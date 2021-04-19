@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <center><img src="../Img/logo_ingsistemas.png" width="300px" height="110px"></center>
                         <h5 class="card-title text-center"><strong>PRACTISOFT</strong></h5>
-                        <form class="form-signin">
+                        <form class="form-signin" method="POST" action="../Controller/Empresa_Controller.php">
                             <div class="form-label-group">
                                 <input type="text" id="inputNombreEmpresa" name="inputNombreEmpresa" class="form-control" placeholder="Nombre de la Empresa" required autofocus>
                                 <label for="inputNombreEmpresa">Nombre de la Empresa</label>
@@ -46,6 +46,13 @@
                                 <input type="text " id="inputContacto" name="inputContacto" class="form-control" placeholder="Contacto" required>
                                 <label for="inputContacto">Contacto</label>
                             </div>
+                            <div class="form-label-group">
+                                <select name="selectSector" id="selectSector" class="form-control">
+                                    <option value="">Seleccione el sector</option>
+                                    <option value="Privado">Privado</option>
+                                    <option value="Publico">Publico</option>
+                                </select>
+                            </div>
                             <div class="form-label-group" onkeyup="validarClaves();">
                                 <input type="password" id="inputClave1" name="inputClave1" class="form-control" placeholder="Contraseña" required>
                                 <label for="inputClave1">Contraseña</label>
@@ -55,7 +62,7 @@
                                 <label for="inputClave2">Validar Contraseña</label>
                             </div>
                             <hr>
-                            <button class="btn btn-lg btn-danger btn-block text-uppercase " type="submit ">Registrarte</button>
+                            <button class="btn btn-lg btn-danger btn-block text-uppercase" id="btn_registrar_empresa" type="submit" name="btn_registrar_empresa">Registrarte</button>
 
                             <hr class="my-4 ">
                             <a class="d-block text-center mt-2 medium " href="../index.html ">¿Ya tienes cuenta? Inicia Sesion</a>

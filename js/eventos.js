@@ -1,12 +1,18 @@
 function validarClaves() {
+    // Tomar los valores de los campos de las claves
     var pas1 = document.getElementById("inputClave1").value;
     var pas2 = document.getElementById("inputClave2").value;
     console.log("Clave 1: " + pas1);
     console.log("Clave 2: " + pas2);
+    //Preguntar si son iguales
     if (pas1 != pas2) {
         console.log("No son iguales");
+        // Deshabilitar el boton de registrar
+        document.getElementById("btn_registrar_empresa").disabled = true;
+        // Pregunta si ya hay una alerta mostrandose
         if (document.getElementById("newID")) {
             console.log("Existe un newID");
+            // Si no hay alerta, se crea una nueva
         } else {
             console.log("No existe newID");
             //crea un nuevo div
@@ -22,7 +28,10 @@ function validarClaves() {
 
             app.insertAdjacentElement("afterend", newDiv);
         }
+        //Si son iguales borro la alerta
     } else {
+        // Activar el boton nuevamente de registrar
+        document.getElementById("btn_registrar_empresa").disabled = false;
         if (document.getElementById("newID")) {
             $('#newID').remove();
         }
