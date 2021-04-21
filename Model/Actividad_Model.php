@@ -11,4 +11,8 @@ class ActividadModel{
         $this->conexion=Conexion::conectar();
     }
 
+    public function agregarActividad(){
+        
+    }
+
 }
