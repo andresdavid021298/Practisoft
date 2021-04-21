@@ -11,4 +11,8 @@ class EstudianteModel{
         $this->conexion=Conexion::conectar();
     }
 
+    public function agregarEstudiante(){
+        
+    }
+
 }
