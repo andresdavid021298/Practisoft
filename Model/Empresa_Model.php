@@ -87,4 +87,19 @@ class EmpresaModel
             return 1;
         }
     }
+
+    // Metodo que duevuelve el total de empresas que estan registradas en el sistema
+    public function verCantidadEmpresas()
+    {
+        $query = "SELECT COUNT(*) as cantidad_empresa FROM empresa";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $cantidad = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            return $cantidad;
+        }
+    }
 }

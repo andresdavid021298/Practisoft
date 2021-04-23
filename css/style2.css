@@ -4,8 +4,8 @@
 }
 
 body {
-    background: #be0b20;
-    background: linear-gradient(to right, #be0b20, #be0b20);
+    background: #D61117;
+    background: linear-gradient(to right, #D61117, #D61117);
 }
 
 .card-signin {
@@ -114,5 +114,5 @@ body {
 }
 
 .btn-block {
-    border: 2px solid #be0b20;
+    border: 2px solid #D61117;
 }
