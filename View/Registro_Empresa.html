@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <center><img src="../Img/logo_ingsistemas.png" width="300px" height="110px"></center>
-                        <h5 class="card-title text-center"><strong>PRACTISOFT</strong></h5>
+                        <h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5>
                         <form class="form-signin" method="POST" action="../Controller/Empresa_Controller.php">
                             <div class="form-label-group">
                                 <input type="text" id="inputNombreEmpresa" name="input_nombre_empresa" class="form-control" placeholder="Nombre de la Empresa" required autofocus>
@@ -44,8 +44,8 @@
                                 <label for="inputCorreo">Correo Electronico</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="text " id="inputContacto" name="input_celular_empresa" class="form-control" placeholder="Contacto" required>
-                                <label for="inputContacto">Contacto</label>
+                                <input type="number " id="inputContacto" name="input_celular_empresa" class="form-control" placeholder="Contacto" required>
+                                <label for="inputContacto">Celular</label>
                             </div>
                             <div class="form-group">
                                 <div>
@@ -66,7 +66,7 @@
                                     <label for="inputClave2">Validar Contraseña</label>
                                 </div>
                                 <hr>
-                                <button class="btn btn-lg btn-danger btn-block text-uppercase" id="btn_registrar_empresa" type="button" onclick="alertaRegistro()" name="btn_registrar_empresa">Registrarte</button>
+                                <button class="btn btn-lg btn-block text-uppercase" style="background-color: #D61117; color: white;" id="btn_registrar_empresa" type="button" onclick="alertaRegistro()" name="btn_registrar_empresa">Registrarte</button>
 
                                 <hr class="my-4 ">
                                 <a class="d-block text-center mt-2 medium " href="../index.html ">¿Ya tienes cuenta? Inicia Sesion</a>

@@ -33,6 +33,8 @@ function alertaRegistro() {
                 swal.fire({
                     icon: response.state,
                     title: response.title
+                }).then((result) => {
+                    window.location = "../Company/index.html";
                 })
             })
     }
