@@ -104,6 +104,23 @@ class ActividadModel
 
     //Método para sumar la cantidad de horas del estudiante
 
+   
+    //Método para aprobar la actividad de un estudiante
+    public function cambiarActividadReprobado($id_actividad, $observaciones_actividad)
+    {
+        $query = "UPDATE actividad SET estado_actividad='Reprobada', observaciones_actividad=:observacion WHERE id_actividad=:id_actividad";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_actividad", $id_actividad);
+        $stmt->bindParam(":observacion", $observaciones_actividad);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
 }
 
 $actividad = new ActividadModel();
