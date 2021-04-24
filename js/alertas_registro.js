@@ -1,13 +1,14 @@
 function alertaRegistro() {
     var nombre_empresa = document.getElementById("inputNombreEmpresa").value;
     var representante_legal = document.getElementById("inputRepresentanteLegal").value;
+    var NIT = document.getElementById("inputNIT").value;
     var direccion_empresa = document.getElementById("inputDireccion").value;
     var correo_empresa = document.getElementById("inputCorreo").value;
     var celular_empresa = document.getElementById("inputContacto").value;
     var sector_empresa = document.getElementById("selectSector").value;
     var clave_empresa = document.getElementById("inputClave1").value;
     var clave_empresa2 = document.getElementById("inputClave2").value;
-    if ((nombre_empresa == "") || (representante_legal == "") || (direccion_empresa == "") || (correo_empresa == "") || (celular_empresa == "") || (clave_empresa == "") || (clave_empresa2 == "")) {
+    if ((nombre_empresa == "") || (representante_legal == "") || (NIT == "") || (direccion_empresa == "") || (correo_empresa == "") || (celular_empresa == "") || (clave_empresa == "") || (clave_empresa2 == "")) {
         swal.fire({
             icon: "warning",
             title: "Oops, Hay campos vacios"
@@ -20,6 +21,7 @@ function alertaRegistro() {
                     "accion": "insertar",
                     "nombre_empresa": nombre_empresa,
                     "representante_legal": representante_legal,
+                    "NIT": NIT,
                     "direccion_empresa": direccion_empresa,
                     "correo_empresa": correo_empresa,
                     "celular_empresa": celular_empresa,

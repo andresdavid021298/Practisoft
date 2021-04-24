@@ -7,6 +7,7 @@ if (isset($_POST['accion'])) {
         $response = array();
         $nombre_empresa = $_POST['nombre_empresa'];
         $representante_legal = $_POST['representante_legal'];
+        $NIT = $_POST['NIT'];
         $direccion_empresa = $_POST['direccion_empresa'];
         $correo_empresa = $_POST['correo_empresa'];
         $celular_empresa = $_POST['celular_empresa'];
