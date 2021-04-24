@@ -2,8 +2,6 @@ function validarClaves() {
     // Tomar los valores de los campos de las claves
     var pas1 = document.getElementById("inputClave1").value;
     var pas2 = document.getElementById("inputClave2").value;
-    console.log("Clave 1: " + pas1);
-    console.log("Clave 2: " + pas2);
     //Preguntar si son iguales
     if (pas1 != pas2) {
         console.log("No son iguales");
