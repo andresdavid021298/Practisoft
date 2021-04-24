@@ -1,7 +1,8 @@
 <?php
 session_start();
 if ($_SESSION['id_empresa'] == NULL) {
-    header("Location: ../../index.html");
+    
+    header("Location: ../../index.php");
 }
 ?>
 <!DOCTYPE html>
