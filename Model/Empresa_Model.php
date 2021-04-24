@@ -15,13 +15,15 @@ class EmpresaModel
     }
 
     // Metodo que inserta una nueva empresa
-    public function insertarEmpresa($nombre_empresa, $representante, $direccion, $correo, $celular, $sector, $clave)
+    public function insertarEmpresa($nombre_empresa, $representante, $nit, $direccion, $municipio, $correo, $celular, $sector, $clave)
     {
-        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,direccion_empresa,correo_empresa,celular_empresa,sector_empresa,clave_empresa) VALUES(:nombre,:representante,:direccion,:correo,:celular,:sector,:clave)";
+        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,nit_empresa,direccion_empresa,municipio_empresa,correo_empresa,celular_empresa,sector_empresa,clave_empresa) VALUES(:nombre,:representante,:nit,:direccion,:municipio,:correo,:celular,:sector,:clave)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre", $nombre_empresa);
         $stmt->bindParam(":representante", $representante);
+        $stmt->bindParam(":nit", $nit);
         $stmt->bindParam(":direccion", $direccion);
+        $stmt->bindParam(":municipio", $municipio);
         $stmt->bindParam(":correo", $correo);
         $stmt->bindParam(":celular", $celular);
         $stmt->bindParam(":sector", $sector);
@@ -100,6 +102,29 @@ class EmpresaModel
             $cantidad = $stmt->fetch(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
             return $cantidad;
+        }
+    }
+
+    // Verifica 
+    public function verificarExistencia($correo, $clave)
+    {
+        $query = "SELECT id_empresa, nombre_empresa,clave_empresa FROM empresa WHERE correo_empresa=:correo";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":correo", $correo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if (password_verify($clave, $result['clave_empresa'])) {
+                    $datos_empresa = NULL;
+                    $datos_empresa['id_empresa'] = $result['id_empresa'];
+                    $datos_empresa['nombre_empresa'] = $result['nombre_empresa'];
+                    return $datos_empresa;
+                    break;
+                }
+            }
+            return 2;
         }
     }
 }
