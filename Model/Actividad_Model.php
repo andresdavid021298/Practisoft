@@ -105,7 +105,7 @@ class ActividadModel
     //Método para sumar la cantidad de horas del estudiante
     public function sumarHorasDelEstudiante($id_estudiante)
     {
-        $query = "SELECT SUM(horas_actividad) FROM actividad WHERE id_estudiante=:id_estudiante";
+        $query = "SELECT SUM(horas_actividad) AS horas_estudiante FROM actividad WHERE id_estudiante=:id_estudiante";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
         if (!$stmt->execute()) {
@@ -134,13 +134,3 @@ class ActividadModel
         }
     }
 }
-
-$actividad = new ActividadModel();
-// $result = $actividad->insertarActividades(1, '2021-04-23', 'prueba', 4);
-// $result = $actividad->actualizarActividad(11, '2021-04-24', 'prueba 2', 8);
-// $result = $actividad->eliminarActividad(11);
-// $result = $actividad->listarActividadesPorEstudiante(1);
-// echo var_dump($result);
-// $result = $actividad->cambiarActividadAprobado(13, 1);
-$result = $actividad->sumarHorasDelEstudiante(1);
-echo $result;
