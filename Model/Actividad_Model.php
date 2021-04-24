@@ -103,8 +103,21 @@ class ActividadModel
     }
 
     //Método para sumar la cantidad de horas del estudiante
+    public function sumarHorasDelEstudiante($id_estudiante)
+    {
+        $query = "SELECT SUM(horas_actividad) FROM actividad WHERE id_estudiante=:id_estudiante";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
 
-   
+
     //Método para aprobar la actividad de un estudiante
     public function cambiarActividadReprobado($id_actividad, $observaciones_actividad)
     {
@@ -120,7 +133,6 @@ class ActividadModel
             return 1;
         }
     }
-
 }
 
 $actividad = new ActividadModel();
@@ -129,4 +141,6 @@ $actividad = new ActividadModel();
 // $result = $actividad->eliminarActividad(11);
 // $result = $actividad->listarActividadesPorEstudiante(1);
 // echo var_dump($result);
-$result = $actividad->cambiarActividadAprobado(13, 1);
+// $result = $actividad->cambiarActividadAprobado(13, 1);
+$result = $actividad->sumarHorasDelEstudiante(1);
+echo $result;
