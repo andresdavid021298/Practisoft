@@ -16,6 +16,7 @@ function alertaRegistro() {
         })
     } else {
         $.ajax({
+                //Como hago el llamado a la funcion dentro de la carpeta View tengo que salir de la carpeta primero
                 url: "../Controller/Empresa_Controller.php",
                 type: "POST",
                 data: {
@@ -55,6 +56,7 @@ function alertaLogin() {
         })
     } else {
         $.ajax({
+                //Como hago llamado a la funcion desde la carpeta raiz no tengo que hacer ningun salto
                 url: "Controller/Empresa_Controller.php",
                 type: "POST",
                 data: {

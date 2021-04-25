@@ -1,6 +1,6 @@
 <?php
 
-require_once "../Model/Empresa_Model.php";
+require_once "../Model/DAO/Empresa_Model.php";
 
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "registrar") {
