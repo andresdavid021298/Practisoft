@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['id_empresa'] == NULL) {
+
+    header("Location: ../../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +16,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
-
+    <title>PractiSoft</title>
+    <link rel="shortcut icon" href="../../Img/favicon_ingsistemas.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 
     <!-- Custom fonts for this template-->
-    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -26,7 +33,7 @@
 </head>
 
 <body id="page-top">
-    <div style="border: 2px solid black;">
+    <div>
         <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
@@ -111,7 +118,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #9D9C9C;">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -124,8 +131,9 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Google</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
+                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
+                                <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -140,92 +148,102 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <center><h2>Mi Perfil</h2></center>
+                <center>
+                    <h2>Mi Perfil</h2>
+                </center>
                 <br>
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Empresa</span>
+                <?php
+                require_once '../../Controller/Empresa/Empresa_Controller.php';
+                $id_empresa = $_SESSION['id_empresa'];
+                $datos_empresa = mostrarDatos($id_empresa);
+                foreach ($datos_empresa as $datos) {
+                ?>
+                    <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php" enctype="multipart/form-data">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Empresa</span>
+                                        </div>
+                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">NIT</span>
+                                        </div>
+                                        <input value="<?php echo $datos['nit_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Sector</span>
+                                        </div>
+                                        <input id="inputSector" name="input_sector" value="<?php echo $datos['sector_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Actividad</span>
+                                        </div>
+                                        <input name="input_actividad" value="<?php echo $datos['actividad_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Correo</span>
+                                        </div>
+                                        <input id="inputCorreo" name="input_correo" value="<?php echo $datos['correo_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">NIT</span>
+                                <div class="col-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Representante Legal</span>
+                                        </div>
+                                        <input id="inputRepresentante" name="input_representante_legal" value="<?php echo $datos['representante_legal']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Dirección</span>
+                                        </div>
+                                        <input id="inputDireccion" name="input_direccion" value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Ubicación</span>
+                                        </div>
+                                        <select id="select_municipio" class="form-control">
+                                            <option value="<?php echo $datos['municipio_empresa']; ?>"><?php echo $datos['municipio_empresa']; ?></option>
+                                            <option value="Cucuta">Cúcuta</option>
+                                            <option value="Villa del Rosario">Villa del Rosario</option>
+                                            <option value="Los Patios">Los Patios</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Tutor</span>
+                                        </div>
+                                        <input id="inputTutor" name="input_tutor" value="<?php echo $datos['tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Contacto</span>
+                                        </div>
+                                        <input id="inputContacto" name="input_celular" value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control"aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Representante Legal</span>
+                                <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <button type="button" onclick="actualizarDatos()" name="btn_editar_perfil" style="background-color: #D61117; color: white;" class="btn">Editar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control"aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Dirección</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Ubicación</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <div class="col-6">
-                        <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Tutor</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Correo</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Contacto</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Sector</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Actividad</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Footer -->
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Your Website 2020</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
-                </div>
-                <!-- End of Content Wrapper -->
-
+                    </form>
+                <?php
+                }
+                ?>
             </div>
             <!-- End of Page Wrapper -->
 
@@ -252,20 +270,27 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer -->
+            <footer>
+                <div class="ufps-footer">
+                    <h3>Universidad Francisco de Paula Santander</h3>
+                    <p>Programa Ingeniería de Sistemas</p>
+                    <p>PractiSoft 2021</p>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+
+    </div>
 
 </body>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/eventos.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 
 </html>
