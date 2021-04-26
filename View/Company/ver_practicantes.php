@@ -41,9 +41,6 @@ if ($_SESSION['id_empresa'] == NULL) {
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" style="background-color: #D61117;" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-
-            <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
@@ -56,6 +53,9 @@ if ($_SESSION['id_empresa'] == NULL) {
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Interface
+            </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -137,103 +137,44 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-
                 <center>
                     <h2>Mi Perfil</h2>
                 </center>
-                <br>
-                <?php
-                require_once '../../Controller/Empresa/Empresa_Controller.php';
-                $id_empresa = $_SESSION['id_empresa'];
-                $datos_empresa = mostrarDatos($id_empresa);
-                foreach ($datos_empresa as $datos) {
-                ?>
-                    <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php" enctype="multipart/form-data">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Empresa</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">NIT</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nit_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Sector</span>
-                                        </div>
-                                        <input id="inputSector" name="input_sector" value="<?php echo $datos['sector_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Actividad</span>
-                                        </div>
-                                        <input name="input_actividad" value="<?php echo $datos['actividad_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Correo</span>
-                                        </div>
-                                        <input id="inputCorreo" name="input_correo" value="<?php echo $datos['correo_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Representante Legal</span>
-                                        </div>
-                                        <input id="inputRepresentante" name="input_representante_legal" value="<?php echo $datos['representante_legal']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Dirección</span>
-                                        </div>
-                                        <input id="inputDireccion" name="input_direccion" value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Ubicación</span>
-                                        </div>
-                                        <select id="select_municipio" class="form-control">
-                                            <option value="<?php echo $datos['municipio_empresa']; ?>"><?php echo $datos['municipio_empresa']; ?></option>
-                                            <option value="Cucuta">Cúcuta</option>
-                                            <option value="Villa del Rosario">Villa del Rosario</option>
-                                            <option value="Los Patios">Los Patios</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Tutor</span>
-                                        </div>
-                                        <input id="inputTutor" name="input_tutor" value="<?php echo $datos['tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Contacto</span>
-                                        </div>
-                                        <input id="inputContacto" name="input_celular" value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <button type="button" onclick="actualizarDatos()" name="btn_editar_perfil" style="background-color: #D61117; color: white;" class="btn">Editar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                <?php
-                }
-                ?>
+                <div class="container-fluid">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo Institucional</th>
+                                <th>Codigo</th>
+                                <th>Celular</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
+                            if (is_null($lista_de_estudiantes)) {
+                            ?>
+                                <td colspan="4" style="color: #D61117;">
+                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
+                                </td>
+                                <?php
+                            } else {
+                                foreach ($lista_de_estudiantes as $estudiante) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $estudiante['nombre_estudiante']; ?></td>
+                                        <td><?php echo $estudiante['correo_estudiante']; ?></td>
+                                        <td><?php echo $estudiante['codigo_estudiante']; ?></td>
+                                        <td><?php echo $estudiante['celular_estudiante']; ?></td>
+                                    </tr>
+                            <?php }
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- End of Page Wrapper -->
 
@@ -274,13 +215,16 @@ if ($_SESSION['id_empresa'] == NULL) {
     </div>
 
 </body>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-<script src="../../js/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 
 </html>

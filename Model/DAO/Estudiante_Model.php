@@ -1,6 +1,6 @@
 <?php
 
-include_once "../Config/db._config.php";
+require_once "../../Config/db._config.php";
 
 class EstudianteModel
 {
