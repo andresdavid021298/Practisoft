@@ -69,6 +69,24 @@ if (isset($_POST['accion'])) {
             $response['location'] = "actualizar_perfil.php";
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == 'cambiarClave') {
+        $response = array();
+        $id_empresa = $_SESSION['id_empresa'];
+        $clave1 = $_POST['clave1'];
+        $clave2 = $_POST['clave2'];
+        $clave_codificada = password_hash($clave1, PASSWORD_DEFAULT);
+        $empresa = new EmpresaModel();
+        $rta = $empresa->cambiarClave($id_empresa, $clave_codificada);
+        if ($rta == 0) {
+            $response['title'] = "Error al cambiar la contraseña";
+            $response['state'] = "error";
+            $response['location'] = "cambiar_clave.php";
+        } else {
+            $response['title'] = "Clave cambiada correctamente. Por favor vuelve a iniciar sesión";
+            $response['state'] = "success";
+            $response['location'] = "../../index.php";
+        }
+        echo json_encode($response);
     }
 }
 
