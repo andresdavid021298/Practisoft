@@ -1,6 +1,6 @@
 <?php
 
-require_once "../Model/DAO/Empresa_Model.php";
+require_once "../../Model/DAO/Empresa_Model.php";
 
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "registrar") {
@@ -48,5 +48,32 @@ if (isset($_POST['accion'])) {
             $_SESSION["nombre_empresa"] = $rta['nombre_empresa'];
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == "actualizarDatos") {
+        $response = array();
+        $id_empresa = $_POST['id'];
+        $representante_legal = $_POST['representante'];
+        $direccion_empresa = $_POST['direccion'];
+        $municipio_empresa = $_POST['municipio'];
+        $tutor = $_POST['tutor'];
+        $correo_empresa = $_POST['correo'];
+        $celular_empresa = $_POST['contacto'];
+        $empresa = new EmpresaModel();
+        $rta = $empresa->actualizarEmpresa($id_empresa, $representante_legal, $direccion_empresa, $municipio_empresa, $tutor, $correo_empresa, $celular_empresa);
+        if ($rta == 0) {
+            $response['title'] = "Error al editar los datos";
+            $response['state'] = "error";
+            $response['location'] = "actualizar_perfil.php";
+        } else {
+            $response['title'] = "Datos editados correctamente";
+            $response['state'] = "success";
+            $response['location'] = "actualizar_perfil.php";
+        }
+        echo json_encode($response);
     }
+}
+
+function mostrarDatos($id_empresa)
+{
+    $empresa = new EmpresaModel();
+    return $empresa->mostrarDatos($id_empresa);
 }

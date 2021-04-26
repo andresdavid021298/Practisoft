@@ -42,10 +42,10 @@
                             <br>
                             <div class="row">
                                 <div class="col-sm">
-                                    <a class="text-center mt-2 medium" href="View/Registro_Empresa.html">Registro de empresas</a>
+                                    <a class="text-center mt-2 medium" href="View/Company/Registro_Empresa.html">Registro de empresas</a>
                                 </div>
                                 <div class="col-sm">
-                                    <a class="text-center mt-2 medium" href="View/Recuperar_clave.html">¿Olvidaste la contraseña?</a>
+                                    <a class="text-center mt-2 medium" href="View/Company/Recuperar_clave.html">¿Olvidaste la contraseña?</a>
                                 </div>
                             </div>
                             <hr class="my-4">
@@ -60,7 +60,7 @@
 <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/alertas_empresa.js"></script>
+<script src="js/Company/alertas_empresa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

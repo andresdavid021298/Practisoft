@@ -1,11 +1,11 @@
 <?php
 
-require_once "../Config/db._config.php";
+require_once "../../Config/db._config.php";
 
 class EmpresaModel
 {
 
-    //Atributo ppara manejar la conexion con la base de datos
+    //Atributo para manejar la conexion con la base de datos
     private $conexion;
 
     //Contructor que inicializa la conexion
@@ -38,15 +38,18 @@ class EmpresaModel
     }
 
     // Metodo que actualiza una empresa
-    public function actualizarEmpresa($id_empresa, $direccion, $celular, $descripcion, $tutor)
+    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $tutor, $correo, $celular)
     {
-        $query = "UPDATE empresa SET direccion_empresa=:direccion,celular_empresa=:celular,descripcion_empresa=:descripcion,tutor=:tutor WHERE id_empresa=:id";
+        $query = "UPDATE empresa SET representante_legal=:representante, direccion_empresa=:direccion, municipio_empresa=:municipio,
+                  tutor=:tutor, correo_empresa=:correo, celular_empresa=:celular WHERE id_empresa=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_empresa);
+        $stmt->bindParam(":representante", $representante_legal);
         $stmt->bindParam(":direccion", $direccion);
-        $stmt->bindParam(":descripcion", $descripcion);
-        $stmt->bindParam(":celular", $celular);
+        $stmt->bindParam(":municipio", $municipio);
         $stmt->bindParam(":tutor", $tutor);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":celular", $celular);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
@@ -125,6 +128,25 @@ class EmpresaModel
                 }
             }
             return 2;
+        }
+    }
+    //Método para mostrar la información del perfil de la empresa
+    public function mostrarDatos($id_empresa)
+    {
+        $datos_empresa = NULL;
+        $query = "SELECT nombre_empresa, nit_empresa, representante_legal, direccion_empresa, municipio_empresa,
+                  tutor, correo_empresa, celular_empresa, sector_empresa, actividad_empresa
+                  FROM empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $datos_empresa[] = $result;
+            $stmt->closeCursor();
+            return $datos_empresa;
         }
     }
 }
