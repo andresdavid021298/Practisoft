@@ -5040,7 +5040,7 @@ input[type=submit].btn-block {
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
-    background-color: #be0b20;
+    background-color: #D61117;
     border-color: #4e73df
 }
 
@@ -5546,7 +5546,7 @@ a.badge-dark:focus {
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #be0b20;
+    background-color: #D61117;
     border-color: #4e73df
 }
 
@@ -11618,3 +11618,47 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
+
+footer {
+  display: block;
+}
+
+  .ufps-footer {
+    background-color: #9D9C9C;
+    border-top: 3px solid #d61117;
+    color: #333;
+    height: 100px;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .ufps-footer-light {
+    background-color: #ecf0f1;
+    border-top: 3px solid #d61117;
+    color: #333;
+  }
+  
+  .ufps-footer-dark {
+    background-color: #2c3e50;
+    border-top: 3px solid #d61117;
+  }
+  
+  .ufps-footer h1,
+  .ufps-footer h2,
+  .ufps-footer h3,
+  .ufps-footer h4,
+  .ufps-footer h5,
+  .ufps-footer h6,
+  .ufps-footer p {
+    margin: 3px;
+  }
+
+  .ufps-modal-footer {
+    padding: 2px 16px;
+    border-top: 1px solid #AAA;
+    background-color: #efefef;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: #222;
+  }
