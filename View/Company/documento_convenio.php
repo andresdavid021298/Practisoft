@@ -149,6 +149,50 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2>Convenio de Prácticas Empresariales</h2>
+                            <br><br>
+                            <?php
+                            require_once '../../Controller/Convenio/Convenio_Controller.php';
+                            $id_empresa = $_SESSION['id_empresa'];
+                            $empresa = mostrarConvenio($id_empresa);
+                            echo var_dump($empresa);
+                            ?>
+                            <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php" enctype="multipart/form-data">
+                                <div style="align-items: center; justify-content: center;" class="row">
+                                    <div class="col-3">
+                                        <b>
+                                            <center><label for="fecha_inicio">Fecha Inicio</label></center>
+                                        </b>
+                                        <label for="fecha_inicio" class="sr-only">Fecha Inicio</label>
+                                        <input value="<?php echo $empresa['fecha_inicio']; ?>" type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+                                    </div>
+                                    <div class="col-3">
+                                        <b>
+                                            <center><label for="fecha_fin">Fecha Fin</label></center>
+                                        </b>
+                                        <label for="fecha_fin" class="sr-only">Fecha Fin</label>
+                                        <input value="<?php echo $empresa['fecha_fin']; ?>" type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="fileUpload btn">
+                                    <label>Archivo</label>
+                                    <input type="file" class="upload" name="input_archivo" />
+                                </div>
+                                <button id="btn_subir_convenio" type="submit" value="Enviar" name="btn_subir_convenio" class="btn btn-primary">Cargar</button>
+                                <input type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
+                                <input type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
+                            </form>
+                            <br><br>
+                            <b>
+                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                            </b>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- End of Page Wrapper -->
