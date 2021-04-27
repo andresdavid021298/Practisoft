@@ -139,7 +139,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="../../index.html">
+                                <a class="dropdown-item" href="../../index.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
                                 </a>
                             </div>
@@ -196,7 +196,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <li class="list-group-item">
                                                     <!-- Default checked -->
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" name="areas[]" value="Mantenimiento Hardware / Software" class="custom-control-input" id="check1">
+                                                        <input type="checkbox" name="areas[]" value="Mantenimiento de Hardware/Software" class="custom-control-input" id="check1">
                                                         <label class="custom-control-label" for="check1">Mantenimiento de Hardware / Software</label>
                                                     </div>
                                                 </li>
@@ -237,8 +237,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     <button type="button" onclick="agregarSolicitud()" class="btn btn-primary">Solicitar</button>
                                                 </div>
                                             </div>
-                                        </div>    
-                                        
+                                        </div>
+
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -269,15 +269,24 @@ if ($_SESSION['id_empresa'] == NULL) {
                             require_once '../../Controller/Solicitud/Solicitud_Controller.php';
                             $id_empresa = $_SESSION['id_empresa'];
                             $datos_solicitud = mostrarInformacion($id_empresa);
-                            foreach ($datos_solicitud as $datos) {
+                            if (is_null($datos_solicitud)) {
                             ?>
-                                <tr>
-                                    <td><?php echo $datos['numero_practicantes'] ?></td>
-                                    <td><?php echo $datos['funciones'] ?></td>
-                                    <td><?php echo $datos['observaciones_solicitud'] ?></td>
-                                    <td><?php echo $datos['estado_solicitud'] ?></td>
-                                </tr>
+                                <td colspan="4" style="color: #D61117;">
+                                    <center><strong>NO POSEE SOLICITUDES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                </td>
+                                <?php
+                            } else {
+
+                                foreach ($datos_solicitud as $datos) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $datos['numero_practicantes'] ?></td>
+                                        <td><?php echo $datos['funciones'] ?></td>
+                                        <td><?php echo $datos['observaciones_solicitud'] ?></td>
+                                        <td><?php echo $datos['estado_solicitud'] ?></td>
+                                    </tr>
                             <?php
+                                }
                             }
                             ?>
                         </tbody>

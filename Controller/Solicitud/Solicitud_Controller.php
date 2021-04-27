@@ -2,11 +2,10 @@
 
 require_once "../../Model/DAO/Solicitud_Model.php";
 if (isset($_POST['accion'])) {
-    if($_POST['accion'] == 'agregarSolicitud'){
+    if($_POST['accion'] == 'agregar_solicitud'){
         $id_empresa = $_POST['id']; 
         $numero_practicantes = $_POST['practicantes'];
         $lista_areas = $_POST['areas'];
-        //$listado_areas = implode(",", $lista_areas);
         $solicitud = new SolicitudModel();
         $rta = $solicitud->insertarSolicitud($id_empresa, $numero_practicantes, $lista_areas);
         if($rta == 0){
