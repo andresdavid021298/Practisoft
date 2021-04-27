@@ -251,7 +251,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form action="" method="POST">
                                 <div class="form-group">
                                     <label for="textarea_observaciones">Observaciones</label>
-                                    <textarea name="textarea_observaciones" id="textarea_observaciones" cols="55" rows="5"></textarea>
+                                    <textarea name="textarea_observaciones" style="width: 100%;" id="textarea_observaciones" rows="5"></textarea>
                                 </div>
                                 <input type="hidden" id="id_actividad">
                                 <center><button type="button" onclick="rechazarActividad(<?php echo $datos_estudiante['id_estudiante']; ?>)" class="btn btn-primary">Enviar</button></center>

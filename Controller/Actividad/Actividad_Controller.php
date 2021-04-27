@@ -41,7 +41,7 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Ocurrio un error";
         } else {
             $response['state'] = "success";
-            $response['title'] = "ID Actividad: $id_actividad" . "\n Observaciones: " . $observaciones;
+            $response['title'] = "Actividad Rechazada";
         }
         echo json_encode($response);
     }
