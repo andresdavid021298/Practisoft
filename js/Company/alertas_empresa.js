@@ -118,3 +118,66 @@ function actualizarDatos() {
             })
     }
 }
+
+function agregarSolicitud(){
+
+    var isChecked = document.getElementById('check1').checked;
+    var isChecked2 = document.getElementById('check2').checked;
+    var isChecked3 = document.getElementById('check3').checked;
+    var isChecked4 = document.getElementById('check4').checked;
+    var isChecked5 = document.getElementById('check5').checked;
+    
+    var areas = [];
+    if(isChecked == true){
+        c1 = document.getElementById('check1').value;
+        areas.push(c1);
+    }
+    if(isChecked2 == true){
+        c2 = document.getElementById('check2').value;
+        areas.push(c2);
+    }
+    if(isChecked3 == true){
+        c3 = document.getElementById('check3').value;
+        areas.push(c3);
+    }
+    if(isChecked4 == true){
+        c4 = document.getElementById('check4').value;
+        areas.push(c4);
+    }
+    if(isChecked5 == true){
+        c5 = document.getElementById('check5').value;
+        areas.push(c5);
+    }
+    
+    var areasSeleccionadas = areas.join();
+    var numPracticantes = document.getElementById('practicantes').value;
+    var idEmpresa = document.getElementById('id_empresa').value;
+
+    if(practicantes == "" || areasSeleccionadas == ""){
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    }else {
+        $.ajax({
+            url: "../../Controller/Solicitud/Solicitud_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregarSolicitud",
+                "id": idEmpresa,
+                "practicantes": numPracticantes,
+                "areas": areasSeleccionadas
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
+                console.log(response);
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = response.location
+                })
+            })
+    }
+}
