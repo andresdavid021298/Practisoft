@@ -1,6 +1,6 @@
 <?php
 
-include_once "../Config/db._config.php";
+require_once "../../Config/db._config.php";
 
 class ActividadModel
 {
@@ -69,10 +69,9 @@ class ActividadModel
     public function listarActividadesPorEstudiante($id_estudiante)
     {
         $lista_actividades = NULL;
-        $query = "SELECT e.nombre_estudiante, a.fecha_actividad, a.descripcion_actividad, a.horas_actividad, a.estado_actividad, a.observaciones_actividad
-                  FROM actividad a
-                  INNER JOIN estudiante e ON e.id_estudiante = a.id_estudiante
-                  WHERE e.id_estudiante=:id";
+        $query = "SELECT  id_actividad,fecha_actividad, descripcion_actividad, horas_actividad, estado_actividad, observaciones_actividad
+                  FROM actividad
+                  WHERE id_estudiante=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_estudiante);
         if (!$stmt->execute()) {
@@ -102,18 +101,23 @@ class ActividadModel
         }
     }
 
-    //Método para sumar la cantidad de horas del estudiante
+    //Método para sumar la cantidad de horas del estudiante de las actividades aprobadas
     public function sumarHorasDelEstudiante($id_estudiante)
     {
-        $query = "SELECT SUM(horas_actividad) AS horas_estudiante FROM actividad WHERE id_estudiante=:id_estudiante";
+        $query = "SELECT SUM(horas_actividad) AS horas_estudiante FROM actividad WHERE id_estudiante=:id_estudiante AND estado_actividad='Aprobada'";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
         } else {
+            $horas = $stmt->fetch(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
-            return 1;
+            if ($horas['horas_estudiante'] === NULL) {
+                return 0;
+            } else {
+                return $horas['horas_estudiante'];
+            }
         }
     }
 

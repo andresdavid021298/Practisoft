@@ -97,7 +97,7 @@ class EstudianteModel
     // Metodo que lista los estudiantes que estan asignados a cierta empresa
     public function listarEstudiantesPorEmpresa($id_empresa)
     {
-        $query = "SELECT nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_empresa=:id_empresa";
+        $query = "SELECT id_estudiante,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_empresa=:id_empresa";
         $lista_estudiantes = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
@@ -113,5 +113,20 @@ class EstudianteModel
         }
     }
 
-    // 
+    // Metodo para buscar y mostrar informacion de un estudiante
+    public function buscarEstudiante($id_estudiante)
+    {
+        $query = "SELECT id_estudiante,id_empresa,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_estudiante=:id";
+        $lista_estudiantes = NULL;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $datos_del_estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            return $datos_del_estudiante;
+        }
+    }
 }

@@ -1,8 +1,9 @@
 <?php
 
 require_once "../../Model/DAO/Empresa_Model.php";
-
+// Valida si se envia por metodo POST en algun campo "accion"
 if (isset($_POST['accion'])) {
+    // Pregunta si la accion es "registrar"
     if ($_POST['accion'] == "registrar") {
         $response = array();
         $nombre_empresa = $_POST['nombre_empresa'];
@@ -25,6 +26,7 @@ if (isset($_POST['accion'])) {
             $response['state'] = "success";
         }
         echo json_encode($response);
+        // Pregunta si la accion es "logearse"
     } else if ($_POST['accion'] == "login") {
         $response = array();
         $correo_empresa = $_POST['correo'];
@@ -48,7 +50,8 @@ if (isset($_POST['accion'])) {
             $_SESSION["nombre_empresa"] = $rta['nombre_empresa'];
         }
         echo json_encode($response);
-    } else if ($_POST['accion'] == "actualizarDatos") {
+        // Pregunta si la accion es "actualizar datos"
+    } else if ($_POST['accion'] == "actualizar_datos") {
         $response = array();
         $id_empresa = $_POST['id'];
         $representante_legal = $_POST['representante'];
@@ -69,12 +72,12 @@ if (isset($_POST['accion'])) {
             $response['location'] = "actualizar_perfil.php";
         }
         echo json_encode($response);
-    } else if ($_POST['accion'] == 'cambiarClave') {
+        // Pregunta si la accion es "cambiar la clave"
+    } else if ($_POST['accion'] == 'cambiar_clave') {
         $response = array();
-        $id_empresa = $_SESSION['id_empresa'];
-        $clave1 = $_POST['clave1'];
-        $clave2 = $_POST['clave2'];
-        $clave_codificada = password_hash($clave1, PASSWORD_DEFAULT);
+        $id_empresa = $_POST['id_empresa'];
+        $clave_empresa = $_POST['clave'];
+        $clave_codificada = password_hash($clave_empresa, PASSWORD_DEFAULT);
         $empresa = new EmpresaModel();
         $rta = $empresa->cambiarClave($id_empresa, $clave_codificada);
         if ($rta == 0) {
@@ -90,6 +93,7 @@ if (isset($_POST['accion'])) {
     }
 }
 
+// Metodo que conecta con la vista para enviar los datos de la empresa que trae desde modelo Empresa
 function mostrarDatos($id_empresa)
 {
     $empresa = new EmpresaModel();
