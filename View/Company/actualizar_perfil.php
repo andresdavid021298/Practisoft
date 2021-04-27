@@ -48,7 +48,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="#">
+                <a class="nav-link" style="text-align: center;" href="index_company.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 
@@ -98,10 +98,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Convenio</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-id-card"></i> C.C Representante</a>
+                        <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
+                        <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
+                        <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
+                        <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a>
                     </div>
                 </div>
             </li>

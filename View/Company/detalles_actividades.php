@@ -45,7 +45,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="#">
+                <a class="nav-link" style="text-align: center;" href="index_company.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 
@@ -93,7 +93,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Convenio</a>
+                        <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
                         <a class="collapse-item" href="#"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
                         <a class="collapse-item" href="#"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
                         <a class="collapse-item" href="#"><i class="fas fa-id-card"></i> C.C Representante</a>
@@ -195,7 +195,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 $lista_de_actividades = listarActividadesPorEstudiante($_GET['id_estudiante']);
                                 if (is_null($lista_de_actividades)) {
                                 ?>
-                                    <td colspan="4" style="color: #D61117;">
+                                    <td colspan="5" style="color: #D61117;">
                                         <center><strong>EL PRACTICANTE NO REGISTRA ACTIVIDADES</strong></center>
                                     </td>
                                     <?php
@@ -217,12 +217,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             </td>
                                             <td>
                                                 <?php
-                                                if ($actividad['estado_actividad'] != "Aprobada") { ?>
+                                                if ($actividad['estado_actividad'] == "En Espera") { ?>
                                                     <center><button class="btn btn-success" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $datos_estudiante['id_estudiante'] ?>)">Validar</button></center>
+                                                    <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
+                                                <?php } else { ?>
+                                                    <center>----------</center>
                                                 <?php } ?>
-                                                <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
                                             </td>
-
                                         </tr>
                                 <?php }
                                 }
@@ -238,15 +239,15 @@ if ($_SESSION['id_empresa'] == NULL) {
             <div class="modal fade" id="modalRechazarActividad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Nombre Actividad</h2>
+                        <div class="modal-header" style="background-color: #D61117">
+                            <h3 class="modal-title" id="exampleModalLabel" style="color: white">Nombre Actividad</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <center>
-                                <h4><?php echo $datos_estudiante['nombre_estudiante']; ?></h4>
+                                <h5><?php echo $datos_estudiante['nombre_estudiante']; ?></h5>
                             </center>
                             <form action="" method="POST">
                                 <div class="form-group">
