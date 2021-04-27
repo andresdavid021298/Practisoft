@@ -22,8 +22,8 @@ class SolicitudModel
         $stmt->bindParam(":id", $id_empresa);
         $stmt->bindParam(":practicantes", $numero_practicantes);
         $stmt->bindParam(":funciones", $funciones);
-        
-        
+
+
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
@@ -90,20 +90,61 @@ class SolicitudModel
         }
     }
 
+    // Metodo que retorna la cantidad de solicitudes aporbadas a una empresa
+    public function cantidadSolicitudesAprobadasPorEmpresa($id_empresa)
+    {
+        $query = "SELECT COUNT(*) as cantidad 
+        FROM solicitud 
+        WHERE id_empresa = :id AND estado_solicitud='Aprobada'";
+        $cantidad_solicitudes_aprobadas = 0;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!is_null($result)) {
+                $cantidad_solicitudes_aprobadas = $result['cantidad'];
+            }
+            return $cantidad_solicitudes_aprobadas;
+        }
+    }
+
+    // Metodo que retorna la cantidad de solicitudes en espera de una empresa
+    public function cantidadSolicitudesEnEsperaPorEmpresa($id_empresa)
+    {
+        $query = "SELECT COUNT(*) as cantidad 
+        FROM solicitud 
+        WHERE id_empresa = :id AND estado_solicitud='En Espera'";
+        $cantidad_solicitudes_aprobadas = 0;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!is_null($result)) {
+                $cantidad_solicitudes_aprobadas = $result['cantidad'];
+            }
+            return $cantidad_solicitudes_aprobadas;
+        }
+    }
+
     // Metodo para eliminar solicitud
-    public function eliminarSolicitud($id_solicitud){
+    public function eliminarSolicitud($id_solicitud)
+    {
         $query = "DELETE FROM solicitud WHERE id_solicitud = :id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_solicitud);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        }
-        else{
+        } else {
             $stmt->closeCursor();
             return 1;
         }
     }
-
 }

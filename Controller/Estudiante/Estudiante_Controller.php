@@ -14,3 +14,10 @@ function buscarEstudiante($id_estudiante)
     $obj_estudiante_model = new EstudianteModel();
     return $obj_estudiante_model->buscarEstudiante($id_estudiante);
 }
+
+// Metodo que conecta con la vista para enviar la cantidad de estudiantes asignados a una empresa
+function cantidadDeEstudiantesPorEmpresa($id_empresa)
+{
+    $obj_estudiante_model = new EstudianteModel();
+    return $obj_estudiante_model->cantidadEstudiantesPorEmpresa($id_empresa);
+}

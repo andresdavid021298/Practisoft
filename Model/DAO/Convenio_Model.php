@@ -43,7 +43,7 @@ class ConvenioModel
             return 0;
         } else {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            $datos_convenio[] = $result;
+            $datos_convenio = $result;
             $stmt->closeCursor();
             return $datos_convenio;
         }

@@ -71,7 +71,7 @@ class ActividadModel
         $lista_actividades = NULL;
         $query = "SELECT  id_actividad,fecha_actividad, descripcion_actividad, horas_actividad, estado_actividad, observaciones_actividad
                   FROM actividad
-                  WHERE id_estudiante=:id";
+                  WHERE id_estudiante=:id ORDER BY estado_actividad";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_estudiante);
         if (!$stmt->execute()) {

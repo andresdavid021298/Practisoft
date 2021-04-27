@@ -29,6 +29,29 @@ if ($_SESSION['id_empresa'] == NULL) {
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .zoom {
+            transition: 0.5s ease;
+            -moz-transition: 0.5s ease;
+            /* Firefox */
+            -webkit-transition: 0.5s ease;
+            /* Chrome - Safari */
+            -o-transition: 0.5s ease;
+            /* Opera */
+        }
+
+        .zoom:hover {
+            transform: scale(1.18);
+            -moz-transform: scale(1.18);
+            /* Firefox */
+            -webkit-transform: scale(1.18);
+            /* Chrome - Safari */
+            -o-transform: scale(1.18);
+            /* Opera */
+            -ms-transform: scale(1.18);
+            /* IE9 */
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -94,10 +117,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Convenio</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-id-card"></i> C.C Representante</a>
+                        <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
+                        <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
+                        <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
+                        <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a></a>
                     </div>
                 </div>
             </li>
@@ -149,7 +172,145 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container-fluid">
+                    <center>
+                        <h2>Bienvenido <strong><?php echo $_SESSION['nombre_empresa']; ?></strong></h2>
+                    </center>
+                    <br>
+                    <br>
+                    <div class="row">
 
+                        <?php
+                        require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                        $cantidad_estudiantes = cantidadDeEstudiantesPorEmpresa($_SESSION['id_empresa']);
+                        ?>
+                        <div class="col-xl-3 col-md-6 mb-4 zoom">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Practicantes Asignados</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_estudiantes ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        require_once '../../Controller/Solicitud/Solicitud_Controller.php';
+                        $cantidad_solicitudes_aprobadas = cantidadSolicitudesAprobadas($_SESSION['id_empresa']);
+                        if ($cantidad_solicitudes_aprobadas > 0) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Solicitudes Aprobadas</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_aprobadas ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+
+                        <?php
+                        require_once '../../Controller/Solicitud/Solicitud_Controller.php';
+                        $cantidad_solicitudes_en_espera = cantidadSolicitudesEnEspera($_SESSION['id_empresa']);
+                        ?>
+                        <div class="col-xl-3 col-md-6 mb-4 zoom">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Solicitudes en Espera</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_en_espera; ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-pause-circle fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        require_once "../../Controller/Convenio/Convenio_Controller.php";
+                        $datos_convenio = mostrarConvenio($_SESSION['id_empresa']);
+                        if ($datos_convenio == NULL) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Convenio</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene convenio</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } else {
+
+                            $fecha_expiracion = $datos_convenio['fecha_expiracion'];
+                            $fecha_actual = date("Y-m-d");
+                            if ($fecha_expiracion > $fecha_actual) {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Convenio</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Vigencia hasta el <?php echo $fecha_expiracion ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                        Convenio</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Expiró el <?php echo $fecha_expiracion ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php }
+                        } ?>
+                    </div>
+                </div>
             </div>
             <!-- End of Page Wrapper -->
 
