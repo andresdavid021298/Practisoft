@@ -62,10 +62,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-user"></i> Ver Practicantes</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-check-circle"></i> Ver Actividades</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
+                        <a class="collapse-item" href="solicitud_practicante.php"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
+                        <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
+                        <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
+                        <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
                     </div>
                 </div>
             </li>
@@ -79,8 +79,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-edit"></i> Actualizar Perfil</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-unlock"></i> Cambiar Clave</a>
+                        <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Actualizar Perfil</a>
+                        <a class="collapse-item" href="cambiar_clave.php"><i class="fas fa-unlock"></i> Cambiar Clave</a>
                     </div>
                 </div>
             </li>
