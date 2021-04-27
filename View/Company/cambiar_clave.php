@@ -139,7 +139,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="../../index.html">
+                                <a class="dropdown-item" href="../../index.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
                                 </a>
                             </div>
@@ -171,7 +171,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </div>
                         </div>
                         <br><br>
-                        <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
+                        <input type="hidden" id="input_id_empresa" name="input_id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
                         <div class="col text-center">
                             <button onclick="cambiarClave();" id="btn_cambiar_clave" type="button" name="btn_editar_perfil" class="btn btn-primary">Cambiar clave</button>
                         </div>

@@ -66,10 +66,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
+                        <a class="collapse-item" href="solicitud_practicante.php"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-check-circle"></i> Ver Actividades</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
+                        <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
+                        <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
                     </div>
                 </div>
             </li>
@@ -84,11 +84,28 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Actualizar Perfil</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-unlock"></i> Cambiar Clave</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Ver Documentos</a>
+                        <a class="collapse-item" href="cambiar_clave.php"><i class="fas fa-unlock"></i> Cambiar Clave</a>
                     </div>
                 </div>
             </li>
+
+            <!-- Nav Item - Documentos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
+                    <i class="fas fa-print"></i>
+                    <span>Documentos</span>
+                </a>
+                <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Convenio</a>
+                        <a class="collapse-item" href="#"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
+                        <a class="collapse-item" href="#"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
+                        <a class="collapse-item" href="#"><i class="fas fa-id-card"></i> C.C Representante</a>
+                    </div>
+                </div>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -138,16 +155,24 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <center>
-                    <h2>Mi Perfil</h2>
+                    <h2>Ver Practicantes</h2>
                 </center>
                 <div class="container-fluid">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo Institucional</th>
-                                <th>Codigo</th>
-                                <th>Celular</th>
+                                <th>
+                                    <center>Nombre</center>
+                                </th>
+                                <th>
+                                    <center>Correo Institucional</center>
+                                </th>
+                                <th>
+                                    <center>Codigo</center>
+                                </th>
+                                <th>
+                                    <center>Celular</center>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,10 +190,18 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 foreach ($lista_de_estudiantes as $estudiante) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $estudiante['nombre_estudiante']; ?></td>
-                                        <td><?php echo $estudiante['correo_estudiante']; ?></td>
-                                        <td><?php echo $estudiante['codigo_estudiante']; ?></td>
-                                        <td><?php echo $estudiante['celular_estudiante']; ?></td>
+                                        <td>
+                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                        </td>
+                                        <td>
+                                            <center><?php echo $estudiante['correo_estudiante']; ?></center>
+                                        </td>
+                                        <td>
+                                            <center><?php echo $estudiante['codigo_estudiante']; ?></center>
+                                        </td>
+                                        <td>
+                                            <center><?php echo $estudiante['celular_estudiante']; ?></center>
+                                        </td>
                                     </tr>
                             <?php }
                             } ?>
@@ -182,25 +215,6 @@ if ($_SESSION['id_empresa'] == NULL) {
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
-
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">
