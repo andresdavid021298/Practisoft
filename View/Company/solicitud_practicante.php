@@ -46,7 +46,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="#">
+                <a class="nav-link" style="text-align: center;" href="index_company.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 
@@ -176,8 +176,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Solicitud de Practicantes</h5>
+                                <div class="modal-header" style="background-color:#D61117;">
+                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Solicitud de Practicantes</h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -238,13 +238,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </form>
-                                </div>
-                                <div class="modal-footer">
-
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                                 </div>
                             </div>
                         </div>
