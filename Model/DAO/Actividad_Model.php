@@ -35,7 +35,7 @@ class ActividadModel
     //Método que actualiza las actividades de la práctica
     public function actualizarActividad($id_actividad, $fecha_actividad, $descripcion_actividad, $horas_actividad)
     {
-        $query = "UPDATE actividad SET fecha_actividad=:fecha, descripcion_actividad=:descripcion, horas_actividad=:horas
+        $query = "UPDATE actividad SET fecha_actividad=:fecha, descripcion_actividad=:descripcion, horas_actividad=:horas, estado_actividad='En Espera'
                   WHERE id_actividad=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_actividad);
