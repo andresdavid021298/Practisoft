@@ -154,7 +154,9 @@ $_SESSION['id_estudiante'] = 1;
                         <div class="row">
                             <div class="col text-center">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva Actividad</button>
-                                <button type="button" class="btn btn-primary">Descargar Registro</button>
+                                <button type="button" class="btn btn-primary">Descargar Registro</button><br><br>
+                                <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
+                                <b><h5>Total de Horas Aprobadas: <?php echo verHorasPorEstudiante($_SESSION['id_estudiante']); ?>/320</h5></b>
                             </div>
                         </div>
                     </div>
@@ -176,7 +178,7 @@ $_SESSION['id_estudiante'] = 1;
                                     <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Fecha de Realización:</label>
-                                            <input type="date" class="form-control" name="fecha_realizacion" id="fecha">
+                                            <input type="date" class="form-control" name="fecha_realizacion" max="<?php echo date("Y-m-d"); ?>" id="fecha">
                                         </div>
 
                                         <div class="form-group">
@@ -305,9 +307,11 @@ $_SESSION['id_estudiante'] = 1;
                         <div class="modal-body">
                             <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
 
+                                
+
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Fecha:</label>
-                                    <input type="date" class="form-control fecha_act" id="fecha_input">
+                                    <input type="date" class="form-control fecha_act" max="<?php echo date("Y-m-d"); ?>" id="fecha_input">
                                 </div>
 
                                 <div class="form-group">
@@ -319,7 +323,6 @@ $_SESSION['id_estudiante'] = 1;
                                     <label for="message-text" class="col-form-label">Descripcion:</label>
                                     <input type="text" class="form-control descripcion_act" name="descripcion_actividad" id="descripcion_input">
                                 </div>
-
                                 
                                 <input type="hidden" class="form-control id_act" name="id_actividad" id="id_input">
                                    
