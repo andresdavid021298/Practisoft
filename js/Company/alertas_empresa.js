@@ -297,5 +297,39 @@ function subirConvenio() {
             })
         })
     }
+}
 
+//Método que permite mostrar alerta cuando se sube el documento de protocolos de bioseguridad
+function subirProtocolos() {
+    var idEmpresa = document.getElementById('id_empresa').value;
+    var nombreEmpresa = document.getElementById('nombre_empresa').value;
+    var inputArchivo = document.getElementById('input_archivo').value;
+    var fd = new FormData();
+    var files = $('#input_archivo')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        fd.append('id_empresa', idEmpresa);
+        fd.append('nombre_empresa', nombreEmpresa);
+        fd.append('input_archivo', files[0]);
+        $.ajax({
+            url: '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "documento_protocolos.php"
+                })
+            },
+        })
+    }
 }
