@@ -47,7 +47,7 @@ $_SESSION['id_estudiante'] = 1;
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="#">
+                <a class="nav-link" style="text-align: center;" href="index_student.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 
@@ -63,8 +63,8 @@ $_SESSION['id_estudiante'] = 1;
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"> <i class="fas fa-file-alt"></i> Inscripcion</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-building"></i> Ver Empresa</a>
+                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
+                        <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="#"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="#"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
@@ -82,7 +82,7 @@ $_SESSION['id_estudiante'] = 1;
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Ver Perfil</a>
+                        <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i> Ver Perfil</a>
                     </div>
                 </div>
             </li>
@@ -146,24 +146,6 @@ $_SESSION['id_estudiante'] = 1;
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">
