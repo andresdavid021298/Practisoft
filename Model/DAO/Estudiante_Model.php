@@ -29,10 +29,11 @@ class EstudianteModel
     }
 
     // Metodo que permite actualizar la informacion del estudiante
-    public function actualizarEstudiante($nombre_estudiante, $codigo_estudiante, $celular_estudiante)
+    public function actualizarEstudiante($id_estudiante,$nombre_estudiante, $codigo_estudiante, $celular_estudiante)
     {
-        $query = "INSERT INTO estudiante(nombre_estudiante,codigo_estudiante,celular_estudiante) VALUES(:nombre_estudiante,:codigo_estudiante,:celular_estudiante)";
+        $query = "UPDATE estudiante SET nombre_estudiante=:nombre_estudiante,codigo_estudiante=:codigo_estudiante,celular_estudiante=:celular_estudiante WHERE id_estudiante=:id";
         $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id",$id_estudiante);
         $stmt->bindParam(":nombre_estudiante", $nombre_estudiante);
         $stmt->bindParam(":codigo_estudiante", $codigo_estudiante);
         $stmt->bindParam(":celular_estudiante", $celular_estudiante);

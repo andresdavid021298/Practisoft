@@ -21,3 +21,23 @@ function cantidadDeEstudiantesPorEmpresa($id_empresa)
     $obj_estudiante_model = new EstudianteModel();
     return $obj_estudiante_model->cantidadEstudiantesPorEmpresa($id_empresa);
 }
+
+if (isset($_POST['accion'])) {
+    if ($_POST['accion'] == "actualizar_perfil") {
+        $response = array();
+        $id_estudiante = $_POST['id_estudiante'];
+        $nombre_estudiante = $_POST['nombre'];
+        $codigo_estudiante = $_POST['codigo'];
+        $celular_estudiante = $_POST['celular'];
+        $obj_estudiante_model = new EstudianteModel();
+        $rta = $obj_estudiante_model->actualizarEstudiante($id_estudiante, $nombre_estudiante, $codigo_estudiante, $celular_estudiante);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Perfil Actualizado Correctamente";
+        }
+        echo json_encode($response);
+    }
+}
