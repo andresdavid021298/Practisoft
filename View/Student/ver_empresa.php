@@ -1,9 +1,6 @@
 <?php
 session_start();
 $_SESSION['id_estudiante'] = 1;
-$_SESSION['nombre_estudiante'] = "Jorge Mojica"
-
-// $_SESSION['nombre_estudiante'] = "Andres";
 // if ($_SESSION['id_estudiante'] == NULL) {
 
 //     header("Location: ../../index.php");
@@ -50,7 +47,7 @@ $_SESSION['nombre_estudiante'] = "Jorge Mojica"
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="index_student.php">
+                <a class="nav-link" style="text-align: center;" href="#">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 
@@ -139,89 +136,106 @@ $_SESSION['nombre_estudiante'] = "Jorge Mojica"
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
 
-                <div class="container-fluid">
-                    <center>
-                        <h2>Encuesta de Inscripcion</h2>
-                    </center>
-                    <br>
-                    <div class="form-group row">
-                        <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="inputNombre" value="<?php echo $_SESSION['nombre_estudiante'] ?>" readonly>
+                <!-- Inicio Formulario -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h3>Ver Empresa</h3>
                         </div>
                     </div>
-                    <br>
-                    <h4><strong>Areas</strong></h4>
-                    <br>
-                    <p>Selecciona tu área de interés para aplicar a una empresa, de acuerdo con los siguientes criterios: 5. <strong>Muy Interesado</strong>, 4. <strong>Interesado</strong>, 3. <strong>Medianamente Interesado</strong>,
-                        2. <strong>Poco Interesado</strong>, 1. <strong>Nada Interesado</strong></p>
-                    <form>
-                        <div class="form-group row">
-                            <label for="select_area_desarrollo" class="col-sm-4">Desarrollo de Software</label>
-                            <select name="select_area_desarrollo" id="select_area_desarrollo" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_mantenimiento" class="col-sm-4">Mantenimiento de Hardware / Software</label>
-                            <select name="select_area_mantenimiento" id="select_area_mantenimiento" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_capacitacion" class="col-sm-4">Capacitacion</label>
-                            <select name="select_area_capacitacion" id="select_area_capacitacion" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_redes" class="col-sm-4">Mantenimiento y Administracion de Redes</label>
-                            <select name="select_area_redes" id="select_area_redes" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_servidores" class="col-sm-4">Servidores y Computacion de la Nube</label>
-                            <select name="select_area_servidores" id="select_area_servidores" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                        <div class="col text-center">
-                            <button onclick="guardarEncuestaInscripcion();" id="btn_guardar_encuesta_inscripcion" type="button" name="btn_guardar_encuesta_inscripcion" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
                 </div>
+
+                <br>
+                <?php
+                require_once '../../Controller/Empresa/Empresa_Controller.php';
+                $id_estudiante = $_SESSION['id_estudiante'];
+                $datos_empresa = mostrarEmpresaAsignadaEstudiante($id_estudiante);
+                if ($datos_empresa == null) {
+
+                ?>
+                    <center><strong>NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
+
+                <?php
+                } else {
+
+                    foreach ($datos_empresa as $datos) {
+
+                ?>
+                        <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
+
+                            <div class="container">
+                                <div class="row" style="justify-content: center;">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <label for="Empresa">Nombre:</label>
+                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="justify-content: center;">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <label for="Tutor">Tutor:</label>
+                                        <input value="<?php echo $datos['tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="justify-content: center;">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <label for="Direccion">Direccion:</label>
+                                        <input value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="justify-content: center;">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <label for="Empresa">Celular:</label>
+                                        <input value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </form>
+
+                <?php
+                    }
+                }
+                ?>
+                <!-- Fin Formulario -->
+                <!-- End of Topbar -->
+
             </div>
             <!-- End of Page Wrapper -->
+
+
 
             <!-- Scroll to Top Button-->
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
 
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">
@@ -240,24 +254,18 @@ $_SESSION['nombre_estudiante'] = "Jorge Mojica"
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/Student/alertas_estudiante.js"></script>
+<script src="../../js/eventos.js"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<?php
-require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
-
-if (buscarEncuesta($_SESSION['id_estudiante']) > 0) {
-?>
-    <script>
-        swal.fire({
-            icon: "error",
-            title: "Ya realizo la encuesta de inscripcion"
-        }).then(() => {
-            window.location = "index_student.php";
-        })
-    </script>
-<?php
-}
-?>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 
 </html>

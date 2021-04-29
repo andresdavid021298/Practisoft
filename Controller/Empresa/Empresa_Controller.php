@@ -99,3 +99,8 @@ function mostrarDatos($id_empresa)
     $empresa = new EmpresaModel();
     return $empresa->mostrarDatos($id_empresa);
 }
+
+function mostrarEmpresaAsignadaEstudiante($id_estudiante){
+    $empresa = new EmpresaModel();
+    return $empresa->verEmpresaAsignadaEstudiante($id_estudiante);
+}
