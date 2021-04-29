@@ -153,7 +153,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="row">
                         <div class="col text-center">
                             <h2>Convenio de Prácticas Empresariales</h2>
-                            <br><br>
+                            <br>
                             <?php
                             require_once '../../Controller/Convenio/Convenio_Controller.php';
                             $id_empresa = $_SESSION['id_empresa'];
