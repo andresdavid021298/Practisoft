@@ -322,14 +322,13 @@ function subirProtocolos() {
             data: fd,
             contentType: false,
             processData: false,
-            success: function (response) {
-                swal.fire({
-                    icon: response.state,
-                    title: response.title
-                }).then(() => {
-                    window.location = "documento_protocolos.php"
-                })
-            },
+        }).done(function (response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "documento_protocolos.php"
+            })
         })
     }
 }

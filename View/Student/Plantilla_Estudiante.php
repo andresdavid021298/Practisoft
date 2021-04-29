@@ -47,7 +47,7 @@ $_SESSION['id_estudiante'] = 1;
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="#">
+                <a class="nav-link" style="text-align: center;" href="index_student.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
             </li>
 

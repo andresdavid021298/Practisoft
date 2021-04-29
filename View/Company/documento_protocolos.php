@@ -139,7 +139,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="../../index.html">
+                                <a class="dropdown-item" href="../../index.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
                                 </a>
                             </div>
@@ -153,6 +153,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="row">
                         <div class="col text-center">
                             <h2>Documento de Protocolos de Bioseguridad</h2>
+                            <br>
                             <img src="../../Img/bio.png" style="width: 100px; height: 100px;" />
                             <?php
                             require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
@@ -160,7 +161,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             $protocolos = mostrarDatosProtocolos($id_empresa);
                             ?>
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
-                                <br><br>
+                                <br>
                                 <?php
                                 if ($protocolos != NULL) {
                                 ?>
@@ -169,7 +170,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <?php
                                 }
                                 ?>
-                                <br>
                                 <div class="fileUpload btn">
                                     <label>Archivo</label>
                                     <input id="input_archivo" type="file" name="input_archivo" />

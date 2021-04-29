@@ -3,7 +3,6 @@
 require_once "../../Model/DAO/Documentos_Empresa_Model.php";
 
 if (isset($_FILES['input_archivo']['name'])) {
-
     $response = array();
     $nombreArchivo = $_FILES['input_archivo']['name'];
     $idEmpresa = $_POST['id_empresa'];
@@ -12,16 +11,33 @@ if (isset($_FILES['input_archivo']['name'])) {
     $extension = strrchr($nombreArchivo, ".");
     $archivo = $formatoNombre . $extension;
     $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/ProtocolosBioseguridad/' . $archivo;
-    move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
-    $id = intval($idEmpresa);
-    $protocolos = new DocumentosEmpresaModel();
-    $rta = $protocolos->insertarDocumentoProtocolos($id, $archivo);
-    if ($rta == 0) {
-        $response['title'] = "Error al subir el convenio";
-        $response['state'] = "error";
+    $tipoArchivo = $_FILES['input_archivo']['type'];
+    if ($tipoArchivo != "application/pdf") {
+        $response['title'] = "Solo se permiten archivos PDF";
+        $response['state'] = "warning";
     } else {
-        $response['title'] = "Información cargada correctamente";
-        $response['state'] = "success";
+        move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
+        $protocolos = new DocumentosEmpresaModel();
+        $registros = verificarRegistros($idEmpresa);
+        if ($registros == 0) {
+            $rta = $protocolos->insertarDocumentoProtocolos($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información cargada correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            $rta = $protocolos->actualizarDocumentoProtocolos($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información actualizada correctamente";
+                $response['state'] = "success";
+            }
+        }
     }
     echo json_encode($response);
 }
@@ -36,4 +52,10 @@ function mostrarDatosCertificado($id_empresa)
 {
     $certificado = new DocumentosEmpresaModel();
     return $certificado->mostrarCertificado($id_empresa);
+}
+
+function verificarRegistros($id_empresa)
+{
+    $registros = new DocumentosEmpresaModel();
+    return $registros->verificarRegistroDocumento($id_empresa);
 }

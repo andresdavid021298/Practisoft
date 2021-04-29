@@ -89,7 +89,7 @@ class ActividadModel
     //Método para aprobar la actividad de un estudiante
     public function cambiarActividadAprobado($id_actividad)
     {
-        $query = "UPDATE actividad SET estado_actividad='Aprobada' WHERE id_actividad=:id_actividad";
+        $query = "UPDATE actividad SET estado_actividad='Aprobada', observaciones_actividad=NULL WHERE id_actividad=:id_actividad";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_actividad", $id_actividad);
         if (!$stmt->execute()) {
