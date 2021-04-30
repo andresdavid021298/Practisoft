@@ -22,7 +22,7 @@ if (isset($_FILES['input_archivo']['name'])) {
         if ($registros == 0) {
             $rta = $protocolos->insertarDocumentoProtocolos($idEmpresa, $archivo);
             if ($rta == 0) {
-                $response['title'] = "Error al subir el convenio";
+                $response['title'] = "Error al subir los protocolos de bioseguridad";
                 $response['state'] = "error";
             } else {
                 $response['title'] = "Información cargada correctamente";
@@ -40,6 +40,88 @@ if (isset($_FILES['input_archivo']['name'])) {
         }
     }
     echo json_encode($response);
+} else if (isset($_FILES['input_archivo_certificado']['name'])) {
+    $response = array();
+    $nombreArchivo = $_FILES['input_archivo_certificado']['name'];
+    $idEmpresa = $_POST['id_empresa'];
+    $nombre_empresa = $_POST['nombre_empresa'];
+    $formatoNombre = "Certificado_" . $nombre_empresa;
+    $extension = strrchr($nombreArchivo, ".");
+    $archivo = $formatoNombre . $extension;
+    $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/CertificadoExistencia/' . $archivo;
+    $tipoArchivo = $_FILES['input_archivo_certificado']['type'];
+    if ($tipoArchivo != "application/pdf") {
+        $response['title'] = "Solo se permiten archivos PDF";
+        $response['state'] = "warning";
+    } else {
+        move_uploaded_file($_FILES['input_archivo_certificado']['tmp_name'], $location);
+        $certificado = new DocumentosEmpresaModel();
+        $registros = verificarRegistros($idEmpresa);
+        if ($registros == 0) {
+            $rta = $certificado->insertarDocumentoCertificado($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el certificado de existencia";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información cargada correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            $rta = $certificado->actualizarDocumentoCertificado($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información actualizada correctamente";
+                $response['state'] = "success";
+            }
+        }
+    }
+    echo json_encode($response);
+} else if (isset($_FILES['input_archivo_rut']['name'])) {
+    $response = array();
+    $nombreArchivo = $_FILES['input_archivo_rut']['name'];
+    $idEmpresa = $_POST['id_empresa'];
+    $nombre_empresa = $_POST['nombre_empresa'];
+    $formatoNombre = "RUT_" . $nombre_empresa;
+    $extension = strrchr($nombreArchivo, ".");
+    $archivo = $formatoNombre . $extension;
+    $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/RUT/' . $archivo;
+    $tipoArchivo = $_FILES['input_archivo_rut']['type'];
+    if ($tipoArchivo != "application/pdf") {
+        $response['title'] = "Solo se permiten archivos PDF";
+        $response['state'] = "warning";
+    } else {
+        move_uploaded_file($_FILES['input_archivo_rut']['tmp_name'], $location);
+        $certificado = new DocumentosEmpresaModel();
+        $registros = verificarRegistros($idEmpresa);
+        if ($registros == 0) {
+            $rta = $certificado->insertarDocumentoRUT($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el RUT";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información cargada correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            $rta = $certificado->actualizarDocumentoRUT($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información actualizada correctamente";
+                $response['state'] = "success";
+            }
+        }
+    }
+    echo json_encode($response);
+}
+
+function verificarRegistros($id_empresa)
+{
+    $registros = new DocumentosEmpresaModel();
+    return $registros->verificarRegistroDocumento($id_empresa);
 }
 
 function mostrarDatosProtocolos($id_empresa)
@@ -54,8 +136,8 @@ function mostrarDatosCertificado($id_empresa)
     return $certificado->mostrarCertificado($id_empresa);
 }
 
-function verificarRegistros($id_empresa)
+function mostrarDatosRUT($id_empresa)
 {
-    $registros = new DocumentosEmpresaModel();
-    return $registros->verificarRegistroDocumento($id_empresa);
+    $rut = new DocumentosEmpresaModel();
+    return $rut->mostrarRUT($id_empresa);
 }

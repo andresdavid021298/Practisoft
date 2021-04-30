@@ -153,46 +153,29 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2>Convenio de Prácticas Empresariales</h2>
+                            <h2>RUT (Registro Único Tributario)</h2>
                             <br>
+                            <img src="../../Img/bio.png" style="width: 100px; height: 100px;" />
                             <?php
-                            require_once '../../Controller/Convenio/Convenio_Controller.php';
+                            require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
                             $id_empresa = $_SESSION['id_empresa'];
-                            $empresa = mostrarConvenio($id_empresa);
+                            $rut = mostrarDatosRUT($id_empresa);
                             ?>
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
-                                <div style="align-items: center; justify-content: center;" class="row">
-                                    <div class="col-3">
-                                        <b>
-                                            <center><label for="fecha_inicio">Fecha Inicio</label></center>
-                                        </b>
-                                        <label for="fecha_inicio" class="sr-only">Fecha Inicio</label>
-                                        <input value="<?php echo $empresa['fecha_inicio']; ?>" type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
-                                    </div>
-                                    <div class="col-3">
-                                        <b>
-                                            <center><label for="fecha_fin">Fecha Fin</label></center>
-                                        </b>
-                                        <label for="fecha_fin" class="sr-only">Fecha Fin</label>
-                                        <input value="<?php echo $empresa['fecha_expiracion']; ?>" type="date" class="form-control" id="fecha_expiracion" name="fecha_expiracion">
-                                    </div>
-
-                                </div>
-                                <br><br>
+                                <br>
                                 <?php
-                                if ($empresa['nombre_archivo'] != NULL) {
+                                if ($rut['archivo_rut'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/Convenios/<?php echo $empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $empresa['nombre_archivo']; ?></p>
+                                    <a target="_blank" href="../../Documentos/RUT/<?php echo $rut['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                    <p><?php echo $rut['archivo_rut']; ?></p>
                                 <?php
                                 }
                                 ?>
-                                <br>
                                 <div class="fileUpload btn">
                                     <label>Archivo</label>
-                                    <input id="input_archivo" type="file" name="input_archivo" />
+                                    <input id="input_archivo_rut" type="file" name="input_archivo_rut" />
                                 </div>
-                                <button onclick="subirConvenio();" id="btn_subir_convenio" type="button" value="Enviar" name="btn_subir_convenio" class="btn btn-primary">Cargar</button>
+                                <button onclick="subirRUT();" id="btn_subir_prot" type="button" value="Enviar" name="btn_subir_prot" class="btn btn-primary">Cargar</button>
                                 <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                                 <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
                             </form>

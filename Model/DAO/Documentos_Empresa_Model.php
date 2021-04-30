@@ -13,22 +13,6 @@ class DocumentosEmpresaModel
         $this->conexion = Conexion::conectar();
     }
 
-    //Método para cargar el documento de protocolos de bioseguridad
-    public function insertarDocumentoProtocolos($id_empresa, $nombre_archivo)
-    {
-        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, :nombre_archivo, NULL, NULL)";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":id_empresa", $id_empresa);
-        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
-        if (!$stmt->execute()) {
-            $stmt->closeCursor();
-            return 0;
-        } else {
-            $stmt->closeCursor();
-            return 1;
-        }
-    }
-
     //Método para verificar si hay un registro de documento
     public function verificarRegistroDocumento($id_empresa)
     {
@@ -46,6 +30,22 @@ class DocumentosEmpresaModel
             }
             $stmt->closeCursor();
             return $documentos;
+        }
+    }
+
+    //Método para cargar el documento de protocolos de bioseguridad
+    public function insertarDocumentoProtocolos($id_empresa, $nombre_archivo)
+    {
+        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, :nombre_archivo, NULL, NULL, NULL)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
         }
     }
 
@@ -83,11 +83,93 @@ class DocumentosEmpresaModel
         }
     }
 
+    //Método para cargar el documento de certificado de existencia de la empresa
+    public function insertarDocumentoCertificado($id_empresa, $nombre_archivo)
+    {
+        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, NULL, NULL, :nombre_archivo, NULL)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para actualizar el documento de certificado de existencia de la empresa
+    public function actualizarDocumentoCertificado($id_empresa, $nombre_archivo)
+    {
+        $query = "UPDATE documentos_empresa SET archivo_certificado_existencia=:nombre_archivo WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
     //Método para mostrar el certificado de existencia de la empresa
     public function mostrarCertificado($id_empresa)
     {
         $doc_certificado = NULL;
         $query = "SELECT archivo_certificado_existencia FROM documentos_empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $doc_certificado = $result;
+            $stmt->closeCursor();
+            return $doc_certificado;
+        }
+    }
+
+    //Método para cargar el documento del RUT
+    public function insertarDocumentoRUT($id_empresa, $nombre_archivo)
+    {
+        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, NULL, NULL, NULL, :nombre_archivo)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para actualizar el documento del RUT
+    public function actualizarDocumentoRUT($id_empresa, $nombre_archivo)
+    {
+        $query = "UPDATE documentos_empresa SET archivo_rut=:nombre_archivo WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para mostrar el documento del RUT
+    public function mostrarRUT($id_empresa)
+    {
+        $doc_certificado = NULL;
+        $query = "SELECT archivo_rut FROM documentos_empresa WHERE id_empresa=:id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
         if (!$stmt->execute()) {

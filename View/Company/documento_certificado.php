@@ -154,6 +154,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="row">
                         <div class="col text-center">
                             <h2>Certificado de Existencia de la Empresa</h2>
+                            <br>
                             <img src="../../Img/empresa.png" style="width: 100px; height: 100px;" />
                             <?php
                             require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
@@ -163,19 +164,18 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <br><br>
                                 <?php
-                                if ($certificado != NULL) {
+                                if ($certificado['archivo_certificado_existencia'] != NULL) {
                                 ?>
                                     <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $certificado['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
                                     <p><?php echo $certificado['archivo_certificado_existencia']; ?></p>
                                 <?php
                                 }
                                 ?>
-                                <br>
                                 <div class="fileUpload btn">
                                     <label>Archivo</label>
-                                    <input id="input_archivo" type="file" name="input_archivo" />
+                                    <input id="input_archivo_certificado" type="file" name="input_archivo_certificado" />
                                 </div>
-                                <button onclick="subirProtocolos();" id="btn_subir_prot" type="button" value="Enviar" name="btn_subir_prot" class="btn btn-primary">Cargar</button>
+                                <button onclick="subirCertificado();" id="btn_subir_prot" type="button" value="Enviar" name="btn_subir_prot" class="btn btn-primary">Cargar</button>
                                 <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                                 <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
                             </form>

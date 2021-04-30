@@ -164,7 +164,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <br>
                                 <?php
-                                if ($protocolos != NULL) {
+                                if ($protocolos['archivo_protocolos_bio'] != NULL) {
                                 ?>
                                     <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $protocolos['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
                                     <p><?php echo $protocolos['archivo_protocolos_bio']; ?></p>
