@@ -267,28 +267,32 @@ function rechazarActividad(id_estudiante) {
 
 //Método que permite mostrar alerta cuando se sube un convenio con su fecha de inicio y fin
 function subirConvenio() {
+    var idEmpresa = document.getElementById('id_empresa').value;
+    var nombreEmpresa = document.getElementById('nombre_empresa').value;
+    var inputArchivo = document.getElementById('input_archivo').value;
     var fechaInicio = document.getElementById('fecha_inicio').value;
     var fechaExpiracion = document.getElementById('fecha_expiracion').value;
-    var inputArchivo = document.getElementById('input_archivo').value;
-    if ((fechaInicio == "") || (fechaExpiracion == "") || (inputArchivo == "")) {
+    var fd = new FormData();
+    var files = $('#input_archivo')[0].files;
+    if (fechaInicio == "" || fechaExpiracion == "" || inputArchivo == "") {
         swal.fire({
             icon: "warning",
             title: "Oops, Hay campos vacios"
         })
     } else {
-        //El boton de la vista debe ser tipo button
+        fd.append('id_empresa', idEmpresa);
+        fd.append('nombre_empresa', nombreEmpresa);
+        fd.append('fecha_inicio', fechaInicio);
+        fd.append('fecha_expiracion', fechaExpiracion);
+        fd.append('input_archivo', files[0]);
         $.ajax({
-            url: "../../Controller/Convenio/Convenio_Controller.php",
-            type: "post",
-            //Debe ser tipo JSON para poder mostrar la alerta
+            url: '../../Controller/Convenio/Convenio_Controller.php',
+            type: 'post',
             dataType: "JSON",
-            //Se hace referencia al formulario por jQuery
-            data: new FormData($("#formConvenio")[0]),
-            cache: false,
+            data: fd,
             contentType: false,
-            processData: false
+            processData: false,
         }).done(function (response) {
-            console.log(response);
             swal.fire({
                 icon: response.state,
                 title: response.title

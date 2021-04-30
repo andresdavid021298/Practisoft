@@ -2,35 +2,43 @@
 
 require_once "../../Model/DAO/Convenio_Model.php";
 
-if (isset($_POST['fecha_inicio']) || isset($_POST['fecha_expiracion']) || isset($_POST['input_archivo'])) {
+if (isset($_POST['fecha_inicio']) || isset($_POST['fecha_expiracion']) || isset($_FILES['input_archivo']['name'])) {
     $response = array();
-    $fechaInicio = $_POST['fecha_inicio'];
-    $fechaExpiracion = $_POST['fecha_expiracion'];
-    $nombre_empresa = $_POST['nombre_empresa'];
-    $idEmpresa = $_POST['id_empresa'];
     $nombreArchivo = $_FILES['input_archivo']['name'];
-    $ruta = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/Convenios/';
+    $idEmpresa = $_POST['id_empresa'];
+    $nombre_empresa = $_POST['nombre_empresa'];
     $formatoNombre = "Convenio_" . $nombre_empresa;
     $extension = strrchr($nombreArchivo, ".");
     $archivo = $formatoNombre . $extension;
+    $ruta = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/Convenios/' . $archivo;
+    $fechaInicio = $_POST['fecha_inicio'];
+    $fechaExpiracion = $_POST['fecha_expiracion'];
     $tipoArchivo = $_FILES['input_archivo']['type'];
     if ($tipoArchivo != "application/pdf") {
         $response['title'] = "Solo se permiten archivos PDF";
         $response['state'] = "warning";
     } else {
-        try {
-            move_uploaded_file($_FILES['input_archivo']['tmp_name'], $ruta . $archivo);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+        move_uploaded_file($_FILES['input_archivo']['tmp_name'], $ruta);
         $convenio = new ConvenioModel();
-        $rta = $convenio->insertarConvenio($idEmpresa, $archivo, $fechaInicio, $fechaExpiracion);
-        if ($rta == 0) {
-            $response['title'] = "Error al subir el convenio";
-            $response['state'] = "error";
+        $registros = $convenio->verificarRegistroDocumento($idEmpresa);
+        if ($registros == 0) {
+            $rta = $convenio->insertarConvenio($idEmpresa, $archivo, $fechaInicio, $fechaExpiracion);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información cargada correctamente";
+                $response['state'] = "success";
+            }
         } else {
-            $response['title'] = "Información cargada correctamente";
-            $response['state'] = "success";
+            $rta = $convenio->actualizarConvenio($idEmpresa, $archivo, $fechaInicio, $fechaExpiracion);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el convenio";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Información actualizada correctamente";
+                $response['state'] = "success";
+            }
         }
     }
     echo json_encode($response);
