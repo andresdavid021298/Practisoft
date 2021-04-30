@@ -210,8 +210,25 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <li class="list-group-item">
                                                     <!-- Default checked -->
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" name="areas[]" value="Desarrollo de Software" class="custom-control-input" id="check3">
+                                                        <input type="checkbox" name="areas[]" value="Desarrollo de Software" onclick="seleccionarOtrosCheckDesarrollo()" class="custom-control-input" id="check3">
                                                         <label class="custom-control-label" for="check3">Desarrollo de Software</label>
+                                                        <div>
+                                                            <br>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" value="Desarrollo de Software Movil" onclick="SeleccionarcheckboxDesarrolloSoftware()" type="checkbox" name="checkMovil" id="checkMovil">
+                                                                <label class="custom-control-label" for="checkMovil">Movil</label>
+                                                            </div>
+                                                            <br>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" value="Desarrollo de Software de Escritorio" type="checkbox" onclick="SeleccionarcheckboxDesarrolloSoftware()" name="checkEscritorio" id="checkEscritorio">
+                                                                <label class="custom-control-label" for="checkEscritorio">Escritorio</label>
+                                                            </div>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <br>
+                                                                <input class="custom-control-input" value="Desarrollo de Software Web" type="checkbox" onclick="SeleccionarcheckboxDesarrolloSoftware()" name="checkWeb" id="checkWeb">
+                                                                <label class="custom-control-label" for="checkWeb">Web</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
@@ -224,8 +241,25 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <li class="list-group-item">
                                                     <!-- Default checked -->
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" name="areas[]" value="Mantenimiento y Administracion de Redes" class="custom-control-input" id="check5">
-                                                        <label class="custom-control-label" for="check5">Mantenimiento y Administración de Redes</label>
+                                                        <input type="checkbox" name="areas[]" value="Administracion de Redes" class="custom-control-input" id="check5" onclick="seleccionarCheckRedes()">
+                                                        <label class="custom-control-label" for="check5">Administración de Redes</label>
+                                                        <div>
+                                                            <br>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" value="Mantenimiento de Redes" onclick="SeleccionarcheckboxRedes()" type="checkbox" name="checkMantenimiento" id="checkMantenimiento">
+                                                                <label class="custom-control-label" for="checkMantenimiento">Mantenimiento de Redes</label>
+                                                            </div>
+                                                            <br>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" value="Diseño de Redes" type="checkbox" onclick="SeleccionarcheckboxRedes()" name="checkDiseño" id="checkDiseño">
+                                                                <label class="custom-control-label" for="checkDiseño">Diseño de Redes</label>
+                                                            </div>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <br>
+                                                                <input class="custom-control-input" value="Seguridad de Redes" type="checkbox" onclick="SeleccionarcheckboxRedes()" name="checkSeguridad" id="checkSeguridad">
+                                                                <label class="custom-control-label" for="checkSeguridad">Seguridad de Redes</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </li>
                                             </ul>

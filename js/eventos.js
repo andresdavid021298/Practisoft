@@ -67,3 +67,53 @@ function validarClavesEnPerfil() {
         }
     }
 }
+
+function seleccionarOtrosCheckDesarrollo() {
+    var isCheckedDesarrollo = document.getElementById("check3").checked;
+    if (isCheckedDesarrollo) {
+        document.getElementById('checkWeb').checked = true;
+        document.getElementById('checkMovil').checked = true;
+        document.getElementById('checkEscritorio').checked = true;
+    } else {
+        document.getElementById('checkWeb').checked = false;
+        document.getElementById('checkMovil').checked = false;
+        document.getElementById('checkEscritorio').checked = false;
+    }
+}
+
+function SeleccionarcheckboxDesarrolloSoftware() {
+    var isCheckedWeb = document.getElementById('checkWeb').checked;
+    var isCheckedMovil = document.getElementById('checkMovil').checked;
+    var isCheckedEscritorio = document.getElementById('checkEscritorio').checked;
+    if (isCheckedWeb && isCheckedMovil && isCheckedEscritorio) {
+        document.getElementById('check3').checked = true;
+    } else {
+        document.getElementById('check3').checked = false;
+
+    }
+}
+
+function seleccionarCheckRedes() {
+    var isCheckedRedes = document.getElementById("check5").checked;
+    if (isCheckedRedes) {
+        document.getElementById('checkMantenimiento').checked = true;
+        document.getElementById('checkSeguridad').checked = true;
+        document.getElementById('checkDiseño').checked = true;
+    } else {
+        document.getElementById('checkMantenimiento').checked = false;
+        document.getElementById('checkSeguridad').checked = false;
+        document.getElementById('checkDiseño').checked = false;
+    }
+}
+
+function SeleccionarcheckboxRedes() {
+    var isCheckedMantenimiento = document.getElementById('checkMantenimiento').checked;
+    var isCheckedSeguridad = document.getElementById('checkSeguridad').checked;
+    var isCheckedDiseño = document.getElementById('checkDiseño').checked;
+    if (isCheckedSeguridad && isCheckedMantenimiento && isCheckedDiseño) {
+        document.getElementById('check5').checked = true;
+    } else {
+        document.getElementById('check5').checked = false;
+
+    }
+}
