@@ -116,6 +116,44 @@ if (isset($_FILES['input_archivo']['name'])) {
         }
     }
     echo json_encode($response);
+}else if (isset($_FILES['input_archivo_representante']['name'])) {
+    $response = array();
+    $nombreArchivo = $_FILES['input_archivo_representante']['name'];
+    $idEmpresa = $_POST['id_empresa'];
+    $nombre_empresa = $_POST['nombre_empresa'];
+    $formatoNombre = "CCRepresentante_" . $nombre_empresa;
+    $extension = strrchr($nombreArchivo, ".");
+    $archivo = $formatoNombre . $extension;
+    $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/CedulaRepresentante/' . $archivo;
+    $tipoArchivo = $_FILES['input_archivo_representante']['type'];
+    if ($tipoArchivo != "application/pdf") {
+        $response['title'] = "Solo se permiten archivos PDF";
+        $response['state'] = "warning";
+    } else {
+        move_uploaded_file($_FILES['input_archivo_representante']['tmp_name'], $location);
+        $representante = new DocumentosEmpresaModel();
+        $registros = verificarRegistros($idEmpresa);
+        if ($registros == 0) {
+            $rta = $representante->insertarDocumentoRepresentante($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el documento del representante";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Documento de Representante cargada correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            $rta = $representante->actualizarDocumentoRepresentante($idEmpresa, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al actualizar documento";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Documento de representante actualizada correctamente";
+                $response['state'] = "success";
+            }
+        }
+    }
+    echo json_encode($response);
 }
 
 function verificarRegistros($id_empresa)
@@ -128,6 +166,11 @@ function mostrarDatosProtocolos($id_empresa)
 {
     $protocolos = new DocumentosEmpresaModel();
     return $protocolos->mostrarProtocolos($id_empresa);
+}
+
+function mostrarDatosRepresentante($id_empresa){
+    $representante = new DocumentosEmpresaModel();
+    return $representante->mostrarRepresentante($id_empresa);
 }
 
 function mostrarDatosCertificado($id_empresa)

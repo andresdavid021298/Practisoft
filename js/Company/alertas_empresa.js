@@ -363,6 +363,40 @@ function subirProtocolos() {
     }
 }
 
+//Metodo que permite subir el documento del representante legal
+function subirRepresentante() {
+    var idEmpresa = document.getElementById('id_empresa').value;
+    var nombreEmpresa = document.getElementById('nombre_empresa').value;
+    var inputArchivo = document.getElementById('input_archivo_representante').value;
+    var fd = new FormData();
+    var files = $('#input_archivo_representante')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        fd.append('id_empresa', idEmpresa);
+        fd.append('nombre_empresa', nombreEmpresa);
+        fd.append('input_archivo_representante', files[0]);
+        $.ajax({
+            url: '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "documento_representante.php"
+            })
+        })
+    }
+}
+
 //Método que permite mostrar alerta cuando se sube el documento de protocolos de bioseguridad
 function subirCertificado() {
     var idEmpresa = document.getElementById('id_empresa').value;

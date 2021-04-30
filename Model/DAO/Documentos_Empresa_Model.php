@@ -49,6 +49,57 @@ class DocumentosEmpresaModel
         }
     }
 
+    //Metodo para insertar la cedula del representante legal
+    public function insertarDocumentoRepresentante($id_empresa, $nombre_archivo)
+    {
+        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, NULL, :nombre_archivo, NULL, NULL)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+//Metodo para actualizar el documento del representante legal
+    public function actualizarDocumentoRepresentante($id_empresa, $nombre_archivo)
+    {
+        $query = "UPDATE documentos_empresa SET archivo_cc_representante=:nombre_archivo WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+//Metodo para mostrar el documento de identificacion del representante legal
+    public function mostrarRepresentante($id_empresa){
+        $doc_representante = NULL;
+        $query = "SELECT archivo_cc_representante FROM documentos_empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        }
+        else{
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $doc_representante = $result;
+            $stmt->closeCursor();
+            return $doc_representante;
+        }
+    }
+    
+
     //Método para actualizar el documento de protocolos de bioseguridad
     public function actualizarDocumentoProtocolos($id_empresa, $nombre_archivo)
     {
