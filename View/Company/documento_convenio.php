@@ -155,6 +155,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <div class="col text-center">
                             <h2>Convenio de Prácticas Empresariales</h2>
                             <br>
+                            <img src="../../Img/convenio.png" style="width: 100px; height: 100px;" />
+                            <br><br>
                             <?php
                             require_once '../../Controller/Convenio/Convenio_Controller.php';
                             $id_empresa = $_SESSION['id_empresa'];
@@ -180,14 +182,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </div>
                                 <br><br>
                                 <?php
-                                if ($empresa['nombre_archivo'] != NULL) {
+                                if ($empresa == true) {
+                                    if ($empresa['nombre_archivo'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/Convenios/<?php echo $empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $empresa['nombre_archivo']; ?></p>
+                                        <a target="_blank" href="../../Documentos/Convenios/<?php echo $empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $empresa['nombre_archivo']; ?></p>
                                 <?php
+                                    }
                                 }
                                 ?>
-                                <br>
                                 <div class="fileUpload btn">
                                     <label>Archivo</label>
                                     <input id="input_archivo" type="file" name="input_archivo" />

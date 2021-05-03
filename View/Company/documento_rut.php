@@ -155,7 +155,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <div class="col text-center">
                             <h2>RUT (Registro Único Tributario)</h2>
                             <br>
-                            <img src="../../Img/bio.png" style="width: 100px; height: 100px;" />
+                            <img src="../../Img/rut.jpeg" style="width: 100px; height: 100px;" />
                             <?php
                             require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
                             $id_empresa = $_SESSION['id_empresa'];
@@ -164,11 +164,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <br>
                                 <?php
-                                if ($rut['archivo_rut'] != NULL) {
+                                if ($rut == true) {
+                                    if ($rut['archivo_rut'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/RUT/<?php echo $rut['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $rut['archivo_rut']; ?></p>
+                                        <a target="_blank" href="../../Documentos/RUT/<?php echo $rut['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $rut['archivo_rut']; ?></p>
                                 <?php
+                                    }
                                 }
                                 ?>
                                 <div class="fileUpload btn">

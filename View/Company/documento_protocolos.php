@@ -164,11 +164,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <br>
                                 <?php
-                                if ($protocolos['archivo_protocolos_bio'] != NULL) {
+                                if ($protocolos == true) {
+                                    if ($protocolos['archivo_protocolos_bio'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $protocolos['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $protocolos['archivo_protocolos_bio']; ?></p>
+                                        <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $protocolos['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $protocolos['archivo_protocolos_bio']; ?></p>
                                 <?php
+                                    }
                                 }
                                 ?>
                                 <div class="fileUpload btn">

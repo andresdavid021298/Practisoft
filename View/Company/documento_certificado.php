@@ -164,11 +164,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <br><br>
                                 <?php
-                                if ($certificado['archivo_certificado_existencia'] != NULL) {
+                                if ($certificado == true) {
+                                    if ($certificado['archivo_certificado_existencia'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $certificado['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $certificado['archivo_certificado_existencia']; ?></p>
+                                        <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $certificado['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $certificado['archivo_certificado_existencia']; ?></p>
                                 <?php
+                                    }
                                 }
                                 ?>
                                 <div class="fileUpload btn">

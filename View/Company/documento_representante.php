@@ -164,11 +164,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <form id="formRepresentante" method="POST" enctype="multipart/form-data">
                                 <br>
                                 <?php
-                                if ($representante['archivo_cc_representante'] != NULL) {
+                                if ($representante == true) {
+                                    if ($representante['archivo_cc_representante'] != NULL) {
                                 ?>
-                                    <a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $representante['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                    <p><?php echo $representante['archivo_cc_representante']; ?></p>
+                                        <a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $representante['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $representante['archivo_cc_representante']; ?></p>
                                 <?php
+                                    }
                                 }
                                 ?>
                                 <div class="fileUpload btn">
