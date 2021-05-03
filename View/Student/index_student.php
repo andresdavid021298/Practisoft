@@ -1,11 +1,11 @@
-<?php
+<!-- <?php
 session_start();
 $_SESSION['id_estudiante'] = 1;
-// if ($_SESSION['id_estudiante'] == NULL) {
+if ($_SESSION['id_estudiante'] == NULL) {
 
-//     header("Location: ../../index.php");
-// }
-?>
+    header("Location: ../../index.php");
+ }
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +87,7 @@ $_SESSION['id_estudiante'] = 1;
                 </div>
             </li>
 
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -137,6 +137,46 @@ $_SESSION['id_estudiante'] = 1;
 
                 </nav>
                 <!-- End of Topbar -->
+
+                <?php
+                require_once '../../vendor/autoload.php';
+
+                // CONFIGURACION DE GOOGLE
+                $clientID = '1008530545893-v4b9lpn6kuljnbb88odmebvlsmlha8t5.apps.googleusercontent.com';
+                $clientSecret = '3O6XV6hgt_cWDzYWFq-XQTQb';
+                $redirectUri = 'http://localhost/Practisoft/Controller/Login/Login_Controller.php';
+
+                $client = new Google_Client();
+                $client->setClientId($clientID);
+                $client->setClientSecret($clientSecret);
+                $client->setRedirectUri($redirectUri);
+                $client->addScope("email");
+                $client->addScope("profile");
+
+                // if (isset($_GET['code'])) {
+                //     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                //     $client->setAccessToken($token['access_token']);
+
+                //     // get profile info
+                //     $google_oauth = new Google_Service_Oauth2($client);
+                //     $google_account_info = $google_oauth->userinfo->get();
+                //     $email =  $google_account_info->email;
+                //     $name =  $google_account_info->name;
+
+                //     // Estos datos son los que obtenemos....	
+                //     // echo $email . '<br>';
+                //     // echo $name . '<br>';
+                //     $extension = strrchr($email, "@");
+                //     // echo $extension;
+
+                //     if($extension != "@ufps.edu.co"){
+                //         echo '<script type="text/javascript">alert("Debes ingresar con cuenta institucional");</script>';
+                //         echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
+                //     }
+
+                    
+                // }
+                ?>
 
             </div>
             <!-- End of Page Wrapper -->

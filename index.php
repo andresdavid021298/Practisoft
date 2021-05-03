@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    session_destroy();
+session_start();
+session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,44 @@
                                 </div>
                             </div>
                             <hr class="my-4">
-                            <button class="btn btn-google btn-block text-uppercase" type="submit" style="border: 2px solid #D61117"><i class="fab fa-google mr-2"></i>Inicia Sesion con tu cuenta universitaria</button>
+                            <?php
+                            require_once 'vendor/autoload.php';
+
+                            // CONFIGURACION DE GOOGLE
+                            $clientID = '1008530545893-v4b9lpn6kuljnbb88odmebvlsmlha8t5.apps.googleusercontent.com';
+                            $clientSecret = '3O6XV6hgt_cWDzYWFq-XQTQb';
+                            $redirectUri = 'http://localhost/Practisoft/Controller/Login/Login_Controller.php';
+
+                            $client = new Google_Client();
+                            $client->setClientId($clientID);
+                            $client->setClientSecret($clientSecret);
+                            $client->setRedirectUri($redirectUri);
+                            $client->addScope("email");
+                            $client->addScope("profile");
+
+                            ?>
+                            <center>
+                                <a class="btn btn-outline-dark" href="<?php echo $client->createAuthUrl() ?>" role="button" style="text-transform:none">
+                                    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                    Login with Google
+                                </a>
+                            </center>
+                            <!-- <?php
+                            if (isset($_GET['code'])) {
+                                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                                $client->setAccessToken($token['access_token']);
+
+                                // get profile info
+                                $google_oauth = new Google_Service_Oauth2($client);
+                                $google_account_info = $google_oauth->userinfo->get();
+                                $email =  $google_account_info->email;
+                                $name =  $google_account_info->name;
+
+                                // Estos datos son los que obtenemos....	
+                                echo $email . '<br>';
+                                echo $name;
+                            }
+                            ?> -->
                         </form>
                     </div>
                 </div>

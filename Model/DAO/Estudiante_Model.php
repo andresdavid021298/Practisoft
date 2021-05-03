@@ -29,11 +29,11 @@ class EstudianteModel
     }
 
     // Metodo que permite actualizar la informacion del estudiante
-    public function actualizarEstudiante($id_estudiante,$nombre_estudiante, $codigo_estudiante, $celular_estudiante)
+    public function actualizarEstudiante($id_estudiante, $nombre_estudiante, $codigo_estudiante, $celular_estudiante)
     {
         $query = "UPDATE estudiante SET nombre_estudiante=:nombre_estudiante,codigo_estudiante=:codigo_estudiante,celular_estudiante=:celular_estudiante WHERE id_estudiante=:id";
         $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":id",$id_estudiante);
+        $stmt->bindParam(":id", $id_estudiante);
         $stmt->bindParam(":nombre_estudiante", $nombre_estudiante);
         $stmt->bindParam(":codigo_estudiante", $codigo_estudiante);
         $stmt->bindParam(":celular_estudiante", $celular_estudiante);
@@ -147,6 +147,23 @@ class EstudianteModel
             $datos_del_estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
             $stmt->closeCursor();
             return $datos_del_estudiante;
+        }
+    }
+
+    // Verifica si existe una empresa mediante el correo electrónico y la contraseña
+    public function verificarExistenciaEstudiante($correo_estudiante)
+    {
+        $datos = NULL;
+        $query = "SELECT id_estudiante, nombre_estudiante FROM estudiante WHERE correo_estudiante=:correo_estudiante";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":correo_estudiante", $correo_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $datos = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            return $datos;
         }
     }
 }
