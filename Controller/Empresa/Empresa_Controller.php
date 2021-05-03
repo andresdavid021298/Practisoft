@@ -57,11 +57,10 @@ if (isset($_POST['accion'])) {
         $representante_legal = $_POST['representante'];
         $direccion_empresa = $_POST['direccion'];
         $municipio_empresa = $_POST['municipio'];
-        $tutor = $_POST['tutor'];
         $correo_empresa = $_POST['correo'];
         $celular_empresa = $_POST['contacto'];
         $empresa = new EmpresaModel();
-        $rta = $empresa->actualizarEmpresa($id_empresa, $representante_legal, $direccion_empresa, $municipio_empresa, $tutor, $correo_empresa, $celular_empresa);
+        $rta = $empresa->actualizarEmpresa($id_empresa, $representante_legal, $direccion_empresa, $municipio_empresa, $correo_empresa, $celular_empresa);
         if ($rta == 0) {
             $response['title'] = "Error al editar los datos";
             $response['state'] = "error";

@@ -122,6 +122,101 @@ function actualizarDatos() {
     }
 }
 
+function agregarTutor(){
+    var nombre = document.getElementById('nombre_tutor').value;
+    var correo = document.getElementById('correo_tutor').value;
+    var celular = document.getElementById('celular_tutor').value;
+    var idEmpresa = document.getElementById('id_empresa').value;
+
+    if(nombre == "" || correo == "" || celular == ""){
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    }else {
+        $.ajax({
+                url: "../../Controller/Tutor/Tutor_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "registrar_tutor",
+                    "id": idEmpresa,
+                    "nombre_tutor": nombre,
+                    "correo_tutor": correo,
+                    "celular_tutor": celular
+                },
+                dataType: "JSON"
+            })
+            .done(function(response) {
+                console.log(response);
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = response.location
+                })
+            })
+    }
+}
+
+function actualizarTutor(){
+    var nombre = document.getElementById('nombre_tutor_act').value;
+    var correo = document.getElementById('correo_tutor_act').value;
+    var celular = document.getElementById('celular_tutor_act').value;
+    var idEmpresa = document.getElementById('id_empresa_act').value;
+    var idTutor = document.getElementById('id_tutor_act').value;
+
+    if(nombre == "" || correo == "" || celular == ""){
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    }else {
+        $.ajax({
+                url: "../../Controller/Tutor/Tutor_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "actualizar_tutor",
+                    "id": idEmpresa,
+                    "id_tutor": idTutor,
+                    "nombre_tutor": nombre,
+                    "correo_tutor": correo,
+                    "celular_tutor": celular
+                },
+                dataType: "JSON"
+            })
+            .done(function(response) {
+                console.log(response);
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = response.location
+                })
+            })
+    }
+    
+}
+
+function eliminarTutor(id_tutor){
+    $.ajax({
+        url: "../../Controller/Tutor/Tutor_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "eliminar_tutor",
+            "id_tutor": id_tutor
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location
+        })
+    })
+}
+
 //Método para mostrar alerta cuando una empresa agrega una solicitud de practicantes
 function agregarSolicitud() {
 

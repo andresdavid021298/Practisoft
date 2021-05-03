@@ -80,6 +80,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Actualizar Perfil</a>
                         <a class="collapse-item" href="cambiar_clave.php"><i class="fas fa-unlock"></i> Cambiar Clave</a>
+                        <a class="collapse-item" href="ver_tutores.php"><i class="fas fa-unlock"></i> Ver Tutores</a>
                     </div>
                 </div>
             </li>

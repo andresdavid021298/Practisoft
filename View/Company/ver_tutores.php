@@ -41,8 +41,6 @@ if ($_SESSION['id_empresa'] == NULL) {
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient sidebar sidebar-dark accordion" style="background-color: #D61117;" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -54,8 +52,6 @@ if ($_SESSION['id_empresa'] == NULL) {
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -70,6 +66,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
                         <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
+                        <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
                     </div>
                 </div>
             </li>
@@ -103,7 +100,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
                         <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
                         <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a>
-                        <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
                     </div>
                 </div>
             </li>
@@ -118,6 +114,8 @@ if ($_SESSION['id_empresa'] == NULL) {
 
         </ul>
         <!-- End of Sidebar -->
+
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -156,96 +154,178 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <center>
-                    <h2>Mi Perfil</h2>
-                </center>
-                <br>
-                <?php
-                require_once '../../Controller/Empresa/Empresa_Controller.php';
-                $id_empresa = $_SESSION['id_empresa'];
-                $datos_empresa = mostrarDatos($id_empresa);
-                foreach ($datos_empresa as $datos) {
-                ?>
-                    <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php" enctype="multipart/form-data">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Empresa</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">NIT</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nit_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Sector</span>
-                                        </div>
-                                        <input id="inputSector" name="input_sector" value="<?php echo $datos['sector_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Actividad</span>
-                                        </div>
-                                        <input name="input_actividad" value="<?php echo $datos['actividad_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Correo</span>
-                                        </div>
-                                        <input id="inputCorreo" name="input_correo" value="<?php echo $datos['correo_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
+                <div class="container-fluid">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <h1 class="h3 mb-0 text-gray-800">Ver Tutores</h1>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarTutor">Agregar Nuevo Tutor</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inicio Modal Agregar Tutor -->
+                    <div class="modal fade" id="agregarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:#D61117;">
+                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Tutor</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Representante Legal</span>
+                                <div class="modal-body">
+
+                                    <form action="../../Controller/Tutor/Tutor_Controller.php" method="POST">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Nombre de Tutor:</label>
+                                            <input type="text" class="form-control" name="nombreTutor" id="nombre_tutor">
                                         </div>
-                                        <input id="inputRepresentante" name="input_representante_legal" value="<?php echo $datos['representante_legal']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Dirección</span>
+
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Correo:</label>
+                                            <input type="text" class="form-control" name="correoTutor" id="correo_tutor">
                                         </div>
-                                        <input id="inputDireccion" name="input_direccion" value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Ubicación</span>
+
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Celular:</label>
+                                            <input type="text" class="form-control" name="celularTutor" id="celular_tutor">
                                         </div>
-                                        <select id="select_municipio" class="form-control">
-                                            <option value="<?php echo $datos['municipio_empresa']; ?>"><?php echo $datos['municipio_empresa']; ?></option>
-                                            <option value="Cucuta">Cúcuta</option>
-                                            <option value="Villa del Rosario">Villa del Rosario</option>
-                                            <option value="Los Patios">Los Patios</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Contacto</span>
+
+                                        
+                                        <input type="hidden" name="id_empresa" id="id_empresa" value="<?php echo $_SESSION['id_empresa'] ?>">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button type="button" onclick="agregarTutor()" class="btn btn-primary">Solicitar</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <input id="inputContacto" name="input_celular" value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <button type="button" onclick="actualizarDatos()" name="btn_editar_perfil" class="btn btn-primary">Editar</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                <?php
-                }
-                ?>
+                    </div>
+                    <!-- Fin Modal Agregar Tutor -->
+
+                    <!-- Inicio Tabla Tutores -->
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Celular</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            require_once '../../Controller/Tutor/Tutor_Controller.php';
+                            $id_empresa = $_SESSION['id_empresa'];
+                            $datos_tutor = mostrarDatosTutorEmpresa($id_empresa);
+                            if (is_null($datos_tutor)) {
+                            ?>
+                                <td colspan="4" style="color: #D61117;">
+                                    <center><strong>NO POSEE TUTORES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                </td>
+                                <?php
+                            } else {
+
+                                foreach ($datos_tutor as $datos) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $datos['nombre_tutor'] ?></td>
+                                        <td><?php echo $datos['correo_tutor'] ?></td>
+                                        <td><?php echo $datos['celular_tutor'] ?></td>
+                                        <td>
+
+                                            <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" 
+                                            data-nombre="<?php echo $datos['nombre_tutor']; ?>" 
+                                            data-correo="<?php echo $datos['correo_tutor']; ?>"
+                                            data-celular="<?php echo $datos['celular_tutor']; ?>"
+                                            data-tutor="<?php echo $datos['id_tutor']; ?>"
+                                            >Actualizar</button></center><br>
+                                            
+                                            <center><button class="btn btn-danger" onclick="eliminarTutor(<?php echo $datos['id_tutor'];?>)"> Eliminar</button></center>
+                                            
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Celular</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Fin de tabla tutores -->
+
+                <!-- Inicio Modal Actualizar Tutor -->
+                <div class="modal fade" id="modalActualizarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:#D61117;">
+                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Tutor</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="../../Controller/Tutor/Tutor_Controller.php" method="POST">
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Nombre de Tutor:</label>
+                                            <input type="text" class="form-control nombre_tut" name="nombreTutor" id="nombre_tutor_act">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Correo:</label>
+                                            <input type="text" class="form-control correo_tut" name="correoTutor" id="correo_tutor_act">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Celular:</label>
+                                            <input type="text" class="form-control celular_tut" name="celularTutor" id="celular_tutor_act">
+                                        </div>
+
+                                        <input type="hidden" class="form-control id_tut" name="id_tutor" id="id_tutor_act">
+                                        
+                                        <input type="hidden" name="id_empresa" id="id_empresa_act" value="<?php echo $_SESSION['id_empresa'] ?>">
+                                        
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button type="button" onclick="actualizarTutor()" class="btn btn-primary">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal Agregar Tutor -->
+
             </div>
             <!-- End of Page Wrapper -->
 
@@ -289,10 +369,36 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
 <script src="../../js/Company/alertas_empresa.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="../../js/sb-admin-2.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+<script>
+    $('#modalActualizarTutor').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        //var recipient = button.data('whatever')
+        var nombre = button.data('nombre') // Extract info from data-* attributes
+        var correo = button.data('correo')
+        var celular = button.data('celular')
+        var id_tutor = button.data('tutor')
+        var modal = $(this)
+        //modal.find('.modal-title').text('Actividad: ' + fecha)
+        //modal.find('.modal-body input').val(num_horas)
+        modal.find('.nombre_tut').val(nombre)
+        modal.find('.correo_tut').val(correo)
+        modal.find('.celular_tut').val(celular)
+        modal.find('.id_tut').val(id_tutor)
+    })
+</script>
 
 </html>

@@ -38,16 +38,15 @@ class EmpresaModel
     }
 
     // Metodo que actualiza una empresa
-    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $tutor, $correo, $celular)
+    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $correo, $celular)
     {
         $query = "UPDATE empresa SET representante_legal=:representante, direccion_empresa=:direccion, municipio_empresa=:municipio,
-                  tutor=:tutor, correo_empresa=:correo, celular_empresa=:celular WHERE id_empresa=:id";
+                  correo_empresa=:correo, celular_empresa=:celular WHERE id_empresa=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_empresa);
         $stmt->bindParam(":representante", $representante_legal);
         $stmt->bindParam(":direccion", $direccion);
         $stmt->bindParam(":municipio", $municipio);
-        $stmt->bindParam(":tutor", $tutor);
         $stmt->bindParam(":correo", $correo);
         $stmt->bindParam(":celular", $celular);
         if (!$stmt->execute()) {
@@ -62,7 +61,7 @@ class EmpresaModel
     // Metodo que devuelve un listado con todas las empresas
     public function listarEmpresas()
     {
-        $query = "SELECT id_empresa,nombre_empresa,representante_legal,direccion_empresa,celular_empresa,correo_empresa,sector_empresa,descripcion_empresa,tutor FROM empresa";
+        $query = "SELECT id_empresa,nombre_empresa,representante_legal,direccion_empresa,celular_empresa,correo_empresa,sector_empresa,descripcion_empresa FROM empresa";
         $lista_empresas = NULL;
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {
@@ -135,7 +134,7 @@ class EmpresaModel
     {
         $datos_empresa = NULL;
         $query = "SELECT nombre_empresa, nit_empresa, representante_legal, direccion_empresa, municipio_empresa,
-                  tutor, correo_empresa, celular_empresa, sector_empresa, actividad_empresa
+                  correo_empresa, celular_empresa, sector_empresa, actividad_empresa
                   FROM empresa WHERE id_empresa=:id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
@@ -152,7 +151,7 @@ class EmpresaModel
     //Metodo para mostrar la información de la empresa a la que fue asignado un estudiante
     public function verEmpresaAsignadaEstudiante($id_estudiante){
         $datos_empresa = NULL;
-        $query = "SELECT e.nombre_empresa, e.tutor, e.direccion_empresa, e.celular_empresa
+        $query = "SELECT e.nombre_empresa, e.direccion_empresa, e.celular_empresa
                   FROM empresa e
                   INNER JOIN estudiante est ON e.id_empresa = est.id_empresa
                   WHERE est.id_estudiante=:id_estudiante";
