@@ -85,7 +85,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Actualizar Perfil</a>
                         <a class="collapse-item" href="cambiar_clave.php"><i class="fas fa-unlock"></i> Cambiar Clave</a>
-                        <a class="collapse-item" href="ver_tutores.php"><i class="fas fa-unlock"></i> Ver Tutores</a>
+                        <a class="collapse-item" href="ver_tutores.php"><i class="fas fa-user-shield"></i> Ver Tutores</a>
                     </div>
                 </div>
             </li>
@@ -190,7 +190,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
                             if (is_null($lista_de_estudiantes)) {
                             ?>
-                                <td colspan="4" style="color: #D61117;">
+                                <td colspan="6" style="color: #D61117;">
                                     <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
                                 </td>
                                 <?php

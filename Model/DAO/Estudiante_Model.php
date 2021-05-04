@@ -96,7 +96,10 @@ class EstudianteModel
     // Meotodo que permite listar la informacion de todos los estudiantes
     public function listarEstudiantes()
     {
-        $query = "SELECT nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante, em.nombre_empresa AS nombre_empresa FROM estudiante LEFT JOIN empresa AS em ON id_empresa=em.id_empresa";
+        $query = "SELECT es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, 
+                  em.nombre_empresa AS nombre_empresa, t.nombre_tutor AS nombre_tutor
+                  FROM estudiante AS es LEFT JOIN empresa AS em ON es.id_empresa=em.id_empresa
+                  LEFT JOIN tutor AS t ON es.id_tutor=t.id_tutor";
         $lista_estudiantes = NULL;
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {
@@ -115,8 +118,8 @@ class EstudianteModel
     public function listarEstudiantesPorEmpresa($id_empresa)
     {
         $query = "SELECT e.id_estudiante, e.id_tutor, e.nombre_estudiante, e.codigo_estudiante, e.correo_estudiante, e.celular_estudiante, t.nombre_tutor
-        FROM estudiante e LEFT JOIN tutor t ON e.id_tutor = t.id_tutor; 
-        WHERE id_empresa=:id_empresa";
+        FROM estudiante e LEFT JOIN tutor t ON e.id_tutor = t.id_tutor
+        WHERE e.id_empresa=:id_empresa";
         $lista_estudiantes = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);

@@ -149,11 +149,13 @@ class EmpresaModel
         }
     }
     //Metodo para mostrar la información de la empresa a la que fue asignado un estudiante
-    public function verEmpresaAsignadaEstudiante($id_estudiante){
+    public function verEmpresaAsignadaEstudiante($id_estudiante)
+    {
         $datos_empresa = NULL;
-        $query = "SELECT e.nombre_empresa, e.direccion_empresa, e.celular_empresa
+        $query = "SELECT e.nombre_empresa, e.direccion_empresa, e.celular_empresa, t.nombre_tutor
                   FROM empresa e
                   INNER JOIN estudiante est ON e.id_empresa = est.id_empresa
+                  INNER JOIN tutor t ON est.id_tutor = t.id_tutor
                   WHERE est.id_estudiante=:id_estudiante";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
@@ -161,7 +163,7 @@ class EmpresaModel
             $stmt->closeCursor();
             return 0;
         } else {
-            if($stmt->rowCount()>0){
+            if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 $datos_empresa[] = $result;
             }

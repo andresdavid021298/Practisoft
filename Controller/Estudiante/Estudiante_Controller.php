@@ -22,6 +22,11 @@ function cantidadDeEstudiantesPorEmpresa($id_empresa)
     return $obj_estudiante_model->cantidadEstudiantesPorEmpresa($id_empresa);
 }
 
+function listarEstudiantes()
+{
+    $obj_estudiante_model = new EstudianteModel();
+    return $obj_estudiante_model->listarEstudiantes();
+}
 
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "actualizar_perfil") {
@@ -40,13 +45,12 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Perfil Actualizado Correctamente";
         }
         echo json_encode($response);
-    }
-    else if($_POST['accion'] == "asignar_tutor_estudiante"){
+    } else if ($_POST['accion'] == "asignar_tutor_estudiante") {
         $response = array();
         $id_estudiante = $_POST['id_estudiante'];
         $id_tutor = $_POST['id_tutor'];
         $nombre_estudiante = $_POST['nombre_estudiante'];
-        
+
         $obj_estudiante_model = new EstudianteModel();
         $rta = $obj_estudiante_model->vincularEstudianteConTutor($id_estudiante, $id_tutor);
         if ($rta == 0) {

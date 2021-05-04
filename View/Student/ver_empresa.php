@@ -174,7 +174,17 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="row" style="justify-content: center;">
                                     <div class="form-group mx-sm-3 mb-2">
                                         <label for="Tutor">Tutor:</label>
-                                        <input value="<?php echo $datos['tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <?php
+                                        if ($datos['nombre_tutor'] == NULL) {
+                                        ?>
+                                            <input value="Sin tutor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <input value="<?php echo $datos['nombre_tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
 
