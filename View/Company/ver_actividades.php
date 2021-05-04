@@ -56,7 +56,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
-                    <i class="fas fa-grip-lines"></i>
+                    <i class="fas fa-users-cog"></i>
                     <span>Gestion de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -73,7 +73,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-grip-lines"></i>
+                    <i class="fas fa-user-circle"></i>
                     <span>Perfil de Empresa</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
