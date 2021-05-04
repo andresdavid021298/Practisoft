@@ -217,6 +217,41 @@ function eliminarTutor(id_tutor){
     })
 }
 
+//Metodo para asignar un tutor a un estudiante
+function asignarTutor(){
+    var nombre_estudiante = document.getElementById('nombre_estudiante_tut').value;
+    var id_estudiante = document.getElementById('id_estudiante_tut').value;
+    var id_tutor = document.getElementById('id_tutor_est').value;
+    
+    if(nombre_estudiante == ""){
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    }else {
+        $.ajax({
+                url: "../../Controller/Estudiante/Estudiante_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "asignar_tutor_estudiante",
+                    "id_estudiante": id_estudiante,
+                    "id_tutor": id_tutor,
+                    "nombre_estudiante": nombre_estudiante
+                },
+                dataType: "JSON"
+            })
+            .done(function(response) {
+                console.log(response);
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = response.location
+                })
+            })
+    }
+}
+
 //Método para mostrar alerta cuando una empresa agrega una solicitud de practicantes
 function agregarSolicitud() {
 

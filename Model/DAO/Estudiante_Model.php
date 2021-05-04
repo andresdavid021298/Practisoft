@@ -77,6 +77,22 @@ class EstudianteModel
         }
     }
 
+    // Metodo que permite asignarle a un estudiante un tutor
+    public function vincularEstudianteConTutor($id_estudiante, $id_tutor)
+    {
+        $query = "UPDATE estudiante SET id_tutor=:id_tutor WHERE id_estudiante=:id_estudiante";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        $stmt->bindParam(":id_tutor", $id_tutor);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
     // Meotodo que permite listar la informacion de todos los estudiantes
     public function listarEstudiantes()
     {
@@ -98,7 +114,9 @@ class EstudianteModel
     // Metodo que lista y datos los estudiantes que estan asignados a cierta empresa
     public function listarEstudiantesPorEmpresa($id_empresa)
     {
-        $query = "SELECT id_estudiante,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_empresa=:id_empresa";
+        $query = "SELECT e.id_estudiante, e.id_tutor, e.nombre_estudiante, e.codigo_estudiante, e.correo_estudiante, e.celular_estudiante, t.nombre_tutor
+        FROM estudiante e LEFT JOIN tutor t ON e.id_tutor = t.id_tutor; 
+        WHERE id_empresa=:id_empresa";
         $lista_estudiantes = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);

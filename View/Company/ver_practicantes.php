@@ -175,6 +175,12 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <th>
                                     <center>Celular</center>
                                 </th>
+                                <th>
+                                    <center>Tutor</center>
+                                </th>
+                                <th>
+                                    <center>Asignar Tutor</center>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -204,12 +210,81 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <td>
                                             <center><?php echo $estudiante['celular_estudiante']; ?></center>
                                         </td>
+                                        <td>
+                                            <center><?php echo $estudiante['nombre_tutor']; ?></center>
+                                        </td>
+                                        <td>
+                                            <?php if($estudiante['id_tutor'] == NULL){
+                                            ?>
+                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor</button></center>
+                                            
+                                            <?php } else{
+                                            ?>
+                                            <center><label>Tutor Asignado</label></center>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
                             <?php }
                             } ?>
                         </tbody>
                     </table>
                 </div>
+                <!-- inicio modal Actualizar Actividad -->
+
+
+                <div class="modal fade" id="modalAsignarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#D61117;">
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Asignar Tutor a Estudiante</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <?php
+                                require_once '../../Controller/Tutor/Tutor_Controller.php';
+                                $lista_de_tutores = mostrarDatosTutorEmpresa($_SESSION['id_empresa']);
+
+                                ?>
+                                <form action="" method="POST">
+
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Estudiante:</label>
+                                        <input type="text" class="form-control nombre_est" name="nombre_estudiante" id="nombre_estudiante_tut">
+                                    </div>
+
+                                    <input type="hidden" class="form-control id_est" name="id_estudiante" id="id_estudiante_tut">
+
+                                    <label for="message-text" class="col-form-label">Seleccione un Tutor:</label>
+                                    <select class="form-control" aria-label="Default select example">
+                                        <?php
+                                        foreach ($lista_de_tutores as $listado) {
+                                        ?>
+                                            <option id="id_tutor_est" value="<?php echo $listado['id_tutor'] ?>"><?php echo $listado['nombre_tutor'] ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <br>
+                                                <button type="button" onclick="asignarTutor()" class="btn btn-primary">Asignar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- fin modal -->
+
             </div>
             <!-- End of Page Wrapper -->
 
@@ -231,16 +306,35 @@ if ($_SESSION['id_empresa'] == NULL) {
     </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../js/sb-admin-2.min.js"></script>
+<script src="../../js/eventos.js"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="../../js/sb-admin-2.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
     });
+</script>
+<script>
+    $('#modalAsignarTutor').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        //var recipient = button.data('whatever')
+        var id_estudiante = button.data('estudiante')
+        var nombre_estudiante = button.data('nombre')
+        var modal = $(this)
+        //modal.find('.modal-title').text('Actividad: ' + fecha)
+        //modal.find('.modal-body input').val(num_horas)
+        modal.find('.id_est').val(id_estudiante)
+        modal.find('.nombre_est').val(nombre_estudiante)
+    })
 </script>
 
 </html>
