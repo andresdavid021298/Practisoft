@@ -140,25 +140,36 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <h2>Plan de Trabajo</h2>
                     </center>
                     <br>
-                    <form method="POST">
-                        <div class="row" id="primer_row">
-                            <div class="form-group col-md-8" id="actividad_estatica">
-                                <label for="exampleFormControlInput1">Nueva Actividad</label>
-                                <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
+                    <!-- Valida si esta asignada a una empresa -->
+                    <?php
+                    require_once "../../Controller/Empresa/Empresa_Controller.php";
+                    $empresa_estudiante = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                    if (is_null($empresa_estudiante)) {
+                    ?>
+                        <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
+                    <?php
+                    } else {
+                    ?>
+                        <form method="POST">
+                            <div class="row" id="primer_row">
+                                <div class="form-group col-md-8" id="actividad_estatica">
+                                    <label for="exampleFormControlInput1">Nueva Actividad</label>
+                                    <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
+                                </div>
+                                <div class="form-group col-md-4" id="numero_horas_estatica">
+                                    <label for="exampleFormControlInput1">Numero de Horas</label>
+                                    <input type="number" class="form-control form-control-lg" id="numero_horas" min="1" max="320">
+                                </div>
                             </div>
-                            <div class="form-group col-md-4" id="numero_horas_estatica">
-                                <label for="exampleFormControlInput1">Numero de Horas</label>
-                                <input type="number" class="form-control form-control-lg" id="numero_horas" min="1" max="320">
+                            <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                            <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
+                            <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
+                            <div class="text-center">
+                                <br>
+                                <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
                             </div>
-                        </div>
-                        <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                        <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
-                        <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
-                        <div class="text-center">
-                            <br>
-                            <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
-                        </div>
-                    </form>
+                        </form>
+                    <?php } ?>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
@@ -214,7 +225,7 @@ if (!is_null($lista)) {
                 title: "Plan de Trabajo Rechazado",
                 text: "Tienes que corregir algunas actividades...",
                 footer: "Se eliminaran las actividades previas"
-            }).then(()=>{
+            }).then(() => {
                 eliminarActividadesPlanTrabajo(<?php echo $_SESSION['id_estudiante']; ?>);
             })
         </script>
