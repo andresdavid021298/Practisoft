@@ -52,4 +52,22 @@ class Encuesta_Areas_Model
             return $cantidad;
         }
     }
+    public function detallesEncuestaPorEstudiante($id_estudiante)
+    {
+        $query = "SELECT * FROM encuesta_areas WHERE id_estudiante=:id";
+        $detalles_encuesta = NULL;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            if ($stmt->rowCount() > 0) {
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $detalles_encuesta = $result;
+            }
+            $stmt->closeCursor();
+            return $detalles_encuesta;
+        }
+    }
 }
