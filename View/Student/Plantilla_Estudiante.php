@@ -1,10 +1,9 @@
 <?php
 session_start();
-$_SESSION['id_estudiante'] = 1;
-// if ($_SESSION['id_estudiante'] == NULL) {
+if ($_SESSION['id_estudiante'] == NULL) {
 
-//     header("Location: ../../index.php");
-// }
+    header("Location: ../../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +65,7 @@ $_SESSION['id_estudiante'] = 1;
                         <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="#"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-book"></i> Plan de Trabajo </a>
+                        <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
                         <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
                     </div>
@@ -146,24 +145,6 @@ $_SESSION['id_estudiante'] = 1;
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">

@@ -165,3 +165,65 @@ function guardarEncuestaInscripcion() {
             })
         })
 }
+
+// Metodo para mostrar alerta al momento de agregar el plan de trabajo
+function agregarPlanDeTrabajo() {
+    var id_estudiante = document.getElementById("input_id_estudiante").value;
+    var inputs_actividades;
+    inputs_actividades = document.getElementsByClassName("form-control form-control-lg");
+    var arreglo_actividades = []
+    var longitud = inputs_actividades.length;
+    var cantidad_horas = 0;
+    for (let index = 0; index < longitud; index++) {
+        arreglo_actividades.push(inputs_actividades[index].value)
+        if (index % 2 != 0) {
+            cantidad_horas = cantidad_horas + parseInt(inputs_actividades[index].value);
+        }
+    }
+    existe_actividad_vacia = arreglo_actividades.includes("");
+    if (existe_actividad_vacia) {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else if (cantidad_horas != 320) {
+        swal.fire({
+            icon: "warning",
+            title: "No se cumplen las 320 horas reglamentarias"
+        })
+    } else {
+        $.ajax({
+                url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "insertar_actividad_plan_trabajo",
+                    "id_estudiante": id_estudiante,
+                    "actividades": arreglo_actividades
+                },
+                dataType: "JSON"
+            })
+            .done(function(response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "index_student.php";
+                })
+            })
+    }
+}
+
+// Metodo que permite conectar con el controlador para borrar luego de la accion en la alerta
+function eliminarActividadesPlanTrabajo(id_estudiante) {
+    $.ajax({
+        url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "eliminar_actividad_plan_trabajo",
+            "id_estudiante": id_estudiante
+        },
+        dataType: "JSON"
+    }).done(function() {
+        window.location = "plan_de_trabajo.php";
+    })
+}

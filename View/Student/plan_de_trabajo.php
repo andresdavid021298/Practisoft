@@ -136,51 +136,28 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-
                 <div class="container-fluid">
                     <center>
-                        <h2>Mi Perfil</h2>
+                        <h2>Plan de Trabajo</h2>
                     </center>
                     <br>
-                    <?php
-
-                    require_once "../../Controller/Estudiante/Estudiante_Controller.php";
-                    $datos_estudiante = buscarEstudiante($_SESSION['id_estudiante']);
-                    ?>
-                    <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">
-                        <div class="container">
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Nombre</label></center>
-                                    <input type="text" class="form-control" id="input_nombre" placeholder="Digite su nombre" value="<?php echo $datos_estudiante['nombre_estudiante']; ?>">
-                                </div>
+                    <form method="POST">
+                        <div class="row" id="primer_row">
+                            <div class="form-group col-md-8" id="actividad_estatica">
+                                <label for="exampleFormControlInput1">Nueva Actividad</label>
+                                <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
                             </div>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Correo</label></center>
-                                    <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_estudiante['correo_estudiante']; ?>" disabled>
-                                </div>
+                            <div class="form-group col-md-4" id="numero_horas_estatica">
+                                <label for="exampleFormControlInput1">Numero de Horas</label>
+                                <input type="number" class="form-control form-control-lg" id="numero_horas" min="1" max="320">
                             </div>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Codigo</label>
-                                        <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_estudiante['codigo_estudiante']; ?>" placeholder="Digite su codigo">
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Celular</label></center>
-                                    <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
-                                </div>
-                            </div>
-                            <br><br>
-                            <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                            <div class="col text-center">
-                                <button onclick="actualizarPerfil();" id="btn_editar_perfil" type="button" name="btn_editar_perfil" class="btn btn-primary">Guardar</button>
-                            </div>
+                        </div>
+                        <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                        <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
+                        <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
+                        <div class="text-center">
+                            <br>
+                            <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
                         </div>
                     </form>
                 </div>
@@ -210,7 +187,51 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/Student/alertas_estudiante.js"></script>
+<script src="../../js/eventos.js"></script>
+<script src="../../js/Student//alertas_estudiante.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+<!-- Valida si un estudiante ya hizo un plan de trabajo -->
+<?php
+require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
+$lista = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
+// Sino, valida si tiene actividades del plan de trabajo
+if (!is_null($lista)) {
+    // Valida si las actividades fueron rechazadas por el tutor
+    if ($lista[0]['estado'] == "Rechazada") {
+?>
+        <script>
+            swal.fire({
+                icon: "info",
+                title: "Plan de Trabajo Rechazado",
+                text: "Tienes que corregir algunas actividades...",
+                footer: "Se eliminaran las actividades previas"
+            }).then(()=>{
+                eliminarActividadesPlanTrabajo(<?php echo $_SESSION['id_estudiante']; ?>);
+            })
+        </script>
+    <?php } else {
+    ?>
+        <script>
+            swal.fire({
+                icon: "error",
+                title: "Ya registra un plan de trabajo, esta en espera de aprobacion"
+            }).then(() => {
+                window.location = "index_student.php";
+            })
+        </script>
+<?php
+    }
+}
+?>
+
 </html>

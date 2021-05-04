@@ -1,11 +1,10 @@
-<!-- <?php
+<?php
 session_start();
-$_SESSION['id_estudiante'] = 1;
 if ($_SESSION['id_estudiante'] == NULL) {
 
     header("Location: ../../index.php");
- }
-?> -->
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +65,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="#"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-book"></i> Plan de Trabajo </a>
+                        <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
                         <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
                     </div>
@@ -174,7 +173,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 //         echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
                 //     }
 
-                    
+
                 // }
                 ?>
 

@@ -1,13 +1,9 @@
 <?php
 session_start();
-$_SESSION['id_estudiante'] = 1;
-$_SESSION['nombre_estudiante'] = "Jorge Mojica"
+if ($_SESSION['id_estudiante'] == NULL) {
 
-// $_SESSION['nombre_estudiante'] = "Andres";
-// if ($_SESSION['id_estudiante'] == NULL) {
-
-//     header("Location: ../../index.php");
-// }
+    header("Location: ../../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +65,7 @@ $_SESSION['nombre_estudiante'] = "Jorge Mojica"
                         <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="#"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-book"></i> Plan de Trabajo </a>
+                        <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
                         <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
                     </div>
@@ -243,6 +239,8 @@ $_SESSION['nombre_estudiante'] = "Jorge Mojica"
 <script src="../../js/Student/alertas_estudiante.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Valida si un estudiante ya realizo la encuesta -->
 <?php
 require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
 
