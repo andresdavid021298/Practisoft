@@ -117,3 +117,69 @@ function SeleccionarcheckboxRedes() {
 
     }
 }
+
+function agregarActividadesDinamicamente() {
+
+    // Crear el nuevo div con clase row
+    var newDivRow = document.createElement("div");
+    newDivRow.className = "row";
+    newDivRow.id = "newRow";
+
+    // Crear un nuevo div de descripcion
+    var newDiv_descripcion = document.createElement("div");
+    newDiv_descripcion.className = "form-group col-md-8";
+    newDiv_descripcion.id = "newID_descripcion";
+
+    // Crear un nuevo div del numero de horas
+    var newDiv_horas = document.createElement("div");
+    newDiv_horas.className = "form-group col-md-4";
+    newDiv_horas.id = "newID_horas";
+
+    // Crear nuevo Label de descripcion y añadirle un texto
+    var newLabel = document.createElement("label");
+    var textLabel = document.createTextNode("Nueva Actividad");
+    newLabel.appendChild(textLabel);
+
+    // Crear nuevo Input de descripcion
+    var newInput = document.createElement("textarea");
+    newInput.className = "form-control form-control-lg";
+    newInput.id = "actividad_nueva";
+    newInput.rows = 1
+
+    // Crear nuevo Label de numero de horas y añadirle un texto
+    var newLabel_horas = document.createElement("label");
+    var textLabel_horas = document.createTextNode("Numero de Horas");
+    newLabel_horas.appendChild(textLabel_horas);
+
+    // Crear nuevo Input de numero de horas
+    var newInput_horas = document.createElement("input");
+    newInput_horas.className = "form-control form-control-lg";
+    newInput_horas.id = "numero_horas_nueva";
+
+    // Añadir a la vista el div row
+    const app = document.querySelector("#primer_row");
+    app.insertAdjacentElement("afterend", newDivRow);
+
+    // Añadir a la vista el div de descripcion
+    const app1 = document.querySelector("#newRow");
+    app1.insertAdjacentElement("afterbegin", newDiv_descripcion);
+
+    const app3 = document.querySelector("#newRow");
+    app3.insertAdjacentElement("beforeend", newDiv_horas);
+
+    // Añadirle al nuevo div de descripcion el label y el input
+    const app2 = document.querySelector("#newID_descripcion");
+    app2.insertAdjacentElement("beforeend", newLabel);
+    app2.insertAdjacentElement("beforeend", newInput);
+
+    // Añadirle al nuevo div de horas el label y el input
+    const app5 = document.querySelector("#newID_horas");
+    app5.insertAdjacentElement("beforeend", newLabel_horas);
+    app5.insertAdjacentElement("beforeend", newInput_horas);
+
+
+}
+
+function eliminarActividadesDinamicamente() {
+    $('#newRow').remove();
+}
