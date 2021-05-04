@@ -120,8 +120,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b></b></span>
-                                <!-- <?php echo $_SESSION['nombre_estudiante'] ?> -->
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
+                                <?php echo $_SESSION['nombre_estudiante'] ?>
                                 <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
                             </a>
                             <!-- Dropdown - User Information -->

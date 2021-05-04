@@ -152,11 +152,11 @@ class EmpresaModel
     public function verEmpresaAsignadaEstudiante($id_estudiante)
     {
         $datos_empresa = NULL;
-        $query = "SELECT e.nombre_empresa, e.direccion_empresa, e.celular_empresa, t.nombre_tutor
-                  FROM empresa e
-                  INNER JOIN estudiante est ON e.id_empresa = est.id_empresa
-                  INNER JOIN tutor t ON est.id_tutor = t.id_tutor
-                  WHERE est.id_estudiante=:id_estudiante";
+        $query = "SELECT e.nombre_empresa,e.direccion_empresa, e.celular_empresa,t.nombre_tutor 
+                FROM empresa AS e 
+                JOIN estudiante AS est ON e.id_empresa=est.id_empresa 
+                LEFT JOIN tutor AS t ON t.id_tutor=est.id_tutor 
+                WHERE est.id_estudiante=:id_estudiante";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
         if (!$stmt->execute()) {
@@ -165,7 +165,7 @@ class EmpresaModel
         } else {
             if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $datos_empresa[] = $result;
+                $datos_empresa = $result;
             }
             $stmt->closeCursor();
             return $datos_empresa;

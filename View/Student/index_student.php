@@ -29,6 +29,37 @@ if ($_SESSION['id_estudiante'] == NULL) {
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Efecto de hover al momento de pasar por las cards -->
+    <style>
+        .zoom {
+            transition: 0.5s ease;
+            -moz-transition: 0.5s ease;
+            /* Firefox */
+            -webkit-transition: 0.5s ease;
+            /* Chrome - Safari */
+            -o-transition: 0.5s ease;
+            /* Opera */
+        }
+
+        .zoom:hover {
+            transform: scale(1.18);
+            -moz-transform: scale(1.18);
+            /* Firefox */
+            -webkit-transform: scale(1.18);
+            /* Chrome - Safari */
+            -o-transform: scale(1.18);
+            /* Opera */
+            -ms-transform: scale(1.18);
+            /* IE9 */
+        }
+
+        .arreglo_imagen {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -120,8 +151,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b></b></span>
-                                <!-- <?php echo $_SESSION['nombre_estudiante'] ?> -->
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
+                                <?php echo $_SESSION['nombre_estudiante'] ?>
                                 <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -136,47 +166,134 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container-fluid">
+                    <div class="row">
 
-                <?php
-                require_once '../../vendor/autoload.php';
-
-                // CONFIGURACION DE GOOGLE
-                $clientID = '1008530545893-v4b9lpn6kuljnbb88odmebvlsmlha8t5.apps.googleusercontent.com';
-                $clientSecret = '3O6XV6hgt_cWDzYWFq-XQTQb';
-                $redirectUri = 'http://localhost/Practisoft/Controller/Login/Login_Controller.php';
-
-                $client = new Google_Client();
-                $client->setClientId($clientID);
-                $client->setClientSecret($clientSecret);
-                $client->setRedirectUri($redirectUri);
-                $client->addScope("email");
-                $client->addScope("profile");
-
-                // if (isset($_GET['code'])) {
-                //     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-                //     $client->setAccessToken($token['access_token']);
-
-                //     // get profile info
-                //     $google_oauth = new Google_Service_Oauth2($client);
-                //     $google_account_info = $google_oauth->userinfo->get();
-                //     $email =  $google_account_info->email;
-                //     $name =  $google_account_info->name;
-
-                //     // Estos datos son los que obtenemos....	
-                //     // echo $email . '<br>';
-                //     // echo $name . '<br>';
-                //     $extension = strrchr($email, "@");
-                //     // echo $extension;
-
-                //     if($extension != "@ufps.edu.co"){
-                //         echo '<script type="text/javascript">alert("Debes ingresar con cuenta institucional");</script>';
-                //         echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
-                //     }
-
-
-                // }
-                ?>
-
+                        <!-- Cards segun si presenta o no encuesta de inscripcion -->
+                        <?php
+                        require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
+                        $num_registros = buscarEncuesta($_SESSION['id_estudiante']);
+                        if ($num_registros > 0) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Encuesta de Inscripcion</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">¡¡LISTO!!</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-poll-h fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Encuesta de Inscripcion</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Registra Encuesta de Inscripcion</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-poll-h fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <div class="arreglo_imagen">
+                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png" alt="Cargando imagen..." width="70px" height="70px">
+                        </div>
+                        <!-- Cards segun si tiene asignado o no empresa -->
+                        <?php
+                        require_once "../../Controller/Empresa/Empresa_Controller.php";
+                        $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                        if (is_null($info_empresa)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Empresa</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Tiene Empresa Asignada</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Empresa</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Su empresa es: <?php echo $info_empresa['nombre_empresa'] ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <div class="arreglo_imagen">
+                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png" alt="Cargando imagen..." width="70px" height="70px">
+                        </div>
+                        <?php
+                        if (is_null($info_empresa['nombre_tutor'])) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                    Tutor</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Tienes Tutor Asignado</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Tutor</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Su tutor es: <?php echo $info_empresa['nombre_tutor']; ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
             <!-- End of Page Wrapper -->
 

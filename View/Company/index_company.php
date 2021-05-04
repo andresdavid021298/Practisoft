@@ -29,6 +29,7 @@ if ($_SESSION['id_empresa'] == NULL) {
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Efecto de hover al momento de pasar por las cards -->
     <style>
         .zoom {
             transition: 0.5s ease;

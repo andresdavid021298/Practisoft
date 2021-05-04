@@ -120,8 +120,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b></b></span>
-                                <!-- <?php echo $_SESSION['nombre_estudiante'] ?> -->
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
+                                <?php echo $_SESSION['nombre_estudiante'] ?>
                                 <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -148,17 +147,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <br>
                 <?php
                 require_once '../../Controller/Empresa/Empresa_Controller.php';
-                $id_estudiante = $_SESSION['id_estudiante'];
-                $datos_empresa = mostrarEmpresaAsignadaEstudiante($id_estudiante);
-                if ($datos_empresa == null) {
+                $datos_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                if (is_null($datos_empresa)) {
 
                 ?>
                     <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
 
                     <?php
                 } else {
-
-                    foreach ($datos_empresa as $datos) {
 
                     ?>
                         <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
@@ -167,7 +163,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="row" style="justify-content: center;">
                                     <div class="form-group mx-sm-3 mb-2">
                                         <label for="Empresa">Nombre:</label>
-                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <input value="<?php echo $datos_empresa['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                     </div>
                                 </div>
 
@@ -175,13 +171,13 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     <div class="form-group mx-sm-3 mb-2">
                                         <label for="Tutor">Tutor:</label>
                                         <?php
-                                        if ($datos['nombre_tutor'] == NULL) {
+                                        if ($datos_empresa['nombre_tutor'] == NULL) {
                                         ?>
                                             <input value="Sin tutor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                         <?php
                                         } else {
                                         ?>
-                                            <input value="<?php echo $datos['nombre_tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                            <input value="<?php echo $datos_empresa['nombre_tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                         <?php
                                         }
                                         ?>
@@ -191,14 +187,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="row" style="justify-content: center;">
                                     <div class="form-group mx-sm-3 mb-2">
                                         <label for="Direccion">Direccion:</label>
-                                        <input value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <input value="<?php echo $datos_empresa['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                     </div>
                                 </div>
 
                                 <div class="row" style="justify-content: center;">
                                     <div class="form-group mx-sm-3 mb-2">
                                         <label for="Empresa">Celular:</label>
-                                        <input value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                        <input value="<?php echo $datos_empresa['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                     </div>
                                 </div>
 
@@ -212,7 +208,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 <?php
                     }
-                }
                 ?>
                 <!-- Fin Formulario -->
                 <!-- End of Topbar -->
