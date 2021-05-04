@@ -95,9 +95,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
+                        <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
-                        <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
+                        <a class="collapse-item" href="actividades_plan_trabajo.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
                         <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
                     </div>
                 </div>
@@ -149,7 +149,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b></b></span>
                                 <?php echo $_SESSION['nombre_estudiante'] ?>
                                 <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
