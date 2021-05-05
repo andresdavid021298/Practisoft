@@ -11,18 +11,18 @@ function agregarActividad() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Actividad/Actividad_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "agregar_actividad",
-                    "id": idEstudiante,
-                    "fecha": fecha,
-                    "horas": horas,
-                    "descripcion": descripcion
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Actividad/Actividad_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregar_actividad",
+                "id": idEstudiante,
+                "fecha": fecha,
+                "horas": horas,
+                "descripcion": descripcion
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -50,18 +50,18 @@ function actualizarActividad() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Actividad/Actividad_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_actividad",
-                    "id": idActividad,
-                    "fecha": fecha,
-                    "horas": horas,
-                    "descripcion": descripcion
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Actividad/Actividad_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_actividad",
+                "id": idActividad,
+                "fecha": fecha,
+                "horas": horas,
+                "descripcion": descripcion
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -75,15 +75,15 @@ function actualizarActividad() {
 // Metodo que le muestra una alerta al estudiante al momento de eliminar una actividad
 function eliminarActividad(id_actividad) {
     $.ajax({
-            url: "../../Controller/Actividad/Actividad_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "eliminar_actividad",
-                "id_actividad": id_actividad
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Actividad/Actividad_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "eliminar_actividad",
+            "id_actividad": id_actividad
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -106,18 +106,18 @@ function actualizarPerfil() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Estudiante/Estudiante_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_perfil",
-                    "id_estudiante": id_estudiante,
-                    "nombre": nombre,
-                    "codigo": codigo,
-                    "celular": celular
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_perfil",
+                "id_estudiante": id_estudiante,
+                "nombre": nombre,
+                "codigo": codigo,
+                "celular": celular
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -143,20 +143,20 @@ function guardarEncuestaInscripcion() {
     console.log("Mantenimiento: " + area_mantenimiento);
     console.log("Servidores: " + area_servidores);
     $.ajax({
-            url: "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "guardar_inscripcion",
-                "id_estudiante": id_estudiante,
-                "area_capacitacion": area_capacitacion,
-                "area_mantenimiento": area_mantenimiento,
-                "area_desarrollo": area_desarrollo,
-                "area_servidores": area_servidores,
-                "area_redes": area_redes
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "guardar_inscripcion",
+            "id_estudiante": id_estudiante,
+            "area_capacitacion": area_capacitacion,
+            "area_mantenimiento": area_mantenimiento,
+            "area_desarrollo": area_desarrollo,
+            "area_servidores": area_servidores,
+            "area_redes": area_redes
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -193,16 +193,16 @@ function agregarPlanDeTrabajo() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "insertar_actividad_plan_trabajo",
-                    "id_estudiante": id_estudiante,
-                    "actividades": arreglo_actividades
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "insertar_actividad_plan_trabajo",
+                "id_estudiante": id_estudiante,
+                "actividades": arreglo_actividades
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -223,7 +223,75 @@ function eliminarActividadesPlanTrabajo(id_estudiante) {
             "id_estudiante": id_estudiante
         },
         dataType: "JSON"
-    }).done(function() {
+    }).done(function () {
         window.location = "plan_de_trabajo.php";
     })
+}
+
+//Método que permite conectar con el controlador para subir la carta compromisoria del estudiante
+function subirCartaCompromisoria() {
+    var idEstudiante = document.getElementById('id_estudiante').value;
+    var nombreEstudiante = document.getElementById('nombre_estudiante').value;
+    var inputArchivo = document.getElementById('input_archivo_carta').value;
+    var fd = new FormData();
+    var files = $('#input_archivo_carta')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        fd.append('id_estudiante', idEstudiante);
+        fd.append('nombre_estudiante', nombreEstudiante);
+        fd.append('input_archivo_carta', files[0]);
+        $.ajax({
+            url: '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function (response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "documento_carta_compromisoria.php"
+            })
+        })
+    }
+}
+
+//Método que permite conectar con el controlador para subir el informe de avance del estudiante
+function subirInformeAvance() {
+    var idEstudiante = document.getElementById('id_estudiante').value;
+    var nombreEstudiante = document.getElementById('nombre_estudiante').value;
+    var inputArchivo = document.getElementById('input_archivo_informe').value;
+    var fd = new FormData();
+    var files = $('#input_archivo_informe')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        fd.append('id_estudiante', idEstudiante);
+        fd.append('nombre_estudiante', nombreEstudiante);
+        fd.append('input_archivo_informe', files[0]);
+        $.ajax({
+            url: '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function (response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "documento_informe_avance.php"
+            })
+        })
+    }
 }

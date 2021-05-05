@@ -67,7 +67,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="actividades_plan_trabajo.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
-                        <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
+                        <a class="collapse-item" href="documento_informe_avance.php"><i class="fas fa-clone"></i> Informe de Avance </a>
                     </div>
                 </div>
             </li>
@@ -86,7 +86,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 </div>
             </li>
 
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -136,6 +136,46 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2>Carta Compromisoria</h2>
+                            <br>
+                            <img src="../../Img/letter.png" style="width: 100px; height: 100px;" />
+                            <?php
+                            require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
+                            $id_estudiante = $_SESSION['id_estudiante'];
+                            $carta = mostrarDocumentoCartaCompromisoria($id_estudiante);
+                            ?>
+                            <form id="formConvenio" method="POST" enctype="multipart/form-data">
+                                <br><br>
+                                <?php
+                                if ($carta == true) {
+                                    if ($carta['archivo_carta_compromisoria'] != NULL) {
+                                ?>
+                                        <a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $carta['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $carta['archivo_carta_compromisoria']; ?></p>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                <div class="fileUpload btn">
+                                    <label>Archivo</label>
+                                    <input id="input_archivo_carta" type="file" name="input_archivo_carta" />
+                                </div>
+                                <button onclick="subirCartaCompromisoria();" id="btn_subir_carta" type="button" value="Enviar" name="btn_subir_carta" class="btn btn-primary">Cargar</button>
+                                <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
+                                <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                            </form>
+                            <div id="mensaje"></div>
+                            <br><br>
+                            <b>
+                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                            </b>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- End of Page Wrapper -->
 
@@ -162,18 +202,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
+<script src="../../js/Student/alertas_estudiante.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
-
 </html>

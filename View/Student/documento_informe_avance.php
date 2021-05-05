@@ -136,79 +136,46 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <div class="container-fluid">
-                    <center>
-                        <h2>Encuesta de Inscripcion</h2>
-                    </center>
-                    <br>
-                    <div class="form-group row">
-                        <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
-                        <div class="col-sm-6">
-                            <input class="form-control" id="inputNombre" value="<?php echo $_SESSION['nombre_estudiante'] ?>" readonly>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2>Informe de Avance</h2>
+                            <br>
+                            <img src="../../Img/informe.png" style="width: 100px; height: 100px;" />
+                            <?php
+                            require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
+                            $id_estudiante = $_SESSION['id_estudiante'];
+                            $informe = mostrarDocumentoInformeDeAvance($id_estudiante);
+                            ?>
+                            <form id="formConvenio" method="POST" enctype="multipart/form-data">
+                                <br><br>
+                                <?php
+                                if ($informe == true) {
+                                    if ($informe['archivo_informe_avance'] != NULL) {
+                                ?>
+                                        <a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informe['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                        <p><?php echo $informe['archivo_informe_avance']; ?></p>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                <div class="fileUpload btn">
+                                    <label>Archivo</label>
+                                    <input id="input_archivo_informe" type="file" name="input_archivo_informe" />
+                                </div>
+                                <button onclick="subirInformeAvance();" id="btn_subir_informe" type="button" value="Enviar" name="btn_subir_informe" class="btn btn-primary">Cargar</button>
+                                <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
+                                <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                            </form>
+                            <div id="mensaje"></div>
+                            <br><br>
+                            <b>
+                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                            </b>
                         </div>
                     </div>
-                    <br>
-                    <h4><strong>Areas</strong></h4>
-                    <br>
-                    <p>Selecciona tu área de interés para aplicar a una empresa, de acuerdo con los siguientes criterios: 5. <strong>Muy Interesado</strong>, 4. <strong>Interesado</strong>, 3. <strong>Medianamente Interesado</strong>,
-                        2. <strong>Poco Interesado</strong>, 1. <strong>Nada Interesado</strong></p>
-                    <form>
-                        <div class="form-group row">
-                            <label for="select_area_desarrollo" class="col-sm-4">Desarrollo de Software</label>
-                            <select name="select_area_desarrollo" id="select_area_desarrollo" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_mantenimiento" class="col-sm-4">Mantenimiento de Hardware / Software</label>
-                            <select name="select_area_mantenimiento" id="select_area_mantenimiento" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_capacitacion" class="col-sm-4">Capacitacion</label>
-                            <select name="select_area_capacitacion" id="select_area_capacitacion" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_redes" class="col-sm-4">Mantenimiento y Administracion de Redes</label>
-                            <select name="select_area_redes" id="select_area_redes" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <div class="form-group row">
-                            <label for="select_area_servidores" class="col-sm-4">Servidores y Computacion de la Nube</label>
-                            <select name="select_area_servidores" id="select_area_servidores" class="form-control col-sm-6">
-                                <option value="5">Muy Interesado</option>
-                                <option value="4">Interesado</option>
-                                <option value="3">Medianamente Interesado</option>
-                                <option value="2">Poco Interesado</option>
-                                <option value="1">Nada Interesado</option>
-                            </select>
-                        </div>
-                        <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                        <div class="col text-center">
-                            <button onclick="guardarEncuestaInscripcion();" id="btn_guardar_encuesta_inscripcion" type="button" name="btn_guardar_encuesta_inscripcion" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
                 </div>
+
             </div>
             <!-- End of Page Wrapper -->
 
@@ -236,25 +203,8 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/Student/alertas_estudiante.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<!-- Valida si un estudiante ya realizo la encuesta -->
-<?php
-require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
-
-if (buscarEncuesta($_SESSION['id_estudiante']) > 0) {
-?>
-    <script>
-        swal.fire({
-            icon: "error",
-            title: "Ya realizo la encuesta de inscripcion"
-        }).then(() => {
-            window.location = "index_student.php";
-        })
-    </script>
-<?php
-}
-?>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </html>

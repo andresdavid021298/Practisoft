@@ -89,6 +89,23 @@ if (isset($_POST['accion'])) {
             $response['location'] = "../../index.php";
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == 'cambiar_clave_email') {
+        $response = array();
+        $inputCorreo = $_POST['input_correo'];
+        $token = bin2hex(random_bytes(32));
+        $clave_codificada = password_hash($clave_empresa, PASSWORD_DEFAULT);
+        $empresa = new EmpresaModel();
+        $rta = $empresa->cambiarClave($id_empresa, $clave_codificada);
+        if ($rta == 0) {
+            $response['title'] = "Error al cambiar la contraseña";
+            $response['state'] = "error";
+            $response['location'] = "cambiar_clave.php";
+        } else {
+            $response['title'] = "Clave cambiada correctamente. Por favor vuelve a iniciar sesión";
+            $response['state'] = "success";
+            $response['location'] = "../../index.php";
+        }
+        echo json_encode($response);
     }
 }
 
@@ -99,7 +116,8 @@ function mostrarDatos($id_empresa)
     return $empresa->mostrarDatos($id_empresa);
 }
 
-function mostrarEmpresaAsignadaEstudiante($id_estudiante){
+function mostrarEmpresaAsignadaEstudiante($id_estudiante)
+{
     $empresa = new EmpresaModel();
     return $empresa->verEmpresaAsignadaEstudiante($id_estudiante);
 }

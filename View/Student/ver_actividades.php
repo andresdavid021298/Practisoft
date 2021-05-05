@@ -67,7 +67,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="actividades_plan_trabajo.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
-                        <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
+                        <a class="collapse-item" href="documento_informe_avance.php"><i class="fas fa-clone"></i> Informe de Avance </a>
                     </div>
                 </div>
             </li>

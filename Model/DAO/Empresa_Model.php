@@ -171,4 +171,6 @@ class EmpresaModel
             return $datos_empresa;
         }
     }
+
+    // id_empresa, nombre_empresa
 }
