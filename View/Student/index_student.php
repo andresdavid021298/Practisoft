@@ -199,7 +199,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Encuesta de Inscripcion</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Registra Encuesta de Inscripcion</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Registra Encuesta de Inscripcion</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-poll-h fa-2x text-gray-300"></i>
@@ -209,9 +209,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="arreglo_imagen">
-                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png" alt="Cargando imagen..." width="70px" height="70px">
-                        </div>
                         <!-- Cards segun si tiene asignado o no empresa -->
                         <?php
                         require_once "../../Controller/Empresa/Empresa_Controller.php";
@@ -225,7 +222,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Empresa</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Tiene Empresa Asignada</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Tiene Empresa Asignada</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-building fa-2x text-gray-300"></i>
@@ -252,9 +249,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 </div>
                             </div>
                         <?php } ?>
-                        <div class="arreglo_imagen">
-                            <img src="https://cdn0.iconfinder.com/data/icons/feather/96/591276-arrow-right-512.png" alt="Cargando imagen..." width="70px" height="70px">
-                        </div>
                         <?php
                         if (is_null($info_empresa['nombre_tutor'])) {
                         ?>
@@ -265,7 +259,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Tutor</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">NO Tienes Tutor Asignado</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Tiene Tutor Asignado</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-user fa-2x text-gray-300"></i>
