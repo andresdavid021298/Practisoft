@@ -1,6 +1,16 @@
 <?php
 
 require_once "../../Model/DAO/Empresa_Model.php";
+require_once "../../Model/DAO/Restablecimiento_Clave_Model.php";
+
+//Importación de la librería de PHPMailer
+require "../../PHPMailer-master/src/Exception.php";
+require "../../PHPMailer-master/src/PHPMailer.php";
+require "../../PHPMailer-master/src/SMTP.php";
+require '../../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+
 // Valida si se envia por metodo POST en algun campo "accion"
 if (isset($_POST['accion'])) {
     // Pregunta si la accion es "registrar"
@@ -90,19 +100,72 @@ if (isset($_POST['accion'])) {
         }
         echo json_encode($response);
     } else if ($_POST['accion'] == 'cambiar_clave_email') {
+
         $response = array();
-        $inputCorreo = $_POST['input_correo'];
-        $token = bin2hex(random_bytes(32));
-        $clave_codificada = password_hash($clave_empresa, PASSWORD_DEFAULT);
+        $correo_empresa = $_POST['input_correo'];
+        $token = bin2hex(random_bytes(8));
         $empresa = new EmpresaModel();
-        $rta = $empresa->cambiarClave($id_empresa, $clave_codificada);
-        if ($rta == 0) {
-            $response['title'] = "Error al cambiar la contraseña";
-            $response['state'] = "error";
-            $response['location'] = "cambiar_clave.php";
+        $result = $empresa->mostrarIdYNombreEmpresa($correo_empresa);
+
+        if ($result != NULL) {
+            $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
+            <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
+            <h3 style='text-align: center;'><strong>Mensaje de recuperacion de clave</strong></h3>
+            <p><b>" . $result['nombre_empresa'] . "</b>, recuerda que tienes una hora para restablecer tu contraseña antes de que caduque el link.</p>
+            <p>Para reestablecer tu contraseña, da click <a href='http://localhost/Practisoft/View/Company/Recuperar_clave_email.php?id_empresa=" . $result['id_empresa'] . "&token=" . $token . "'>aquí.</a></p>";
+            try {
+                $oMail = new PHPMailer();
+                $oMail->isSMTP();
+                $oMail->Host = "smtp.gmail.com";
+                $oMail->Port = 587;
+                $oMail->SMTPSecure = "tls";
+                $oMail->SMTPAuth = true;
+                $oMail->Username = "practisoftufps@gmail.com";
+                $oMail->Password = "practisoftufps2021@";
+                $oMail->setFrom("practisoftufps@gmail.com");
+                $oMail->addAddress($correo_empresa);
+                $oMail->Subject = '['.'Reestablecimiento de Clave'.']'.' - ['.' PractiSoft UFPS'.'] - ['.$result['nombre_empresa'].']';
+                $oMail->msgHTML($head);
+                $response['title'] = "Solicitud recibida. Por favor revisa tu correo.";
+                $response['state'] = "success";
+                if (!$oMail->send()) {
+                    $response['title'] = $oMail->ErrorInfo;
+                    $response['state'] = "error";
+                }
+                $restablecimientoClave = new RestablecimientoClaveModel();
+                $rta = $restablecimientoClave->insertarSolicitudCambioClave($result['id_empresa'], $token);
+            } catch (Exception $e) {
+                $response['title'] = $e->getMessage();
+                $response['state'] = "error";
+            }
         } else {
-            $response['title'] = "Clave cambiada correctamente. Por favor vuelve a iniciar sesión";
-            $response['state'] = "success";
+            $response['title'] = "Correo no registrado en el sistema";
+            $response['state'] = "error";
+        }
+        echo json_encode($response);
+    } else if ($_POST['accion'] == 'restablecer_clave') {
+        $response = array();
+        $id_empresa = $_POST['id_empresa'];
+        $inputClave1 = $_POST['inputClave1'];
+        $token = $_POST['token'];
+        $clave_codificada = password_hash($inputClave1, PASSWORD_DEFAULT);
+        $restablecimientoClave = new RestablecimientoClaveModel();
+        $result = $restablecimientoClave->buscarSolicitudRestablecimientoClave($id_empresa, $token);
+        if ($result != NULL) {
+            $empresa = new EmpresaModel();
+            $rta = $empresa->cambiarClave($id_empresa, $clave_codificada);
+            if ($rta == 0) {
+                $response['title'] = "Error al restablecer la contraseña";
+                $response['state'] = "error";
+                $response['location'] = "cambiar_clave.php";
+            } else {
+                $response['title'] = "Contraseña restablecida correctamente. Por favor vuelve a iniciar sesión";
+                $response['state'] = "success";
+                $response['location'] = "../../index.php";
+            }
+        } else {
+            $response['title'] = "El token de verificación se ha vencido";
+            $response['state'] = "error";
             $response['location'] = "../../index.php";
         }
         echo json_encode($response);

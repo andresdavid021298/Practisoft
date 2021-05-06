@@ -172,5 +172,21 @@ class EmpresaModel
         }
     }
 
-    // id_empresa, nombre_empresa
+    //Método para mostrar el id y el nombre de la empresa
+    public function mostrarIdYNombreEmpresa($correo_empresa)
+    {
+        $datos_empresa = NULL;
+        $query = "SELECT id_empresa, nombre_empresa, correo_empresa FROM empresa WHERE correo_empresa=:correo_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":correo_empresa", $correo_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $datos_empresa = $result;
+            $stmt->closeCursor();
+            return $datos_empresa;
+        }
+    }
 }

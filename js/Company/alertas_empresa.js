@@ -17,25 +17,25 @@ function alertaRegistro() {
         })
     } else {
         $.ajax({
-                //Como hago el llamado a la funcion dentro de la carpeta View tengo que salir de la carpeta primero
-                url: "../../Controller/Empresa/Empresa_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "registrar",
-                    "nombre_empresa": nombre_empresa,
-                    "representante_legal": representante_legal,
-                    "NIT": NIT,
-                    "direccion_empresa": direccion_empresa,
-                    "municipio": municipio,
-                    "correo_empresa": correo_empresa,
-                    "celular_empresa": celular_empresa,
-                    "sector_empresa": sector_empresa,
-                    "clave_empresa": clave_empresa
+            //Como hago el llamado a la funcion dentro de la carpeta View tengo que salir de la carpeta primero
+            url: "../../Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "registrar",
+                "nombre_empresa": nombre_empresa,
+                "representante_legal": representante_legal,
+                "NIT": NIT,
+                "direccion_empresa": direccion_empresa,
+                "municipio": municipio,
+                "correo_empresa": correo_empresa,
+                "celular_empresa": celular_empresa,
+                "sector_empresa": sector_empresa,
+                "clave_empresa": clave_empresa
 
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -57,18 +57,18 @@ function alertaLogin() {
         })
     } else {
         $.ajax({
-                //Como hago llamado a la funcion desde la carpeta raiz no tengo que hacer ningun salto
-                url: "Controller/Empresa/Empresa_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "login",
-                    "correo": email,
-                    "clave": password
+            //Como hago llamado a la funcion desde la carpeta raiz no tengo que hacer ningun salto
+            url: "Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "login",
+                "correo": email,
+                "clave": password
 
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -95,21 +95,21 @@ function actualizarDatos() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Empresa/Empresa_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_datos",
-                    "id": idEmpresa,
-                    "representante": inputRepresentante,
-                    "direccion": inputDireccion,
-                    "municipio": selectMunicipio,
-                    "tutor": inputTutor,
-                    "correo": inputCorreo,
-                    "contacto": inputContacto,
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_datos",
+                "id": idEmpresa,
+                "representante": inputRepresentante,
+                "direccion": inputDireccion,
+                "municipio": selectMunicipio,
+                "tutor": inputTutor,
+                "correo": inputCorreo,
+                "contacto": inputContacto,
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -133,18 +133,18 @@ function agregarTutor() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Tutor/Tutor_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "registrar_tutor",
-                    "id": idEmpresa,
-                    "nombre_tutor": nombre,
-                    "correo_tutor": correo,
-                    "celular_tutor": celular
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Tutor/Tutor_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "registrar_tutor",
+                "id": idEmpresa,
+                "nombre_tutor": nombre,
+                "correo_tutor": correo,
+                "celular_tutor": celular
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -169,19 +169,19 @@ function actualizarTutor() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Tutor/Tutor_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_tutor",
-                    "id": idEmpresa,
-                    "id_tutor": idTutor,
-                    "nombre_tutor": nombre,
-                    "correo_tutor": correo,
-                    "celular_tutor": celular
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Tutor/Tutor_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_tutor",
+                "id": idEmpresa,
+                "id_tutor": idTutor,
+                "nombre_tutor": nombre,
+                "correo_tutor": correo,
+                "celular_tutor": celular
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -195,15 +195,15 @@ function actualizarTutor() {
 
 function eliminarTutor(id_tutor) {
     $.ajax({
-            url: "../../Controller/Tutor/Tutor_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "eliminar_tutor",
-                "id_tutor": id_tutor
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Tutor/Tutor_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "eliminar_tutor",
+            "id_tutor": id_tutor
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -226,17 +226,17 @@ function asignarTutor() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Estudiante/Estudiante_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "asignar_tutor_estudiante",
-                    "id_estudiante": id_estudiante,
-                    "id_tutor": id_tutor,
-                    "nombre_estudiante": nombre_estudiante
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "asignar_tutor_estudiante",
+                "id_estudiante": id_estudiante,
+                "id_tutor": id_tutor,
+                "nombre_estudiante": nombre_estudiante
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -321,17 +321,17 @@ function agregarSolicitud() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Solicitud/Solicitud_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "agregar_solicitud",
-                    "id": idEmpresa,
-                    "areas": areasSeleccionadas,
-                    "practicantes": numPracticantes
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Solicitud/Solicitud_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregar_solicitud",
+                "id": idEmpresa,
+                "areas": areasSeleccionadas,
+                "practicantes": numPracticantes
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -354,17 +354,17 @@ function cambiarClave() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Empresa/Empresa_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "cambiar_clave",
-                    "id_empresa": id_empresa,
-                    "clave": clave_empresa
+            url: "../../Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "cambiar_clave",
+                "id_empresa": id_empresa,
+                "clave": clave_empresa
 
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -378,15 +378,15 @@ function cambiarClave() {
 //Método que permite mostrar alerta cuando se valida una actividad de un estudiante por parte de su empresa
 function validarActividad(id_actividad, id_actividad_plan_trabajo) {
     $.ajax({
-            url: "../../Controller/Actividad/Actividad_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "validar_actividad",
-                "id_actividad": id_actividad
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Actividad/Actividad_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "validar_actividad",
+            "id_actividad": id_actividad
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -401,16 +401,16 @@ function rechazarActividad(id_actividad_plan_trabajo) {
     var id_actividad = document.getElementById("id_actividad").value;
     var observaciones = document.getElementById("textarea_observaciones").value;
     $.ajax({
-            url: "../../Controller/Actividad/Actividad_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "rechazar_actividad",
-                "id_actividad": id_actividad,
-                "observaciones": observaciones
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Actividad/Actividad_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "rechazar_actividad",
+            "id_actividad": id_actividad,
+            "observaciones": observaciones
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -442,7 +442,7 @@ function subirConvenio() {
             cache: false,
             contentType: false,
             processData: false
-        }).done(function(response) {
+        }).done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -476,7 +476,7 @@ function subirProtocolos() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -510,7 +510,7 @@ function subirRepresentante() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -544,7 +544,7 @@ function subirCertificado() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -578,7 +578,7 @@ function subirRUT() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -586,5 +586,69 @@ function subirRUT() {
                 window.location = "documento_rut.php"
             })
         })
+    }
+}
+
+//Método que permite mostrar alerta al momento de cambiar clave de una empresa por email
+function recuperarClaveEmail() {
+    var inputCorreo = document.getElementById("input_correo").value;
+    if (inputCorreo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        $.ajax({
+            url: "../../Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "cambiar_clave_email",
+                "input_correo": inputCorreo,
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "../../index.php"
+                })
+            })
+    }
+}
+
+//Método que permite mostrar alerta al momento de cambiar clave de una empresa por email
+function restablecerClave() {
+    var idEmpresa = document.getElementById("id_empresa").value;
+    var inputClave1 = document.getElementById("inputClave1").value;
+    var inputClave2 = document.getElementById("inputClave2").value;
+    var token = document.getElementById("token").value;
+    if (inputClave1 == "" || inputClave2 == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Oops, Hay campos vacios"
+        })
+    } else {
+        $.ajax({
+            url: "../../Controller/Empresa/Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "restablecer_clave",
+                "id_empresa": idEmpresa,
+                "inputClave1": inputClave1,
+                "token": token
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
+                console.log(response);
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "../../index.php"
+                })
+            })
     }
 }
