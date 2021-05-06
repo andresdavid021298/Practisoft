@@ -205,7 +205,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <center><?php echo $horas_estudiante; ?></center>
                                         </td>
                                         <td>
-                                            <?php if ($horas_estudiante == 320) { ?>
+                                            <?php if ($horas_estudiante >= 320) { ?>
                                                 <center><a class="btn btn-primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfmbjBxCtuUNexgzRvRKAXsgZCyreG1Yg9vBUko3Fwc-KgI0w/viewform?usp=sf_link">Completar Encuesta</a></center>
                                             <?php
                                             } else {
