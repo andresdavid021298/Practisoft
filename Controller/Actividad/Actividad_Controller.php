@@ -10,10 +10,17 @@ function verHorasPorEstudiante($id_estudiante)
 }
 
 // Metodo que conecta con la vista para enviar los datos de todas las actividades de cierto practicante
-function listarActividadesPorEstudiante($id_estudiante)
+function listarActividadesPorActividadPlanTrabajo($id_actividad_plan_trabajo)
 {
     $obj_actividad_model = new ActividadModel();
-    return $obj_actividad_model->listarActividadesPorEstudiante($id_estudiante);
+    return $obj_actividad_model->listarActividadesPorActividadPlanTrabajo($id_actividad_plan_trabajo);
+}
+
+// Metodo que conecta con la vista para enviar los datos de todas las actividades de cierto practicante
+function sumarHorasPorActividadPlanTrabajo($id_actividad_plan_trabajo)
+{
+    $obj_actividad_model = new ActividadModel();
+    return $obj_actividad_model->sumarHorasPorActividadPlanTrabajo($id_actividad_plan_trabajo);
 }
 
 if (isset($_POST['accion'])) {
@@ -44,25 +51,23 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Actividad Rechazada";
         }
         echo json_encode($response);
-    }else if($_POST['accion'] == "agregar_actividad"){
+    } else if ($_POST['accion'] == "agregar_actividad") {
         $response = array();
-        $id_estudiante = $_POST['id'];
+        $id_actividad_plan_trabajo= $_POST['id'];
         $fecha_actividad = $_POST['fecha'];
         $horas_actividad = $_POST['horas'];
         $descripcion_actividad = $_POST['descripcion'];
         $obj_actividad_model = new ActividadModel();
-        $rta = $obj_actividad_model->insertarActividades($id_estudiante, $fecha_actividad, $descripcion_actividad, $horas_actividad);
+        $rta = $obj_actividad_model->insertarActividades($id_actividad_plan_trabajo, $fecha_actividad, $descripcion_actividad, $horas_actividad);
         if ($rta == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
-            $response['location'] = "ver_actividades.php";
         } else {
             $response['state'] = "success";
             $response['title'] = "Actividad Agregada Correctamente";
-            $response['location'] = "ver_actividades.php";
         }
         echo json_encode($response);
-    } else if($_POST['accion'] == "actualizar_actividad"){
+    } else if ($_POST['accion'] == "actualizar_actividad") {
         $response = array();
         $id_actividad = $_POST['id'];
         $fecha_actividad = $_POST['fecha'];
@@ -73,14 +78,12 @@ if (isset($_POST['accion'])) {
         if ($rta == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
-            $response['location'] = "ver_actividades.php";
         } else {
             $response['state'] = "success";
             $response['title'] = "Actividad Actualizada Correctamente";
-            $response['location'] = "ver_actividades.php";
         }
         echo json_encode($response);
-    }else if($_POST['accion'] == "eliminar_actividad"){
+    } else if ($_POST['accion'] == "eliminar_actividad") {
         $response = array();
         $id_actividad = $_POST['id_actividad'];
         $obj_actividad_model = new ActividadModel();
@@ -88,14 +91,10 @@ if (isset($_POST['accion'])) {
         if ($rta == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
-            $response['location'] = "ver_actividades.php";
         } else {
             $response['state'] = "success";
             $response['title'] = "Actividad Eliminada Correctamente";
-            $response['location'] = "ver_actividades.php";
         }
         echo json_encode($response);
     }
-    
-
 }

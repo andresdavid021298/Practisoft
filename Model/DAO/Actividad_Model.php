@@ -14,12 +14,12 @@ class ActividadModel
     }
 
     //Método que permite insertar las actividades de la práctica
-    public function insertarActividades($id_estudiante, $fecha_actividad, $descripcion_actividad, $horas_actividad)
+    public function insertarActividades($id_actividad_plan_estudiante, $fecha_actividad, $descripcion_actividad, $horas_actividad)
     {
-        $query = "INSERT INTO actividad(id_estudiante, fecha_actividad, descripcion_actividad, horas_actividad)
-                  VALUES(:estudiante, :fecha, :descripcion, :horas)";
+        $query = "INSERT INTO actividad(id_actividad_plan_trabajo, fecha_actividad, descripcion_actividad, horas_actividad)
+                  VALUES(:actividad_plan_trabajo, :fecha, :descripcion, :horas)";
         $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":estudiante", $id_estudiante);
+        $stmt->bindParam(":actividad_plan_trabajo", $id_actividad_plan_estudiante);
         $stmt->bindParam(":fecha", $fecha_actividad);
         $stmt->bindParam(":descripcion", $descripcion_actividad);
         $stmt->bindParam(":horas", $horas_actividad);
@@ -66,14 +66,14 @@ class ActividadModel
     }
 
     //Método para listar las activdades por estudiante
-    public function listarActividadesPorEstudiante($id_estudiante)
+    public function listarActividadesPorActividadPlanTrabajo($id_actividad_plan_trabajo)
     {
         $lista_actividades = NULL;
-        $query = "SELECT  id_actividad,fecha_actividad, descripcion_actividad, horas_actividad, estado_actividad, observaciones_actividad
+        $query = "SELECT id_actividad,fecha_actividad, descripcion_actividad, horas_actividad, estado_actividad, observaciones_actividad
                   FROM actividad
-                  WHERE id_estudiante=:id ORDER BY estado_actividad";
+                  WHERE id_actividad_plan_trabajo=:id ORDER BY estado_actividad";
         $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(":id", $id_estudiante);
+        $stmt->bindParam(":id", $id_actividad_plan_trabajo);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
@@ -104,7 +104,10 @@ class ActividadModel
     //Método para sumar la cantidad de horas del estudiante de las actividades aprobadas
     public function sumarHorasDelEstudiante($id_estudiante)
     {
-        $query = "SELECT SUM(horas_actividad) AS horas_estudiante FROM actividad WHERE id_estudiante=:id_estudiante AND estado_actividad='Aprobada'";
+        $query = "SELECT SUM(a.horas_actividad) AS horas_estudiante 
+                  FROM actividad AS a 
+                  JOIN actividades_plan_trabajo AS a_p ON a.id_actividad_plan_trabajo=a_p.id_actividad_plan_trabajo 
+                  WHERE a_p.id_estudiante=:id_estudiante AND a.estado_actividad='Aprobada'";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
         if (!$stmt->execute()) {
@@ -121,8 +124,26 @@ class ActividadModel
         }
     }
 
+    public function sumarHorasPorActividadPlanTrabajo($id_actividad_plan_estudiante)
+    {
+        $query = "SELECT SUM(horas_actividad) AS horas_estudiante FROM actividad WHERE id_actividad_plan_trabajo=:id AND estado_actividad='Aprobada'";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_actividad_plan_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $horas = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if ($horas['horas_estudiante'] === NULL) {
+                return 0;
+            } else {
+                return $horas['horas_estudiante'];
+            }
+        }
+    }
 
-    //Método para aprobar la actividad de un estudiante
+    //Método para reprobar la actividad de un estudiante
     public function cambiarActividadReprobado($id_actividad, $observaciones_actividad)
     {
         $query = "UPDATE actividad SET estado_actividad='Reprobada', observaciones_actividad=:observacion WHERE id_actividad=:id_actividad";

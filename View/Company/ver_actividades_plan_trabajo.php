@@ -1,8 +1,11 @@
 <?php
 session_start();
 if ($_SESSION['id_empresa'] == NULL) {
-
     header("Location: ../../index.php");
+} else {
+    if (!isset($_GET['id_estudiante'])) {
+        header("Location: ver_actividades.php");
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -151,60 +154,86 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div style="padding-left: 10px;">
+                    <a class="btn btn-primary" href="ver_actividades.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
 
-
-                <center>
-                    <h2>Seleccione un estudiante</h2>
-                </center>
-                <div class="container-fluid">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>Estudiante</center>
-                                </th>
-                                <th>
-                                    <center>Horas</center>
-                                </th>
-                                <th>
-                                    <center>Opciones</center>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php
-                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                            if (is_null($lista_de_estudiantes)) {
-                            ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
-                                </td>
-                                <?php
-                            } else {
-                                foreach ($lista_de_estudiantes as $estudiante) {
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                        </td>
-                                        <?php
-                                        require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                        $horas_estudiante = verHorasPorEstudiante($estudiante['id_estudiante']);
-                                        ?>
-                                        <td>
-                                            <center><?php echo $horas_estudiante; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><a class="btn btn-primary" href="ver_actividades_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Detalles</a></center>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
                 </div>
+                <?php
+                require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                $info_estudiante = buscarEstudiante($_GET['id_estudiante']);
+                if ($info_estudiante['id_empresa'] != $_SESSION['id_empresa']) {
+                ?>
+                    <center>
+                        <h2><strong style="color: #D61117;">PRACTICANTE NO ASIGNADO</strong></h2>
+                    </center>
+                <?php
+                } else {
+                ?>
+                    <center>
+                        <h2>Ver Actividades</h2>
+                        <h3><?php echo $info_estudiante['nombre_estudiante']; ?></h3>
+                        <?php
+                        require_once '../../Controller/Actividad/Actividad_Controller.php';
+                        $numero_horas = verHorasPorEstudiante($_GET['id_estudiante']);
+                        ?>
+                        <h4>Numero de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
+                    </center>
+                    <div class="container-fluid">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <center>Descripcion</center>
+                                    </th>
+                                    <th>
+                                        <center>Horas Definidas</center>
+                                    </th>
+                                    <th>
+                                        <center>Horas Cumplidas</center>
+                                    </th>
+                                    <th>
+                                        <center>Opciones</center>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                                $actividades_plan_trabajo = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
+                                if (is_null($actividades_plan_trabajo)) {
+                                ?>
+                                    <td colspan="4" style="color: #D61117;">
+                                        <center><strong>NO SE HA VALIDADO EL PLAN DE TRABAJO DE ESTE ESTUDIANTE</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
+                                    foreach ($actividades_plan_trabajo as $actividad) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <center><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></center>
+                                            </td>
+                                            <?php
+                                            require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                            $horas_estudiante = sumarHorasPorActividadPlanTrabajo($actividad['id_actividad_plan_trabajo']);
+                                            ?>
+                                            <td>
+                                                <center><?php echo $horas_estudiante; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades</a></center>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } ?>
             </div>
             <!-- End of Page Wrapper -->
 

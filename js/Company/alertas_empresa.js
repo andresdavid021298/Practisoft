@@ -36,7 +36,6 @@ function alertaRegistro() {
                 dataType: "JSON"
             })
             .done(function(response) {
-                console.log(response);
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -111,7 +110,6 @@ function actualizarDatos() {
                 dataType: "JSON"
             })
             .done(function(response) {
-                console.log(response);
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -122,18 +120,18 @@ function actualizarDatos() {
     }
 }
 
-function agregarTutor(){
+function agregarTutor() {
     var nombre = document.getElementById('nombre_tutor').value;
     var correo = document.getElementById('correo_tutor').value;
     var celular = document.getElementById('celular_tutor').value;
     var idEmpresa = document.getElementById('id_empresa').value;
 
-    if(nombre == "" || correo == "" || celular == ""){
+    if (nombre == "" || correo == "" || celular == "") {
         swal.fire({
             icon: "warning",
             title: "Oops, Hay campos vacios"
         })
-    }else {
+    } else {
         $.ajax({
                 url: "../../Controller/Tutor/Tutor_Controller.php",
                 type: "POST",
@@ -147,7 +145,6 @@ function agregarTutor(){
                 dataType: "JSON"
             })
             .done(function(response) {
-                console.log(response);
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -158,19 +155,19 @@ function agregarTutor(){
     }
 }
 
-function actualizarTutor(){
+function actualizarTutor() {
     var nombre = document.getElementById('nombre_tutor_act').value;
     var correo = document.getElementById('correo_tutor_act').value;
     var celular = document.getElementById('celular_tutor_act').value;
     var idEmpresa = document.getElementById('id_empresa_act').value;
     var idTutor = document.getElementById('id_tutor_act').value;
 
-    if(nombre == "" || correo == "" || celular == ""){
+    if (nombre == "" || correo == "" || celular == "") {
         swal.fire({
             icon: "warning",
             title: "Oops, Hay campos vacios"
         })
-    }else {
+    } else {
         $.ajax({
                 url: "../../Controller/Tutor/Tutor_Controller.php",
                 type: "POST",
@@ -185,7 +182,6 @@ function actualizarTutor(){
                 dataType: "JSON"
             })
             .done(function(response) {
-                console.log(response);
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -194,41 +190,41 @@ function actualizarTutor(){
                 })
             })
     }
-    
+
 }
 
-function eliminarTutor(id_tutor){
+function eliminarTutor(id_tutor) {
     $.ajax({
-        url: "../../Controller/Tutor/Tutor_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "eliminar_tutor",
-            "id_tutor": id_tutor
-        },
-        dataType: "JSON"
-    })
-    .done(function(response) {
-        swal.fire({
-            icon: response.state,
-            title: response.title
-        }).then(() => {
-            window.location = response.location
+            url: "../../Controller/Tutor/Tutor_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "eliminar_tutor",
+                "id_tutor": id_tutor
+            },
+            dataType: "JSON"
         })
-    })
+        .done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = response.location
+            })
+        })
 }
 
 //Metodo para asignar un tutor a un estudiante
-function asignarTutor(){
+function asignarTutor() {
     var nombre_estudiante = document.getElementById('nombre_estudiante_tut').value;
     var id_estudiante = document.getElementById('id_estudiante_tut').value;
     var id_tutor = document.getElementById('id_tutor_est').value;
-    
-    if(nombre_estudiante == ""){
+
+    if (nombre_estudiante == "") {
         swal.fire({
             icon: "warning",
             title: "Oops, Hay campos vacios"
         })
-    }else {
+    } else {
         $.ajax({
                 url: "../../Controller/Estudiante/Estudiante_Controller.php",
                 type: "POST",
@@ -241,7 +237,6 @@ function asignarTutor(){
                 dataType: "JSON"
             })
             .done(function(response) {
-                console.log(response);
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -381,7 +376,7 @@ function cambiarClave() {
 }
 
 //Método que permite mostrar alerta cuando se valida una actividad de un estudiante por parte de su empresa
-function validarActividad(id_actividad, id_estudiante) {
+function validarActividad(id_actividad, id_actividad_plan_trabajo) {
     $.ajax({
             url: "../../Controller/Actividad/Actividad_Controller.php",
             type: "POST",
@@ -396,13 +391,13 @@ function validarActividad(id_actividad, id_estudiante) {
                 icon: response.state,
                 title: response.title
             }).then(() => {
-                window.location = "detalles_actividades.php?id_estudiante=" + id_estudiante
+                window.location = "detalles_actividades.php?id_actividad=" + id_actividad_plan_trabajo
             })
         })
 }
 
 //Método que permite mostrar alerta cuando se rechaza una actividad de un estudiante por parte de su empresa
-function rechazarActividad(id_estudiante) {
+function rechazarActividad(id_actividad_plan_trabajo) {
     var id_actividad = document.getElementById("id_actividad").value;
     var observaciones = document.getElementById("textarea_observaciones").value;
     $.ajax({
@@ -420,7 +415,7 @@ function rechazarActividad(id_estudiante) {
                 icon: response.state,
                 title: response.title
             }).then(() => {
-                window.location = "detalles_actividades.php?id_estudiante=" + id_estudiante
+                window.location = "detalles_actividades.php?id_actividad=" + id_actividad_plan_trabajo
             })
         })
 }
@@ -448,7 +443,6 @@ function subirConvenio() {
             contentType: false,
             processData: false
         }).done(function(response) {
-            console.log(response);
             swal.fire({
                 icon: response.state,
                 title: response.title

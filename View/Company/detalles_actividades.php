@@ -150,90 +150,108 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-                <div style="padding-left: 10px;">
-                    <a class="btn btn-primary" href="ver_actividades.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
 
+                <!-- Boton de ATRAS -->
+                <div style="padding-left: 10px;">
+                    <a class="btn btn-primary" href="ver_actividades_plan_trabajo.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
                 <?php
-                require_once "../../Controller/Estudiante/Estudiante_Controller.php";
-                $datos_estudiante = buscarEstudiante($_GET['id_estudiante']);
-                if ($datos_estudiante['id_empresa'] != $_SESSION['id_empresa']) {
+                require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
+                $actividad_plan_trabajo = buscarActividaPlanTrabajo($_GET['id_actividad']);
+                if ($actividad_plan_trabajo == NULL) {
                 ?>
-                    <h1 style="color: #D61117; text-align: center;">Practicante NO Asignado</h1>
-                <?php
+                    <h1 style="color: #D61117; text-align: center;">Actividad NO Visible</h1>
+                    <?php
                 } else {
-                ?>
-                    <center>
-                        <h1>Ver Actividades</h1>
-                        <h3><?php echo $datos_estudiante['nombre_estudiante'] ?></h3>
-                        <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
-                        <h5>Total de Horas: <?php echo verHorasPorEstudiante($_GET['id_estudiante']); ?>/320</h5>
-                    </center>
-                    <div class="container-fluid">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <center>Fecha</center>
-                                    </th>
-                                    <th>
-                                        <center>Descripcion</center>
-                                    </th>
-                                    <th>
-                                        <center>Horas</center>
-                                    </th>
-                                    <th>
-                                        <center>Estado</center>
-                                    </th>
-                                    <th>
-                                        <center>Opciones</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                    $estudiante = buscarEstudiante($actividad_plan_trabajo['id_estudiante']);
+                    if ($estudiante['id_empresa'] != $_SESSION['id_empresa']) {
+                    ?>
+                        <h1 style="color: #D61117; text-align: center;">Que no perro</h1>
+                    <?php
+                    } else {
+                    ?>
+                        <center>
+                            <h2>Ver SubActividades</h2>
+                            <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
+                            <!-- <h5>Numero de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $actividad_plan_trabajo['numero_horas_actividad_plan_trabajo']; ?></h5> -->
+                        </center>
+                        <div class="container-fluid">
+                            <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <td colspan="1">
+                                        <center><strong>Actividad:</strong></center></td>
+                                        <td colspan="5">
+                                            <center><strong><em><?php echo $actividad_plan_trabajo['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <center>Fecha</center>
+                                        </th>
+                                        <th>
+                                            <center>Descripcion</center>
+                                        </th>
+                                        <th>
+                                            <center>Horas</center>
+                                        </th>
+                                        <th>
+                                            <center>Estado</center>
+                                        </th>
+                                        <th>
+                                            <center>Opciones</center>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php
-                                require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                $lista_de_actividades = listarActividadesPorEstudiante($_GET['id_estudiante']);
-                                if (is_null($lista_de_actividades)) {
-                                ?>
-                                    <td colspan="5" style="color: #D61117;">
-                                        <center><strong>EL PRACTICANTE NO REGISTRA ACTIVIDADES</strong></center>
-                                    </td>
                                     <?php
-                                } else {
-                                    foreach ($lista_de_actividades as $actividad) {
+                                    require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                    $lista_de_actividades = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
+                                    if (is_null($lista_de_actividades)) {
                                     ?>
-                                        <tr>
-                                            <td>
-                                                <center><?php echo $actividad['fecha_actividad']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $actividad['descripcion_actividad']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $actividad['horas_actividad']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $actividad['estado_actividad']; ?></center>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($actividad['estado_actividad'] == "En Espera") { ?>
-                                                    <center><button class="btn btn-success" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $datos_estudiante['id_estudiante'] ?>)">Validar</button></center>
-                                                    <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
-                                                <?php } else { ?>
-                                                    <center>----------</center>
-                                                <?php } ?>
-                                            </td>
-                                        </tr>
-                                <?php }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php } ?>
+                                        <td colspan="5" style="color: #D61117;">
+                                            <center><strong>EL PRACTICANTE NO REGISTRA ACTIVIDADES</strong></center>
+                                        </td>
+                                        <?php
+                                    } else {
+                                        foreach ($lista_de_actividades as $actividad) {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?php echo $actividad['fecha_actividad']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?php echo $actividad['descripcion_actividad']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?php echo $actividad['horas_actividad']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?php echo $actividad['estado_actividad']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    if ($actividad['estado_actividad'] == "En Espera") { ?>
+                                                        <center><button class="btn btn-success" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $_GET['id_actividad'] ?>)">Validar</button></center>
+                                                        <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
+                                                    <?php } else { ?>
+                                                        <center>----------</center>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                    <?php }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                <?php }
+                } ?>
             </div>
             <!-- End of Page Wrapper -->
 
@@ -249,7 +267,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         </div>
                         <div class="modal-body">
                             <center>
-                                <h5><?php echo $datos_estudiante['nombre_estudiante']; ?></h5>
+                                <h5><?php echo $estudiante['nombre_estudiante']; ?></h5>
                             </center>
                             <form action="" method="POST">
                                 <div class="form-group">
@@ -257,7 +275,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <textarea name="textarea_observaciones" style="width: 100%;" id="textarea_observaciones" rows="5"></textarea>
                                 </div>
                                 <input type="hidden" id="id_actividad">
-                                <center><button type="button" onclick="rechazarActividad(<?php echo $datos_estudiante['id_estudiante']; ?>)" class="btn btn-primary">Enviar</button></center>
+                                <center><button type="button" onclick="rechazarActividad(<?php echo $_GET['id_actividad']; ?>)" class="btn btn-primary">Enviar</button></center>
                             </form>
                         </div>
                     </div>
@@ -309,18 +327,3 @@ if ($_SESSION['id_empresa'] == NULL) {
 </script>
 
 </html>
-<!-- Codigo que valida si no se envio ningun dato por GET -->
-<?php
-if (!isset($_GET['id_estudiante'])) {
-?>
-    <script>
-        swal.fire({
-            icon: "warning",
-            title: "No selecciono ningun estudiante"
-        }).then(() => {
-            window.location = "ver_actividades.php"
-        })
-    </script>
-<?php
-}
-?>

@@ -8,6 +8,18 @@ function listarActividadesPlanTrabajoPorEstudiante($id_estudiante)
     return $obj_actividad_plan_trabajo->listarActividadesPlanTrabajoPorEstudiante($id_estudiante);
 }
 
+function listarActividadesPlanTrabajoPorEstudianteAprobadas($id_estudiante)
+{
+    $obj_actividad_plan_trabajo = new ActividadPlanTabajoModel();
+    return $obj_actividad_plan_trabajo->listarActividadesPlanTrabajoPorEstudianteAprobadas($id_estudiante);
+}
+
+function buscarActividaPlanTrabajo($id_actividad_plan_trabajo)
+{
+    $obj_actividad_plan_trabajo = new ActividadPlanTabajoModel();
+    return $obj_actividad_plan_trabajo->buscarActividadPlanTrabajo($id_actividad_plan_trabajo);
+}
+
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "insertar_actividad_plan_trabajo") {
         $id_estudiante = $_POST['id_estudiante'];

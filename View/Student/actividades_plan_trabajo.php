@@ -67,7 +67,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="actividades_plan_trabajo.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
-                        <a class="collapse-item" href="documento_informe_avance.php"><i class="fas fa-clone"></i> Informes </a>
+                        <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
                     </div>
                 </div>
             </li>
@@ -135,42 +135,55 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+
                 <div class="container-fluid">
-                    <center>
-                        <h2>Plan de Trabajo</h2>
-                    </center>
-                    <br>
-                    <!-- Valida si esta asignada a una empresa -->
+                    <div class="col text-center">
+                        <h3>Mis Actividades</h3>
+                    </div>
                     <?php
                     require_once "../../Controller/Empresa/Empresa_Controller.php";
-                    $empresa_estudiante = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
-                    if (is_null($empresa_estudiante)) {
+                    $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                    if (is_null($info_empresa)) {
                     ?>
-                        <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
-                    <?php
+                        <center><strong style="color:#D61117">NO TIENE EMPRESA ASIGNADA</strong></center>
+                        <?php
                     } else {
-                    ?>
-                        <form method="POST">
-                            <div class="row" id="primer_row">
-                                <div class="form-group col-md-8" id="actividad_estatica">
-                                    <label for="exampleFormControlInput1">Nueva Actividad</label>
-                                    <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
-                                </div>
-                                <div class="form-group col-md-4" id="numero_horas_estatica">
-                                    <label for="exampleFormControlInput1">Numero de Horas</label>
-                                    <input type="number" class="form-control form-control-lg" id="numero_horas" min="1" max="320">
-                                </div>
+                        require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                        $lista_actividades = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
+                        if (is_null($lista_actividades) || $lista_actividades[0]['estado'] != "Aprobada") { ?>
+                            <center><strong style="color:#D61117">NO TIENE ACTIVIDADES ESTABLECIDAS Y APROBADAS EN EL PLAN DE TRABAJO</strong></center>
+                        <?php
+                        } else { ?>
+                            <div class="col text-center">
+                            <?php require_once '../../Controller/Actividad/Actividad_Controller.php';
+                            $suma_horas_totales= verHorasPorEstudiante($_SESSION['id_estudiante']);
+                            ?>
+                                <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales;?> / 320</h5>
                             </div>
-                            <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                            <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
-                            <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
-                            <div class="text-center">
-                                <br>
-                                <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
-                            </div>
-                        </form>
-                    <?php } ?>
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Descripcion Actividad</th>
+                                        <th>Numero de Horas Establecidas</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($lista_actividades as $actividad) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
+                                            <td><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
+                                            <td><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                    <?php }
+                    } ?>
                 </div>
+
             </div>
             <!-- End of Page Wrapper -->
 
@@ -197,60 +210,17 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/Student//alertas_estudiante.js"></script>
+<script src="../../js/Student/alertas_estudiante.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<!-- Valida si un estudiante ya hizo un plan de trabajo -->
-<?php
-require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
-$lista = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
-
-// Sino, valida si tiene actividades del plan de trabajo
-if (!is_null($lista)) {
-    $estado_plan_trabajo = $lista[0]['estado'];
-    // Valida si las actividades fueron rechazadas por el tutor
-    if ($estado_plan_trabajo == "En Espera") {
-?>
-        <script>
-            swal.fire({
-                icon: "error",
-                title: "Ya registra un plan de trabajo, esta en espera de aprobacion"
-            }).then(() => {
-                window.location = "index_student.php";
-            })
-        </script>
-        <!-- Sino, valida si estan aprobadas -->
-    <?php } else if ($estado_plan_trabajo == "Aprobada") {
-    ?>
-        <script>
-            swal.fire({
-                icon: "info",
-                title: "Su plan de trabajo ya esta aprobado"
-            }).then(() => {
-                window.location = "index_student.php";
-            })
-        </script>
-    <?php
-    } else if ($estado_plan_trabajo == "Rechazada") {
-        $observacion = $lista[0]['observacion'];
-        echo
-        "
-        <script>
-            swal.fire({
-                icon: 'warning',
-                title: 'Plan de Trabajo Rechazado',
-                text: 'Observaciones: " . $observacion . "',
-                footer: 'Se eliminaran las actividades previas'
-           }).then(() => {
-            eliminarActividadesPlanTrabajo(" . $_SESSION['id_estudiante'] . ")
-        })
-        </script>
-        ";
-    }
-    ?>
-<?php
-}
-?>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 
 </html>

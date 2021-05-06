@@ -159,19 +159,22 @@ class EstudianteModel
     public function buscarEstudiante($id_estudiante)
     {
         $query = "SELECT id_estudiante,id_empresa,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_estudiante=:id";
+        $informacion = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_estudiante);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
         } else {
-            $datos_del_estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt->rowCount() > 0) {
+                $informacion= $stmt->fetch(PDO::FETCH_ASSOC);
+            }
             $stmt->closeCursor();
-            return $datos_del_estudiante;
+            return $informacion;
         }
     }
 
-    // Verifica si existe una empresa mediante el correo electrónico y la contraseña
+    // Verifica si existe una estudiante mediante el correo electrónico
     public function verificarExistenciaEstudiante($correo_estudiante)
     {
         $datos = NULL;

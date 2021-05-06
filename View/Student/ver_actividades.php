@@ -142,153 +142,167 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Mis Actividades</h1>
+                                <h1 class="h3 mb-0 text-gray-800">SubActividades</h1>
                                 <br>
                             </div>
                         </div>
                     </div>
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva Actividad</button>
-                                <button type="button" class="btn btn-primary">Descargar Registro</button><br><br>
-                                <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
-                                <b><h5>Total de Horas Aprobadas: <?php echo verHorasPorEstudiante($_SESSION['id_estudiante']); ?>/320</h5></b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Modal-->
-
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background-color:#D61117;">
-                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Actividad</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                    <?php
+                    require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                    if (isset($_GET['id_actividad'])) {
+                        $info_actividad = buscarActividaPlanTrabajo($_GET['id_actividad']);
+                        if ($info_actividad == NULL || $info_actividad['id_estudiante'] = !$_SESSION['id_estudiante']) {
+                    ?>
+                            <h2 style="color: #D61117; text-align: center;">Esta Actividad NO Está Visible</h2>
+                        <?php
+                        } else {
+                        ?>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva Actividad</button>
+                                        <button type="button" class="btn btn-primary">Descargar Registro</button><br><br>
+                                        <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
+                                        <b>
+                                            <h5>Total de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $info_actividad['numero_horas_actividad_plan_trabajo'] ?></h5>
+                                        </b>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
+                            </div>
+                            <!--Modal-->
 
-                                    <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Fecha de Realización:</label>
-                                            <input type="date" class="form-control" name="fecha_realizacion" max="<?php echo date("Y-m-d"); ?>" id="fecha">
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
-                                            <input type="number" class="form-control" name="num_horas" id="horas">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color:#D61117;">
+                                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Actividad</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
+                                        <div class="modal-body">
 
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Descripcion:</label>
-                                            <input type="text" class="form-control" name="descripcion_actividad" id="descripcion">
-                                        </div>
-                                        <input type="hidden" name="id_estudiante" id="id_estudiante" value="<?php echo $_SESSION['id_estudiante'] ?>">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col text-center">
-                                                    <button type="button" onclick="agregarActividad()" class="btn btn-primary">Solicitar</button>
+                                            <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="col-form-label">Fecha de Realización:</label>
+                                                    <input type="date" class="form-control" name="fecha_realizacion" max="<?php echo date("Y-m-d"); ?>" id="fecha">
                                                 </div>
-                                            </div>
+
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
+                                                    <input type="number" class="form-control" name="num_horas" id="horas">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="message-text" class="col-form-label">Descripcion:</label>
+                                                    <input type="text" class="form-control" name="descripcion_actividad" id="descripcion">
+                                                </div>
+                                                <input type="hidden" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad'] ?>">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <button type="button" onclick="agregarActividad()" class="btn btn-primary">Agregar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!--End Modal-->
+                            <!--End Modal-->
 
-                    <!-- Data Table -->
+                            <!-- Data Table -->
 
 
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Descripcion</th>
-                                <th>Numero de Horas</th>
-                                <th>Estado</th>
-                                <th>Observaciones</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require_once '../../Controller/Actividad/Actividad_Controller.php';
-                            $id_estudiante = $_SESSION['id_estudiante'];
-                            $lista_actividad = listarActividadesPorEstudiante($id_estudiante);
-                            if (is_null($lista_actividad)) {
-                            ?>
-                                <td colspan="6" style="color: #D61117;">
-                                    <center><strong>NO POSEE ACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
-                                </td>
-                                <?php
-                            } else {
-
-                                foreach ($lista_actividad as $listado) {
-                                ?>
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
                                     <tr>
-                                        <td><?php echo $listado['fecha_actividad'] ?></td>
-                                        <td><?php echo $listado['descripcion_actividad'] ?></td>
-                                        <td><?php echo $listado['horas_actividad'] ?></td>
-                                        <td><?php echo $listado['estado_actividad'] ?></td>
-                                        <td><?php echo $listado['observaciones_actividad'] ?></td>
-                                        <td>
-                                        <?php
-                                            if($listado['estado_actividad'] == 'En Espera'){
-                                        ?>
-                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" 
-                                            data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" 
-                                            data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" 
-                                            data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                            <br>
-                                            <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad']?>)">Eliminar</button></center>
-                                        <?php 
-                                            } else if($listado['estado_actividad'] == 'Reprobada'){
-                                        ?>
-                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" 
-                                            data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" 
-                                            data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" 
-                                            data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                        <?php 
-                                            } else{
-                                        ?>
-                                            <center>----------</center>
-                                        <?php
-                                            } 
-                                        ?>
+                                        <td colspan="1">
+                                            <center><strong>Actividad:</strong></center>
+                                        </td>
+                                        <td colspan="5">
+                                            <center><strong><em><?php echo $info_actividad['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
                                         </td>
                                     </tr>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Descripcion</th>
-                                <th>Numero de Horas</th>
-                                <th>Estado</th>
-                                <th>Observaciones</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Descripcion</th>
+                                        <th>Numero de Horas</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                    $lista_actividad = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
+                                    if (is_null($lista_actividad)) {
+                                    ?>
+                                        <td colspan="6" style="color: #D61117;">
+                                            <center><strong>NO POSEE ACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
+                                        </td>
+                                        <?php
+                                    } else {
 
+                                        foreach ($lista_actividad as $listado) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $listado['fecha_actividad'] ?></td>
+                                                <td><?php echo $listado['descripcion_actividad'] ?></td>
+                                                <td><?php echo $listado['horas_actividad'] ?></td>
+                                                <td><?php echo $listado['estado_actividad'] ?></td>
+                                                <td><?php echo $listado['observaciones_actividad'] ?></td>
+                                                <td>
+                                                    <?php
+                                                    if ($listado['estado_actividad'] == 'En Espera') {
+                                                    ?>
+                                                        <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                        <br>
+                                                        <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
+                                                    <?php
+                                                    } else if ($listado['estado_actividad'] == 'Reprobada') {
+                                                    ?>
+                                                        <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <center>----------</center>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Descripcion</th>
+                                        <th>Numero de Horas</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
 
-
+                        <?php }
+                    } else { ?>
+                        <h2 style="color: #D61117; text-align: center;">Informacion Erronea</h2>
+                    <?php } ?>
                 </div>
 
             </div>
 
-           
+
 
             <!-- inicio modal Actualizar Actividad -->
 
@@ -305,7 +319,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <div class="modal-body">
                             <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
 
-                                
+
 
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Fecha:</label>
@@ -321,10 +335,10 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     <label for="message-text" class="col-form-label">Descripcion:</label>
                                     <input type="text" class="form-control descripcion_act" name="descripcion_actividad" id="descripcion_input">
                                 </div>
-                                
+
                                 <input type="hidden" class="form-control id_act" name="id_actividad" id="id_input">
-                                   
-                                
+                                <input type="hidden" class="form-control id_act" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad']; ?>">
+
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-center">
