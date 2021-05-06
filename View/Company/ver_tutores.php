@@ -65,6 +65,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="solicitud_practicante.php"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
+                        <a class="collapse-item" href="ver_estudiantes_plan_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
                     </div>
                 </div>
@@ -207,7 +208,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col text-center">
-                                                    <button type="button" onclick="agregarTutor()" class="btn btn-primary">Solicitar</button>
+                                                    <button type="button" onclick="agregarTutor()" class="btn btn-primary">Agregar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -285,7 +286,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header" style="background-color:#D61117;">
-                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Tutor</h3>
+                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar Tutor</h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

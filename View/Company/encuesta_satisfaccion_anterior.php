@@ -65,7 +65,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="solicitud_practicante.php"><i class="fas fa-plus"></i> Solicitud de Practicantes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
-                        <a class="collapse-item" href="ver_estudiantes_plan_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
                     </div>
                 </div>
@@ -82,7 +81,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="actualizar_perfil.php"><i class="fas fa-edit"></i> Actualizar Perfil</a>
                         <a class="collapse-item" href="cambiar_clave.php"><i class="fas fa-unlock"></i> Cambiar Clave</a>
-                        <a class="collapse-item" href="ver_tutores.php"><i class="fas fa-user-shield"></i> Ver Tutores</a>
                     </div>
                 </div>
             </li>
@@ -100,7 +98,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
                         <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
                         <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a>
-                        <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
                     </div>
                 </div>
             </li>
@@ -153,138 +150,40 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Tabla de estudiantes que serán evaluados -->
+                <!-- Encuesta de satisfaccion -->
+                <center>
+                    <h2>Encuesta de Satisfacción</h2>
+                </center>
 
-                <div class="container-fluid">
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Estudiantes a Evaluar</h1>
-                                <br>
-                            </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfmbjBxCtuUNexgzRvRKAXsgZCyreG1Yg9vBUko3Fwc-KgI0w/viewform?embedded=true" width="640" height="342" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                         </div>
                     </div>
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>Estudiante</center>
-                                </th>
-                                <th>
-                                    <center>Horas</center>
-                                </th>
-                                <th>
-                                    <center>Opciones</center>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php
-                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                            if (is_null($lista_de_estudiantes)) {
-                            ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
-                                </td>
-                                <?php
-                            } else {
-                                foreach ($lista_de_estudiantes as $estudiante) {
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                        </td>
-                                        <?php
-                                        require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                        $horas_estudiante = verHorasPorEstudiante($estudiante['id_estudiante']);
-                                        // $horas_estudiante = 320;
-                                        ?>
-                                        <td>
-                                            <center><?php echo $horas_estudiante; ?></center>
-                                        </td>
-                                        <td>
-                                            <?php if ($horas_estudiante >= 320) { ?>
-                                                <center><a class="btn btn-primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfmbjBxCtuUNexgzRvRKAXsgZCyreG1Yg9vBUko3Fwc-KgI0w/viewform?usp=sf_link">Completar Encuesta</a></center>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <center><strong>NO HA COMPLETADO LA TOTALIDAD DE HORAS</strong></center>
-                                        </td>
-                                    <?php
-                                            }
-                                    ?>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-            <!-- Fin de tabla -->
+            <!-- End of Page Wrapper -->
 
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-                <!-- Main Content -->
-                <div id="content">
-
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #9D9C9C;">
-
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
-                                    <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                    <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="../../index.php">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
-                                    </a>
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </nav>
-                    <!-- End of Topbar -->
-
-                </div>
-                <!-- End of Page Wrapper -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="login.html">Logout</a>
-                            </div>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -299,7 +198,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             </footer>
             <!-- End of Footer -->
         </div>
-    </div>
+
     </div>
 
 </body>

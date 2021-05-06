@@ -64,6 +64,25 @@ class ActividadPlanTabajoModel
         }
     }
 
+    // // Metodo que permite listar todas las actividades del plan de trabajo de un estudiante
+    // public function listarActividadesPlanTrabajoPorEstudiante($id_estudiante)
+    // {
+    //     $query = "SELECT id_actividad_plan_trabajo, descripcion_actividad_plan_trabajo, numero_horas_actividad_plan_trabajo, observacion, estado FROM actividades_plan_trabajo WHERE id_estudiante=:id";
+    //     $lista_actividades_plan_trabajo = NULL;
+    //     $stmt = $this->conexion->prepare($query);
+    //     $stmt->bindParam(":id", $id_estudiante);
+    //     if (!$stmt->execute()) {
+    //         $stmt->closeCursor();
+    //         return 0;
+    //     } else {
+    //         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    //             $lista_actividades_plan_trabajo[] = $result;
+    //         }
+    //         $stmt->closeCursor();
+    //         return $lista_actividades_plan_trabajo;
+    //     }
+    // }
+
     // Metodo que permite listar las actividades aprobadas del plan de trabajo de un estudiante
     public function listarActividadesPlanTrabajoPorEstudianteAprobadas($id_estudiante)
     {
@@ -101,4 +120,92 @@ class ActividadPlanTabajoModel
             return $datos_actividad;
         }
     }
+    
+
+    //Método para aprobar plan de trabajo de un estudiante
+    public function planTrabajoAprobado($id_estudiante)
+    {
+        $query = "UPDATE actividades_plan_trabajo SET estado='Aprobada' WHERE id_estudiante=:id_estudiante";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para reprobar el plan de trabajo de un estudiante
+    public function planTrabajoReprobado($id_estudiante, $observacion)
+    {
+        $query = "UPDATE actividades_plan_trabajo SET estado='Rechazada', observacion=:observacion WHERE id_estudiante=:id_estudiante";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        $stmt->bindParam(":observacion", $observacion);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Contar las actividades aprobadas del plan de trabajo para conocer su estado
+    public function contarPlanTrabajoAprobado($id_estudiante){
+        $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='Aprobada'";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        $cantidad_aprobadas = null;
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if (!is_null($result)) {
+                $cantidad_aprobadas = $result['cantidad'];
+            }
+            return $cantidad_aprobadas;
+        }
+    }
+
+    //Contar las actividades aprobadas del plan de trabajo para conocer su estado
+    public function contarPlanTrabajoRechazado($id_estudiante){
+        $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='Rechazada'";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        $cantidad_rechazado = null;
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if (!is_null($result)) {
+                $cantidad_rechazado = $result['cantidad'];
+            }
+            return $cantidad_rechazado;
+        }
+    }
+
+    public function contarPlanTrabajoEspera($id_estudiante){
+        $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='En Espera'";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_estudiante", $id_estudiante);
+        $cantidad_espera = null;
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if (!is_null($result)) {
+                $cantidad_espera = $result['cantidad'];
+            }
+            return $cantidad_espera;
+        }
+    }    
 }

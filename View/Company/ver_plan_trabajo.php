@@ -153,138 +153,144 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Tabla de estudiantes que serán evaluados -->
+                <center>
+                    <h2>Ver Plan de Trabajo</h2>
+                </center>
 
                 <div class="container-fluid">
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Estudiantes a Evaluar</h1>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>
-                                    <center>Estudiante</center>
+                                    <center>Actividad</center>
                                 </th>
                                 <th>
-                                    <center>Horas</center>
+                                    <center>Cantidad de Horas</center>
                                 </th>
-                                <th>
+                                <!-- <th>
                                     <center>Opciones</center>
-                                </th>
+                                </th> -->
                             </tr>
                         </thead>
                         <tbody>
 
                             <?php
-                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                            if (is_null($lista_de_estudiantes)) {
+                            require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                            $lista_de_actividades = listarActividadesPlanTrabajoPorEstudiante($_GET['id_estudiante']);
+                            $estado_aprobado = estado_plan_trabajo($_GET['id_estudiante']);
+                            $estado_rechazado = planTrabajoRechazado($_GET['id_estudiante']);
+                            
+                            if (is_null($lista_de_actividades)) {
                             ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
+                                <td colspan="2" style="color: #D61117;">
+                                    <center><strong>NO PRESENTA PLAN DE TRABAJO</strong></center>
                                 </td>
                                 <?php
                             } else {
-                                foreach ($lista_de_estudiantes as $estudiante) {
+                                foreach ($lista_de_actividades as $actividades) {
                                 ?>
                                     <tr>
                                         <td>
-                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                        </td>
-                                        <?php
-                                        require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                        $horas_estudiante = verHorasPorEstudiante($estudiante['id_estudiante']);
-                                        // $horas_estudiante = 320;
-                                        ?>
-                                        <td>
-                                            <center><?php echo $horas_estudiante; ?></center>
+                                            <center><?php echo $actividades['descripcion_actividad_plan_trabajo']; ?></center>
                                         </td>
                                         <td>
-                                            <?php if ($horas_estudiante >= 320) { ?>
-                                                <center><a class="btn btn-primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfmbjBxCtuUNexgzRvRKAXsgZCyreG1Yg9vBUko3Fwc-KgI0w/viewform?usp=sf_link">Completar Encuesta</a></center>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <center><strong>NO HA COMPLETADO LA TOTALIDAD DE HORAS</strong></center>
+                                            <center><?php echo $actividades['numero_horas_actividad_plan_trabajo']; ?></center>
                                         </td>
-                                    <?php
-                                            }
-                                    ?>
                                     </tr>
                             <?php }
                             } ?>
                         </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- Fin de tabla -->
 
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <?php if (!is_null($lista_de_actividades) && $estado_aprobado == 0 && $estado_rechazado == 0) {
+                                    ?>
+                                        <button type="button" onclick="validarPlanTrabajo(<?php echo $_GET['id_estudiante'] ?>)" class="btn btn-primary" data-toggle="modal" data-target="#">Validar Plan</button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rechazarPlan" data-actividad="<?php echo $_GET['id_estudiante'] ?>">Rechazar Plan</button>
+                                    <?php
+                                    } else if(!is_null($lista_de_actividades) && $estado_rechazado == 0) {
+                                    ?>
 
-                <!-- Main Content -->
-                <div id="content">
-
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #9D9C9C;">
-
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
-                                    <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                    <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="../../index.php">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
-                                    </a>
+                                        <div class="p-2" style="background-color: #3FA535;">
+                                            <center><strong class="text-white">Plan de Trabajo Aprobado</strong></center>
+                                        </div>
+                                        <br>
+                                    <?php
+                                    } else if(!is_null($lista_de_actividades) && $estado_aprobado == 0){
+                                    ?>
+                                        <div class="p-2 bg-danger">
+                                            <center><strong class="text-white">Plan de Trabajo Rechazado</strong></center>
+                                        </div>
+                                        <br>
+                                    <?php
+                                    } 
+                                    ?>
                                 </div>
-                            </li>
+                            </div>
+                        </div>
+                    </table>
 
-                        </ul>
-
-                    </nav>
-                    <!-- End of Topbar -->
 
                 </div>
-                <!-- End of Page Wrapper -->
 
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Inicio Modal Rechazar Plan de Trabajo del Estudiante -->
+                <div class="modal fade" id="rechazarPlan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
+                            <div class="modal-header" style="background-color:#D61117;">
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Rechazar Plan</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="login.html">Logout</a>
+                            <div class="modal-body">
+
+                                <form action="" method="POST">
+
+                                    <input type="hidden" class="form-control id_estudiante_act" name="id_estudiante" id="id_estudiante">
+
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Observaciones:</label>
+                                        <input type="text" class="form-control" name="observacion_plan" id="observacion_plan">
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <button type="button" onclick="rechazarPlanTrabajo(<?php echo $_GET['id_estudiante']?>)" class="btn btn-primary">Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal Agregar Tutor -->
+
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -299,7 +305,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             </footer>
             <!-- End of Footer -->
         </div>
-    </div>
+
     </div>
 
 </body>
@@ -309,10 +315,10 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
 <script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
@@ -320,5 +326,17 @@ if ($_SESSION['id_empresa'] == NULL) {
         $('#example').DataTable();
     });
 </script>
-
+<script>
+    $('#rechazarPlan').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        //var recipient = button.data('whatever')
+        var id = button.data('actividad') // Extract info from data-* attributes
+        
+        var modal = $(this)
+        //modal.find('.modal-title').text('Actividad: ' + fecha)
+        //modal.find('.modal-body input').val(num_horas)
+        modal.find('.id_estudiante_act').val(id)
+        
+    })
+</script>
 </html>

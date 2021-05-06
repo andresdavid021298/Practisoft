@@ -120,6 +120,52 @@ function actualizarDatos() {
     }
 }
 
+//Metodo para mostrar alerta cuando se valida el plan de trabajo del estudiante
+function validarPlanTrabajo(id_estudiante){
+    
+    $.ajax({
+        url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "validar_plan_trabajo",
+            "id_estudiante": id_estudiante
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location;
+        })
+    })
+}
+
+//Metodo para mostrar alerta cuando se rechaza el plan de trabajo del estudiante
+function rechazarPlanTrabajo(id_estudiante){
+    var observacion = document.getElementById('observacion_plan').value;
+    
+    $.ajax({
+        url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "rechazar_plan_trabajo",
+            "id_estudiante": id_estudiante,
+            "observacion": observacion
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location;
+        })
+    })
+}
+
 function agregarTutor() {
     var nombre = document.getElementById('nombre_tutor').value;
     var correo = document.getElementById('correo_tutor').value;
