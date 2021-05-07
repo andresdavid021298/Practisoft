@@ -252,7 +252,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                                     <div class="form-group">
                                         <label for="message-text" class="col-form-label">Estudiante:</label>
-                                        <input type="text" class="form-control nombre_est" name="nombre_estudiante" id="nombre_estudiante_tut">
+                                        <input type="text" class="form-control nombre_est" name="nombre_estudiante" id="nombre_estudiante_tut" readonly>
                                     </div>
 
                                     <input type="hidden" class="form-control id_est" name="id_estudiante" id="id_estudiante_tut">

@@ -141,37 +141,45 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <div class="col text-center">
                             <h2>Carta Compromisoria</h2>
                             <br>
-                            <img src="../../Img/letter.png" style="width: 100px; height: 100px;" />
                             <?php
-                            require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
-                            $id_estudiante = $_SESSION['id_estudiante'];
-                            $carta = mostrarDocumentoCartaCompromisoria($id_estudiante);
+                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                            $estudiante = buscarEstudiante($_SESSION['id_estudiante']);
+                            if (is_null($estudiante['id_empresa'])) {
                             ?>
-                            <form id="formConvenio" method="POST" enctype="multipart/form-data">
-                                <br><br>
+                                <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
+                            <?php } else { ?>
+                                <img src="../../Img/letter.png" style="width: 100px; height: 100px;" />
                                 <?php
-                                if ($carta == true) {
-                                    if ($carta['archivo_carta_compromisoria'] != NULL) {
+                                require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
+                                $id_estudiante = $_SESSION['id_estudiante'];
+                                $carta = mostrarDocumentoCartaCompromisoria($id_estudiante);
                                 ?>
-                                        <a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $carta['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                        <p><?php echo $carta['archivo_carta_compromisoria']; ?></p>
-                                <?php
+                                <form id="formConvenio" method="POST" enctype="multipart/form-data">
+                                    <br><br>
+                                    <?php
+                                    if ($carta == true) {
+                                        if ($carta['archivo_carta_compromisoria'] != NULL) {
+                                    ?>
+                                            <a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $carta['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                            <p><?php echo $carta['archivo_carta_compromisoria']; ?></p>
+                                    <?php
+                                        }
                                     }
-                                }
-                                ?>
-                                <div class="fileUpload btn">
-                                    <label>Archivo</label>
-                                    <input id="input_archivo_carta" type="file" name="input_archivo_carta" />
-                                </div>
-                                <button onclick="subirCartaCompromisoria();" id="btn_subir_carta" type="button" value="Enviar" name="btn_subir_carta" class="btn btn-primary">Cargar</button>
-                                <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
-                                <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                            </form>
-                            <div id="mensaje"></div>
-                            <br><br>
-                            <b>
-                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
-                            </b>
+                                    ?>
+                                    <div class="fileUpload btn">
+                                        <label>Archivo</label>
+                                        <input id="input_archivo_carta" type="file" name="input_archivo_carta" />
+                                    </div>
+                                    <button onclick="subirCartaCompromisoria();" id="btn_subir_carta" type="button" value="Enviar" name="btn_subir_carta" class="btn btn-primary">Cargar</button>
+                                    <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
+                                    <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                                </form>
+                                <div id="mensaje"></div>
+                                <br><br>
+                                <b>
+                                    <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                                </b>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -207,4 +215,5 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 </html>

@@ -1,10 +1,10 @@
-<?php
+<!-- <?php
 session_start();
 if ($_SESSION['id_empresa'] == NULL) {
 
     header("Location: ../../index.php");
 }
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,7 +139,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="../../index.php">
+                                <a class="dropdown-item" href="../../index.html">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
                                 </a>
                             </div>
@@ -150,18 +150,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Encuesta de satisfaccion -->
-                <center>
-                    <h2>Encuesta de Satisfacción</h2>
-                </center>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfmbjBxCtuUNexgzRvRKAXsgZCyreG1Yg9vBUko3Fwc-KgI0w/viewform?embedded=true" width="640" height="342" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- End of Page Wrapper -->
 

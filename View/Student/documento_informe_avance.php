@@ -141,37 +141,45 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <div class="col text-center">
                             <h2>Informe de Avance</h2>
                             <br>
-                            <img src="../../Img/informe.png" style="width: 100px; height: 100px;" />
                             <?php
-                            require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
-                            $id_estudiante = $_SESSION['id_estudiante'];
-                            $informe = mostrarDocumentoInformeDeAvance($id_estudiante);
+                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                            $estudiante = buscarEstudiante($_SESSION['id_estudiante']);
+                            if (is_null($estudiante['id_empresa'])) {
                             ?>
-                            <form id="formConvenio" method="POST" enctype="multipart/form-data">
-                                <br><br>
+                                <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
+                            <?php } else { ?>
+                                <img src="../../Img/informe.png" style="width: 100px; height: 100px;" />
                                 <?php
-                                if ($informe == true) {
-                                    if ($informe['archivo_informe_avance'] != NULL) {
+                                require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
+                                $id_estudiante = $_SESSION['id_estudiante'];
+                                $informe = mostrarDocumentoInformeDeAvance($id_estudiante);
                                 ?>
-                                        <a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informe['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                        <p><?php echo $informe['archivo_informe_avance']; ?></p>
-                                <?php
+                                <form id="formConvenio" method="POST" enctype="multipart/form-data">
+                                    <br><br>
+                                    <?php
+                                    if ($informe == true) {
+                                        if ($informe['archivo_informe_avance'] != NULL) {
+                                    ?>
+                                            <a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informe['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                            <p><?php echo $informe['archivo_informe_avance']; ?></p>
+                                    <?php
+                                        }
                                     }
-                                }
-                                ?>
-                                <div class="fileUpload btn">
-                                    <label>Archivo</label>
-                                    <input id="input_archivo_informe" type="file" name="input_archivo_informe" />
-                                </div>
-                                <button onclick="subirInformeAvance();" id="btn_subir_informe" type="button" value="Enviar" name="btn_subir_informe" class="btn btn-primary">Cargar</button>
-                                <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
-                                <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                            </form>
-                            <div id="mensaje"></div>
-                            <br><br>
-                            <b>
-                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
-                            </b>
+                                    ?>
+                                    <div class="fileUpload btn">
+                                        <label>Archivo</label>
+                                        <input id="input_archivo_informe" type="file" name="input_archivo_informe" />
+                                    </div>
+                                    <button onclick="subirInformeAvance();" id="btn_subir_informe" type="button" value="Enviar" name="btn_subir_informe" class="btn btn-primary">Cargar</button>
+                                    <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
+                                    <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                                </form>
+                                <div id="mensaje"></div>
+                                <br><br>
+                                <b>
+                                    <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                                </b>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -207,4 +215,5 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 </html>
