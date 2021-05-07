@@ -49,7 +49,6 @@ if (isset($_POST['accion'])) {
         $response = array();
         $id_estudiante = $_POST['id_estudiante'];
         $id_tutor = $_POST['id_tutor'];
-        $nombre_estudiante = $_POST['nombre_estudiante'];
 
         $obj_estudiante_model = new EstudianteModel();
         $rta = $obj_estudiante_model->vincularEstudianteConTutor($id_estudiante, $id_tutor);

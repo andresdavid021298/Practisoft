@@ -160,7 +160,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col text-center">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva Actividad</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva SubActividad</button>
                                         <button type="button" class="btn btn-primary">Descargar Registro</button><br><br>
                                         <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
                                         <b>
@@ -176,7 +176,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:#D61117;">
-                                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Actividad</h3>
+                                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar SubActividad</h3>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -311,7 +311,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#D61117;">
-                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar Actividad</h3>
+                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar SubActividad</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

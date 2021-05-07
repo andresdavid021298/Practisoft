@@ -64,7 +64,7 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Ocurrio un error";
         } else {
             $response['state'] = "success";
-            $response['title'] = "Actividad Agregada Correctamente";
+            $response['title'] = "SubActividad Agregada Correctamente";
         }
         echo json_encode($response);
     } else if ($_POST['accion'] == "actualizar_actividad") {
@@ -80,7 +80,7 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Ocurrio un error";
         } else {
             $response['state'] = "success";
-            $response['title'] = "Actividad Actualizada Correctamente";
+            $response['title'] = "SubActividad Actualizada Correctamente";
         }
         echo json_encode($response);
     } else if ($_POST['accion'] == "eliminar_actividad") {
@@ -93,7 +93,7 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Ocurrio un error";
         } else {
             $response['state'] = "success";
-            $response['title'] = "Actividad Eliminada Correctamente";
+            $response['title'] = "SubActividad Eliminada Correctamente";
         }
         echo json_encode($response);
     }
