@@ -329,12 +329,8 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script>
     $('#rechazarPlan').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        //var recipient = button.data('whatever')
         var id = button.data('actividad') // Extract info from data-* attributes
-        
         var modal = $(this)
-        //modal.find('.modal-title').text('Actividad: ' + fecha)
-        //modal.find('.modal-body input').val(num_horas)
         modal.find('.id_estudiante_act').val(id)
         
     })

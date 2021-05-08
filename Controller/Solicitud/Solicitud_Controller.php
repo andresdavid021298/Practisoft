@@ -19,6 +19,37 @@ if (isset($_POST['accion'])) {
         }
         echo json_encode($response);
     }
+    else if($_POST['accion'] == 'validar_solicitud'){
+        $id_solicitud = $_POST['id_solicitud'];
+        $solicitud = new SolicitudModel();
+        $rta = $solicitud->cambiarSolicitudAprobada($id_solicitud);
+        if($rta == 0){
+            $response['title'] = "Error al validar la solicitud";
+            $response['state'] = "error";
+            $response['location'] = "revision_solicitudes.php";
+        } else {
+            $response['title'] = "Solicitud agregada correctamente";
+            $response['state'] = "success";
+            $response['location'] = "revision_solicitudes.php";
+        }
+        echo json_encode($response);
+    }
+    else if($_POST['accion'] == 'rechazar_solicitud'){
+        $id_solicitud = $_POST['id_solicitud'];
+        $observacion = $_POST['observacion'];
+        $solicitud = new SolicitudModel();
+        $rta = $solicitud->cambiarSolicitudRechazada($id_solicitud, $observacion);
+        if($rta == 0){
+            $response['title'] = "Error al rechazar la solicitud";
+            $response['state'] = "error";
+            $response['location'] = "revision_solicitudes.php";
+        } else {
+            $response['title'] = "Solicitud rechazada correctamente";
+            $response['state'] = "success";
+            $response['location'] = "revision_solicitudes.php";
+        }
+        echo json_encode($response);
+    }
 }
 
 // Metodo que conecta con la vista para enviar los datos de las solicitudes de una empresa
@@ -39,4 +70,10 @@ function cantidadSolicitudesEnEspera($id_empresa)
 {
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->cantidadSolicitudesEnEsperaPorEmpresa($id_empresa);
+}
+
+// Metodo que conecta con la vista para enviar las solicitudes recibidas por parte de las empresas
+function listaSolicitudEmpresas(){
+    $obj_solicitud_model = new SolicitudModel();
+    return $obj_solicitud_model->listarSolicitudes();
 }

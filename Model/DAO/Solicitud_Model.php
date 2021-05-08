@@ -51,10 +51,16 @@ class SolicitudModel
         }
     }
 
-    // Metodo que devuelve un listado con todas las solicitudes
+    // Metodo que devuelve un listado con todas las solicitudes con informacion de la empresa y los documentos
     public function listarSolicitudes()
     {
-        $query = "SELECT id_empresa, numero_practicantes, funciones, observaciones_solicitud, estado_solicitud FROM solicitud";
+        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+                  d.archivo_cc_representante, d.archivo_certificado_existencia 
+                  FROM solicitud AS s
+                  INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
+                  LEFT JOIN documentos_empresa AS d ON e.id_empresa = d.id_empresa
+                  LEFT JOIN convenio c ON e.id_empresa = c.id_empresa
+                  ORDER BY s.estado_solicitud";
         $lista_solicitud = NULL;
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {
@@ -143,6 +149,37 @@ class SolicitudModel
             $stmt->closeCursor();
             return 0;
         } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para validar la solicitud de una empresa
+    public function cambiarSolicitudAprobada($id_solicitud){
+        $query = "UPDATE solicitud SET estado_solicitud = 'Aprobada', observaciones_solicitud = NULL WHERE id_solicitud=:id_solicitud";
+        $stmt  = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_solicitud", $id_solicitud);
+
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        } else{
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para rechazar la solicitud de una empresa
+    public function cambiarSolicitudRechazada($id_solicitud, $observaciones){
+        $query = "UPDATE solicitud SET estado_solicitud = 'Rechazada', observaciones_solicitud =:observaciones WHERE id_solicitud=:id_solicitud";
+        $stmt  = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_solicitud", $id_solicitud);
+        $stmt->bindParam(":observaciones", $observaciones);
+
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        } else{
             $stmt->closeCursor();
             return 1;
         }
