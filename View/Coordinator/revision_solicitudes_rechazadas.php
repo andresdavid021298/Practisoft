@@ -154,7 +154,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Revision de Solicitudes</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Revision de Solicitudes Rechazadas</h1>
                                 <br>
                             </div>
                         </div>
@@ -189,7 +189,6 @@
                                     <th>CC Representante</th>
                                     <th>Doc Certificado Existencia</th>
                                     <th>RUT</th>
-                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -198,7 +197,7 @@
                                 require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
                                 require_once '../../Controller/Convenio/Convenio_Controller.php';
 
-                                $solicitudes = listaSolicitudEmpresas();
+                                $solicitudes = listaSolicitudEmpresasRechazadas();
 
                                 if (is_null($solicitudes)) {
                                 ?>
@@ -282,27 +281,6 @@
                                                 }
                                                 ?>
                                             </td>
-
-                                            <td>
-
-                                                <?php if ($solicitud['estado_solicitud'] == 'En Espera') {
-
-                                                ?>
-                                                    <center style="margin-top: 15px;"> <button class="btn btn-primary" onclick="validarSolicitud(<?php echo $solicitud['id_solicitud'] ?>)">Validar</button></center><br>
-
-                                                    <center><button class="btn btn-danger" data-toggle="modal" data-target="#modalRechazarSolicitud" data-solicitud="<?php echo $solicitud['id_solicitud'] ?>" data-empresa="<?php echo $solicitud['nombre_empresa'] ?>"> Rechazar</button></center>
-                                                <?php
-                                                } else if ($solicitud['estado_solicitud'] == 'Aprobada') {
-                                                ?>
-                                                    <p style="color: green;">Aprobada</p>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <p style="color: red;">Rechazada</p>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
                                         </tr>
                                 <?php
                                     }
@@ -319,7 +297,6 @@
                                     <th>CC Representante</th>
                                     <th>Doc Certificado Existencia</th>
                                     <th>RUT</th>
-                                    <th>Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -404,6 +381,7 @@
                 </div>
             </footer>
             <!-- End of Footer -->
+
         </div>
 
 </body>

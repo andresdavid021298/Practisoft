@@ -72,8 +72,20 @@ function cantidadSolicitudesEnEspera($id_empresa)
     return $obj_solicitud_model->cantidadSolicitudesEnEsperaPorEmpresa($id_empresa);
 }
 
-// Metodo que conecta con la vista para enviar las solicitudes recibidas por parte de las empresas
+// Metodo que conecta con la vista para enviar las solicitudes En Espera recibidas por parte de las empresas
 function listaSolicitudEmpresas(){
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->listarSolicitudes();
+}
+
+// Metodo que conecta con la vista para enviar las solicitudes Aprobadas recibidas por parte de las empresas
+function listaSolicitudEmpresasAprobadas(){
+    $obj_solicitud_model = new SolicitudModel();
+    return $obj_solicitud_model->listarSolicitudesAprobadas();
+}
+
+// Metodo que conecta con la vista para enviar las solicitudes Rechazadas recibidas por parte de las empresas
+function listaSolicitudEmpresasRechazadas(){
+    $obj_solicitud_model = new SolicitudModel();
+    return $obj_solicitud_model->listarSolicitudesRechazadas();
 }

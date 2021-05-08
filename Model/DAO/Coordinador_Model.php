@@ -33,18 +33,18 @@ class CoordinadorModel
     }
 
     //Metodo para actualizar Coordinador
-    public function actualizarCoordinador($id_coordinador, $correo_coordinador, $celular_coordinador)
-    {
-        $query = "UPDATE coordinador SET correo_coordinador=:correo, celular_coordinador=:celular WHERE id_coordinador=:id";
+    public function actualizarCoordinador($id_coordinador, $codigo_coordinador, $celular_coordinador){
+        $query = "UPDATE coordinador SET codigo_coordinador=:codigo, celular_coordinador=:celular WHERE id_coordinador=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_coordinador);
-        $stmt->bindParam(":correo", $correo_coordinador);
+        $stmt->bindParam(":codigo", $codigo_coordinador);
         $stmt->bindParam(":celular", $celular_coordinador);
 
-        if (!$stmt->execute()) {
+        if(!$stmt->execute()){
             $stmt->closeCursor();
             return 0;
-        } else {
+        }
+        else{
             $stmt->closeCursor();
             return 1;
         }
@@ -101,6 +101,28 @@ class CoordinadorModel
             }
             $stmt->closeCursor();
             return $coordinador;
+        }
+    }
+
+    // Metodo para buscar coordinador
+    public function buscarCoordinador($id_coordinador){
+        $query = "SELECT nombre_coordinador, correo_coordinador, codigo_coordinador, celular_coordinador
+                  FROM coordinador 
+                  WHERE id_coordinador =:id_coordinador";
+        $informacion = NULL;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_coordinador", $id_coordinador);
+
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        }
+        else{
+            if ($stmt->rowCount() > 0) {
+                $informacion= $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            $stmt->closeCursor();
+            return $informacion;
         }
     }
 }

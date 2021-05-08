@@ -44,3 +44,30 @@ function rechazarSolicitud() {
             })
         })
 }
+
+//Metodo para actualizar datos de coordinador
+function actualizarPerfil(){
+    var id_coordinador= document.getElementById('id_coordinador').value;
+    var codigo_coordinador = document.getElementById('input_codigo').value;
+    var celular_coordinador = document.getElementById('input_celular').value;
+    
+    $.ajax({
+        url: "../../Controller/Coordinador/Coodinador_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "actualizar_perfil",
+            "id_coordinador": id_coordinador,
+            "codigo_coordinador": codigo_coordinador,
+            "celular_coordinador":celular_coordinador
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location;
+        })
+    })
+}

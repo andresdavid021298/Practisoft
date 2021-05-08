@@ -51,7 +51,7 @@ class SolicitudModel
         }
     }
 
-    // Metodo que devuelve un listado con todas las solicitudes con informacion de la empresa y los documentos
+    // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado EN ESPERA con informacion de la empresa y los documentos
     public function listarSolicitudes()
     {
         $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
@@ -60,7 +60,55 @@ class SolicitudModel
                   INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
                   LEFT JOIN documentos_empresa AS d ON e.id_empresa = d.id_empresa
                   LEFT JOIN convenio c ON e.id_empresa = c.id_empresa
-                  ORDER BY s.estado_solicitud";
+                  WHERE s.estado_solicitud = 'En Espera'";
+        $lista_solicitud = NULL;
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_solicitud[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_solicitud;
+        }
+    }
+
+    // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado APROBADA con informacion de la empresa y los documentos
+    public function listarSolicitudesAprobadas()
+    {
+        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+                  d.archivo_cc_representante, d.archivo_certificado_existencia 
+                  FROM solicitud AS s
+                  INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
+                  LEFT JOIN documentos_empresa AS d ON e.id_empresa = d.id_empresa
+                  LEFT JOIN convenio c ON e.id_empresa = c.id_empresa
+                  WHERE s.estado_solicitud = 'Aprobada'";
+        $lista_solicitud = NULL;
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_solicitud[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_solicitud;
+        }
+    }
+
+    // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado EN ESPERA con informacion de la empresa y los documentos
+    public function listarSolicitudesRechazadas()
+    {
+        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+                  d.archivo_cc_representante, d.archivo_certificado_existencia 
+                  FROM solicitud AS s
+                  INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
+                  LEFT JOIN documentos_empresa AS d ON e.id_empresa = d.id_empresa
+                  LEFT JOIN convenio c ON e.id_empresa = c.id_empresa
+                  WHERE s.estado_solicitud = 'Rechazada'";
         $lista_solicitud = NULL;
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {
