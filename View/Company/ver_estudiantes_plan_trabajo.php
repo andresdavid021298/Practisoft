@@ -157,49 +157,51 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <h2>Ver Plan de Trabajo</h2>
                 </center>
                 <div class="container-fluid">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>Estudiante</center>
-                                </th>
-                                <th>
-                                    <center>Correo</center>
-                                </th>
-                                <th>
-                                    <center>Opciones</center>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <center>Estudiante</center>
+                                    </th>
+                                    <th>
+                                        <center>Correo</center>
+                                    </th>
+                                    <th>
+                                        <center>Opciones</center>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php
-                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                            if (is_null($lista_de_estudiantes)) {
-                            ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
-                                </td>
                                 <?php
-                            } else {
-                                foreach ($lista_de_estudiantes as $estudiante) {
+                                require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                                $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
+                                if (is_null($lista_de_estudiantes)) {
                                 ?>
-                                    <tr>
-                                        <td>
-                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $estudiante['correo_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><a class="btn btn-primary" href="ver_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver</a></center>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
+                                    <td colspan="4" style="color: #D61117;">
+                                        <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
+                                    foreach ($lista_de_estudiantes as $estudiante) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $estudiante['correo_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><a class="btn btn-primary" href="ver_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver</a></center>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>

@@ -284,57 +284,54 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                     <!-- Data Table -->
 
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
 
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                        <thead>
-                            <tr>
-                                <th>Numero de Practicantes</th>
-                                <th>Area</th>
-                                <th>Observaciones</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require_once '../../Controller/Solicitud/Solicitud_Controller.php';
-                            $id_empresa = $_SESSION['id_empresa'];
-                            $datos_solicitud = mostrarInformacion($id_empresa);
-                            if (is_null($datos_solicitud)) {
-                            ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO POSEE SOLICITUDES DE PRACTICANTES EN EL SISTEMA</strong></center>
-                                </td>
+                            <thead>
+                                <tr>
+                                    <th>Numero de Practicantes</th>
+                                    <th>Area</th>
+                                    <th>Observaciones</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                            } else {
-
-                                foreach ($datos_solicitud as $datos) {
+                                require_once '../../Controller/Solicitud/Solicitud_Controller.php';
+                                $id_empresa = $_SESSION['id_empresa'];
+                                $datos_solicitud = mostrarInformacion($id_empresa);
+                                if (is_null($datos_solicitud)) {
                                 ?>
-                                    <tr>
-                                        <td><?php echo $datos['numero_practicantes'] ?></td>
-                                        <td><?php echo $datos['funciones'] ?></td>
-                                        <td><?php echo $datos['observaciones_solicitud'] ?></td>
-                                        <td><?php echo $datos['estado_solicitud'] ?></td>
-                                    </tr>
-                            <?php
+                                    <td colspan="4" style="color: #D61117;">
+                                        <center><strong>NO POSEE SOLICITUDES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
+
+                                    foreach ($datos_solicitud as $datos) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $datos['numero_practicantes'] ?></td>
+                                            <td><?php echo $datos['funciones'] ?></td>
+                                            <td><?php echo $datos['observaciones_solicitud'] ?></td>
+                                            <td><?php echo $datos['estado_solicitud'] ?></td>
+                                        </tr>
+                                <?php
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Numero de Practicantes</th>
-                                <th>Area</th>
-                                <th>Observaciones</th>
-                                <th>Estado</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-
-
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Numero de Practicantes</th>
+                                    <th>Area</th>
+                                    <th>Observaciones</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-
             </div>
             <!-- End of Page Wrapper -->
 

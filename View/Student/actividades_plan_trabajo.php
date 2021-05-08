@@ -155,31 +155,34 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <?php
                         } else { ?>
                             <div class="col text-center">
-                            <?php require_once '../../Controller/Actividad/Actividad_Controller.php';
-                            $suma_horas_totales= verHorasPorEstudiante($_SESSION['id_estudiante']);
-                            ?>
-                                <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales;?> / 320</h5>
+                                <?php require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                $suma_horas_totales = verHorasPorEstudiante($_SESSION['id_estudiante']);
+                                ?>
+                                <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
                             </div>
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Descripcion Actividad</th>
-                                        <th>Numero de Horas Establecidas</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($lista_actividades as $actividad) {
-                                    ?>
+
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
                                         <tr>
-                                            <td><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
-                                            <td><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
-                                            <td><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
+                                            <th>Descripcion Actividad</th>
+                                            <th>Numero de Horas Establecidas</th>
+                                            <th>Opciones</th>
                                         </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($lista_actividades as $actividad) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
+                                                <td><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
+                                                <td><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                     <?php }
                     } ?>
                 </div>

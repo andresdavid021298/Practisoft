@@ -180,59 +180,61 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <h4>Numero de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
                     </center>
                     <div class="container-fluid">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <center>Descripcion</center>
-                                    </th>
-                                    <th>
-                                        <center>Horas Definidas</center>
-                                    </th>
-                                    <th>
-                                        <center>Horas Cumplidas</center>
-                                    </th>
-                                    <th>
-                                        <center>Opciones</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="table-responsive">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <center>Descripcion</center>
+                                        </th>
+                                        <th>
+                                            <center>Horas Definidas</center>
+                                        </th>
+                                        <th>
+                                            <center>Horas Cumplidas</center>
+                                        </th>
+                                        <th>
+                                            <center>Opciones</center>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                <?php
-                                require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
-                                $actividades_plan_trabajo = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
-                                if (is_null($actividades_plan_trabajo)) {
-                                ?>
-                                    <td colspan="4" style="color: #D61117;">
-                                        <center><strong>NO SE HA VALIDADO EL PLAN DE TRABAJO DE ESTE ESTUDIANTE</strong></center>
-                                    </td>
                                     <?php
-                                } else {
-                                    foreach ($actividades_plan_trabajo as $actividad) {
+                                    require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                                    $actividades_plan_trabajo = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
+                                    if (is_null($actividades_plan_trabajo)) {
                                     ?>
-                                        <tr>
-                                            <td>
-                                                <center><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></center>
-                                            </td>
-                                            <?php
-                                            require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                            $horas_estudiante = sumarHorasPorActividadPlanTrabajo($actividad['id_actividad_plan_trabajo']);
-                                            ?>
-                                            <td>
-                                                <center><?php echo $horas_estudiante; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades</a></center>
-                                            </td>
-                                        </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                        </table>
+                                        <td colspan="4" style="color: #D61117;">
+                                            <center><strong>NO SE HA VALIDADO EL PLAN DE TRABAJO DE ESTE ESTUDIANTE</strong></center>
+                                        </td>
+                                        <?php
+                                    } else {
+                                        foreach ($actividades_plan_trabajo as $actividad) {
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <center><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></center>
+                                                </td>
+                                                <?php
+                                                require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                                $horas_estudiante = sumarHorasPorActividadPlanTrabajo($actividad['id_actividad_plan_trabajo']);
+                                                ?>
+                                                <td>
+                                                    <center><?php echo $horas_estudiante; ?></center>
+                                                </td>
+                                                <td>
+                                                    <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades</a></center>
+                                                </td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 <?php } ?>
             </div>

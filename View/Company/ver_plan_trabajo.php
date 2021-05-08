@@ -158,79 +158,80 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </center>
 
                 <div class="container-fluid">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>Actividad</center>
-                                </th>
-                                <th>
-                                    <center>Cantidad de Horas</center>
-                                </th>
-                                <!-- <th>
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <center>Actividad</center>
+                                    </th>
+                                    <th>
+                                        <center>Cantidad de Horas</center>
+                                    </th>
+                                    <!-- <th>
                                     <center>Opciones</center>
                                 </th> -->
-                            </tr>
-                        </thead>
-                        <tbody>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php
-                            require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
-                            $lista_de_actividades = listarActividadesPlanTrabajoPorEstudiante($_GET['id_estudiante']);
-                            $estado_aprobado = estado_plan_trabajo($_GET['id_estudiante']);
-                            $estado_rechazado = planTrabajoRechazado($_GET['id_estudiante']);
-                            
-                            if (is_null($lista_de_actividades)) {
-                            ?>
-                                <td colspan="2" style="color: #D61117;">
-                                    <center><strong>NO PRESENTA PLAN DE TRABAJO</strong></center>
-                                </td>
                                 <?php
-                            } else {
-                                foreach ($lista_de_actividades as $actividades) {
+                                require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                                $lista_de_actividades = listarActividadesPlanTrabajoPorEstudiante($_GET['id_estudiante']);
+                                $estado_aprobado = estado_plan_trabajo($_GET['id_estudiante']);
+                                $estado_rechazado = planTrabajoRechazado($_GET['id_estudiante']);
+
+                                if (is_null($lista_de_actividades)) {
                                 ?>
-                                    <tr>
-                                        <td>
-                                            <center><?php echo $actividades['descripcion_actividad_plan_trabajo']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $actividades['numero_horas_actividad_plan_trabajo']; ?></center>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
+                                    <td colspan="2" style="color: #D61117;">
+                                        <center><strong>NO PRESENTA PLAN DE TRABAJO</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
+                                    foreach ($lista_de_actividades as $actividades) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <center><?php echo $actividades['descripcion_actividad_plan_trabajo']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $actividades['numero_horas_actividad_plan_trabajo']; ?></center>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <?php if (!is_null($lista_de_actividades) && $estado_aprobado == 0 && $estado_rechazado == 0) {
-                                    ?>
-                                        <button type="button" onclick="validarPlanTrabajo(<?php echo $_GET['id_estudiante'] ?>)" class="btn btn-primary" data-toggle="modal" data-target="#">Validar Plan</button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rechazarPlan" data-actividad="<?php echo $_GET['id_estudiante'] ?>">Rechazar Plan</button>
-                                    <?php
-                                    } else if(!is_null($lista_de_actividades) && $estado_rechazado == 0) {
-                                    ?>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <?php if (!is_null($lista_de_actividades) && $estado_aprobado == 0 && $estado_rechazado == 0) {
+                                        ?>
+                                            <button type="button" onclick="validarPlanTrabajo(<?php echo $_GET['id_estudiante'] ?>)" class="btn btn-primary" data-toggle="modal" data-target="#">Validar Plan</button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rechazarPlan" data-actividad="<?php echo $_GET['id_estudiante'] ?>">Rechazar Plan</button>
+                                        <?php
+                                        } else if (!is_null($lista_de_actividades) && $estado_rechazado == 0) {
+                                        ?>
 
-                                        <div class="p-2" style="background-color: #3FA535;">
-                                            <center><strong class="text-white">Plan de Trabajo Aprobado</strong></center>
-                                        </div>
-                                        <br>
-                                    <?php
-                                    } else if(!is_null($lista_de_actividades) && $estado_aprobado == 0){
-                                    ?>
-                                        <div class="p-2 bg-danger">
-                                            <center><strong class="text-white">Plan de Trabajo Rechazado</strong></center>
-                                        </div>
-                                        <br>
-                                    <?php
-                                    } 
-                                    ?>
+                                            <div class="p-2" style="background-color: #3FA535;">
+                                                <center><strong class="text-white">Plan de Trabajo Aprobado</strong></center>
+                                            </div>
+                                            <br>
+                                        <?php
+                                        } else if (!is_null($lista_de_actividades) && $estado_aprobado == 0) {
+                                        ?>
+                                            <div class="p-2 bg-danger">
+                                                <center><strong class="text-white">Plan de Trabajo Rechazado</strong></center>
+                                            </div>
+                                            <br>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </table>
-
+                        </table>
+                    </div>
 
                 </div>
 
@@ -258,7 +259,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <div class="container">
                                         <div class="row">
                                             <div class="col text-center">
-                                                <button type="button" onclick="rechazarPlanTrabajo(<?php echo $_GET['id_estudiante']?>)" class="btn btn-primary">Agregar</button>
+                                                <button type="button" onclick="rechazarPlanTrabajo(<?php echo $_GET['id_estudiante'] ?>)" class="btn btn-primary">Agregar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -332,7 +333,8 @@ if ($_SESSION['id_empresa'] == NULL) {
         var id = button.data('actividad') // Extract info from data-* attributes
         var modal = $(this)
         modal.find('.id_estudiante_act').val(id)
-        
+
     })
 </script>
+
 </html>

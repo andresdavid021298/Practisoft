@@ -203,7 +203,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <input type="text" class="form-control" name="celularTutor" id="celular_tutor">
                                         </div>
 
-                                        
+
                                         <input type="hidden" name="id_empresa" id="id_empresa" value="<?php echo $_SESSION['id_empresa'] ?>">
                                         <div class="container">
                                             <div class="row">
@@ -220,112 +220,108 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <!-- Fin Modal Agregar Tutor -->
 
                     <!-- Inicio Tabla Tutores -->
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
 
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Celular</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require_once '../../Controller/Tutor/Tutor_Controller.php';
-                            $id_empresa = $_SESSION['id_empresa'];
-                            $datos_tutor = mostrarDatosTutorEmpresa($id_empresa);
-                            if (is_null($datos_tutor)) {
-                            ?>
-                                <td colspan="4" style="color: #D61117;">
-                                    <center><strong>NO POSEE TUTORES DE PRACTICANTES EN EL SISTEMA</strong></center>
-                                </td>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Celular</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                            } else {
-
-                                foreach ($datos_tutor as $datos) {
+                                require_once '../../Controller/Tutor/Tutor_Controller.php';
+                                $id_empresa = $_SESSION['id_empresa'];
+                                $datos_tutor = mostrarDatosTutorEmpresa($id_empresa);
+                                if (is_null($datos_tutor)) {
                                 ?>
-                                    <tr>
-                                        <td><?php echo $datos['nombre_tutor'] ?></td>
-                                        <td><?php echo $datos['correo_tutor'] ?></td>
-                                        <td><?php echo $datos['celular_tutor'] ?></td>
-                                        <td>
+                                    <td colspan="4" style="color: #D61117;">
+                                        <center><strong>NO POSEE TUTORES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
 
-                                            <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" 
-                                            data-nombre="<?php echo $datos['nombre_tutor']; ?>" 
-                                            data-correo="<?php echo $datos['correo_tutor']; ?>"
-                                            data-celular="<?php echo $datos['celular_tutor']; ?>"
-                                            data-tutor="<?php echo $datos['id_tutor']; ?>"
-                                            >Actualizar</button></center><br>
-                                            
-                                            <center><button class="btn btn-danger" onclick="eliminarTutor(<?php echo $datos['id_tutor'];?>)"> Eliminar</button></center>
-                                            
-                                        </td>
-                                    </tr>
-                            <?php
+                                    foreach ($datos_tutor as $datos) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $datos['nombre_tutor'] ?></td>
+                                            <td><?php echo $datos['correo_tutor'] ?></td>
+                                            <td><?php echo $datos['celular_tutor'] ?></td>
+                                            <td>
+
+                                                <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" data-nombre="<?php echo $datos['nombre_tutor']; ?>" data-correo="<?php echo $datos['correo_tutor']; ?>" data-celular="<?php echo $datos['celular_tutor']; ?>" data-tutor="<?php echo $datos['id_tutor']; ?>">Actualizar</button></center><br>
+
+                                                <center><button class="btn btn-danger" onclick="eliminarTutor(<?php echo $datos['id_tutor']; ?>)"> Eliminar</button></center>
+
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Celular</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Celular</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Fin de tabla tutores -->
 
                 <!-- Inicio Modal Actualizar Tutor -->
                 <div class="modal fade" id="modalActualizarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background-color:#D61117;">
-                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar Tutor</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#D61117;">
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar Tutor</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-                                    <form action="../../Controller/Tutor/Tutor_Controller.php" method="POST">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Nombre de Tutor:</label>
-                                            <input type="text" class="form-control nombre_tut" name="nombreTutor" id="nombre_tutor_act">
-                                        </div>
+                                <form action="../../Controller/Tutor/Tutor_Controller.php" method="POST">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Nombre de Tutor:</label>
+                                        <input type="text" class="form-control nombre_tut" name="nombreTutor" id="nombre_tutor_act">
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Correo:</label>
-                                            <input type="text" class="form-control correo_tut" name="correoTutor" id="correo_tutor_act">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Correo:</label>
+                                        <input type="text" class="form-control correo_tut" name="correoTutor" id="correo_tutor_act">
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Celular:</label>
-                                            <input type="text" class="form-control celular_tut" name="celularTutor" id="celular_tutor_act">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Celular:</label>
+                                        <input type="text" class="form-control celular_tut" name="celularTutor" id="celular_tutor_act">
+                                    </div>
 
-                                        <input type="hidden" class="form-control id_tut" name="id_tutor" id="id_tutor_act">
-                                        
-                                        <input type="hidden" name="id_empresa" id="id_empresa_act" value="<?php echo $_SESSION['id_empresa'] ?>">
-                                        
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col text-center">
-                                                    <button type="button" onclick="actualizarTutor()" class="btn btn-primary">Actualizar</button>
-                                                </div>
+                                    <input type="hidden" class="form-control id_tut" name="id_tutor" id="id_tutor_act">
+
+                                    <input type="hidden" name="id_empresa" id="id_empresa_act" value="<?php echo $_SESSION['id_empresa'] ?>">
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <button type="button" onclick="actualizarTutor()" class="btn btn-primary">Actualizar</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <!-- Fin Modal Agregar Tutor -->
+                </div>
+                <!-- Fin Modal Agregar Tutor -->
 
             </div>
             <!-- End of Page Wrapper -->
