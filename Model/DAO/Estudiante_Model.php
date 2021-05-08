@@ -167,7 +167,7 @@ class EstudianteModel
             return 0;
         } else {
             if ($stmt->rowCount() > 0) {
-                $informacion= $stmt->fetch(PDO::FETCH_ASSOC);
+                $informacion = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             $stmt->closeCursor();
             return $informacion;
@@ -185,7 +185,9 @@ class EstudianteModel
             $stmt->closeCursor();
             return 0;
         } else {
-            $datos = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt->rowCount() > 0) {
+                $datos = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
             $stmt->closeCursor();
             return $datos;
         }

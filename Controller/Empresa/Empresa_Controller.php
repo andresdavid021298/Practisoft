@@ -124,7 +124,7 @@ if (isset($_POST['accion'])) {
                 $oMail->Password = "practisoftufps2021@";
                 $oMail->setFrom("practisoftufps@gmail.com");
                 $oMail->addAddress($correo_empresa);
-                $oMail->Subject = '['.'Reestablecimiento de Clave'.']'.' - ['.' PractiSoft UFPS'.'] - ['.$result['nombre_empresa'].']';
+                $oMail->Subject = '[' . 'Reestablecimiento de Clave' . ']' . ' - [' . ' PractiSoft UFPS' . '] - [' . $result['nombre_empresa'] . ']';
                 $oMail->msgHTML($head);
                 $response['title'] = "Solicitud recibida. Por favor revisa tu correo.";
                 $response['state'] = "success";
@@ -175,12 +175,20 @@ if (isset($_POST['accion'])) {
 // Metodo que conecta con la vista para enviar los datos de la empresa que trae desde modelo Empresa
 function mostrarDatos($id_empresa)
 {
-    $empresa = new EmpresaModel();
-    return $empresa->mostrarDatos($id_empresa);
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->mostrarDatos($id_empresa);
 }
 
+// Metodo que conecta con la vista para enviar los datos de la empresa a signada a un estudiante
 function mostrarEmpresaAsignadaEstudiante($id_estudiante)
 {
-    $empresa = new EmpresaModel();
-    return $empresa->verEmpresaAsignadaEstudiante($id_estudiante);
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verEmpresaAsignadaEstudiante($id_estudiante);
+}
+
+// Metodo que conecta con la vista para enviar la lista de empresas que hay registradas en el sistema
+function listarTodasLasEmpresas()
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->listarEmpresas();
 }

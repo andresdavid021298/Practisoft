@@ -161,76 +161,78 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <h2>Ver Practicantes</h2>
                 </center>
                 <div class="container-fluid">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <center>Nombre</center>
-                                </th>
-                                <th>
-                                    <center>Correo Institucional</center>
-                                </th>
-                                <th>
-                                    <center>Codigo</center>
-                                </th>
-                                <th>
-                                    <center>Celular</center>
-                                </th>
-                                <th>
-                                    <center>Tutor</center>
-                                </th>
-                                <th>
-                                    <center>Asignar Tutor</center>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-responsive">
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <center>Nombre</center>
+                                    </th>
+                                    <th>
+                                        <center>Correo Institucional</center>
+                                    </th>
+                                    <th>
+                                        <center>Codigo</center>
+                                    </th>
+                                    <th>
+                                        <center>Celular</center>
+                                    </th>
+                                    <th>
+                                        <center>Tutor</center>
+                                    </th>
+                                    <th>
+                                        <center>Asignar Tutor</center>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php
-                            require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                            $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                            if (is_null($lista_de_estudiantes)) {
-                            ?>
-                                <td colspan="6" style="color: #D61117;">
-                                    <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
-                                </td>
                                 <?php
-                            } else {
-                                foreach ($lista_de_estudiantes as $estudiante) {
+                                require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                                $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
+                                if (is_null($lista_de_estudiantes)) {
                                 ?>
-                                    <tr>
-                                        <td>
-                                            <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $estudiante['correo_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $estudiante['codigo_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $estudiante['celular_estudiante']; ?></center>
-                                        </td>
-                                        <td>
-                                            <center><?php echo $estudiante['nombre_tutor']; ?></center>
-                                        </td>
-                                        <td>
-                                            <?php if ($estudiante['id_tutor'] == NULL) {
-                                            ?>
-                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor</button></center>
+                                    <td colspan="6" style="color: #D61117;">
+                                        <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
+                                    </td>
+                                    <?php
+                                } else {
+                                    foreach ($lista_de_estudiantes as $estudiante) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $estudiante['correo_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $estudiante['codigo_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $estudiante['celular_estudiante']; ?></center>
+                                            </td>
+                                            <td>
+                                                <center><?php echo $estudiante['nombre_tutor']; ?></center>
+                                            </td>
+                                            <td>
+                                                <?php if ($estudiante['id_tutor'] == NULL) {
+                                                ?>
+                                                    <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor</button></center>
 
-                                            <?php } else {
-                                            ?>
-                                                <center><label>Tutor Asignado</label></center>
-                                            <?php } ?>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-                    </table>
+                                                <?php } else {
+                                                ?>
+                                                    <center><label>Tutor Asignado</label></center>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <!-- inicio modal Actualizar Actividad -->
+                <!-- inicio modal Asignar Tutor-->
 
 
                 <div class="modal fade" id="modalAsignarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -313,10 +315,8 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
 <script src="../../js/Company/alertas_empresa.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

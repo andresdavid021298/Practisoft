@@ -1,6 +1,7 @@
 <?php
 
 require_once '../../Model/DAO/Estudiante_Model.php';
+require_once '../../Model/DAO/Coordinador_Model.php';
 // require_once '../../Model/DAO/Coordinador_Model.php';
 // require_once '../../Model/DAO/Director_Model.php';
 require_once '../../vendor/autoload.php';
@@ -35,15 +36,24 @@ if (isset($_GET['code'])) {
         echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
     } else {
         $estudiante = new EstudianteModel();
-        $rta = $estudiante->verificarExistenciaEstudiante($email);
-        if ($rta == NULL) {
-            echo '<script type="text/javascript">alert("Usuario no registrado con este correo");</script>';
-            echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
-        } else {
+        $rta_estudiante = $estudiante->verificarExistenciaEstudiante($email);
+        if (!is_null($rta_estudiante)) {
             session_start();
-            $_SESSION['id_estudiante'] = $rta['id_estudiante'];
-            $_SESSION['nombre_estudiante'] = $rta['nombre_estudiante'];
+            $_SESSION['id_estudiante'] = $rta_estudiante['id_estudiante'];
+            $_SESSION['nombre_estudiante'] = $rta_estudiante['nombre_estudiante'];
             echo '<script type="text/javascript">window.location.href="../../View/Student/index_student.php"</script>';
+        } else {
+            $coordinador = new CoordinadorModel();
+            $rta_coordinador = $coordinador->buscarCoordinadorPorCorreo($email);
+            if (!is_null($rta_coordinador)) {
+                session_start();
+                $_SESSION['id_coordinador'] = $rta_coordinador['id_coordinador'];
+                $_SESSION['nombre_coordinador'] = $rta_coordinador['nombre_coordinador'];
+                echo '<script type="text/javascript">window.location.href="../../View/Coordinator/index_coordinator.php"</script>';
+            } else {
+                echo '<script type="text/javascript">alert("Usuario no registrado con este correo");</script>';
+                echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
+            }
         }
     }
 }

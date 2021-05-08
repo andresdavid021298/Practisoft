@@ -1,18 +1,21 @@
 <?php
 
-include_once "../Config/db._config.php";
+require_once "../../Config/db._config.php";
 
-class CoordinadorModel{
+class CoordinadorModel
+{
 
     //Atributo ppara manejar la conexion con la base de datos
     private $conexion;
 
-    public function __construct() {
-        $this->conexion=Conexion::conectar();
+    public function __construct()
+    {
+        $this->conexion = Conexion::conectar();
     }
 
     //Metodo para Insertar Coordinador
-    public function insertarCoordinador($nombre_coordinador, $correo_coordinador, $codigo_coordinador, $celular_coordinador){
+    public function insertarCoordinador($nombre_coordinador, $correo_coordinador, $codigo_coordinador, $celular_coordinador)
+    {
         $query = "INSERT INTO coordinador VALUES(NULL, :nombre_coordinador, :correo_coordinador, :codigo_coordinador, :celular_coordinador)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre_coordinador", $nombre_coordinador);
@@ -20,29 +23,28 @@ class CoordinadorModel{
         $stmt->bindParam(":codigo_coordinador", $codigo_coordinador);
         $stmt->bindParam(":celular_coordinador", $celular_coordinador);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        }
-        else{
+        } else {
             $stmt->closeCursor();
             return 1;
         }
     }
 
     //Metodo para actualizar Coordinador
-    public function actualizarCoordinador($id_coordinador, $correo_coordinador, $celular_coordinador){
+    public function actualizarCoordinador($id_coordinador, $correo_coordinador, $celular_coordinador)
+    {
         $query = "UPDATE coordinador SET correo_coordinador=:correo, celular_coordinador=:celular WHERE id_coordinador=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_coordinador);
         $stmt->bindParam(":correo", $correo_coordinador);
         $stmt->bindParam(":celular", $celular_coordinador);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        }
-        else{
+        } else {
             $stmt->closeCursor();
             return 1;
         }
@@ -53,7 +55,7 @@ class CoordinadorModel{
     {
         $query = "SELECT id_coordinador, nombre_coordinador, correo_coordinador, codigo_coordinador, celular_coordinador FROM coordinador";
         $lista_coordinador = NULL;
-        
+
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
@@ -68,22 +70,37 @@ class CoordinadorModel{
     }
 
     // Metodo para eliminar Coordinador
-    public function eliminarCoordinador($id_coordinador){
+    public function eliminarCoordinador($id_coordinador)
+    {
         $query = "DELETE FROM coordinador WHERE id_coordinador = :id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_coordinador);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        }
-        else{
+        } else {
             $stmt->closeCursor();
             return 1;
         }
     }
 
- 
-
+    // Metodo para buscar un coordinador por su correo electronico
+    public function buscarCoordinadorPorCorreo($correo_coordinador)
+    {
+        $query = "SELECT id_coordinador, nombre_coordinador FROM coordinador WHERE correo_coordinador = :correo";
+        $coordinador = NULL;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":correo", $correo_coordinador);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            if ($stmt->rowCount() > 0) {
+                $coordinador = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            $stmt->closeCursor();
+            return $coordinador;
+        }
+    }
 }
-

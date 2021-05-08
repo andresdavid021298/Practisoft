@@ -142,89 +142,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-                <center>
-                    <h2>Ver Empresas</h2>
-                </center>
-                <div class="table-responsive">
-                    <div class="container-fluid">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <center>Nombre</center>
-                                    </th>
-                                    <th>
-                                        <center>Representante Legal</center>
-                                    </th>
-                                    <th>
-                                        <center>Direccion</center>
-                                    </th>
-                                    <th>
-                                        <center>Celular</center>
-                                    </th>
-                                    <th>
-                                        <center>Correo</center>
-                                    </th>
-                                    <th>
-                                        <center>Sector</center>
-                                    </th>
-                                    <th>
-                                        <center>Convenio</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                require_once '../../Controller/Empresa/Empresa_Controller.php';
-                                $lista_empresas = listarTodasLasEmpresas();
-                                if (is_null($lista_empresas)) {
-                                ?><tr>
-                                        <td colspan="8" style="color: #D61117;">
-                                            <center><strong>NO HAY EMPRESAS REGISTRADAS EN EL SISTEMA</strong></center>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                } else {
-                                    foreach ($lista_empresas as $empresa) {
-                                    ?>
-                                        <tr>
-                                            <td>
-                                                <center><?php echo $empresa['nombre_empresa']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $empresa['representante_legal']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $empresa['direccion_empresa']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $empresa['celular_empresa']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $empresa['correo_empresa']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $empresa['sector_empresa']; ?></center>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($empresa['fecha_inicio'] == NULL && $empresa['fecha_expiracion'] == NULL) {
-                                                ?>
-                                                    <center>NO PRESENTA CONVENIO</center>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <center><strong>Inicio:</strong> <?php echo $empresa['fecha_inicio']; ?><strong> / Expiracion:</strong> <?php echo $empresa['fecha_expiracion']; ?></center>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
-                                        </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
+
+                <div>
+                
                 </div>
             </div>
             <!-- End of Page Wrapper -->
@@ -248,10 +168,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
     </div>
 
 </body>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
+<script src="../../js/eventos.js"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
