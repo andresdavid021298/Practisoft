@@ -1,6 +1,6 @@
 <!-- <?php
 session_start();
-$_SESSION['id_coordinador']=1;
+$_SESSION['id_coordinador']=4;
 if ($_SESSION['id_coordinador'] == NULL) {
 
     header("Location: ../../index.php");
@@ -128,7 +128,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
+                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b></b></span>
                                 <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
                                 <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
                             </a>
@@ -145,8 +145,55 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <div>
-                
+                <div class="container-fluid">
+                    <center>
+                        <h2>Mi Perfil</h2>
+                    </center>
+                    <br>
+                    <?php
+
+                    require_once "../../Controller/Coordinador/Coodinador_Controller.php";
+                    $datos_coordinador = buscarCoordinador($_SESSION['id_coordinador']);
+                    ?>
+                    <form method="POST" action="../../Controller/Coordinador/Coodinador_Controller.php">
+                        <div class="container">
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <center><label for="Nombre">Nombre</label></center>
+                                    <input type="text" class="form-control" id="input_nombre" value="<?php echo $datos_coordinador['nombre_coordinador']; ?>" disabled>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <center><label for="Correo">Correo</label></center>
+                                    <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_coordinador['correo_coordinador']; ?>" disabled>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <center><label for="Codigo">Codigo</label>
+                                        <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_coordinador['codigo_coordinador']; ?>" placeholder="Digite su codigo">
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <center><label for="Celular">Celular</label></center>
+                                    <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_coordinador['celular_coordinador']; ?>" placeholder="Digite su celular">
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="id_coordinador" value="<?php echo $_SESSION['id_coordinador']?>">
+
+                            <br><br>
+                            <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                            <div class="col text-center">
+                                <button onclick="actualizarPerfil();" id="btn_editar_perfil" type="button" name="btn_editar_perfil" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
@@ -174,18 +221,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 
 </html>
