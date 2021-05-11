@@ -67,7 +67,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
                         <a class="collapse-item" href="actividades_plan_trabajo.php"><i class="fas fa-tasks"></i> Mis Actividades </a>
-                        <a class="collapse-item" href="#"><i class="fas fa-clone"></i> Informes </a>
+                        <a class="collapse-item" href="documento_informe_avance.php"><i class="fas fa-clone"></i> Informe de Avance </a>
                     </div>
                 </div>
             </li>
@@ -143,6 +143,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <?php
                     require_once "../../Controller/Empresa/Empresa_Controller.php";
                     $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                    $id_estudiante = $_SESSION['id_estudiante'];
                     if (is_null($info_empresa)) {
                     ?>
                         <center><strong style="color:#D61117">NO TIENE EMPRESA ASIGNADA</strong></center>
@@ -160,7 +161,16 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 ?>
                                 <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
                             </div>
-
+                            <div>
+                                <center>
+                                    <form action="informe_actividades.php" method="post">
+                                        <div>
+                                            <input value="Ver" type="submit" id="submit" name="import" class="btn btn-primary">
+                                            <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
+                                        </div>
+                                    </form>
+                                </center>
+                            </div>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
@@ -225,5 +235,10 @@ if ($_SESSION['id_estudiante'] == NULL) {
         $('#example').DataTable();
     });
 </script>
+<!-- <script>
+function ventanaNueva(){
+   window.open('informe_actividades.php');
+}
+</script> -->
 
 </html>

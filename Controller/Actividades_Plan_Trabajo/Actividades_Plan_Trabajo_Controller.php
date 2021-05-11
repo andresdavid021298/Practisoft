@@ -35,6 +35,11 @@ function planTrabajoEspera($id_estudiante){
     return $obj_actividad_plan_trabajo->contarPlanTrabajoEspera($id_estudiante);
 }
 
+function generarEncabezadoInformeDeActividades($id_estudiante){
+    $obj_actividad_plan_trabajo = new ActividadPlanTabajoModel();
+    return $obj_actividad_plan_trabajo->generarEncabezadoInformeDeActividades($id_estudiante);
+}
+
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "insertar_actividad_plan_trabajo") {
         $id_estudiante = $_POST['id_estudiante'];

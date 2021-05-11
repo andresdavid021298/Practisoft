@@ -64,25 +64,6 @@ class ActividadPlanTabajoModel
         }
     }
 
-    // // Metodo que permite listar todas las actividades del plan de trabajo de un estudiante
-    // public function listarActividadesPlanTrabajoPorEstudiante($id_estudiante)
-    // {
-    //     $query = "SELECT id_actividad_plan_trabajo, descripcion_actividad_plan_trabajo, numero_horas_actividad_plan_trabajo, observacion, estado FROM actividades_plan_trabajo WHERE id_estudiante=:id";
-    //     $lista_actividades_plan_trabajo = NULL;
-    //     $stmt = $this->conexion->prepare($query);
-    //     $stmt->bindParam(":id", $id_estudiante);
-    //     if (!$stmt->execute()) {
-    //         $stmt->closeCursor();
-    //         return 0;
-    //     } else {
-    //         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    //             $lista_actividades_plan_trabajo[] = $result;
-    //         }
-    //         $stmt->closeCursor();
-    //         return $lista_actividades_plan_trabajo;
-    //     }
-    // }
-
     // Metodo que permite listar las actividades aprobadas del plan de trabajo de un estudiante
     public function listarActividadesPlanTrabajoPorEstudianteAprobadas($id_estudiante)
     {
@@ -120,7 +101,7 @@ class ActividadPlanTabajoModel
             return $datos_actividad;
         }
     }
-    
+
 
     //Método para aprobar plan de trabajo de un estudiante
     public function planTrabajoAprobado($id_estudiante)
@@ -154,7 +135,8 @@ class ActividadPlanTabajoModel
     }
 
     //Contar las actividades aprobadas del plan de trabajo para conocer su estado
-    public function contarPlanTrabajoAprobado($id_estudiante){
+    public function contarPlanTrabajoAprobado($id_estudiante)
+    {
         $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='Aprobada'";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
@@ -173,7 +155,8 @@ class ActividadPlanTabajoModel
     }
 
     //Contar las actividades aprobadas del plan de trabajo para conocer su estado
-    public function contarPlanTrabajoRechazado($id_estudiante){
+    public function contarPlanTrabajoRechazado($id_estudiante)
+    {
         $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='Rechazada'";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
@@ -191,7 +174,8 @@ class ActividadPlanTabajoModel
         }
     }
 
-    public function contarPlanTrabajoEspera($id_estudiante){
+    public function contarPlanTrabajoEspera($id_estudiante)
+    {
         $query = "SELECT COUNT(*) AS cantidad FROM actividades_plan_trabajo WHERE id_estudiante=:id_estudiante AND estado='En Espera'";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_estudiante", $id_estudiante);
@@ -207,5 +191,31 @@ class ActividadPlanTabajoModel
             }
             return $cantidad_espera;
         }
-    }    
+    }
+
+    //Método para generar el encabezado del informe de actividades
+    public function generarEncabezadoInformeDeActividades($id_estudiante)
+    {
+        $lista_actividades = NULL;
+        $query = "SELECT a.id_actividad, a.fecha_actividad, a.descripcion_actividad, a.horas_actividad, a.estado_actividad,
+                         a.observaciones_actividad, apt.descripcion_actividad_plan_trabajo, e.nombre_estudiante, e.codigo_estudiante,
+                         em.nombre_empresa, t.nombre_tutor
+                  FROM actividad a
+                  RIGHT JOIN actividades_plan_trabajo apt ON a.id_actividad_plan_trabajo = apt.id_actividad_plan_trabajo
+                  RIGHT JOIN estudiante e ON apt.id_estudiante = e.id_estudiante
+                  LEFT JOIN empresa em ON e.id_empresa = em.id_empresa
+                  LEFT JOIN tutor t ON e.id_tutor = t.id_tutor
+                  WHERE e.id_estudiante=:id ORDER BY estado_actividad";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_estudiante);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $lista_actividades = $result;
+            $stmt->closeCursor();
+            return $lista_actividades;
+        }
+    }
 }
