@@ -28,6 +28,8 @@ session_destroy();
                     <div class="card-body">
                         <center><img src="Img/logo_ingsistemas.png" width="350px" height="120px"></center>
                         <h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5>
+                        <center><em>Ingresa con tus credenciales</em></center>
+                        <br>
                         <form class="form-signin">
                             <div class="form-label-group">
                                 <input type="email" id="inputEmail" class="form-control" placeholder="Correo Electronico" required autofocus>
