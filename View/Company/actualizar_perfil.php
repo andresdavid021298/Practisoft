@@ -49,7 +49,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" style="text-align: center;" href="index_company.php">
-                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
+                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
             <!-- Divider -->
@@ -140,9 +140,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
+                                <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -228,9 +227,21 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Contacto</span>
+                                            <span class="input-group-text" id="basic-addon1">Numero de Celular de la Empresa</span>
                                         </div>
                                         <input id="inputContacto" name="input_celular" value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Numero Telefonico de la Empresa</span>
+                                        </div>
+                                        <input id="inputTelefono" name="input_telefono" value="<?php echo $datos['telefono_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">Pagina Web</span>
+                                        </div>
+                                        <input id="inputPaginaWeb" name="input_pagina_web" value="<?php echo $datos['web_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                                 <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">

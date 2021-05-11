@@ -4,16 +4,18 @@ function alertaRegistro() {
     var representante_legal = document.getElementById("inputRepresentanteLegal").value;
     var NIT = document.getElementById("inputNIT").value;
     var direccion_empresa = document.getElementById("inputDireccion").value;
+    var web_empresa = document.getElementById("inputPaginaWeb").value;
     var municipio = document.getElementById("selectMunicipio").value;
     var correo_empresa = document.getElementById("inputCorreo").value;
     var celular_empresa = document.getElementById("inputContacto").value;
+    var telefono_empresa = document.getElementById("inputTelefono").value;
     var sector_empresa = document.getElementById("selectSector").value;
     var clave_empresa = document.getElementById("inputClave1").value;
     var clave_empresa2 = document.getElementById("inputClave2").value;
     if ((nombre_empresa == "") || (representante_legal == "") || (NIT == "") || (direccion_empresa == "") || (correo_empresa == "") || (celular_empresa == "") || (clave_empresa == "") || (clave_empresa2 == "")) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -28,7 +30,9 @@ function alertaRegistro() {
                     "direccion_empresa": direccion_empresa,
                     "municipio": municipio,
                     "correo_empresa": correo_empresa,
+                    "pagina_web_empresa": web_empresa,
                     "celular_empresa": celular_empresa,
+                    "telefono_empresa": telefono_empresa,
                     "sector_empresa": sector_empresa,
                     "clave_empresa": clave_empresa
 
@@ -53,7 +57,7 @@ function alertaLogin() {
     if ((email == "") || (password == "")) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -86,11 +90,13 @@ function actualizarDatos() {
     var inputDireccion = document.getElementById("inputDireccion").value;
     var selectMunicipio = document.getElementById("select_municipio").value;
     var inputCorreo = document.getElementById("inputCorreo").value;
+    var inputPaginaWeb = document.getElementById("inputPaginaWeb").value;
     var inputContacto = document.getElementById("inputContacto").value;
+    var inputTelefono = document.getElementById("inputTelefono").value;
     if ((inputRepresentante == "") || (inputDireccion == "") || (selectMunicipio == "") || (inputCorreo == "") || (inputContacto == "")) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -104,6 +110,8 @@ function actualizarDatos() {
                     "municipio": selectMunicipio,
                     "correo": inputCorreo,
                     "contacto": inputContacto,
+                    "telefono": inputTelefono,
+                    "pagina_web": inputPaginaWeb
                 },
                 dataType: "JSON"
             })
@@ -173,7 +181,7 @@ function agregarTutor() {
     if (nombre == "" || correo == "" || celular == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -209,7 +217,7 @@ function actualizarTutor() {
     if (nombre == "" || correo == "" || celular == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -352,7 +360,7 @@ function agregarSolicitud() {
     if (practicantes == "" || areasSeleccionadas == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -385,7 +393,7 @@ function cambiarClave() {
     if ((clave_empresa == "") || (clave_empresa2 == "")) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -463,7 +471,7 @@ function subirConvenio() {
     if ((fechaInicio == "") || (fechaExpiracion == "") || (inputArchivo == "")) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         //El boton de la vista debe ser tipo button
@@ -498,7 +506,7 @@ function subirProtocolos() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_empresa', idEmpresa);
@@ -532,7 +540,7 @@ function subirRepresentante() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_empresa', idEmpresa);
@@ -566,7 +574,7 @@ function subirCertificado() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_empresa', idEmpresa);
@@ -600,7 +608,7 @@ function subirRUT() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_empresa', idEmpresa);
@@ -630,7 +638,7 @@ function recuperarClaveEmail() {
     if (inputCorreo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -662,7 +670,7 @@ function restablecerClave() {
     if (inputClave1 == "" || inputClave2 == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({

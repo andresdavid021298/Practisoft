@@ -15,9 +15,9 @@ class EmpresaModel
     }
 
     // Metodo que inserta una nueva empresa
-    public function insertarEmpresa($nombre_empresa, $representante, $nit, $direccion, $municipio, $correo, $celular, $sector, $clave)
+    public function insertarEmpresa($nombre_empresa, $representante, $nit, $direccion, $municipio, $correo, $pagina_web,$celular,$telefono, $sector, $clave)
     {
-        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,nit_empresa,direccion_empresa,municipio_empresa,correo_empresa,celular_empresa,sector_empresa,clave_empresa) VALUES(:nombre,:representante,:nit,:direccion,:municipio,:correo,:celular,:sector,:clave)";
+        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,nit_empresa,direccion_empresa,municipio_empresa,correo_empresa,web_empresa,celular_empresa,telefono_empresa,sector_empresa,clave_empresa) VALUES(:nombre,:representante,:nit,:direccion,:municipio,:correo,:pagina_web,:celular,:telefono,:sector,:clave)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre", $nombre_empresa);
         $stmt->bindParam(":representante", $representante);
@@ -25,7 +25,9 @@ class EmpresaModel
         $stmt->bindParam(":direccion", $direccion);
         $stmt->bindParam(":municipio", $municipio);
         $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":pagina_web", $pagina_web);
         $stmt->bindParam(":celular", $celular);
+        $stmt->bindParam(":telefono", $telefono);
         $stmt->bindParam(":sector", $sector);
         $stmt->bindParam(":clave", $clave);
         if (!$stmt->execute()) {
@@ -38,10 +40,10 @@ class EmpresaModel
     }
 
     // Metodo que actualiza una empresa
-    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $correo, $celular)
+    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $correo, $pagina_web,$celular,$telefono)
     {
         $query = "UPDATE empresa SET representante_legal=:representante, direccion_empresa=:direccion, municipio_empresa=:municipio,
-                  correo_empresa=:correo, celular_empresa=:celular WHERE id_empresa=:id";
+                  correo_empresa=:correo, celular_empresa=:celular,telefono_empresa=:telefono,web_empresa=:pagina_web WHERE id_empresa=:id";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_empresa);
         $stmt->bindParam(":representante", $representante_legal);
@@ -49,6 +51,8 @@ class EmpresaModel
         $stmt->bindParam(":municipio", $municipio);
         $stmt->bindParam(":correo", $correo);
         $stmt->bindParam(":celular", $celular);
+        $stmt->bindParam(":telefono", $telefono);
+        $stmt->bindParam(":pagina_web", $pagina_web);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
@@ -134,7 +138,7 @@ class EmpresaModel
     {
         $datos_empresa = NULL;
         $query = "SELECT nombre_empresa, nit_empresa, representante_legal, direccion_empresa, municipio_empresa,
-                  correo_empresa, celular_empresa, sector_empresa, actividad_empresa
+                  correo_empresa,web_empresa, celular_empresa,telefono_empresa, sector_empresa, actividad_empresa
                   FROM empresa WHERE id_empresa=:id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);

@@ -22,12 +22,14 @@ if (isset($_POST['accion'])) {
         $direccion_empresa = $_POST['direccion_empresa'];
         $municipio_empresa = $_POST['municipio'];
         $correo_empresa = $_POST['correo_empresa'];
+        $pagina_web_empresa = $_POST['pagina_web_empresa'];
         $celular_empresa = $_POST['celular_empresa'];
+        $telefono_empresa = $_POST['telefono_empresa'];
         $sector_empresa = $_POST['sector_empresa'];
         $clave_empresa = $_POST['clave_empresa'];
         $clave_codificada = password_hash($clave_empresa, PASSWORD_DEFAULT);
         $obj_empresa_model = new EmpresaModel();
-        $rta = $obj_empresa_model->insertarEmpresa($nombre_empresa, $representante_legal, $NIT, $direccion_empresa, $municipio_empresa, $correo_empresa, $celular_empresa, $sector_empresa, $clave_codificada);
+        $rta = $obj_empresa_model->insertarEmpresa($nombre_empresa, $representante_legal, $NIT, $direccion_empresa, $municipio_empresa, $correo_empresa, $pagina_web_empresa, $celular_empresa, $telefono_empresa, $sector_empresa, $clave_codificada);
         if ($rta == 0) {
             $response['title'] = "Ocurrio un error";
             $response['state'] = "error";
@@ -69,8 +71,10 @@ if (isset($_POST['accion'])) {
         $municipio_empresa = $_POST['municipio'];
         $correo_empresa = $_POST['correo'];
         $celular_empresa = $_POST['contacto'];
+        $telefono_empresa = $_POST['telefono'];
+        $pagina_web = $_POST['pagina_web'];
         $empresa = new EmpresaModel();
-        $rta = $empresa->actualizarEmpresa($id_empresa, $representante_legal, $direccion_empresa, $municipio_empresa, $correo_empresa, $celular_empresa);
+        $rta = $empresa->actualizarEmpresa($id_empresa, $representante_legal, $direccion_empresa, $municipio_empresa, $correo_empresa, $pagina_web, $celular_empresa, $telefono_empresa);
         if ($rta == 0) {
             $response['title'] = "Error al editar los datos";
             $response['state'] = "error";
@@ -106,13 +110,14 @@ if (isset($_POST['accion'])) {
         $token = bin2hex(random_bytes(8));
         $empresa = new EmpresaModel();
         $result = $empresa->mostrarIdYNombreEmpresa($correo_empresa);
+        $servidor = $_SERVER['SERVER_NAME'];
 
         if ($result != NULL) {
             $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
             <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
             <h3 style='text-align: center;'><strong>Mensaje de recuperacion de clave</strong></h3>
             <p><b>" . $result['nombre_empresa'] . "</b>, recuerda que tienes una hora para restablecer tu contraseña antes de que caduque el link.</p>
-            <p>Para reestablecer tu contraseña, da click <a href='http://localhost/Practisoft/View/Company/Recuperar_clave_email.php?id_empresa=" . $result['id_empresa'] . "&token=" . $token . "'>aquí.</a></p>";
+            <p>Para reestablecer tu contraseña, da click <a href='" . $servidor . "/Practisoft/View/Company/Recuperar_clave_email.php?id_empresa=" . $result['id_empresa'] . "&token=" . $token . "'>aquí.</a></p>";
             try {
                 $oMail = new PHPMailer();
                 $oMail->isSMTP();
