@@ -161,7 +161,18 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="row">
                                     <div class="col text-center">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva SubActividad</button>
-                                        <button type="button" class="btn btn-primary">Descargar Registro</button><br><br>
+                                        <!-- <button type="button" class="btn btn-primary">Descargar Registro</button><br><br> -->
+                                        <div style="display: inline-block;">
+                                            <center>
+                                                <form action="crear_informe_subactividades.php" method="post">
+                                                    <div>
+                                                        <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                                                        <input name="id_actividad" type="hidden" value="<?php echo $_GET['id_actividad']; ?>">
+                                                    </div>
+                                                </form>
+                                            </center>
+                                        </div>
+                                        <br><br>
                                         <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
                                         <b>
                                             <h5>Total de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $info_actividad['numero_horas_actividad_plan_trabajo'] ?></h5>
@@ -215,89 +226,91 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                             <!-- Data Table -->
 
-
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <td colspan="1">
-                                            <center><strong>Actividad:</strong></center>
-                                        </td>
-                                        <td colspan="5">
-                                            <center><strong><em><?php echo $info_actividad['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <thead>
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>Descripcion</th>
-                                        <th>Numero de Horas</th>
-                                        <th>Estado</th>
-                                        <th>Observaciones</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                    $lista_actividad = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
-                                    if (is_null($lista_actividad)) {
-                                    ?>
-                                        <td colspan="6" style="color: #D61117;">
-                                            <center><strong>NO POSEE ACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
-                                        </td>
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="1">
+                                                <center><strong>Actividad:</strong></center>
+                                            </td>
+                                            <td colspan="5">
+                                                <center><strong><em><?php echo $info_actividad['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Descripcion</th>
+                                            <th>Numero de Horas</th>
+                                            <th>Estado</th>
+                                            <th>Observaciones</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
-                                    } else {
-
-                                        foreach ($lista_actividad as $listado) {
+                                        require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                        $lista_actividad = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
+                                        if (is_null($lista_actividad)) {
                                         ?>
-                                            <tr>
-                                                <td><?php echo $listado['fecha_actividad'] ?></td>
-                                                <td><?php echo $listado['descripcion_actividad'] ?></td>
-                                                <td><?php echo $listado['horas_actividad'] ?></td>
-                                                <td><?php echo $listado['estado_actividad'] ?></td>
-                                                <td><?php echo $listado['observaciones_actividad'] ?></td>
-                                                <td>
-                                                    <?php
-                                                    if ($listado['estado_actividad'] == 'En Espera') {
-                                                    ?>
-                                                        <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                                        <br>
-                                                        <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
-                                                    <?php
-                                                    } else if ($listado['estado_actividad'] == 'Reprobada') {
-                                                    ?>
-                                                        <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <center>----------</center>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </td>
-                                            </tr>
-                                    <?php
+                                            <td colspan="6" style="color: #D61117;">
+                                                <center><strong>NO POSEE ACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
+                                            </td>
+                                            <?php
+                                        } else {
+
+                                            foreach ($lista_actividad as $listado) {
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo $listado['fecha_actividad'] ?></td>
+                                                    <td><?php echo $listado['descripcion_actividad'] ?></td>
+                                                    <td><?php echo $listado['horas_actividad'] ?></td>
+                                                    <td><?php echo $listado['estado_actividad'] ?></td>
+                                                    <td><?php echo $listado['observaciones_actividad'] ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($listado['estado_actividad'] == 'En Espera') {
+                                                        ?>
+                                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                            <br>
+                                                            <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
+                                                        <?php
+                                                        } else if ($listado['estado_actividad'] == 'Reprobada') {
+                                                        ?>
+                                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <center>----------</center>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                        <?php
+                                            }
                                         }
-                                    }
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Fecha</th>
-                                        <th>Descripcion</th>
-                                        <th>Numero de Horas</th>
-                                        <th>Estado</th>
-                                        <th>Observaciones</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                        ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Descripcion</th>
+                                            <th>Numero de Horas</th>
+                                            <th>Estado</th>
+                                            <th>Observaciones</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
 
                         <?php }
                     } else { ?>
                         <h2 style="color: #D61117; text-align: center;">Informacion Erronea</h2>
                     <?php } ?>
+
                 </div>
 
             </div>
