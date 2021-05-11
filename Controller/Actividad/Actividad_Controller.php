@@ -23,6 +23,27 @@ function sumarHorasPorActividadPlanTrabajo($id_actividad_plan_trabajo)
     return $obj_actividad_model->sumarHorasPorActividadPlanTrabajo($id_actividad_plan_trabajo);
 }
 
+// Metodo que conecta con el modelo para generar el informe de subactividades
+function generarInformeDeSubactividades($id_actividad_plan_trabajo)
+{
+    $obj_actividad_model = new ActividadModel();
+    return $obj_actividad_model->generarInformeDeSubactividades($id_actividad_plan_trabajo);
+}
+
+// Metodo que conecta con el modelo para generar el encabezado del informe de subactividades
+function generarEncabezadoInformeDeSubactividades($id_actividad_plan_trabajo)
+{
+    $obj_actividad_model = new ActividadModel();
+    return $obj_actividad_model->generarEncabezadoInformeDeSubactividades($id_actividad_plan_trabajo);
+}
+
+// Metodo que conecta con el modelo para generar el encabezado del informe de subactividades
+function cantidadDeSubactividadesPorActividad($id_actividad_plan_trabajo)
+{
+    $obj_actividad_model = new ActividadModel();
+    return $obj_actividad_model->cantidadDeSubactividadesPorActividad($id_actividad_plan_trabajo);
+}
+
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "validar_actividad") {
         $response = array();
