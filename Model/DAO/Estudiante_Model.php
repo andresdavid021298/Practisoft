@@ -96,7 +96,7 @@ class EstudianteModel
     // Meotodo que permite listar la informacion de todos los estudiantes
     public function listarEstudiantes()
     {
-        $query = "SELECT es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, 
+        $query = "SELECT es.id_estudiante,es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, 
                   em.nombre_empresa AS nombre_empresa, t.nombre_tutor AS nombre_tutor
                   FROM estudiante AS es LEFT JOIN empresa AS em ON es.id_empresa=em.id_empresa
                   LEFT JOIN tutor AS t ON es.id_tutor=t.id_tutor";

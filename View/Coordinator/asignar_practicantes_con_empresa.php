@@ -1,8 +1,9 @@
- <?php
+<?php
 session_start();
 if ($_SESSION['id_coordinador'] == NULL) {
-
     header("Location: ../../index.php");
+} else if ($_GET['id_estudiante'] == NULL) {
+    header("Location: asignar_practicantes.php");
 }
 ?>
 <!DOCTYPE html>
@@ -143,9 +144,135 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div style="padding-left: 10px;">
+                    <a class="btn btn-primary" href="asignar_practicantes.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+                </div>
+                <center>
+                    <h2>Asignar Practicante</h2>
+                </center>
+                <?php
+                require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                $estudiante = buscarEstudiante($_GET['id_estudiante']);
+                if (is_null($estudiante)) {
+                ?>
+                    <h2 style="color: #D61117; text-align: center;">Estudiante NO registrado en el sistema</h2>
+                    <?php
+                } else {
+                    require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
+                    $buscar_encuesta = detallarEncuestaPorEstudiante($_GET['id_estudiante']);
+                    if (is_null($buscar_encuesta)) {
+                    ?>
+                        <h2 style="color: #D61117; text-align: center;">NO presenta encuesta de inscripcion</h2>
+                    <?php
+                    } else {
+                    ?>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta"><i class="fas fa-eye"></i></button>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <center>Nombre Empresa</center>
+                                            </th>
+                                            <th>
+                                                <center>Numero de Practicantes</center>
+                                            </th>
+                                            <th>
+                                                <center>Areas</center>
+                                            </th>
+                                            <th>
+                                                <center>Opciones</center>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        require_once "../../Controller/Solicitud/Solicitud_Controller.php";
+                                        $solicitudes_aprobadas = listaSolicitudEmpresasAprobadas();
+                                        if (is_null($solicitudes_aprobadas)) {
+                                        ?>
+                                            <tr>
+                                                <td colspan="4" style="color: #D61117; text-align: center;">El sistema NO cuenta con solicitudes aprobadas</td>
+                                            </tr>
+                                            <?php
+                                        } else {
+                                            foreach ($solicitudes_aprobadas as $solicitud) {
+                                            ?>
+                                                <tr>
+                                                    <td>
+                                                        <center><?php echo $solicitud['nombre_empresa']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $solicitud['numero_practicantes']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $solicitud['funciones']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,<?php echo $solicitud['id_empresa']; ?>)">Vincular</button></center>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                <?php }
+                } ?>
+            </div>
 
-                <div>
-                
+            <!-- Modal para ver la encuesta de areas -->
+            <div class="modal fade" id="modalEncuesta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#D61117;">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color: white;"><?php echo $estudiante['nombre_estudiante'];?></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                            require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
+                            $buscar_encuesta = detallarEncuestaPorEstudiante($_GET['id_estudiante']);
+                            ?>
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label">Area de desarrollo de software: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_desarrollo']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label">Area de Administracion de Redes:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_redes']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label">Area de Mantenimiento de Hardware/Software: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_mantenimiento']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label">Area de Capacitacion: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_capacitacion']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-9 col-form-label">Areas de Servidores y Computacion en la Nube: </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_servidores']; ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
@@ -170,15 +297,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 </body>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-<script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

@@ -63,7 +63,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
                         <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
                     </div>
                 </div>
@@ -146,6 +146,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <h2>Ver Empresas</h2>
                 </center>
                 <div class="table-responsive">
+                    <div>
+                        <center>
+                            <form action="#" method="POST">
+                                <div>
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Descargar Listado</button>
+                                </div>
+                            </form>
+                        </center>
+                    </div>
                     <div class="container-fluid">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>

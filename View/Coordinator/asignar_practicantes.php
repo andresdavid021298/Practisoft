@@ -1,7 +1,6 @@
- <?php
+<?php
 session_start();
 if ($_SESSION['id_coordinador'] == NULL) {
-
     header("Location: ../../index.php");
 }
 ?>
@@ -143,10 +142,92 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-
-                <div>
-                
-                </div>
+                <center>
+                    <h2>Asignar Practicantes</h2>
+                </center>
+                <?php
+                require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                $lista_estudiantes = listarEstudiantes();
+                if (is_null($lista_estudiantes)) {
+                ?>
+                    <h2 style="color: #D61117; text-align: center;">No hay estudiantes registrados en el semestre actual</h2>
+                <?php
+                } else {
+                ?>
+                    <div class="table-responsive">
+                        <div class="container-fluid">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <center>Nombre</center>
+                                        </th>
+                                        <th>
+                                            <center>Area de Desarrollo de Software</center>
+                                        </th>
+                                        <th>
+                                            <center>Area de Redes</center>
+                                        </th>
+                                        <th>
+                                            <center>Area de Mantenimiento</center>
+                                        </th>
+                                        <th>
+                                            <center>Area de Capacitacion</center>
+                                        </th>
+                                        <th>
+                                            <center>Area de Servidores y Computacion en la Nube</center>
+                                        </th>
+                                        <th>
+                                            <center>Opciones</center>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($lista_estudiantes as $estudiante) {
+                                        if (is_null($estudiante['nombre_empresa'])) {
+                                    ?><tr>
+                                                <td>
+                                                    <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                                </td>
+                                                <?php
+                                                require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
+                                                $encuesta_estudiante = detallarEncuestaPorEstudiante($estudiante['id_estudiante']);
+                                                if (is_null($encuesta_estudiante)) {
+                                                ?>
+                                                    <td colspan="6" style="color: #D61117;">
+                                                        <center>NO PRESENTA ENCUESTA DE INSCRIPCION</center>
+                                                    </td>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['area_desarrollo']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['area_redes']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['area_mantenimiento']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['area_capacitacion']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['area_servidores']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Asignar</a></center>
+                                                    </td>
+                                            </tr>
+                                <?php }
+                                            }
+                                        } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
             <!-- End of Page Wrapper -->
 
@@ -169,16 +250,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
     </div>
 
 </body>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

@@ -7,7 +7,7 @@ function agregarActividad() {
     if (fecha == "" || horas == "" || descripcion == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -43,7 +43,7 @@ function actualizarActividad() {
     if (fecha == "" || horas == "" || descripcion == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -99,7 +99,7 @@ function actualizarPerfil() {
     if (codigo == "" || nombre == "" || celular == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         $.ajax({
@@ -175,7 +175,7 @@ function agregarPlanDeTrabajo() {
     if (existe_actividad_vacia) {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else if (cantidad_horas != 320) {
         swal.fire({
@@ -229,7 +229,7 @@ function subirCartaCompromisoria() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_estudiante', idEstudiante);
@@ -263,7 +263,7 @@ function subirInformeAvance() {
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",
-            title: "Oops, Hay campos vacios"
+            title: "Hay campos vacios"
         })
     } else {
         fd.append('id_estudiante', idEstudiante);

@@ -23,8 +23,16 @@ if (isset($_POST['accion'])) {
     }
 }
 
+// Metodo que conecta con la vista para enviar 1 o 0 si hay algun registro de Encuesta por parte de un estudiante
 function buscarEncuesta($id_estudiante)
 {
     $obj_encuesta_areas_model = new Encuesta_Areas_Model();
     return $obj_encuesta_areas_model->buscarEncuesta($id_estudiante);
+}
+
+// Metodo que conecta con la vista para enviar detalle de la encuesta por parte de un estudiante 
+function detallarEncuestaPorEstudiante($id_estudiante)
+{
+    $obj_encuesta_areas_model = new Encuesta_Areas_Model();
+    return $obj_encuesta_areas_model->detallesEncuestaPorEstudiante($id_estudiante);
 }

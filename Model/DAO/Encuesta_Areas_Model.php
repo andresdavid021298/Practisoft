@@ -63,8 +63,7 @@ class Encuesta_Areas_Model
             return 0;
         } else {
             if ($stmt->rowCount() > 0) {
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                $detalles_encuesta = $result;
+                $detalles_encuesta = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             $stmt->closeCursor();
             return $detalles_encuesta;

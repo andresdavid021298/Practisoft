@@ -46,28 +46,61 @@ function rechazarSolicitud() {
 }
 
 //Metodo para actualizar datos de coordinador
-function actualizarPerfil(){
-    var id_coordinador= document.getElementById('id_coordinador').value;
+function actualizarPerfil() {
+    var id_coordinador = document.getElementById('id_coordinador').value;
     var codigo_coordinador = document.getElementById('input_codigo').value;
     var celular_coordinador = document.getElementById('input_celular').value;
-    
+
     $.ajax({
-        url: "../../Controller/Coordinador/Coodinador_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "actualizar_perfil",
-            "id_coordinador": id_coordinador,
-            "codigo_coordinador": codigo_coordinador,
-            "celular_coordinador":celular_coordinador
-        },
-        dataType: "JSON"
-    })
-    .done(function(response) {
-        swal.fire({
-            icon: response.state,
-            title: response.title
-        }).then(() => {
-            window.location = response.location;
+            url: "../../Controller/Coordinador/Coodinador_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_perfil",
+                "id_coordinador": id_coordinador,
+                "codigo_coordinador": codigo_coordinador,
+                "celular_coordinador": celular_coordinador
+            },
+            dataType: "JSON"
         })
+        .done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = response.location;
+            })
+        })
+}
+
+//Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
+function vincularEstudianteConEmpresa(id_estudiante, id_empresa) {
+
+    swal.fire({
+        title: '¿Esta seguro de vincular al estudiante?',
+        showCancelButton: true,
+        confirmButtonText: "Vincular",
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: "../../Controller/Estudiante/Estudiante_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "asignar_empresa_estudiante",
+                        "id_estudiante": id_estudiante,
+                        "id_empresa": id_empresa
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "asignar_practicantes.php";
+                    })
+                })
+        }
     })
+
 }

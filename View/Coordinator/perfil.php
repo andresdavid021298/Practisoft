@@ -1,11 +1,10 @@
-<!-- <?php
+<?php
 session_start();
-$_SESSION['id_coordinador']=4;
 if ($_SESSION['id_coordinador'] == NULL) {
 
     header("Location: ../../index.php");
 }
-?> -->
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +64,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
                         <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
                     </div>
                 </div>

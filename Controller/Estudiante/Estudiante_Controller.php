@@ -62,5 +62,19 @@ if (isset($_POST['accion'])) {
             $response['location'] = "ver_practicantes.php";
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == "asignar_empresa_estudiante") {
+        $response = array();
+        $id_estudiante = $_POST['id_estudiante'];
+        $id_empresa = $_POST['id_empresa'];
+        $obj_estudiante_model = new EstudianteModel();
+        $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Estudiante asignado correctamente";
+        }
+        echo json_encode($response);
     }
 }
