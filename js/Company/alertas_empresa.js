@@ -407,6 +407,27 @@ function agregarSolicitud() {
     }
 }
 
+//Metodo que muestra una alerta cuando se rechaza una solicitud
+function cancelarSolicitud(id_solicitud){
+    $.ajax({
+        url: "../../Controller/Solicitud/Solicitud_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "cancelar_solicitud",
+            "id_solicitud": id_solicitud
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location
+        })
+    })
+}
+
 //Método que permite mostrar alerta al momento de cambiar clave de una empresa
 function cambiarClave() {
     var id_empresa = document.getElementById("input_id_empresa").value;

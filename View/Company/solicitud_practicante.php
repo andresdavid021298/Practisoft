@@ -136,7 +136,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -292,6 +292,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <th>Area</th>
                                     <th>Observaciones</th>
                                     <th>Estado</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -314,6 +315,20 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <td><?php echo $datos['funciones'] ?></td>
                                             <td><?php echo $datos['observaciones_solicitud'] ?></td>
                                             <td><?php echo $datos['estado_solicitud'] ?></td>
+                                            <td>
+                                                <?php if ($datos['estado_solicitud'] == 'En Espera') {
+
+                                                ?>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
+                                                <?php
+                                                } else if ($datos['estado_solicitud'] == 'Rechazada') {
+
+                                                ?>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
+                                                <?php
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                 <?php
                                     }
@@ -326,6 +341,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <th>Area</th>
                                     <th>Observaciones</th>
                                     <th>Estado</th>
+                                    <th>Acción</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -365,6 +381,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
                     <p>PractiSoft 2021</p>
+                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
                 </div>
             </footer>
             <!-- End of Footer -->

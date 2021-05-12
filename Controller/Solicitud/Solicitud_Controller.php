@@ -50,6 +50,21 @@ if (isset($_POST['accion'])) {
         }
         echo json_encode($response);
     }
+    else if($_POST['accion'] == 'cancelar_solicitud'){
+        $id_solicitud = $_POST['id_solicitud'];
+        $solicitud = new SolicitudModel();
+        $rta = $solicitud->eliminarSolicitud($id_solicitud);
+        if($rta == 0){
+            $response['title'] = "Error al cancelar la solicitud";
+            $response['state'] = "error";
+            $response['location'] = "solicitud_practicante.php";
+        } else {
+            $response['title'] = "Solicitud eliminada correctamente";
+            $response['state'] = "success";
+            $response['location'] = "solicitud_practicante.php";
+        }
+        echo json_encode($response);
+    }
 }
 
 // Metodo que conecta con la vista para enviar los datos de las solicitudes de una empresa

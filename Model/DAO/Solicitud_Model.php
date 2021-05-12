@@ -126,7 +126,7 @@ class SolicitudModel
     // Metodo que devuelve un listado con todas las solicitudes
     public function listarSolicitudesPorEmpresa($id_empresa)
     {
-        $query = "SELECT id_empresa, numero_practicantes, funciones, observaciones_solicitud, estado_solicitud 
+        $query = "SELECT id_solicitud, id_empresa, numero_practicantes, funciones, observaciones_solicitud, estado_solicitud 
                 FROM solicitud 
                 WHERE id_empresa = :id";
         $lista_solicitud = NULL;
