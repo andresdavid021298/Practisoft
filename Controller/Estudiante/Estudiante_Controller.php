@@ -76,5 +76,54 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Estudiante asignado correctamente";
         }
         echo json_encode($response);
+    }  else if ($_POST['accion'] == "eliminar_estudiante") {
+        $response = array();
+        $id_estudiante = $_POST['id_estudiante'];
+        $obj_estudiante_model = new EstudianteModel();
+        $rta = $obj_estudiante_model->eliminarEstudiante($id_estudiante);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+            $response['location'] = "ver_practicantes.php";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Estudiante eliminado correctamente";
+            $response['location'] = "ver_practicantes.php";
+        }
+        echo json_encode($response);
+    }  
+
+} else if (isset($_FILES['input_archivo']['name'])) {
+    $response = array();
+
+    $nombre_archivo = $_FILES['input_archivo']['name'];
+    $formato_nombre = "Estudiantes_Practicas";
+    $extension = strrchr($nombre_archivo, ".");
+    $archivo = $formato_nombre . $extension;
+    $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/' . $archivo;
+    $tipo_archivo = $_FILES['input_archivo']['type'];
+
+    if ($tipo_archivo != "text/plain") {
+        $response['title'] = "Solo se permiten archivos de texto plano (TXT)";
+        $response['state'] = "warning";
+    } 
+    else {
+        move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
+        $content = file($location);
+        
+        $obj_estudiante_model = new EstudianteModel();
+        $cont = 0;
+        
+        foreach ($content as $correo) {
+            if ($cont > 1) {
+                $obj_estudiante_model->insertarEstudiante($correo);
+            }
+            $cont++;
+        }
+        if($cont > 0){
+            $response['title'] = "Estudiantes Agregados Correctamente";
+            $response['state'] = "success";
+        }
     }
-}
+    echo json_encode($response);
+} 

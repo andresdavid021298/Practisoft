@@ -45,6 +45,58 @@ function rechazarSolicitud() {
         })
 }
 
+//Método que permite mostrar alerta cuando se sube el listado de estudiantes al sistema
+function subirEstudiantes() {
+    var inputArchivo = document.getElementById('input_archivo').value;
+    console.log(inputArchivo);
+    var fd = new FormData();
+    var files = $('#input_archivo')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Hay campos vacios"
+        })
+    } else {
+        fd.append('input_archivo', files[0]);
+        $.ajax({
+            url: '../../Controller/Estudiante/Estudiante_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "ver_practicantes.php"
+            })
+        })
+    }
+}
+
+function eliminarEstudiante(id_estudiante){
+    console.log(id_estudiante);
+    $.ajax({
+        url: "../../Controller/Estudiante/Estudiante_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "eliminar_estudiante",
+            "id_estudiante": id_estudiante
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = response.location;
+        })
+    })
+}
+
 //Metodo para actualizar datos de coordinador
 function actualizarPerfil() {
     var id_coordinador = document.getElementById('id_coordinador').value;

@@ -33,6 +33,24 @@ class DocumentosEstudianteModel
         }
     }
 
+    //Metodo para listar documentos del estudiante de practicas
+    public function listarDocumentosEstudiante(){
+        $query = "SELECT id_estudiante, archivo_carta_compromisoria, archivo_informe_avance
+                  FROM documentos_estudiante";
+        $lista_documentos_estudiante = NULL;
+        $stmt = $this->conexion->prepare($query);
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        } else{
+            while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $lista_documentos_estudiante[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_documentos_estudiante;
+        }
+    }
+
     //Método para insertar el documento de carta compromisoria del estudiante
     public function insertarDocumentoCartaCompromisoria($id_estudiante, $nombre_archivo)
     {

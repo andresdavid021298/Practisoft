@@ -64,10 +64,11 @@ class ActividadPlanTabajoModel
         }
     }
 
-    // Metodo que permite listar las actividades aprobadas del plan de trabajo de un estudiante
     public function listarActividadesPlanTrabajoPorEstudianteAprobadas($id_estudiante)
     {
-        $query = "SELECT id_actividad_plan_trabajo, descripcion_actividad_plan_trabajo, numero_horas_actividad_plan_trabajo,estado FROM actividades_plan_trabajo WHERE id_estudiante=:id AND estado='Aprobada'";
+        $query = "SELECT a.id_actividad_plan_trabajo, a.descripcion_actividad_plan_trabajo, a.numero_horas_actividad_plan_trabajo, a.estado, e.nombre_estudiante 
+                  FROM actividades_plan_trabajo a RIGHT JOIN estudiante e ON a.id_estudiante = e.id_estudiante 
+                  WHERE a.id_estudiante=:id AND a.estado='Aprobada'";
         $lista_actividades_plan_trabajo = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_estudiante);

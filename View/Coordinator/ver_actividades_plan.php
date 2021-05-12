@@ -1,9 +1,10 @@
 <?php
-// session_start();
-// if ($_SESSION['id_coordinador'] == NULL) {
+session_start();
 
-//     header("Location: ../../index.php");
-// }
+if ($_SESSION['id_coordinador'] == NULL) {
+
+    header("Location: ../../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,96 +148,117 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Estudiantes</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Actividades</h1>
                                 <br>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Inicio Cargar Estudiantes al Sistema mediante archivo txt -->
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <strong><p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p></strong>
-                                    <div class="fileUpload btn">
-                                        <label for="inputArchivo">Seleccione su archivo</label>
-                                        <input type="file" name="input_archivo" id="input_archivo">
-                                        <!-- <button class="btn-danger" type="submit" value="Enviar" name="btn_enviar"> -->
-                                        <button type="button" class="btn btn-danger" onclick="subirEstudiantes()">Subir</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Componente Collapse para Presentar las Actividades y Subactividades de un plan de trabajo aprobado -->
+                    <div id="accordion">
+
+                        <?php
+                        require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                        require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                        $estudiante = buscarEstudiante($_GET['id_estudiante']);
+                        $actividad_plan = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
+                        ?>
+
+                        <h4>Estudiante: <?php echo $estudiante['nombre_estudiante']; ?></h4>
+
+                        <?php
+                        if (is_null($actividad_plan)) {
+                        ?>
                             <hr>
-                    </form>
+                            <h2 style="color: #D61117; text-align: center;">No Presenta Actividades Aprobadas</h2>
+                            <hr>
+                        <?php
+                        } else {
+                        ?>
 
 
-                    <!-- Fin -->
+                            <div class="card">
 
-                    <!-- Inicio Tabla Solicitudes -->
-
-                    <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Codigo</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
                                 <?php
-                                require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                                $estudiantes = listarEstudiantes();
+                                $cont = 0;
+                                foreach ($actividad_plan as $actividades) {
 
-                                if (is_null($estudiantes)) {
                                 ?>
-                                    <td colspan="6" style="color: #D61117;">
-                                        <center><strong>NO EXISTEN SOLICITUDES EN EL SISTEMA</strong></center>
-                                    </td>
-                                    <?php
-                                } else {
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $cont ?>" aria-expanded="false" aria-controls="collapseOne">
+                                                <?php echo $actividades['descripcion_actividad_plan_trabajo'] ?>
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                                    foreach ($estudiantes as $estudiante) {
-                                    ?>
-                                        <tr>
 
-                                            <td><?php echo $estudiante['nombre_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['codigo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['correo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['celular_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['nombre_empresa'] ?></td>
-                                            <td>
-                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center>
 
-                                                <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Elimina Estudiante</button></center>
-                                            </td>
-                                        </tr>
+                                    <div id="collapse<?php echo $cont ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <?php
+                                            require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                            $subactividades = listarActividadesPorActividadPlanTrabajo($actividades['id_actividad_plan_trabajo']);
+                                            if (is_null($subactividades)) {
+                                            ?>
+                                                <label>No Presenta Subactividades</label>
+                                            <?php
+                                            } else {
+                                            ?>
+
+                                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Descripcion</th>
+                                                            <th>Horas Dedicadas</th>
+                                                            <th>Estado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+
+
+                                                        foreach ($subactividades as $subactividad) {
+                                                        ?>
+                                                            <tr>
+
+                                                                <td><?php echo $subactividad['descripcion_actividad'] ?></td>
+                                                                <td><?php echo $subactividad['horas_actividad'] ?></td>
+                                                                <td><?php echo $subactividad['estado_actividad'] ?></td>
+
+                                                            </tr>
+                                                        <?php
+                                                        }
+
+                                                        ?>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Descripcion</th>
+                                                            <th>Horas Dedicadas</th>
+                                                            <th>Estado</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            <?php
+                                            }
+
+                                            ?>
+                                        </div>
+                                    </div>
+
                                 <?php
-                                    }
+                                    $cont++;
                                 }
                                 ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Codigo</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
+                    <!-- Fin de componente Collapse -->
                 </div>
-                <!-- Fin de tabla Solicitudes -->
             </div>
             <!-- End of Page Wrapper -->
 
@@ -263,6 +285,7 @@
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
+<script src="../../js/eventos.js"></script>
 <script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

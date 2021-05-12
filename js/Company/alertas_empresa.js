@@ -4,21 +4,28 @@ function alertaRegistro() {
     var representante_legal = document.getElementById("inputRepresentanteLegal").value;
     var NIT = document.getElementById("inputNIT").value;
     var direccion_empresa = document.getElementById("inputDireccion").value;
-    var web_empresa = document.getElementById("inputPaginaWeb").value;
     var municipio = document.getElementById("selectMunicipio").value;
     var correo_empresa = document.getElementById("inputCorreo").value;
     var celular_empresa = document.getElementById("inputContacto").value;
-    var telefono_empresa = document.getElementById("inputTelefono").value;
     var sector_empresa = document.getElementById("selectSector").value;
     var clave_empresa = document.getElementById("inputClave1").value;
     var clave_empresa2 = document.getElementById("inputClave2").value;
     if ((nombre_empresa == "") || (representante_legal == "") || (NIT == "") || (direccion_empresa == "") || (correo_empresa == "") || (celular_empresa == "") || (clave_empresa == "") || (clave_empresa2 == "")) {
         swal.fire({
             icon: "warning",
-            title: "Hay campos vacios"
+            title: "Oops, Hay campos vacios"
         })
     } else {
-        $.ajax({
+        if (!validarTamañoClaveYCaracterNumerico(clave_empresa)) {
+            swal.fire({
+                icon: "warning",
+                title: "La clave no cumple con las condiciones establecidas"
+            })
+        }
+        else {
+
+
+            $.ajax({
                 //Como hago el llamado a la funcion dentro de la carpeta View tengo que salir de la carpeta primero
                 url: "../../Controller/Empresa/Empresa_Controller.php",
                 type: "POST",
@@ -30,24 +37,39 @@ function alertaRegistro() {
                     "direccion_empresa": direccion_empresa,
                     "municipio": municipio,
                     "correo_empresa": correo_empresa,
-                    "pagina_web_empresa": web_empresa,
                     "celular_empresa": celular_empresa,
-                    "telefono_empresa": telefono_empresa,
                     "sector_empresa": sector_empresa,
                     "clave_empresa": clave_empresa
 
                 },
                 dataType: "JSON"
             })
-            .done(function(response) {
-                swal.fire({
-                    icon: response.state,
-                    title: response.title
-                }).then((result) => {
-                    window.location = "../../index.php";
+                .done(function (response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then((result) => {
+                        window.location = "../../index.php";
+                    })
                 })
-            })
+        }
     }
+}
+
+function validarTamañoClaveYCaracterNumerico() {
+    var pas1 = document.getElementById('inputClave1').value;
+    var tamanio = pas1.length;
+    console.log(tamanio);
+    var numero = false;
+    if (pas1.length >= 8) {
+        for (var i = 0; i < pas1.length; i++) {
+            if (pas1.charCodeAt(i) >= 48 && pas1.charCodeAt(i) <= 57) {
+                numero = true;
+            }
+        }
+        return numero;
+    }
+    return numero;
 }
 
 //Método para mostrar alerta cuando una empresa ingresa al sistema
