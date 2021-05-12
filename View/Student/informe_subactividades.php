@@ -14,7 +14,9 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeSubactividades($id_a
 	<title>Informe</title>
 	<link rel="shortcut icon" href="../../Img/favicon_ingsistemas.ico">
 </head>
-<em><h1 style="text-align: center;">Informe de Subactividades</h1></em>
+<em>
+	<h1 style="text-align: center;">Informe de Subactividades</h1>
+</em>
 
 <body>
 	<table border="1" align="center" cellspacing="0" cellpadding="5">
@@ -22,17 +24,29 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeSubactividades($id_a
 			<td colspan="5" style="color: white;"><b>REGISTRO DE ACTIVIDADES SEMANALES <br>
 					PRACTICA EMPRESARIAL</b></td>
 		</tr>
-		<tr>
-			<td colspan="2"><b>EMPRESA: </b><?php echo $obj_actividad_model_encabezado['nombre_empresa']; ?></td>
-			<td colspan="3"><b>TUTOR EMPRESARIAL: </b><?php echo $obj_actividad_model_encabezado['nombre_tutor']; ?></td>
-		</tr>
-		<tr>
-			<td colspan="1"><b>CODIGO: </b><?php echo $obj_actividad_model_encabezado['codigo_estudiante']; ?></td>
-			<td colspan="4"><b>ESTUDIANTE: </b><?php echo $obj_actividad_model_encabezado['nombre_estudiante']; ?></td>
-		</tr>
-		<tr>
-			<td colspan="5"><b>ACTIVIDAD MACRO:</b> <?php echo $obj_actividad_model_encabezado['descripcion_actividad_plan_trabajo']; ?></td>
-		</tr>
+		<?php
+		if ($obj_actividad_model_encabezado == NULL) {
+		?>
+			<tr>
+				<td colspan="5" style="text-align: center; color: #D61117;"><b>Sin Datos</b></td>
+			</tr>
+		<?php
+		} else {
+		?>
+			<tr>
+				<td colspan="2"><b>EMPRESA: </b><?php echo $obj_actividad_model_encabezado['nombre_empresa']; ?></td>
+				<td colspan="3"><b>TUTOR EMPRESARIAL: </b><?php echo $obj_actividad_model_encabezado['nombre_tutor']; ?></td>
+			</tr>
+			<tr>
+				<td colspan="1"><b>CODIGO: </b><?php echo $obj_actividad_model_encabezado['codigo_estudiante']; ?></td>
+				<td colspan="4"><b>ESTUDIANTE: </b><?php echo $obj_actividad_model_encabezado['nombre_estudiante']; ?></td>
+			</tr>
+			<tr>
+				<td colspan="5"><b>ACTIVIDAD MACRO:</b> <?php echo $obj_actividad_model_encabezado['descripcion_actividad_plan_trabajo']; ?></td>
+			</tr>
+		<?php
+		}
+		?>
 		<tr>
 			<th>
 				Fecha
@@ -51,28 +65,36 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeSubactividades($id_a
 			</th>
 		</tr>
 		<?php
-		foreach ($obj_actividad_model as $row) {
+		if ($obj_actividad_model == NULL) {
 		?>
-			<tr align="center">
-				<td>
-					<?php echo $row['fecha_actividad']; ?>
-				</td>
-				<td>
-					<?php echo $row['descripcion_actividad']; ?>
-				</td>
-				<td>
-					<?php echo $row['horas_actividad']; ?>
-				</td>
-				<td>
-					<?php echo $row['estado_actividad']; ?>
-				</td>
-				<td>
-					<?php echo $row['observaciones_actividad']; ?>
-				</td>
+			<tr>
+				<td colspan="5" style="text-align: center; color: #D61117;"><b>No tiene subactividades asociadas</b></td>
+			</tr>
 			<?php
+		} else {
+			foreach ($obj_actividad_model as $row) {
+			?>
+				<tr align="center">
+					<td>
+						<?php echo $row['fecha_actividad']; ?>
+					</td>
+					<td>
+						<?php echo $row['descripcion_actividad']; ?>
+					</td>
+					<td>
+						<?php echo $row['horas_actividad']; ?>
+					</td>
+					<td>
+						<?php echo $row['estado_actividad']; ?>
+					</td>
+					<td>
+						<?php echo $row['observaciones_actividad']; ?>
+					</td>
+			<?php
+			}
 		}
 			?>
-			</tr>
+				</tr>
 	</table>
 </body>
 

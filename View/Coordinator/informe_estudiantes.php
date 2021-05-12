@@ -43,31 +43,39 @@ $obj_estudiante_model = listarEstudiantes();
 			</th>
 		</tr>
 		<?php
-		foreach ($obj_estudiante_model as $row) {
+		if ($obj_estudiante_model == NULL) {
 		?>
-			<tr align="center">
-				<td>
-					<?php echo $row['nombre_estudiante']; ?>
-				</td>
-				<td>
-					<?php echo $row['codigo_estudiante']; ?>
-				</td>
-				<td>
-					<?php echo $row['correo_estudiante']; ?>
-				</td>
-				<td>
-					<?php echo $row['celular_estudiante']; ?>
-				</td>
-				<td>
-					<?php echo $row['nombre_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['nombre_tutor']; ?>
-				</td>
+			<tr>
+				<td colspan="6" style="text-align: center; color: #D61117;"><b>No hay estudiantes asociados</b></td>
+			</tr>
 			<?php
+		} else {
+			foreach ($obj_estudiante_model as $row) {
+			?>
+				<tr align="center">
+					<td>
+						<?php echo $row['nombre_estudiante']; ?>
+					</td>
+					<td>
+						<?php echo $row['codigo_estudiante']; ?>
+					</td>
+					<td>
+						<?php echo $row['correo_estudiante']; ?>
+					</td>
+					<td>
+						<?php echo $row['celular_estudiante']; ?>
+					</td>
+					<td>
+						<?php echo $row['nombre_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['nombre_tutor']; ?>
+					</td>
+			<?php
+			}
 		}
 			?>
-			</tr>
+				</tr>
 	</table>
 </body>
 

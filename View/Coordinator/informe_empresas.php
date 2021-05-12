@@ -52,40 +52,48 @@ $obj_empresa_model = generarInformeDeEmpresas();
 			</th>
 		</tr>
 		<?php
-		foreach ($obj_empresa_model as $row) {
+		if ($obj_empresa_model == NULL) {
 		?>
-			<tr align="center">
-				<td>
-					<?php echo $row['nombre_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['representante_legal']; ?>
-				</td>
-				<td>
-					<?php echo $row['nit_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['direccion_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['municipio_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['correo_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['celular_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['sector_empresa']; ?>
-				</td>
-				<td>
-					<?php echo $row['actividad_empresa']; ?>
-				</td>
+			<tr>
+				<td colspan="9" style="text-align: center; color: #D61117;"><b>No hay empresas asociadas</b></td>
+			</tr>
 			<?php
+		} else {
+			foreach ($obj_empresa_model as $row) {
+			?>
+				<tr align="center">
+					<td>
+						<?php echo $row['nombre_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['representante_legal']; ?>
+					</td>
+					<td>
+						<?php echo $row['nit_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['direccion_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['municipio_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['correo_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['celular_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['sector_empresa']; ?>
+					</td>
+					<td>
+						<?php echo $row['actividad_empresa']; ?>
+					</td>
+			<?php
+			}
 		}
 			?>
-			</tr>
+				</tr>
 	</table>
 </body>
 

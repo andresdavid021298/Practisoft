@@ -122,13 +122,13 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
                                     <b><?php echo $_SESSION['nombre_estudiante'] ?></b>
                                 </span>
-                                
+
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
                                 </a>
                             </div>
                         </li>
@@ -163,16 +163,16 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 ?>
                                 <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
                             </div>
-                            <div>
-                                <center>
-                                    <form action="informe_actividades.php" method="post">
-                                        <div>
-                                            <input value="Ver" type="submit" id="submit" name="import" class="btn btn-primary">
-                                            <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
-                                        </div>
-                                    </form>
-                                </center>
-                            </div>
+                                <div>
+                                    <center>
+                                        <form action="crear_informe_actividades.php" method="post">
+                                            <div>
+                                            <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                                                <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
+                                            </div>
+                                        </form>
+                                    </center>
+                                </div>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
