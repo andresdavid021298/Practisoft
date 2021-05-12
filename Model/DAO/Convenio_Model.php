@@ -42,8 +42,9 @@ class ConvenioModel
             $stmt->closeCursor();
             return 0;
         } else {
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            $datos_convenio = $result;
+            if ($stmt->rowCount() > 0) {
+                $datos_convenio = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
             $stmt->closeCursor();
             return $datos_convenio;
         }

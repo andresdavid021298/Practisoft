@@ -156,31 +156,39 @@ if (isset($_FILES['input_archivo']['name'])) {
     echo json_encode($response);
 }
 
+// Metodo que conecta con la vista para verificar si existe registro de algun documento para una empresa
 function verificarRegistros($id_empresa)
 {
-    $registros = new DocumentosEmpresaModel();
-    return $registros->verificarRegistroDocumento($id_empresa);
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->verificarRegistroDocumento($id_empresa);
+}
+
+// Metodo que conecta con la vista para listar todos los documentos de una empresa
+function listarDocumentosPorEmpresa($id_empresa)
+{
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->verDocumentosEmpresa($id_empresa);
 }
 
 function mostrarDatosProtocolos($id_empresa)
 {
-    $protocolos = new DocumentosEmpresaModel();
-    return $protocolos->mostrarProtocolos($id_empresa);
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->mostrarProtocolos($id_empresa);
 }
 
 function mostrarDatosRepresentante($id_empresa){
-    $representante = new DocumentosEmpresaModel();
-    return $representante->mostrarRepresentante($id_empresa);
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->mostrarRepresentante($id_empresa);
 }
 
 function mostrarDatosCertificado($id_empresa)
 {
-    $certificado = new DocumentosEmpresaModel();
-    return $certificado->mostrarCertificado($id_empresa);
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->mostrarCertificado($id_empresa);
 }
 
 function mostrarDatosRUT($id_empresa)
 {
-    $rut = new DocumentosEmpresaModel();
-    return $rut->mostrarRUT($id_empresa);
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->mostrarRUT($id_empresa);
 }

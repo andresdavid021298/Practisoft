@@ -160,7 +160,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_empresa'] ?></b></span>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -247,11 +247,12 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </div>
                             </div>
                         </div>
-
                         <?php
                         require_once "../../Controller/Convenio/Convenio_Controller.php";
+                        require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
                         $datos_convenio = mostrarConvenio($_SESSION['id_empresa']);
-                        if ($datos_convenio == NULL) {
+                        $documentos_empresa = listarDocumentosPorEmpresa($_SESSION['id_empresa']);
+                        if (is_null($documentos_empresa) && is_null($datos_convenio)) {
                         ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
                                 <div class="card border-left-danger shadow h-100 py-2">
@@ -259,8 +260,40 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Convenio</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene convenio</div>
+                                                    Documentos
+                                                </div>
+                                                <div class="mb-0 font-weight-bold text-gray-800">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Convenio
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Protocolos Bio
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Cert. Existencia
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            CC Representante
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            RUT
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-file-alt fa-2x text-gray-300"></i>
@@ -269,49 +302,190 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     </div>
                                 </div>
                             </div>
-                            <?php } else {
+                        <?php } else if (!is_null($documentos_empresa) && !in_array(NULL, $documentos_empresa) && !is_null($datos_convenio)) { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Documentos
+                                                </div>
+                                                <div class="mb-0 font-weight-bold text-gray-800">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Convenio
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Protocolos Bio
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            Cert. Existencia
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            CC Representante
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                        <label class="form-check-label" for="checkConvenio">
+                                                            RUT
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Documentos
+                                                </div>
+                                                <div class="mb-0 font-weight-bold text-gray-800">
+                                                    <?php
+                                                    if (is_null($datos_convenio)) {
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                Convenio
+                                                            </label>
+                                                        </div>
 
-                            $fecha_expiracion = $datos_convenio['fecha_expiracion'];
-                            $fecha_actual = date("Y-m-d");
-                            if ($fecha_expiracion > $fecha_actual) {
-                            ?>
-                                <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                    <div class="card border-left-success shadow h-100 py-2">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                        Convenio</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Vigencia hasta el <?php echo $fecha_expiracion ?></div>
+                                                    <?php } else {
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                Convenio
+                                                            </label>
+                                                        </div>
+                                                    <?php }
+                                                    if (is_null($documentos_empresa)) {
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                Protocolos Bio
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                Cert. Existencia
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                CC Representante
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <label class="form-check-label" for="checkConvenio">
+                                                                RUT
+                                                            </label>
+                                                        </div>
+                                                    <?php } else { ?>
+                                                        <?php
+                                                        if (is_null($documentos_empresa['archivo_protocolos_bio'])) {
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    Protocolos Bio
+                                                                </label>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    Protocolos Bio
+                                                                </label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php
+                                                        if (is_null($documentos_empresa['archivo_certificado_existencia'])) {
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    Cert. Existencia
+                                                                </label>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    Cert. Existencia
+                                                                </label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php
+                                                        if (is_null($documentos_empresa['archivo_cc_representante'])) {
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    CC Representante
+                                                                </label>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    CC Representante
+                                                                </label>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php
+                                                        if (is_null($documentos_empresa['archivo_rut'])) {
+                                                        ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    RUT
+                                                                </label>
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                                <label class="form-check-label" for="checkConvenio">
+                                                                    RUT
+                                                                </label>
+                                                            </div>
+                                                    <?php }
+                                                    } ?>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-file-alt fa-2x text-gray-300"></i>
-                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-file-alt fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php
-                            } else {
-                            ?>
-                                <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                    <div class="card border-left-warning shadow h-100 py-2">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                        Convenio</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Expiró el <?php echo $fecha_expiracion ?></div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-file-alt fa-2x text-gray-300"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php }
-                        } ?>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -322,30 +496,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
                     <p>PractiSoft 2021</p>
+                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
                 </div>
             </footer>
             <!-- End of Footer -->
@@ -354,22 +511,9 @@ if ($_SESSION['id_empresa'] == NULL) {
     </div>
 
 </body>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 
 </html>

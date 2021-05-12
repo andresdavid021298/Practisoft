@@ -33,6 +33,25 @@ class DocumentosEmpresaModel
         }
     }
 
+    // Metodo que retorna todos los documentos de una empresa
+    public function verDocumentosEmpresa($id_empresa)
+    {
+        $lista_documentos = NULL;
+        $query = "SELECT * FROM documentos_empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            if ($stmt->rowCount() > 0) {
+                $lista_documentos = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            $stmt->closeCursor();
+            return $lista_documentos;
+        }
+    }
+
     //Método para cargar el documento de protocolos de bioseguridad
     public function insertarDocumentoProtocolos($id_empresa, $nombre_archivo)
     {
@@ -65,7 +84,7 @@ class DocumentosEmpresaModel
         }
     }
 
-//Metodo para actualizar el documento del representante legal
+    //Metodo para actualizar el documento del representante legal
     public function actualizarDocumentoRepresentante($id_empresa, $nombre_archivo)
     {
         $query = "UPDATE documentos_empresa SET archivo_cc_representante=:nombre_archivo WHERE id_empresa=:id_empresa";
@@ -81,24 +100,24 @@ class DocumentosEmpresaModel
         }
     }
 
-//Metodo para mostrar el documento de identificacion del representante legal
-    public function mostrarRepresentante($id_empresa){
+    //Metodo para mostrar el documento de identificacion del representante legal
+    public function mostrarRepresentante($id_empresa)
+    {
         $doc_representante = NULL;
         $query = "SELECT archivo_cc_representante FROM documentos_empresa WHERE id_empresa=:id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        }
-        else{
+        } else {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $doc_representante = $result;
             $stmt->closeCursor();
             return $doc_representante;
         }
     }
-    
+
 
     //Método para actualizar el documento de protocolos de bioseguridad
     public function actualizarDocumentoProtocolos($id_empresa, $nombre_archivo)
