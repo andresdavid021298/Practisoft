@@ -248,6 +248,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
                     <p>PractiSoft 2021</p>
+                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
                 </div>
             </footer>
             <!-- End of Footer -->

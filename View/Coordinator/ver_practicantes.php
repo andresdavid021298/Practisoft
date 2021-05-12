@@ -159,7 +159,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col text-center">
-                                    <strong><p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p></strong>
+                                    <strong>
+                                        <p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p>
+                                    </strong>
                                     <div class="fileUpload btn">
                                         <label for="inputArchivo">Seleccione su archivo</label>
                                         <input type="file" name="input_archivo" id="input_archivo">
@@ -169,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                            <hr>
+                        <hr>
                     </form>
 
 
@@ -251,6 +253,7 @@
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
                     <p>PractiSoft 2021</p>
+                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
                 </div>
             </footer>
             <!-- End of Footer -->
