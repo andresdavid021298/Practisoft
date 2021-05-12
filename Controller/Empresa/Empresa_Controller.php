@@ -26,16 +26,44 @@ if (isset($_POST['accion'])) {
         $celular_empresa = $_POST['celular_empresa'];
         $telefono_empresa = $_POST['telefono_empresa'];
         $sector_empresa = $_POST['sector_empresa'];
+        $actividad_empresa = $_POST['actividad_empresa'];
         $clave_empresa = $_POST['clave_empresa'];
         $clave_codificada = password_hash($clave_empresa, PASSWORD_DEFAULT);
         $obj_empresa_model = new EmpresaModel();
-        $rta = $obj_empresa_model->insertarEmpresa($nombre_empresa, $representante_legal, $NIT, $direccion_empresa, $municipio_empresa, $correo_empresa, $pagina_web_empresa, $celular_empresa, $telefono_empresa, $sector_empresa, $clave_codificada);
-        if ($rta == 0) {
-            $response['title'] = "Ocurrio un error";
-            $response['state'] = "error";
-        } else {
-            $response['title'] = "Empresa Agregada Correctamente";
+        $servidor = $_SERVER['SERVER_NAME'];
+        $rta = $obj_empresa_model->insertarEmpresa($nombre_empresa, $representante_legal, $NIT, $direccion_empresa, $municipio_empresa, $correo_empresa, $pagina_web_empresa, $celular_empresa, $telefono_empresa, $sector_empresa, $actividad_empresa, $clave_codificada);
+        if ($rta == 1) {
+            $result = $obj_empresa_model->mostrarIdYNombreEmpresa($correo_empresa);
+            $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
+            <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
+            <h3 style='text-align: center;'><strong>Mensaje de confirmación de empresa</strong></h3>
+            <p>Para validar su empresa en el sistema, ingrese <a href='" . $servidor . "/Practisoft/View/Company/confirmar_registro_empresa.php?id_empresa=" . $result['id_empresa'] . "'>aquí.</a></p>";
+            try {
+                $oMail = new PHPMailer();
+                $oMail->isSMTP();
+                $oMail->Host = "smtp.gmail.com";
+                $oMail->Port = 587;
+                $oMail->SMTPSecure = "tls";
+                $oMail->SMTPAuth = true;
+                $oMail->Username = "practisoftufps@gmail.com";
+                $oMail->Password = "practisoftufps2021@";
+                $oMail->setFrom("practisoftufps@gmail.com");
+                $oMail->addAddress($correo_empresa);
+                $oMail->Subject = '[' . 'Confirmacion de Empresa' . ']' . ' - [' . ' PractiSoft UFPS' . '] - [' . $result['nombre_empresa'] . ']';
+                $oMail->msgHTML($head);
+                if (!$oMail->send()) {
+                    $response['title'] = $oMail->ErrorInfo;
+                    $response['state'] = "error";
+                }
+            } catch (Exception $e) {
+                $response['title'] = $e->getMessage();
+                $response['state'] = "error";
+            }
+            $response['title'] = "Solicitud recibida. Por favor revise su correo";
             $response['state'] = "success";
+        } else {
+            $response['title'] = "Ocurrió un error";
+            $response['state'] = "error";
         }
         echo json_encode($response);
         // Pregunta si la accion es "logearse"
@@ -54,12 +82,19 @@ if (isset($_POST['accion'])) {
             $response['state'] = "warning";
             $response['location'] = "index.php";
         } else {
-            $response['title'] = "Bienvenido " . $rta['nombre_empresa'];
-            $response['state'] = "success";
-            $response['location'] = "View/Company/index_company.php";
-            session_start();
-            $_SESSION["id_empresa"] = $rta['id_empresa'];
-            $_SESSION["nombre_empresa"] = $rta['nombre_empresa'];
+            $result = $obj_empresa_model->verificarEstadoEmpresa($rta['id_empresa']);
+            if ($result['estado'] == 'Inactivo') {
+                $response['title'] = "No se ha validado la empresa. Por favor revise su correo.";
+                $response['state'] = "error";
+                $response['location'] = "index.php";
+            } else {
+                $response['title'] = "Bienvenido " . $rta['nombre_empresa'];
+                $response['state'] = "success";
+                $response['location'] = "View/Company/index_company.php";
+                session_start();
+                $_SESSION["id_empresa"] = $rta['id_empresa'];
+                $_SESSION["nombre_empresa"] = $rta['nombre_empresa'];
+            }
         }
         echo json_encode($response);
         // Pregunta si la accion es "actualizar datos"
@@ -196,4 +231,25 @@ function listarTodasLasEmpresas()
 {
     $obj_empresa_model = new EmpresaModel();
     return $obj_empresa_model->listarEmpresas();
+}
+
+// Metodo que conecta con el modelo para generar el informe de empresas
+function generarInformeDeEmpresas()
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->generarInformeDeEmpresas();
+}
+
+// Metodo que conecta con el modelo para activar el estado de la empresa
+function activarEstadoEmpresa($id_empresa)
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->activarEstadoEmpresa($id_empresa);
+}
+
+// Metodo que conecta con el modelo para revisar el estado de la empresa
+function verificarEstadoEmpresa($id_empresa)
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verificarEstadoEmpresa($id_empresa);
 }

@@ -15,9 +15,9 @@ class EmpresaModel
     }
 
     // Metodo que inserta una nueva empresa
-    public function insertarEmpresa($nombre_empresa, $representante, $nit, $direccion, $municipio, $correo, $pagina_web,$celular,$telefono, $sector, $clave)
+    public function insertarEmpresa($nombre_empresa, $representante, $nit, $direccion, $municipio, $correo, $pagina_web, $celular, $telefono, $sector, $actividad, $clave)
     {
-        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,nit_empresa,direccion_empresa,municipio_empresa,correo_empresa,web_empresa,celular_empresa,telefono_empresa,sector_empresa,clave_empresa) VALUES(:nombre,:representante,:nit,:direccion,:municipio,:correo,:pagina_web,:celular,:telefono,:sector,:clave)";
+        $query = "INSERT INTO empresa(nombre_empresa,representante_legal,nit_empresa,direccion_empresa,municipio_empresa,correo_empresa,web_empresa,celular_empresa,telefono_empresa,sector_empresa,actividad_empresa,clave_empresa) VALUES(:nombre,:representante,:nit,:direccion,:municipio,:correo,:pagina_web,:celular,:telefono,:sector,:actividad,:clave)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre", $nombre_empresa);
         $stmt->bindParam(":representante", $representante);
@@ -29,6 +29,7 @@ class EmpresaModel
         $stmt->bindParam(":celular", $celular);
         $stmt->bindParam(":telefono", $telefono);
         $stmt->bindParam(":sector", $sector);
+        $stmt->bindParam(":actividad", $actividad);
         $stmt->bindParam(":clave", $clave);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
@@ -40,7 +41,7 @@ class EmpresaModel
     }
 
     // Metodo que actualiza una empresa
-    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $correo, $pagina_web,$celular,$telefono)
+    public function actualizarEmpresa($id_empresa, $representante_legal, $direccion, $municipio, $correo, $pagina_web, $celular, $telefono)
     {
         $query = "UPDATE empresa SET representante_legal=:representante, direccion_empresa=:direccion, municipio_empresa=:municipio,
                   correo_empresa=:correo, celular_empresa=:celular,telefono_empresa=:telefono,web_empresa=:pagina_web WHERE id_empresa=:id";
@@ -191,6 +192,55 @@ class EmpresaModel
             $datos_empresa = $result;
             $stmt->closeCursor();
             return $datos_empresa;
+        }
+    }
+
+    //Método para generar los datos del informe de empresas
+    public function generarInformeDeEmpresas()
+    {
+        $lista_actividades = NULL;
+        $query = "SELECT * FROM empresa";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_actividades[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_actividades;
+        }
+    }
+
+    //Método para activar el estado de la empresa
+    public function activarEstadoEmpresa($id_empresa)
+    {
+        $query = "UPDATE empresa SET estado='Activo' WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método para verificar el estado de la empresa
+    public function verificarEstadoEmpresa($id_empresa)
+    {
+        $query = "SELECT estado FROM empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            return $result;
         }
     }
 }

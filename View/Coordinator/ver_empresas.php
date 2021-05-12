@@ -148,9 +148,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div class="table-responsive">
                     <div>
                         <center>
-                            <form action="#" method="POST">
+                            <form action="crear_informe_empresas.php" method="post">
                                 <div>
-                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Descargar Listado</button>
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
                                 </div>
                             </form>
                         </center>
