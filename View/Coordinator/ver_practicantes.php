@@ -173,6 +173,15 @@
                         </div>
                         <hr>
                     </form>
+                    <div>
+                        <center>
+                            <form action="crear_informe_estudiantes.php" method="post">
+                                <div>
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                                </div>
+                            </form>
+                        </center>
+                    </div>
 
 
                     <!-- Fin -->
