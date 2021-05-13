@@ -122,7 +122,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
                                     <b><?php echo $_SESSION['nombre_estudiante'] ?></b>
                                 </span>
-                                
+
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -152,24 +152,41 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <?php
                     } else {
                     ?>
-                        <form method="POST">
-                            <div class="row" id="primer_row">
-                                <div class="form-group col-md-8" id="actividad_estatica">
-                                    <label for="exampleFormControlInput1">Nueva Actividad</label>
-                                    <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
-                                </div>
-                                <div class="form-group col-md-4" id="numero_horas_estatica">
-                                    <label for="exampleFormControlInput1">Numero de Horas</label>
-                                    <input type="number" class="form-control form-control-lg" id="numero_horas" min="1" max="320">
+
+
+                        <form name="suma" method="POST" onkeyup="sumatoria()">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <label>Cantidad de horas por plan de trabajo acumuladas: </label>
+                                        <input type="number" class="sinBorde" name="resultado" style="width: 53px;" disabled>
+                                        <label>/320</label>
+                                    </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
-                            <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
-                            <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
-                            <div class="text-center">
                                 <br>
-                                <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
-                            </div>
+                                <div class="row" id="primer_row">
+
+                                    <div class="form-group col-md-8" id="actividad_estatica">
+                                        <label for="exampleFormControlInput1">Nueva Actividad</label>
+                                        <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-4" id="numero_horas_estatica">
+                                        <label for="exampleFormControlInput1">Numero de Horas</label>
+                                        <input type="number" class="form-control form-control-lg" id="numero_horas" name="numHoras" min="1" max="320">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="input_id_estudiante" id="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+
+                                <div onclick="sumatoria()">
+                                    <button onclick="agregarActividadesDinamicamente()" type="button" class="btn btn-primary">Agregar Actividad</button>
+                                    <button onclick="eliminarActividadesDinamicamente()" type="button" class="btn btn-primary">Eliminar Actividad</button>
+                                </div>
+
+                                <div class="text-center">
+                                    <br>
+                                    <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
+                                </div>
                         </form>
                     <?php } ?>
                 </div>
@@ -204,7 +221,22 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/Student//alertas_estudiante.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<script>
+    //Función que realiza la suma
+    function sumatoria() {
+        var inputs_actividades = document.getElementsByClassName("form-control form-control-lg");
+        var arreglo_actividades = [];
+        var longitud = inputs_actividades.length;
+        var cantidad_horas = 0;
+        for (let index = 0; index < longitud; index++) {
+            arreglo_actividades.push(inputs_actividades[index].value)
+            if (index % 2 != 0) {
+                cantidad_horas = cantidad_horas + parseInt(inputs_actividades[index].value);
+                document.suma.resultado.value = cantidad_horas;
+            }
+        }
+    }
+</script>
 <!-- Valida si un estudiante ya hizo un plan de trabajo -->
 <?php
 require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
