@@ -64,7 +64,7 @@
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="asignar_practicantes"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
                         <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
                     </div>
                 </div>
@@ -127,9 +127,10 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo 'Nombre' ?></b></span>
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
+                                    <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
+                                </span>
+                                <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
