@@ -346,6 +346,7 @@ function agregarSolicitud() {
     var isCheckedSeguridad = document.getElementById('checkSeguridad').checked;
     var isCheckedDiseño = document.getElementById('checkDiseño').checked;
     var isCheckedMantenimiento = document.getElementById('checkMantenimiento').checked;
+    var isCheckedOtra = document.getElementById('checkOtra').checked;
 
     //Si el estado es true, lo inserta en el arreglo areas
     var areas = [];
@@ -392,6 +393,10 @@ function agregarSolicitud() {
     if (isChecked5 == true) {
         c5 = document.getElementById('check5').value;
         areas.push(c5);
+    }
+    if (isCheckedOtra == true){
+        otro = document.getElementById('input_otra').value;
+        areas.push(otro);
     }
 
     //Concatena todos los elementos del arreglo areas con una coma (,) para conocer las areas seleccionadas por la empresa

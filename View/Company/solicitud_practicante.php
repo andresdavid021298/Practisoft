@@ -195,6 +195,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">Area Requerida:</label>
                                             <ul class="list-group list-group-flush">
+
                                                 <li class="list-group-item">
                                                     <!-- Default checked -->
                                                     <div class="custom-control custom-checkbox">
@@ -264,6 +265,17 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li class="list-group-item">
+                                                    <!-- Default checked -->
+                                                    <div class="custom-control custom-checkbox" onclick="validarInputOtra()">
+                                                        <input type="checkbox" name="areas[]" value="Otra" class="custom-control-input" id="checkOtra">
+                                                        <label class="custom-control-label" for="checkOtra">Otro</label>
+
+                                                    </div>
+                                                </li>
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="¿Cuál?" class="form-control" id="input_otra" disabled><br>
+                                                </div>
                                             </ul>
                                         </div>
                                         <input type="hidden" name="id_empresa" id="id_empresa" value="<?php echo $_SESSION['id_empresa'] ?>">

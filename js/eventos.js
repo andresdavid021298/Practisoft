@@ -33,6 +33,18 @@ function validarClaves() {
     }
 }
 
+function validarInputOtra(){
+    var isCheckedOtra = document.getElementById('checkOtra').checked;
+    
+    if(isCheckedOtra == false){
+        document.getElementById("input_otra").disabled = true;
+    }
+    else{
+        document.getElementById("input_otra").disabled = false;
+    }
+    
+}
+
 function validarClavesEnPerfil() {
     // Tomar los valores de los campos de las claves
     var pas1 = document.getElementById("inputClave1").value;
@@ -155,6 +167,7 @@ function agregarActividadesDinamicamente() {
     var newInput_horas = document.createElement("input");
     newInput_horas.className = "form-control form-control-lg";
     newInput_horas.id = "numero_horas_nueva";
+    newInput_horas.type = "number";
 
     // Añadir a la vista el div row
     const app = document.querySelector("#primer_row");
