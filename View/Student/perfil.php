@@ -62,7 +62,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
+                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripción</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
@@ -122,13 +122,13 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
                                     <b><?php echo $_SESSION['nombre_estudiante'] ?></b>
                                 </span>
-                                
+
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -151,29 +151,29 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">
                         <div class="container">
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Nombre</label></center>
-                                    <input type="text" class="form-control" id="input_nombre" placeholder="Digite su nombre" value="<?php echo $datos_estudiante['nombre_estudiante']; ?>">
+                                <div class="form-group">
+                                    <center><label for="input_nombre">Nombre</label></center>
+                                    <input type="text" class="form-control" id="input_nombre" disabled value="<?php echo $_SESSION['nombre_estudiante']; ?>">
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Correo</label></center>
+                                    <center><label for="input_correo">Correo</label></center>
                                     <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_estudiante['correo_estudiante']; ?>" disabled>
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Codigo</label>
+                                    <center><label for="input_codigo">Codigo</label>
                                         <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_estudiante['codigo_estudiante']; ?>" placeholder="Digite su codigo">
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Contraseña">Celular</label></center>
+                                    <center><label for="input_celular">Numero de Telefono Movil</label></center>
                                     <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
                                 </div>
                             </div>
@@ -215,4 +215,5 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/Student/alertas_estudiante.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </html>

@@ -27,6 +27,7 @@ if (isset($_GET['code'])) {
     $google_account_info = $google_oauth->userinfo->get();
     $email =  $google_account_info->email;
     $name =  $google_account_info->name;
+    $image = $google_account_info->picture;
 
     // Validar la extensión ufps.edu.co
     $extension = strrchr($email, "@");
@@ -40,7 +41,8 @@ if (isset($_GET['code'])) {
         if (!is_null($rta_estudiante)) {
             session_start();
             $_SESSION['id_estudiante'] = $rta_estudiante['id_estudiante'];
-            $_SESSION['nombre_estudiante'] = $rta_estudiante['nombre_estudiante'];
+            $_SESSION['nombre_estudiante'] = $name;
+            $_SESSION['url_image'] = $image;
             echo '<script type="text/javascript">window.location.href="../../View/Student/index_student.php"</script>';
         } else {
             $coordinador = new CoordinadorModel();
@@ -49,6 +51,7 @@ if (isset($_GET['code'])) {
                 session_start();
                 $_SESSION['id_coordinador'] = $rta_coordinador['id_coordinador'];
                 $_SESSION['nombre_coordinador'] = $rta_coordinador['nombre_coordinador'];
+                $_SESSION['url_image'] = $image;
                 echo '<script type="text/javascript">window.location.href="../../View/Coordinator/index_coordinator.php"</script>';
             } else {
                 echo '<script type="text/javascript">alert("Usuario no registrado con este correo");</script>';
