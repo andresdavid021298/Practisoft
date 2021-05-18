@@ -204,7 +204,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                                 if (is_null($solicitudes)) {
                                 ?>
-                                    <td colspan="6" style="color: #D61117;">
+                                    <td colspan="10" style="color: #D61117;">
                                         <center><strong>NO POSEE SOLICITUDES EN EL SISTEMA</strong></center>
                                     </td>
                                     <?php
@@ -318,10 +318,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     <th>Fecha Solicitud</th>
                                     <th>N° de Practicantes</th>
                                     <th>Funciones</th>
-                                    <th>Doc Protocolos</th>
+                                    <th>Protocolos</th>
                                     <th>Convenio</th>
                                     <th>CC Representante</th>
-                                    <th>Doc Certificado Existencia</th>
+                                    <th>Certificado Existencia</th>
                                     <th>RUT</th>
                                     <th>Opciones</th>
                                 </tr>
