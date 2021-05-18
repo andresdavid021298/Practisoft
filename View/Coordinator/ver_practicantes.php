@@ -233,7 +233,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <td><?php echo $estudiante['celular_estudiante'] ?></td>
                                             <td><?php echo $estudiante['nombre_empresa'] ?></td>
                                             <td>
-                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center>
+                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center><br>
 
                                                 <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Eliminar Estudiante</button></center>
                                             </td>

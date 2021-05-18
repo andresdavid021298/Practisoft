@@ -55,11 +55,10 @@ class DocumentosEstudianteModel
     //Metodo para listar documentos del estudiante de practicas
     public function listarDocumentosEstudianteGrupo($id_grupo)
     {
-        $query = "SELECT es.id_estudiante, es.nombre_estudiante, d.archivo_carta_compromisoria, d.archivo_informe_avance
-                  FROM documentos_estudiante AS d 
-                  RIGHT JOIN estudiante AS es ON d.id_estudiante = es.id_estudiante
-                  RIGHT JOIN grupo AS g ON es.id_grupo = g.id_grupo
-                  WHERE g.id_grupo =:id_grupo";
+        $query = "SELECT es.id_estudiante, es.nombre_estudiante, es.correo_estudiante, d.archivo_carta_compromisoria, d.archivo_informe_avance
+        FROM documentos_estudiante AS d 
+        RIGHT JOIN estudiante AS es ON d.id_estudiante = es.id_estudiante
+        WHERE es.id_grupo=:id_grupo";
         $lista_documentos_estudiante = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_grupo", $id_grupo);
@@ -67,8 +66,11 @@ class DocumentosEstudianteModel
             $stmt->closeCursor();
             return 0;
         } else {
-            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $lista_documentos_estudiante[] = $result;
+            if($stmt->rowCount() > 0) {
+                while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $lista_documentos_estudiante[] = $result;
+                }
+                
             }
             $stmt->closeCursor();
             return $lista_documentos_estudiante;
