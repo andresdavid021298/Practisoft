@@ -54,7 +54,7 @@ class SolicitudModel
     // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado EN ESPERA con informacion de la empresa y los documentos
     public function listarSolicitudes()
     {
-        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+        $query = "SELECT s.id_empresa, s.fecha_solicitud, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
                   d.archivo_cc_representante, d.archivo_certificado_existencia 
                   FROM solicitud AS s
                   INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
@@ -78,7 +78,7 @@ class SolicitudModel
     // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado APROBADA con informacion de la empresa y los documentos
     public function listarSolicitudesAprobadas()
     {
-        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+        $query = "SELECT s.id_empresa, s.fecha_solicitud, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
                   d.archivo_cc_representante, d.archivo_certificado_existencia 
                   FROM solicitud AS s
                   INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
@@ -102,7 +102,7 @@ class SolicitudModel
     // Metodo que devuelve un listado con todas las solicitudes que se encuentren en estado EN ESPERA con informacion de la empresa y los documentos
     public function listarSolicitudesRechazadas()
     {
-        $query = "SELECT s.id_empresa, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
+        $query = "SELECT s.id_empresa, s.fecha_solicitud, s.id_solicitud, e.nombre_empresa, s.numero_practicantes, s.funciones, s.estado_solicitud, d.archivo_protocolos_bio, c.nombre_archivo, 
                   d.archivo_cc_representante, d.archivo_certificado_existencia 
                   FROM solicitud AS s
                   INNER JOIN empresa AS e ON s.id_empresa = e.id_empresa
@@ -126,7 +126,7 @@ class SolicitudModel
     // Metodo que devuelve un listado con todas las solicitudes
     public function listarSolicitudesPorEmpresa($id_empresa)
     {
-        $query = "SELECT id_solicitud, id_empresa, numero_practicantes, funciones, observaciones_solicitud, estado_solicitud 
+        $query = "SELECT id_solicitud, fecha_solicitud, id_empresa, numero_practicantes, funciones, observaciones_solicitud, estado_solicitud 
                 FROM solicitud 
                 WHERE id_empresa = :id";
         $lista_solicitud = NULL;
@@ -203,33 +203,71 @@ class SolicitudModel
     }
 
     //Método para validar la solicitud de una empresa
-    public function cambiarSolicitudAprobada($id_solicitud){
+    public function cambiarSolicitudAprobada($id_solicitud)
+    {
         $query = "UPDATE solicitud SET estado_solicitud = 'Aprobada', observaciones_solicitud = NULL WHERE id_solicitud=:id_solicitud";
         $stmt  = $this->conexion->prepare($query);
         $stmt->bindParam(":id_solicitud", $id_solicitud);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        } else{
+        } else {
             $stmt->closeCursor();
             return 1;
         }
     }
 
     //Método para rechazar la solicitud de una empresa
-    public function cambiarSolicitudRechazada($id_solicitud, $observaciones){
+    public function cambiarSolicitudRechazada($id_solicitud, $observaciones)
+    {
         $query = "UPDATE solicitud SET estado_solicitud = 'Rechazada', observaciones_solicitud =:observaciones WHERE id_solicitud=:id_solicitud";
         $stmt  = $this->conexion->prepare($query);
         $stmt->bindParam(":id_solicitud", $id_solicitud);
         $stmt->bindParam(":observaciones", $observaciones);
 
-        if(!$stmt->execute()){
+        if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
-        } else{
+        } else {
             $stmt->closeCursor();
             return 1;
+        }
+    }
+
+    //Método que disminuye el número de practicantes requeridos por solicitud
+    public function disminuirNumeroDePracticantes($id_solicitud)
+    {
+        $query = "UPDATE solicitud SET numero_practicantes=(numero_practicantes-1) WHERE id_solicitud=:id_solicitud";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_solicitud", $id_solicitud);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $cantidad_practicantes = $this->cantidadDePracticantesPorSolicitud($id_solicitud);
+            if($cantidad_practicantes <= 0){
+                $this->eliminarSolicitud($id_solicitud);
+            }
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Método que retorna la cantidad de prácticantes por solicitud
+    public function cantidadDePracticantesPorSolicitud($id_solicitud)
+    {
+        $query = "SELECT numero_practicantes FROM solicitud WHERE id_solicitud=:id_solicitud";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_solicitud", $id_solicitud);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $numero_practicantes = $result['numero_practicantes'];
+            $stmt->closeCursor();
+            return $numero_practicantes;
         }
     }
 }

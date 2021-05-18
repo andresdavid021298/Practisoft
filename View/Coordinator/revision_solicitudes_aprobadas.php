@@ -46,7 +46,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="index_company.php">
+                <a class="nav-link" style="text-align: center;" href="index_coordinator.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
@@ -56,16 +56,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
-                    <!-- <i class="fas fa-users-cog"></i> -->
-                    <span>Gestion Practica</span>
+                    <i class="fas fa-users-cog"></i>
+                    <span>Gestión de Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
-                        <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
-                        <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
+                        <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -73,6 +72,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-building"></i>
                     <span>Empresas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -86,7 +86,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Documentos -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
-                    <span>Perfil</span>
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mi Perfil</span>
                 </a>
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -137,7 +138,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -154,7 +155,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Revision de Solicitudes Aprobadas</h1>
+                                <h1 class="h3 mb-0 text-gray-800">Revisión de Solicitudes Aprobadas</h1>
                                 <br>
                             </div>
                         </div>
@@ -182,6 +183,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <thead>
                                 <tr>
                                     <th>Empresa</th>
+                                    <th>Fecha Solicitud</th>
                                     <th>N° de Practicantes</th>
                                     <th>Areas</th>
                                     <th>Doc Protocolos</th>
@@ -212,6 +214,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <tr>
 
                                             <td><?php echo $solicitud['nombre_empresa'] ?></td>
+                                            <td><?php echo $solicitud['fecha_solicitud'] ?></td>
                                             <td><?php echo $solicitud['numero_practicantes'] ?></td>
                                             <td><?php echo $solicitud['funciones'] ?></td>
                                             <td>
@@ -290,6 +293,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <tfoot>
                                 <tr>
                                     <th>Empresa</th>
+                                    <th>Fecha Solicitud</th>
                                     <th>N° de Practicantes</th>
                                     <th>Funciones</th>
                                     <th>Doc Protocolos</th>

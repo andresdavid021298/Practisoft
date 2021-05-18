@@ -243,4 +243,40 @@ class EmpresaModel
             return $result;
         }
     }
+
+    // Metodo que duevuelve el total de empresas según la actividad económica
+    public function verCantidadEmpresasSegunActividad()
+    {
+        $lista_empresas = NULL;
+        $query = "SELECT actividad_empresa, COUNT(*) as cantidad_empresa FROM empresa GROUP BY actividad_empresa";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_empresas[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $lista_empresas;
+        }
+    }
+
+    // Metodo que duevuelve el total de empresas según el sector
+    public function verCantidadEmpresasSegunSector()
+    {
+        $lista_empresas = NULL;
+        $query = "SELECT sector_empresa, COUNT(*) as cantidad_empresa FROM empresa GROUP BY sector_empresa";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_empresas[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $lista_empresas;
+        }
+    }
 }

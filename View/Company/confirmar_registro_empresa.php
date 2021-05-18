@@ -42,7 +42,7 @@ $activar_empresa = activarEstadoEmpresa($id_empresa);
                             <br>
                             <div class="row" style="text-align: center;">
                                 <div class="col-sm">
-                                    <a class="text-center mt-2 medium" href="../../index.php">Iniciar Sesion</a>
+                                    <a class="text-center mt-2 medium" href="../../index.php">Iniciar Sesión</a>
                                 </div>
                             </div>
                         </form>

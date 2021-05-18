@@ -49,7 +49,7 @@ if (isset($_POST['accion'])) {
                 $oMail->Password = "practisoftufps2021@";
                 $oMail->setFrom("practisoftufps@gmail.com");
                 $oMail->addAddress($correo_empresa);
-                $oMail->Subject = '[' . 'Confirmacion de Empresa' . ']' . ' - [' . ' PractiSoft UFPS' . '] - [' . $result['nombre_empresa'] . ']';
+                $oMail->Subject = 'Registro de Empresa' . ' - ' . 'PractiSoft UFPS' . ' - ' . $result['nombre_empresa'];
                 $oMail->msgHTML($head);
                 if (!$oMail->send()) {
                     $response['title'] = $oMail->ErrorInfo;
@@ -150,9 +150,9 @@ if (isset($_POST['accion'])) {
         if ($result != NULL) {
             $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
             <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
-            <h3 style='text-align: center;'><strong>Mensaje de recuperacion de clave</strong></h3>
-            <p><b>" . $result['nombre_empresa'] . "</b>, recuerda que tienes una hora para restablecer tu contraseña antes de que caduque el link.</p>
-            <p>Para reestablecer tu contraseña, da click <a href='" . $servidor . "/Practisoft/View/Company/Recuperar_clave_email.php?id_empresa=" . $result['id_empresa'] . "&token=" . $token . "'>aquí.</a></p>";
+            <h3 style='text-align: center;'><strong>Mensaje de recuperación de clave</strong></h3>
+            <p>Empresa <b>" . $result['nombre_empresa'] . "</b>, recuerde que tiene una hora para restablecer su contraseña antes de que caduque el link.</p>
+            <p>Para restablecer su contraseña, acceda al siguiente <a href='" . $servidor . "/Practisoft/View/Company/Recuperar_clave_email.php?id_empresa=" . $result['id_empresa'] . "&token=" . $token . "'>link.</a></p>";
             try {
                 $oMail = new PHPMailer();
                 $oMail->isSMTP();
@@ -164,9 +164,9 @@ if (isset($_POST['accion'])) {
                 $oMail->Password = "practisoftufps2021@";
                 $oMail->setFrom("practisoftufps@gmail.com");
                 $oMail->addAddress($correo_empresa);
-                $oMail->Subject = '[' . 'Reestablecimiento de Clave' . ']' . ' - [' . ' PractiSoft UFPS' . '] - [' . $result['nombre_empresa'] . ']';
+                $oMail->Subject = "Restablecimiento de Clave - PractiSoft UFPS" . " - " . $result['nombre_empresa'];
                 $oMail->msgHTML($head);
-                $response['title'] = "Solicitud recibida. Por favor revisa tu correo.";
+                $response['title'] = "Solicitud recibida. Por favor revise su correo.";
                 $response['state'] = "success";
                 if (!$oMail->send()) {
                     $response['title'] = $oMail->ErrorInfo;
@@ -252,4 +252,18 @@ function verificarEstadoEmpresa($id_empresa)
 {
     $obj_empresa_model = new EmpresaModel();
     return $obj_empresa_model->verificarEstadoEmpresa($id_empresa);
+}
+
+// Metodo que conecta con el modelo para mostrar la cantidad de empresas según la actividad económica
+function verCantidadEmpresasSegunActividad()
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verCantidadEmpresasSegunActividad();
+}
+
+// Metodo que conecta con el modelo para mostrar la cantidad de empresas según el sector
+function verCantidadEmpresasSegunSector()
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verCantidadEmpresasSegunSector();
 }

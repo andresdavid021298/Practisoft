@@ -66,7 +66,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-user"></i> Ver Practicantes</a>
                         <a class="collapse-item" href="ver_actividades.php"><i class="fas fa-check-circle"></i> Ver Actividades</a>
                         <a class="collapse-item" href="ver_estudiantes_plan_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
-                        <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfaccion</a>
+                        <a class="collapse-item" href="encuesta_satisfaccion.php"><i class="fas fa-star-half-alt"></i> Encuesta de Satisfacción</a>
                     </div>
                 </div>
             </li>
@@ -96,10 +96,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-alt"></i> Convenio</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
-                        <a class="collapse-item" href="#"><i class="fas fa-id-card"></i> C.C Representante</a>
+                        <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
+                        <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
+                        <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
+                        <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a>
                         <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
                     </div>
                 </div>
@@ -142,7 +142,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -193,7 +193,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Area Requerida:</label>
+                                            <label for="message-text" class="col-form-label">Área Requerida:</label>
                                             <ul class="list-group list-group-flush">
 
                                                 <li class="list-group-item">
@@ -207,7 +207,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     <!-- Default checked -->
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" name="areas[]" value="Capacitacion" class="custom-control-input" id="check2">
-                                                        <label class="custom-control-label" for="check2">Capacitacion</label>
+                                                        <label class="custom-control-label" for="check2">Capacitación</label>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
@@ -219,7 +219,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                             <br>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input class="custom-control-input" value="Desarrollo de Software Movil" onclick="SeleccionarcheckboxDesarrolloSoftware()" type="checkbox" name="checkMovil" id="checkMovil">
-                                                                <label class="custom-control-label" for="checkMovil">Movil</label>
+                                                                <label class="custom-control-label" for="checkMovil">Móvil</label>
                                                             </div>
                                                             <br>
                                                             <div class="custom-control custom-checkbox">
@@ -300,8 +300,9 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Numero de Practicantes</th>
-                                    <th>Area</th>
+                                    <th>Fecha Solicitud</th>
+                                    <th>Número de Practicantes</th>
+                                    <th>Área</th>
                                     <th>Observaciones</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
@@ -323,24 +324,48 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     foreach ($datos_solicitud as $datos) {
                                     ?>
                                         <tr>
+                                            <td><?php echo $datos['fecha_solicitud'] ?></td>
                                             <td><?php echo $datos['numero_practicantes'] ?></td>
                                             <td><?php echo $datos['funciones'] ?></td>
                                             <td><?php echo $datos['observaciones_solicitud'] ?></td>
-                                            <td><?php echo $datos['estado_solicitud'] ?></td>
                                             <td>
-                                                <?php if ($datos['estado_solicitud'] == 'En Espera') {
-
-                                                ?>
-                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
                                                 <?php
-                                                } else if ($datos['estado_solicitud'] == 'Rechazada') {
-
+                                                if ($datos['estado_solicitud'] == 'En Espera') {
                                                 ?>
-                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
-                                                <?php
-                                                }
-                                                ?>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-yellow?style=for-the-badge">
                                             </td>
+                                            <td>
+                                            <?php
+                                                } else if ($datos['estado_solicitud'] == 'Aprobada') {
+                                            ?>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-green?style=for-the-badge">
+                                            <?php
+                                                } else {
+                                            ?>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-red?style=for-the-badge">
+                                            </td>
+                                            <td>
+                                            <?php
+                                                } ?>
+                                            <?php if ($datos['estado_solicitud'] == 'En Espera') {
+
+                                            ?>
+                                                <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
+                                            <?php
+                                            } else if ($datos['estado_solicitud'] == 'Rechazada') {
+
+                                            ?>
+                                                <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
+                                            <?php
+                                            } else {
+                                            ?>
+                                            <td style="text-align: center; display: table-cell; vertical-align: middle;">
+                                                <i class="fas fa-check-square"></i>
+                                            </td>
+                                        <?php
+                                            }
+                                        ?>
+                                        </td>
                                         </tr>
                                 <?php
                                     }

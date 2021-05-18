@@ -37,7 +37,7 @@ if ($_GET['id_empresa'] == NULL || $_GET['token'] == NULL) {
                         <center><img src="../../Img/logo_ingsistemas.png" width="300px" height="110px"></center>
                         <h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5>
                         <form class="form-signin" method="POST" enctype="multipart/form-data">
-                            <p style="text-align: center;"><em>Ingresa la nueva clave para el reestablecimiento de tu contraseña.</em></p>
+                            <p style="text-align: center;"><em>Ingrese la nueva clave para el restablecimiento de su contraseña.</em></p>
                             <div class="form-label-group" onkeyup="validarClavesEnPerfil();">
                                 <input type="password" id="inputClave1" name="inputClave1" class="form-control" placeholder="Nueva clave" required>
                                 <label for="inputClave1">Nueva clave</label>
@@ -51,7 +51,7 @@ if ($_GET['id_empresa'] == NULL || $_GET['token'] == NULL) {
                             <br>
                             <div class="row" style="text-align: center;">
                                 <div class="col-12">
-                                    <a class="text-center mt-2 medium" href="../../index.php">Iniciar Sesion</a>
+                                    <a class="text-center mt-2 medium" href="../../index.php">Iniciar Sesión</a>
                                 </div>
                             </div>
                             <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_GET['id_empresa']; ?>">

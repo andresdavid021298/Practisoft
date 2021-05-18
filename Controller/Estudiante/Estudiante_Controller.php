@@ -1,5 +1,6 @@
 <?php
 require_once "../../Model/DAO/Estudiante_Model.php";
+require_once "../../Model/DAO/Solicitud_Model.php";
 
 // Metodo que conecta con la vista para mostrar informacion de practicantes asignados a una empresa
 function listarEstudiantesPorEmpresa($id_empresa)
@@ -28,7 +29,8 @@ function listarEstudiantes()
     return $obj_estudiante_model->listarEstudiantes();
 }
 
-function listarEstudiantesPorGrupo($id_grupo){
+function listarEstudiantesPorGrupo($id_grupo)
+{
     $obj_estudiante_model = new EstudianteModel();
     return $obj_estudiante_model->listarEstudiantesPorGrupo($id_grupo);
 }
@@ -71,17 +73,25 @@ if (isset($_POST['accion'])) {
         $response = array();
         $id_estudiante = $_POST['id_estudiante'];
         $id_empresa = $_POST['id_empresa'];
+        $id_solicitud = $_POST['id_solicitud'];
+        $obj_solicitud_model = new SolicitudModel();
+        $result = $obj_solicitud_model->disminuirNumeroDePracticantes($id_solicitud);
         $obj_estudiante_model = new EstudianteModel();
         $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa);
-        if ($rta == 0) {
+        if ($result == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
         } else {
-            $response['state'] = "success";
-            $response['title'] = "Estudiante asignado correctamente";
+            if ($rta == 0) {
+                $response['state'] = "error";
+                $response['title'] = "Ocurrio un error";
+            } else {
+                $response['state'] = "success";
+                $response['title'] = "Estudiante asignado correctamente";
+            }
         }
         echo json_encode($response);
-    }  else if ($_POST['accion'] == "eliminar_estudiante") {
+    } else if ($_POST['accion'] == "eliminar_estudiante") {
         $response = array();
         $id_estudiante = $_POST['id_estudiante'];
         $obj_estudiante_model = new EstudianteModel();
@@ -94,8 +104,7 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Estudiante eliminado correctamente";
         }
         echo json_encode($response);
-    }  
-
+    }
 } else if (isset($_FILES['input_archivo']['name'])) {
     $response = array();
     $id_grupo = $_POST['input_id_grupo'];
@@ -109,24 +118,23 @@ if (isset($_POST['accion'])) {
     if ($tipo_archivo != "text/plain") {
         $response['title'] = "Solo se permiten archivos de texto plano (TXT)";
         $response['state'] = "warning";
-    } 
-    else {
+    } else {
         move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
         $content = file($location);
-        
+
         $obj_estudiante_model = new EstudianteModel();
         $cont = 0;
-        
+
         foreach ($content as $correo) {
             if ($cont > 1) {
                 $obj_estudiante_model->insertarEstudiante($correo, $id_grupo);
             }
             $cont++;
         }
-        if($cont > 0){
+        if ($cont > 0) {
             $response['title'] = "Estudiantes Agregados Correctamente";
             $response['state'] = "success";
         }
     }
     echo json_encode($response);
-} 
+}

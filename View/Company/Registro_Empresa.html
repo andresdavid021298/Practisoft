@@ -28,7 +28,8 @@
                         <center><img src="../../Img/logo_ingsistemas.png" width="300px" height="110px"></center>
                         <h5 class="text-center"
                             style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-                            <strong>PRACTISOFT</strong></h5>
+                            <strong>PRACTISOFT</strong>
+                        </h5>
                         <form class="form-signin" method="POST" action="../../Controller/Empresa_Controller.php">
                             <div class="form-label-group">
                                 <input type="text" id="inputNombreEmpresa" name="input_nombre_empresa"
@@ -48,13 +49,13 @@
                             <div class="form-label-group">
                                 <input type="text" id="inputDireccion" name="input_direccion_empresa"
                                     class="form-control" placeholder="Direccion" required>
-                                <label for="inputDireccion">Direccion de la Empresa</label>
+                                <label for="inputDireccion">Dirección de la Empresa</label>
                             </div>
                             <div class="form-group">
-                                <label for="selectMunicipio">Seleccione el municipio</label>
+                                <label for="selectMunicipio">Seleccione el Municipio</label>
                                 <select name="select_municipio" id="selectMunicipio" class="form-control">
                                     <!-- <option value="">Seleccione el sector</option> -->
-                                    <option value="Cucuta">Cucuta</option>
+                                    <option value="Cucuta">Cúcuta</option>
                                     <option value="Villa del Rosario">Villa del Rosario</option>
                                     <option value="Los Patios">Los Patios</option>
                                 </select>
@@ -62,34 +63,35 @@
                             <div class=" form-label-group">
                                 <input type="email" id="inputCorreo" name="input_correo_empresa" class="form-control"
                                     placeholder="Correo Electronico" required>
-                                <label for="inputCorreo">Correo Electronico de la Empresa</label>
+                                <label for="inputCorreo">Correo Electrónico de la Empresa</label>
                             </div>
                             <div class=" form-label-group">
                                 <input type="text" id="inputPaginaWeb" name="input_pagina_web_empresa"
                                     class="form-control" placeholder="Pagina Web">
-                                <label for="inputPaginaWeb">Pagina Web de la Empresa</label>
+                                <label for="inputPaginaWeb">Página Web de la Empresa</label>
                             </div>
                             <div class="form-label-group">
                                 <input type="number " id="inputContacto" name="input_celular_empresa"
                                     class="form-control" placeholder="Contacto" required>
-                                <label for="inputContacto">Numero de Celular de la Empresa</label>
+                                <label for="inputContacto">Número de Teléfono Móvil de la Empresa</label>
                             </div>
                             <div class="form-label-group">
                                 <input type="number " id="inputTelefono" name="input_telefono_empresa"
                                     class="form-control" placeholder="Telefono">
-                                <label for="inputTelefono">Telefono de la Empresa</label>
+                                <label for="inputTelefono">Teléfono Fijo de la Empresa</label>
                             </div>
                             <div class="form-group">
-                                <label for="selectSector">Seleccione el sector de la empresa</label>
+                                <label for="selectSector">Seleccione el Sector de la Empresa</label>
                                 <select name="select_sector" id="selectSector" class="form-control">
                                     <option value="Privado">Privado</option>
-                                    <option value="Publico">Publico</option>
+                                    <option value="Publico">Público</option>
                                 </select>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="selectActividad">Seleccione la actividad de la empresa</label>
-                                <select onclick="mostrarYOcultarInput();" name="select_actividad" id="selectActividad" class="form-control">
+                                <label for="selectActividad">Seleccione la Actividad de la Empresa</label>
+                                <select onclick="mostrarYOcultarInput();" name="select_actividad" id="selectActividad"
+                                    class="form-control">
                                     <option value="Tecnologia">Tecnología</option>
                                     <option value="Religioso">Religioso</option>
                                     <option value="Comercial">Comercial</option>
@@ -102,8 +104,8 @@
                                 <br>
                                 <div id="divOtro">
                                     <p>Si seleccionó otro, por favor especifique</p>
-                                    <input type="text " id="inputActividadOtro" name="input_actividad_otro" class="form-control"
-                                        placeholder="Actividad de la empresa">
+                                    <input type="text " id="inputActividadOtro" name="input_actividad_otro"
+                                        class="form-control" placeholder="Actividad de la Empresa">
                                 </div>
                             </div>
                             <br>
@@ -127,11 +129,11 @@
                             <button class="btn btn-lg btn-block text-uppercase"
                                 style="background-color: #D61117; color: white;" id="btn_registrar_empresa"
                                 type="button" onclick="alertaRegistro()"
-                                name="btn_registrar_empresa">Registrarte</button>
+                                name="btn_registrar_empresa">Registrarse</button>
 
                             <hr class="my-4 ">
-                            <a class="d-block text-center mt-2 medium " href="../../index.php">¿Ya tienes cuenta? Inicia
-                                Sesion</a>
+                            <a class="d-block text-center mt-2 medium " href="../../index.php">¿Ya tiene cuenta? Inicie
+                                Sesión</a>
                         </form>
                     </div>
                 </div>
