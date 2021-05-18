@@ -45,6 +45,20 @@ class ActividadPlanTabajoModel
         }
     }
 
+    public function eliminarActividadPlanTrabajo($id_actividad_plan_trabajo)
+    {
+        $query = "DELETE FROM actividades_plan_trabajo WHERE id_actividad_plan_trabajo=:id";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_actividad_plan_trabajo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
     // Metodo que permite listar todas las actividades del plan de trabajo de un estudiante
     public function listarActividadesPlanTrabajoPorEstudiante($id_estudiante)
     {

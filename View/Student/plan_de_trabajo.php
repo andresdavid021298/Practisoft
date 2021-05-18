@@ -62,7 +62,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
+                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripción</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
@@ -128,7 +128,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -149,21 +149,22 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     if (is_null($empresa_estudiante)) {
                     ?>
                         <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
-                    <?php
+                        <?php
                     } else {
-                    ?>
-
-
-                        <form name="suma" method="POST" onkeyup="sumatoria()">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <label>Cantidad de horas por plan de trabajo acumuladas: </label>
-                                        <input type="number" class="sinBorde" name="resultado" style="width: 53px;" disabled>
-                                        <label>/320</label>
+                        require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
+                        $lista_actividades = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
+                        if (is_null($lista_actividades)) {
+                        ?>
+                            <form name="suma" method="POST" onkeyup="sumatoria()">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <label>Cantidad de horas por plan de trabajo acumuladas: </label>
+                                            <input type="number" class="sinBorde" name="resultado" style="width: 53px;" disabled>
+                                            <label>/320</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                                 <br>
                                 <div class="row" id="primer_row">
 
@@ -172,7 +173,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                         <textarea class="form-control form-control-lg" id="actividad" rows="1"></textarea>
                                     </div>
                                     <div class="form-group col-md-4" id="numero_horas_estatica">
-                                        <label for="exampleFormControlInput1">Numero de Horas</label>
+                                        <label for="exampleFormControlInput1">Número de Horas</label>
                                         <input type="number" class="form-control form-control-lg" id="numero_horas" name="numHoras" min="1" max="320">
                                     </div>
                                 </div>
@@ -187,8 +188,40 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     <br>
                                     <input type="button" value="Guardar" class="btn btn-primary" onclick="agregarPlanDeTrabajo()">
                                 </div>
-                        </form>
-                    <?php } ?>
+                            </form>
+                        <?php } else {
+                        ?>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary" onclick="eliminarActividadesPlanTrabajoPorEdicion(<?php echo $_SESSION['id_estudiante']; ?>);">Realizar Nuevo Plan de Trabajo</button>
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Número de Actividad</th>
+                                                <th>Descripción</th>
+                                                <th>Número de Horas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $cont = 1;
+                                            foreach ($lista_actividades as $actividad) {
+                                            ?>
+                                                <tr>
+                                                    <td>Actividad <?php echo $cont; ?></td>
+                                                    <td><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
+                                                    <td><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
+                                                </tr>
+                                            <?php
+                                                $cont++;
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } ?>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
@@ -221,8 +254,15 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/Student//alertas_estudiante.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    //Función que realiza la suma
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
+<script>
+    //Función que realiza la suma de las actividades del plan de trabajo
     function sumatoria() {
         var inputs_actividades = document.getElementsByClassName("form-control form-control-lg");
         var arreglo_actividades = [];
@@ -237,6 +277,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
         }
     }
 </script>
+
 <!-- Valida si un estudiante ya hizo un plan de trabajo -->
 <?php
 require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
@@ -245,19 +286,9 @@ $lista = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
 // Sino, valida si tiene actividades del plan de trabajo
 if (!is_null($lista)) {
     $estado_plan_trabajo = $lista[0]['estado'];
-    // Valida si las actividades fueron rechazadas por el tutor
-    if ($estado_plan_trabajo == "En Espera") {
 ?>
-        <script>
-            swal.fire({
-                icon: "error",
-                title: "Ya registra un plan de trabajo, esta en espera de aprobacion"
-            }).then(() => {
-                window.location = "index_student.php";
-            })
-        </script>
-        <!-- Sino, valida si estan aprobadas -->
-    <?php } else if ($estado_plan_trabajo == "Aprobada") {
+    <!--valida si estan aprobadas -->
+    <?php if ($estado_plan_trabajo == "Aprobada") {
     ?>
         <script>
             swal.fire({
