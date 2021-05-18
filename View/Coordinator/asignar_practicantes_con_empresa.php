@@ -48,7 +48,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" style="text-align: center;" href="index_coordinator.php">
-                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
+                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
             <!-- Divider -->
@@ -57,16 +57,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
-                    <!-- <i class="fas fa-users-cog"></i> -->
-                    <span>Gestion Practica</span>
+                    <i class="fas fa-users-cog"></i>
+                    <span>Gestión de Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
-                        <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
-                        <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
+                        <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -74,6 +73,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-building"></i>
                     <span>Empresas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -87,12 +87,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Documentos -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
-                    <span>Perfil</span>
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mi Perfil</span>
                 </a>
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i></i> Mi Perfil</a>
+                        <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i></i> Ver Perfil</a>
                     </div>
                 </div>
             </li>
@@ -135,7 +136,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -155,14 +156,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 $estudiante = buscarEstudiante($_GET['id_estudiante']);
                 if (is_null($estudiante)) {
                 ?>
-                    <h2 style="color: #D61117; text-align: center;">Estudiante NO registrado en el sistema</h2>
+                    <h2 style="color: #D61117; text-align: center;">Estudiante no registrado en el sistema</h2>
                     <?php
                 } else {
                     require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
                     $buscar_encuesta = detallarEncuestaPorEstudiante($_GET['id_estudiante']);
                     if (is_null($buscar_encuesta)) {
                     ?>
-                        <h2 style="color: #D61117; text-align: center;">NO presenta encuesta de inscripcion</h2>
+                        <h2 style="color: #D61117; text-align: center;">No presenta encuesta de inscripción</h2>
                     <?php
                     } else {
                     ?>
@@ -179,10 +180,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 <center>Nombre Empresa</center>
                                             </th>
                                             <th>
-                                                <center>Numero de Practicantes</center>
+                                                <center>Número de Practicantes</center>
                                             </th>
                                             <th>
-                                                <center>Areas</center>
+                                                <center>Áreas</center>
                                             </th>
                                             <th>
                                                 <center>Opciones</center>
@@ -196,7 +197,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         if (is_null($solicitudes_aprobadas)) {
                                         ?>
                                             <tr>
-                                                <td colspan="4" style="color: #D61117; text-align: center;">El sistema NO cuenta con solicitudes aprobadas</td>
+                                                <td colspan="4" style="color: #D61117; text-align: center;">El sistema no cuenta con solicitudes aprobadas</td>
                                             </tr>
                                             <?php
                                         } else {
@@ -213,7 +214,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <center><?php echo $solicitud['funciones']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,<?php echo $solicitud['id_empresa']; ?>)">Vincular</button></center>
+                                                        <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,<?php echo $solicitud['id_empresa']; ?>),<?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
                                                     </td>
                                                 </tr>
                                         <?php }
@@ -231,7 +232,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#D61117;">
-                            <h5 class="modal-title" id="exampleModalLabel" style="color: white;"><?php echo $estudiante['nombre_estudiante'];?></h5>
+                            <h5 class="modal-title" id="exampleModalLabel" style="color: white;"><?php echo $estudiante['nombre_estudiante']; ?></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -242,33 +243,39 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             $buscar_encuesta = detallarEncuestaPorEstudiante($_GET['id_estudiante']);
                             ?>
                             <div class="form-group row">
-                                <label class="col-sm-9 col-form-label">Area de desarrollo de software: </label>
+                                <label class="col-sm-9 col-form-label">Área de Desarrollo de Software: </label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_desarrollo']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-9 col-form-label">Area de Administracion de Redes:</label>
+                                <label class="col-sm-9 col-form-label">Área de Administración de Redes:</label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_redes']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-9 col-form-label">Area de Mantenimiento de Hardware/Software: </label>
+                                <label class="col-sm-9 col-form-label">Área de Mantenimiento de Hardware/Software: </label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_mantenimiento']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-9 col-form-label">Area de Capacitacion: </label>
+                                <label class="col-sm-9 col-form-label">Área de Capacitación: </label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_capacitacion']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-9 col-form-label">Areas de Servidores y Computacion en la Nube: </label>
+                                <label class="col-sm-9 col-form-label">Área de Servidores y Computación en la Nube: </label>
                                 <div class="col-sm-3">
                                     <input type="text" class="form-control" value="<?php echo $buscar_encuesta['area_servidores']; ?>" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Otro: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" value="<?php echo $buscar_encuesta['otro']; ?>" readonly>
                                 </div>
                             </div>
                         </div>

@@ -46,7 +46,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" style="text-align: center;" href="index_coordinator.php">
-                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MENU</span></a>
+                    <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
             <!-- Divider -->
@@ -55,16 +55,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
-                    <!-- <i class="fas fa-users-cog"></i> -->
-                    <span>Gestion Practica</span>
+                    <i class="fas fa-users-cog"></i>
+                    <span>Gestión de Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
-                        <a class="collapse-item" href="ver_practicantes.php"><i class="fas fa-users"></i> Ver Estudiantes</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
-                        <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
+                        <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -72,6 +71,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-building"></i>
                     <span>Empresas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -85,12 +85,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Documentos -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
-                    <span>Perfil</span>
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mi Perfil</span>
                 </a>
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i></i> Mi Perfil</a>
+                        <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i></i> Ver Perfil</a>
                     </div>
                 </div>
             </li>
@@ -126,14 +127,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
+                                <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -163,19 +163,22 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <center>Nombre</center>
                                         </th>
                                         <th>
-                                            <center>Area de Desarrollo de Software</center>
+                                            <center>Área de Desarrollo de Software</center>
                                         </th>
                                         <th>
-                                            <center>Area de Redes</center>
+                                            <center>Área de Redes</center>
                                         </th>
                                         <th>
-                                            <center>Area de Mantenimiento</center>
+                                            <center>Área de Mantenimiento</center>
                                         </th>
                                         <th>
-                                            <center>Area de Capacitacion</center>
+                                            <center>Área de Capacitación</center>
                                         </th>
                                         <th>
-                                            <center>Area de Servidores y Computacion en la Nube</center>
+                                            <center>Área de Servidores y Computación en la Nube</center>
+                                        </th>
+                                        <th>
+                                            <center>Otro</center>
                                         </th>
                                         <th>
                                             <center>Opciones</center>
@@ -195,8 +198,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 $encuesta_estudiante = detallarEncuestaPorEstudiante($estudiante['id_estudiante']);
                                                 if (is_null($encuesta_estudiante)) {
                                                 ?>
-                                                    <td colspan="6" style="color: #D61117;">
-                                                        <center>NO PRESENTA ENCUESTA DE INSCRIPCION</center>
+                                                    <td colspan="7" style="color: #D61117;">
+                                                        <center>NO PRESENTA ENCUESTA DE INSCRIPCIÓN</center>
                                                     </td>
                                                 <?php
                                                 } else {
@@ -215,6 +218,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                     </td>
                                                     <td>
                                                         <center><?php echo $encuesta_estudiante['area_servidores']; ?></center>
+                                                    </td>
+                                                    <td>
+                                                        <center><?php echo $encuesta_estudiante['otro']; ?></center>
                                                     </td>
                                                     <td>
                                                         <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Asignar</a></center>

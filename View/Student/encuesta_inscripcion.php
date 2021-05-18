@@ -62,7 +62,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
+                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripción</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
@@ -122,13 +122,12 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
                                     <b><?php echo $_SESSION['nombre_estudiante'] ?></b>
                                 </span>
-                                
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -140,7 +139,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 <div class="container-fluid">
                     <center>
-                        <h2>Encuesta de Inscripcion</h2>
+                        <h2>Encuesta de Inscripción</h2>
                     </center>
                     <br>
                     <div class="form-group row">
@@ -152,8 +151,8 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <br>
                     <h4><strong>Areas</strong></h4>
                     <br>
-                    <p>Selecciona tu área de interés para aplicar a una empresa, de acuerdo con los siguientes criterios: 5. <strong>Muy Interesado</strong>, 4. <strong>Interesado</strong>, 3. <strong>Medianamente Interesado</strong>,
-                        2. <strong>Poco Interesado</strong>, 1. <strong>Nada Interesado</strong></p>
+                    <p>Seleccione el área de interés para aplicar a una empresa, de acuerdo con los siguientes criterios: <strong>Muy Interesado</strong>, <strong>Interesado</strong>, <strong>Medianamente Interesado</strong>,
+                        <strong>Poco Interesado</strong>, <strong>Nada Interesado</strong>, </p>
                     <form>
                         <div class="form-group row">
                             <label for="select_area_desarrollo" class="col-sm-4">Desarrollo de Software</label>
@@ -176,7 +175,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="select_area_capacitacion" class="col-sm-4">Capacitacion</label>
+                            <label for="select_area_capacitacion" class="col-sm-4">Capacitación</label>
                             <select name="select_area_capacitacion" id="select_area_capacitacion" class="form-control col-sm-6">
                                 <option value="5">Muy Interesado</option>
                                 <option value="4">Interesado</option>
@@ -186,7 +185,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="select_area_redes" class="col-sm-4">Mantenimiento y Administracion de Redes</label>
+                            <label for="select_area_redes" class="col-sm-4">Mantenimiento y Administración de Redes</label>
                             <select name="select_area_redes" id="select_area_redes" class="form-control col-sm-6">
                                 <option value="5">Muy Interesado</option>
                                 <option value="4">Interesado</option>
@@ -196,7 +195,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             </select>
                         </div>
                         <div class="form-group row">
-                            <label for="select_area_servidores" class="col-sm-4">Servidores y Computacion de la Nube</label>
+                            <label for="select_area_servidores" class="col-sm-4">Servidores y Computación en la Nube</label>
                             <select name="select_area_servidores" id="select_area_servidores" class="form-control col-sm-6">
                                 <option value="5">Muy Interesado</option>
                                 <option value="4">Interesado</option>
@@ -204,6 +203,10 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <option value="2">Poco Interesado</option>
                                 <option value="1">Nada Interesado</option>
                             </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="input_otro" class="col-sm-4">Otro, ¿Cuál?</label>
+                            <input type="email" class="form-control col-sm-6" id="input_otro">
                         </div>
                         <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
                         <div class="col text-center">

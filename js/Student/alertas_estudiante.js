@@ -133,6 +133,7 @@ function guardarEncuestaInscripcion() {
     area_servidores = document.getElementById("select_area_servidores").value;
     area_redes = document.getElementById("select_area_redes").value;
     area_capacitacion = document.getElementById("select_area_capacitacion").value;
+    otro = document.getElementById("input_otro").value;
     $.ajax({
             url: "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php",
             type: "POST",
@@ -143,7 +144,8 @@ function guardarEncuestaInscripcion() {
                 "area_mantenimiento": area_mantenimiento,
                 "area_desarrollo": area_desarrollo,
                 "area_servidores": area_servidores,
-                "area_redes": area_redes
+                "area_redes": area_redes,
+                "otro": otro
             },
             dataType: "JSON"
         })
@@ -157,7 +159,7 @@ function guardarEncuestaInscripcion() {
         })
 }
 
-// Metodo para mostrar alerta al momento de agregar el plan de trabajo
+// Metodo para mostrar alerta al momento de agregar el plan de trabajo con todas las actividades
 function agregarPlanDeTrabajo() {
     var id_estudiante = document.getElementById("input_id_estudiante").value;
     var inputs_actividades;
@@ -204,19 +206,57 @@ function agregarPlanDeTrabajo() {
     }
 }
 
-// Metodo que permite conectar con el controlador para borrar luego de la accion en la alerta
+// Metodo que permite conectar con el controlador para borrar todas las actividades luego de la accion en la alerta
 function eliminarActividadesPlanTrabajo(id_estudiante) {
     $.ajax({
         url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
         type: "POST",
         data: {
-            "accion": "eliminar_actividad_plan_trabajo",
+            "accion": "eliminar_todas_actividad_plan_trabajo",
             "id_estudiante": id_estudiante
         },
         dataType: "JSON"
-    }).done(function() {
-        window.location = "plan_de_trabajo.php";
+    }).done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = "plan_de_trabajo.php";
+        })
     })
+
+}
+
+// Metodo que permite conectar con el controlador para borrar todas las actividades luego de la accion en la alerta
+function eliminarActividadesPlanTrabajoPorEdicion(id_estudiante) {
+    swal.fire({
+        icon: "question",
+        title: '¿Esta seguro de continuar?',
+        text: "Se eliminarán las actividades previas",
+        showCancelButton: true,
+        confirmButtonText: "Continuar",
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "eliminar_todas_actividad_plan_trabajo",
+                    "id_estudiante": id_estudiante
+                },
+                dataType: "JSON"
+            }).done(function(response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "plan_de_trabajo.php";
+                })
+            })
+        }
+    })
+
 }
 
 //Método que permite conectar con el controlador para subir la carta compromisoria del estudiante

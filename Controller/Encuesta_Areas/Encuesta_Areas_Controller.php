@@ -10,8 +10,9 @@ if (isset($_POST['accion'])) {
         $area_desarrollo = $_POST["area_desarrollo"];
         $area_servidores = $_POST["area_servidores"];
         $area_redes = $_POST["area_redes"];
+        $otro = $_POST["otro"];
         $obj_encuesta_areas_model = new Encuesta_Areas_Model();
-        $rta = $obj_encuesta_areas_model->insertarEncuesta($id_estudiante, $area_capacitacion, $area_desarrollo, $area_mantenimiento, $area_redes, $area_servidores);
+        $rta = $obj_encuesta_areas_model->insertarEncuesta($id_estudiante, $area_capacitacion, $area_desarrollo, $area_mantenimiento, $area_redes, $area_servidores,$otro);
         if ($rta == 0) {
             $response['title'] = "Error al guardar la encuesta de inscripcion";
             $response['state'] = "error";
