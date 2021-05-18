@@ -53,11 +53,12 @@ if ($_SESSION['id_estudiante'] == NULL) {
             /* IE9 */
         }
 
-        .arreglo_imagen {
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
+        .imgRedonda {
+            width: 55px;
+            height: 55px;
+            border-radius: 150px;
+            border: 2px solid black;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -93,7 +94,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripcion</a>
+                        <a class="collapse-item" href="encuesta_inscripcion.php"> <i class="fas fa-file-alt"></i> Inscripción</a>
                         <a class="collapse-item" href="ver_empresa.php"><i class="fas fa-building"></i> Ver Empresa</a>
                         <a class="collapse-item" href="documento_carta_compromisoria.php"><i class="fas fa-file-signature"></i> C. Compromisoria</a>
                         <a class="collapse-item" href="plan_de_trabajo.php"><i class="fas fa-book"></i> Plan de Trabajo </a>
@@ -150,14 +151,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_estudiante'] ?></b></span>
-                                
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="../../index.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesion
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Cerrar Sesión
                                 </a>
                             </div>
                         </li>
@@ -171,213 +172,259 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                         <!-- Cards segun si presenta o no encuesta de inscripcion -->
                         <?php
-                        require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
-                        $num_registros = buscarEncuesta($_SESSION['id_estudiante']);
-                        if ($num_registros > 0) {
+                        require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                        $datos_estudiante = buscarEstudiante($_SESSION['id_estudiante']);
+                        if (is_null($datos_estudiante['nombre_estudiante']) || is_null($datos_estudiante['correo_estudiante']) || is_null($datos_estudiante['codigo_estudiante']) || is_null($datos_estudiante['celular_estudiante'])) {
                         ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Encuesta de Inscripcion</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">¡¡LISTO!!</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-poll-h fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } else { ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-danger shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Encuesta de Inscripcion</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Registra Encuesta de Inscripcion</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-poll-h fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <!-- Cards segun si tiene asignado o no empresa -->
-                        <?php
-                        require_once "../../Controller/Empresa/Empresa_Controller.php";
-                        $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
-                        if (is_null($info_empresa)) {
-                        ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-danger shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Empresa</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Tiene Empresa Asignada</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-building fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-danger shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Tutor</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No Tiene Tutor Asignado</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-user fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } else { ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Empresa</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Su empresa es: <?php echo $info_empresa['nombre_empresa'] ?></div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-building fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                            if (is_null($info_empresa['nombre_tutor'])) {
-                            ?>
-                                <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                    <div class="card border-left-danger shadow h-100 py-2">
+                                <a href="perfil.php">
+                                    <div class="card border-left-warning shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                        Tutor</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No Tiene Tutor Asignado</div>
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                        Información de Perfil</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Debe completar la información de perfil</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                                                    <i class="fas fa-user-edit fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </a>
+                            </div>
+                            <?php
+                        } else {
+                            require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
+                            $num_registros = buscarEncuesta($_SESSION['id_estudiante']);
+                            if ($num_registros > 0) {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="encuesta_inscripcion.php">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                            Encuesta de Inscripción</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">¡Listo!</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-poll-h fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             <?php } else { ?>
                                 <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                    <div class="card border-left-success shadow h-100 py-2">
-                                        <div class="card-body">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                        Tutor</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Su tutor es: <?php echo $info_empresa['nombre_tutor']; ?></div>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-user fa-2x text-gray-300"></i>
+                                    <a href="encuesta_inscripcion.php">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                            Encuesta de Inscripción</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">No registra encuesta de inscripción</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-poll-h fa-2x text-gray-300"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            <?php }
-                        }
-                        require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
-                        $plan_trabajo = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
-                        if (is_null($plan_trabajo)) {
+                            <?php } ?>
+                            <!-- Cards segun si tiene asignado o no empresa -->
+                            <?php
+                            require_once "../../Controller/Empresa/Empresa_Controller.php";
+                            $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);
+                            if (is_null($info_empresa)) {
                             ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-danger shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Plan de Trabajo</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">No presenta plan de trabajo</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-book fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } else if($plan_trabajo[0]['estado']=="En Espera"){
-                        ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Plan de Trabajo</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo en espera de revision</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-book fa-2x text-gray-300"></i>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="ver_empresa.php">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                            Empresa</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene empresa asignada</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </div>
-                        <?php } else if($plan_trabajo[0]['estado']=="Rechazada"){
-                        ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Plan de Trabajo</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo rechazado, porfavor vuelve a enviarlo</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-book fa-2x text-gray-300"></i>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="ver_empresa.php">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                            Tutor</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene tutor asignado</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-user fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </div>
-                        <?php } else{
-                        ?>
-                            <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Plan de Trabajo</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo aprobado</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-book fa-2x text-gray-300"></i>
+                            <?php } else { ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="ver_empresa.php">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                            Empresa</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Su empresa es: <?php echo $info_empresa['nombre_empresa'] ?></div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </div>
+                                <?php
+                                if (is_null($info_empresa['nombre_tutor'])) {
+                                ?>
+                                    <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                        <a href="ver_empresa.php">
+                                            <div class="card border-left-danger shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                                Tutor</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene tutor asignado</div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                        <a href="ver_empresa.php">
+                                            <div class="card border-left-success shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                Tutor</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Su tutor es: <?php echo $info_empresa['nombre_tutor']; ?></div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php }
+                            }
+                            require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
+                            $plan_trabajo = listarActividadesPlanTrabajoPorEstudiante($_SESSION['id_estudiante']);
+                            if (is_null($plan_trabajo)) {
+                                ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="plan_de_trabajo.php">
+                                        <div class="card border-left-danger shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                            Plan de Trabajo</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">No presenta plan de trabajo</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php } else if ($plan_trabajo[0]['estado'] == "En Espera") {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="plan_de_trabajo.php">
+                                        <div class="card border-left-info shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                            Plan de Trabajo</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo en espera de revisión</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php } else if ($plan_trabajo[0]['estado'] == "Rechazada") {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="plan_de_trabajo.php">
+                                        <div class="card border-left-warning shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                            Plan de Trabajo</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo rechazado, por favor vuelva a enviarlo</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php } else {
+                            ?>
+                                <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                    <a href="plan_de_trabajo.php">
+                                        <div class="card border-left-success shadow h-100 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                            Plan de Trabajo</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Plan de trabajo aprobado</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php } ?>
                         <?php } ?>
-
                     </div>
                 </div>
             </div>
@@ -394,7 +441,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
                     <p>PractiSoft 2021</p>
-                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
+                    <p>Desarrollado por: Andrés Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
                 </div>
             </footer>
             <!-- End of Footer -->
@@ -403,22 +450,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
     </div>
 
 </body>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/eventos.js"></script>
-<script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 
 </html>
