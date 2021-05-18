@@ -11627,21 +11627,9 @@ footer {
     background-color: #9D9C9C;
     border-top: 3px solid #d61117;
     color: #333;
-    height: 120px;
-    margin-top: 20px;
+    height: 100%;
     text-align: center;
     width: 100%;
-}
-
-.ufps-footer-light {
-    background-color: #ecf0f1;
-    border-top: 3px solid #d61117;
-    color: #333;
-}
-
-.ufps-footer-dark {
-    background-color: #2c3e50;
-    border-top: 3px solid #d61117;
 }
 
 .ufps-footer h1,
