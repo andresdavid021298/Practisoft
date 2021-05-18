@@ -62,10 +62,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
                         <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
-                        
+                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="ver_documentacion.php"><i class="fas fa-book"></i> Ver Documentacion</a>
                     </div>
                 </div>
             </li>
@@ -154,46 +154,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 require_once '../../Controller/Grupo/Grupo_Controller.php';
                                 $grupo = buscarGrupo($_GET['id_grupo']);
                                 ?>
-                                <h1 class="h3 mb-0 text-gray-800">Estudiantes <?php echo $grupo['nombre_grupo'] ?> </h1>
+                                <h1 class="h3 mb-0 text-gray-800">Documentos de Estudiantes <?php echo $grupo['nombre_grupo'] ?> </h1>
                                 <br>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Inicio Cargar Estudiantes al Sistema mediante archivo txt -->
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <strong>
-                                        <p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p>
-                                    </strong>
-                                    <div class="fileUpload btn">
-                                        <label for="inputArchivo">Seleccione su archivo</label>
-                                        <input type="file" name="input_archivo" id="input_archivo">
-                                        <input type="hidden" id="input_id_grupo" name="id_grupo" value="<?php echo $_GET['id_grupo']; ?>">
-                                        <button type="button" class="btn btn-danger" onclick="subirEstudiantes()">Subir</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </form>
-                    <div>
-                        <center>
-                            <a class="btn btn-primary" href="crear_informe_estudiantes.php?id_grupo=<?php echo $_GET['id_grupo']; ?>">Exportar PDF</a>
-                            <!-- <form action="crear_informe_estudiantes.php" method="post">
-                                <div>
-                                    
-                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
-                                </div>
-                            </form> -->
-                        </center>
-                    </div>
 
-
-                    <!-- Fin -->
 
                     <!-- Inicio Tabla Solicitudes -->
 
@@ -202,40 +169,60 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
+                                    <th>Estudiante</th>
+                                    <th>Carta Compromisoria </th>
+                                    <th>Informe de Avance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                                $estudiantes = listarEstudiantesPorGrupo($_GET['id_grupo']);
+                                require_once '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php';
+                                $lista_documentos = listarDocumentosEstudiantePorGrupo($_GET['id_grupo']);
 
-                                if (is_null($estudiantes)) {
+                                if (is_null($lista_documentos)) {
                                 ?>
                                     <td colspan="6" style="color: #D61117;">
-                                        <center><strong>NO EXISTEN ESTUDIANTES EN ESTE GRUPOS</strong></center>
+                                        <center><strong>NO EXISTEN ESTUDIANTES ASIGNADOS A ESTE GRUPO</strong></center>
                                     </td>
                                     <?php
                                 } else {
 
-                                    foreach ($estudiantes as $estudiante) {
+                                    foreach ($lista_documentos as $lista) {
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $estudiante['nombre_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['codigo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['correo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['celular_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['nombre_empresa'] ?></td>
+                                            <td><?php echo $lista['nombre_estudiante'] ?></td>
                                             <td>
-                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center>
+                                                <?php
+                                                $cartaCompromisoria = mostrarDocumentoCartaCompromisoria($lista['id_estudiante']);
+                                                if ($cartaCompromisoria == true) {
+                                                    if ($cartaCompromisoria['archivo_carta_compromisoria'] != NULL) {
+                                                ?>
+                                                        <center><a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $cartaCompromisoria['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
+                                                        <center>
+                                                            <p><?php echo $cartaCompromisoria['archivo_carta_compromisoria'] ?></p>
+                                                        </center>
 
-                                                <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Eliminar Estudiante</button></center>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $informeAvance = mostrarDocumentoInformeDeAvance($lista['id_estudiante']);
+                                                if ($informeAvance == true) {
+                                                    if ($informeAvance['archivo_informe_avance'] != NULL) {
+                                                ?>
+                                                        <center><a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informeAvance['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
+                                                        <center>
+                                                            <p><?php echo $informeAvance['archivo_informe_avance'] ?></p>
+                                                        </center>
+
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
                                 <?php
@@ -245,18 +232,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
+                                    <th>Estudiante</th>
+                                    <th>Carta Compromisoria </th>
+                                    <th>Informe de Avance</th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+
                 </div>
-                <!-- Fin de tabla Solicitudes -->
+
             </div>
             <!-- End of Page Wrapper -->
 

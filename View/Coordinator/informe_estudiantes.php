@@ -1,6 +1,8 @@
 <?php
 require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-$obj_estudiante_model = listarEstudiantes();
+require_once '../../Controller/Grupo/Grupo_Controller.php';
+$obj_estudiante_model = listarEstudiantesPorGrupo($_GET['id_grupo']);
+$buscarGrupo = buscarGrupo($_GET['id_grupo']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ $obj_estudiante_model = listarEstudiantes();
 <body>
 	<table border="1" align="center" cellspacing="0" cellpadding="5">
 		<tr align="center" bgcolor="#D61117">
-			<td colspan="6" style="color: white;"><b>ESTUDIANTES <br>
+			<td colspan="6" style="color: white;"><b>ESTUDIANTES <?php $buscarGrupo['nombre_grupo'] ?><br>
 					PRACTICA EMPRESARIAL</b></td>
 		</tr>
 		<tr>
@@ -69,7 +71,7 @@ $obj_estudiante_model = listarEstudiantes();
 						<?php echo $row['nombre_empresa']; ?>
 					</td>
 					<td>
-						<?php echo $row['nombre_tutor']; ?>
+						<?php echo $row['nombre_tutor'];?>
 					</td>
 			<?php
 			}

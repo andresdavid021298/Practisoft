@@ -48,7 +48,9 @@ function rechazarSolicitud() {
 //Método que permite mostrar alerta cuando se sube el listado de estudiantes al sistema
 function subirEstudiantes() {
     var inputArchivo = document.getElementById('input_archivo').value;
+    var input_id_grupo = document.getElementById('input_id_grupo').value;
     console.log(inputArchivo);
+    console.log(input_id_grupo);
     var fd = new FormData();
     var files = $('#input_archivo')[0].files;
     if (inputArchivo == "") {
@@ -57,6 +59,7 @@ function subirEstudiantes() {
             title: "Hay campos vacios"
         })
     } else {
+        fd.append('input_id_grupo', input_id_grupo);
         fd.append('input_archivo', files[0]);
         $.ajax({
             url: '../../Controller/Estudiante/Estudiante_Controller.php',
@@ -70,7 +73,7 @@ function subirEstudiantes() {
                 icon: response.state,
                 title: response.title
             }).then(() => {
-                window.location = "ver_practicantes.php"
+                window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
             })
         })
     }
@@ -78,6 +81,8 @@ function subirEstudiantes() {
 
 function eliminarEstudiante(id_estudiante){
     console.log(id_estudiante);
+    var input_id_grupo = document.getElementById('input_id_grupo').value;
+    console.log(input_id_grupo);
     $.ajax({
         url: "../../Controller/Estudiante/Estudiante_Controller.php",
         type: "POST",
@@ -92,7 +97,7 @@ function eliminarEstudiante(id_estudiante){
             icon: response.state,
             title: response.title
         }).then(() => {
-            window.location = response.location;
+            window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
         })
     })
 }
@@ -125,7 +130,7 @@ function actualizarPerfil() {
 }
 
 //Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
-function vincularEstudianteConEmpresa(id_estudiante, id_empresa) {
+function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_sollicitud) {
 
     swal.fire({
         title: '¿Esta seguro de vincular al estudiante?',
@@ -140,7 +145,8 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa) {
                     data: {
                         "accion": "asignar_empresa_estudiante",
                         "id_estudiante": id_estudiante,
-                        "id_empresa": id_empresa
+                        "id_empresa": id_empresa,
+                        "id_solicitud": id_solicitud
                     },
                     dataType: "JSON"
                 })

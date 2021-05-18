@@ -28,6 +28,11 @@ function listarEstudiantes()
     return $obj_estudiante_model->listarEstudiantes();
 }
 
+function listarEstudiantesPorGrupo($id_grupo){
+    $obj_estudiante_model = new EstudianteModel();
+    return $obj_estudiante_model->listarEstudiantesPorGrupo($id_grupo);
+}
+
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "actualizar_perfil") {
         $response = array();
@@ -84,18 +89,16 @@ if (isset($_POST['accion'])) {
         if ($rta == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
-            $response['location'] = "ver_practicantes.php";
         } else {
             $response['state'] = "success";
             $response['title'] = "Estudiante eliminado correctamente";
-            $response['location'] = "ver_practicantes.php";
         }
         echo json_encode($response);
     }  
 
 } else if (isset($_FILES['input_archivo']['name'])) {
     $response = array();
-
+    $id_grupo = $_POST['input_id_grupo'];
     $nombre_archivo = $_FILES['input_archivo']['name'];
     $formato_nombre = "Estudiantes_Practicas";
     $extension = strrchr($nombre_archivo, ".");
@@ -116,7 +119,7 @@ if (isset($_POST['accion'])) {
         
         foreach ($content as $correo) {
             if ($cont > 1) {
-                $obj_estudiante_model->insertarEstudiante($correo);
+                $obj_estudiante_model->insertarEstudiante($correo, $id_grupo);
             }
             $cont++;
         }

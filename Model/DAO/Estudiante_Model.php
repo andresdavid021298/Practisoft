@@ -14,11 +14,12 @@ class EstudianteModel
     }
 
     // Metodo para insertar un nuevo estudiante en la base de datos(Solo conociendo el correo electronico)
-    public function insertarEstudiante($correo)
+    public function insertarEstudiante($correo, $grupo)
     {
-        $query = "INSERT INTO estudiante(correo_estudiante) VALUES(:correo)";
+        $query = "INSERT INTO estudiante(correo_estudiante, id_grupo) VALUES(:correo, :id_grupo)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":id_grupo", $grupo);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
@@ -96,7 +97,7 @@ class EstudianteModel
     // Meotodo que permite listar la informacion de todos los estudiantes
     public function listarEstudiantes()
     {
-        $query = "SELECT es.id_estudiante,es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, 
+        $query = "SELECT es.id_estudiante, es.id_grupo, es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, 
                   em.nombre_empresa AS nombre_empresa, t.nombre_tutor AS nombre_tutor
                   FROM estudiante AS es LEFT JOIN empresa AS em ON es.id_empresa=em.id_empresa
                   LEFT JOIN tutor AS t ON es.id_tutor=t.id_tutor";
@@ -113,6 +114,30 @@ class EstudianteModel
             return $lista_estudiantes;
         }
     }
+
+    // Metodo para listar estudiantes por curso
+    public function listarEstudiantesPorGrupo($id_grupo)
+    {
+        $query = "SELECT es.id_estudiante, es.id_grupo, es.nombre_estudiante, es.codigo_estudiante, es.correo_estudiante, es.celular_estudiante, em.nombre_empresa, t.nombre_tutor
+                  FROM estudiante AS es 
+                  LEFT JOIN empresa AS em ON es.id_empresa=em.id_empresa
+                  LEFT JOIN tutor t ON es.id_tutor = t.id_tutor
+                  WHERE es.id_grupo =:id_grupo";
+        $lista_estudiantes = NULL;
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_grupo", $id_grupo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_estudiantes[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_estudiantes;
+        }
+    }
+
 
     // Metodo que lista y datos los estudiantes que estan asignados a cierta empresa
     public function listarEstudiantesPorEmpresa($id_empresa)

@@ -3,9 +3,10 @@
 // require_once 'dompdf/autoload.inc.php';
 require_once '../../vendor/autoload.php';
 use Dompdf\Dompdf;
-
+$id_grupo = $_GET['id_grupo'];
+echo($id_grupo);
 // Introducimos HTML de prueba
-$html=file_get_contents_curl("http://localhost/Practisoft/View/Coordinator/informe_estudiantes.php");
+$html=file_get_contents_curl("http://localhost/Practisoft/View/Coordinator/informe_estudiantes.php?id_grupo=". $id_grupo);
 
 // Instanciamos un objeto de la clase DOMPDF.
 $pdf = new DOMPDF();

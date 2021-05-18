@@ -20,6 +20,11 @@ function mostrarDocumentoInformeDeAvance($id_estudiante)
     return $obj_informe_avance->mostrarDocumentoInformeDeAvance($id_estudiante);
 }
 
+function listarDocumentosEstudiantePorGrupo($id_grupo){
+    $obj_lista_documentos = new DocumentosEstudianteModel();
+    return $obj_lista_documentos->listarDocumentosEstudianteGrupo($id_grupo);
+}
+
 if (isset($_FILES['input_archivo_carta']['name'])) {
     $response = array();
     $nombreArchivo = $_FILES['input_archivo_carta']['name'];
