@@ -77,7 +77,7 @@ if (isset($_POST['accion'])) {
         $obj_solicitud_model = new SolicitudModel();
         $result = $obj_solicitud_model->disminuirNumeroDePracticantes($id_solicitud);
         $obj_estudiante_model = new EstudianteModel();
-        $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa);
+        $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa, $id_solicitud);
         if ($result == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";

@@ -63,7 +63,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
                         <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
+                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -147,7 +147,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </center>
                 <?php
                 require_once "../../Controller/Estudiante/Estudiante_Controller.php";
-                $lista_estudiantes = listarEstudiantes();
+                $grupo = $_GET['id_grupo'];
+                $lista_estudiantes = listarEstudiantesPorGrupo($grupo);
                 if (is_null($lista_estudiantes)) {
                 ?>
                     <h2 style="color: #D61117; text-align: center;">No hay estudiantes registrados en el semestre actual</h2>
@@ -191,7 +192,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         if (is_null($estudiante['nombre_empresa'])) {
                                     ?><tr>
                                                 <td>
-                                                    <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                                    <center>
+                                                        <?php
+                                                        
+                                                            if(is_null($estudiante['nombre_estudiante'])){
+                                                                echo $estudiante['correo_estudiante'];
+                                                            }else{
+                                                                echo $estudiante['nombre_estudiante'];
+                                                            } 
+                                                             ?>
+                                                    </center>
                                                 </td>
                                                 <?php
                                                 require_once "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php";
@@ -223,7 +233,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <center><?php echo $encuesta_estudiante['otro']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Asignar</a></center>
+                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo?>">Asignar</a></center>
                                                     </td>
                                             </tr>
                                 <?php }

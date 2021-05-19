@@ -1,7 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['id_coordinador'] == NULL) {
-
+if ($_SESSION['id_director'] == NULL) {
     header("Location: ../../index.php");
 }
 ?>
@@ -28,6 +27,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .imgRedonda {
+            width: 55px;
+            height: 55px;
+            border-radius: 150px;
+            border: 2px solid black;
+            margin-right: 10px;
+        }
+    </style>
 
 </head>
 
@@ -46,7 +54,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="index_coordinator.php">
+                <a class="nav-link" style="text-align: center;" href="index_director.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
@@ -62,9 +70,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
-                        <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
-                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="agregar_coordinador.php"><i class="fas fa-user-cog"></i> Agregar Coordinador</a>
+                        <a class="collapse-item" href="crear_grupos.php"><i class="fas fa-users"></i> Crear Grupos </a>
+                        <a class="collapse-item" href="gestionar_semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-chart-pie"></i> Informe Estadistico </a>
                     </div>
                 </div>
             </li>
@@ -97,6 +106,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </div>
             </li>
 
+            <!-- Nav Item - Informes -->
+            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -128,8 +140,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
-                                    <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
+                                    <b><?php echo $_SESSION['nombre_director'] ?></b>
                                 </span>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
@@ -145,68 +158,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-                <div class="container-fluid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Grupos de Practicas Empresariales</h1>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
 
-
-
-                    <!-- Inicio Tabla Solicitudes -->
-
-                    <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
-
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                require_once '../../Controller/Grupo/Grupo_Controller.php';
-                                $lista_grupos = listarGruposPorCoordinador($_SESSION['id_coordinador']);
-
-                                if (is_null($lista_grupos)) {
-                                ?>
-                                    <td colspan="6" style="color: #D61117;">
-                                        <center><strong>NO EXISTEN GRUPOS EN EL SISTEMA</strong></center>
-                                    </td>
-                                    <?php
-                                } else {
-
-                                    foreach ($lista_grupos as $lista) {
-                                    ?>
-                                        <tr>
-
-                                            <td><?php echo $lista['nombre_grupo'] ?></td>
-                                            <td>
-                                                <center><a class="btn btn-primary" href="ver_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Gestionar</a></center><br>
-                                                <center><a class="btn btn-warning" href="ver_documentacion_estudiante.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Documentación</a></center>
-                                            </td>
-                                        </tr>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                <div>
 
                 </div>
-
             </div>
             <!-- End of Page Wrapper -->
 
@@ -234,9 +189,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/Coordinator/alertas_coordinador.js"></script>
+<script src="../../js/eventos.js"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

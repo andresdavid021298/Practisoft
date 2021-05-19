@@ -130,8 +130,8 @@ function actualizarPerfil() {
 }
 
 //Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
-function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_sollicitud) {
-
+function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
+    id_grupo = document.getElementById('id_grupo').value;
     swal.fire({
         title: '¿Esta seguro de vincular al estudiante?',
         showCancelButton: true,
@@ -155,7 +155,7 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_sollicitud) 
                         icon: response.state,
                         title: response.title
                     }).then(() => {
-                        window.location = "asignar_practicantes.php";
+                        window.location = "asignar_practicantes.php?id_grupo="+id_grupo;
                     })
                 })
         }

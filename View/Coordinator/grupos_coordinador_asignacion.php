@@ -151,6 +151,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <div class="col text-center">
                                 <h1 class="h3 mb-0 text-gray-800">Grupos de Practicas Empresariales</h1>
                                 <br>
+                                <strong><p style="color: black;">Seleccione el grupo en el que desea realizar la asignación de practicantes</p></strong>
                             </div>
                         </div>
                     </div>
@@ -187,8 +188,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                                             <td><?php echo $lista['nombre_grupo'] ?></td>
                                             <td>
-                                                <center><a class="btn btn-primary" href="ver_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Gestionar</a></center><br>
-                                                <center><a class="btn btn-warning" href="ver_documentacion_estudiante.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Documentación</a></center>
+                                                <center><a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Ver y Asignar</a></center><br>
                                             </td>
                                         </tr>
                                 <?php

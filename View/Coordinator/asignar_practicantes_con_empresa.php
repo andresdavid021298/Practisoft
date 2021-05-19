@@ -65,7 +65,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
                         <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
-                        <a class="collapse-item" href="asignar_practicantes.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
+                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -129,9 +129,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
-                                <!-- <img class="img-profile rounded-circle" src="../../Img/arrow_icon.png"> -->
-                                <img src="../../Img/arrow_icon.png" style="width: 20px; height: 20px;;" alt="Cargando Imagen..." width="100%" height="200px">
+                            <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
+                                <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -146,7 +145,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <div style="padding-left: 10px;">
-                    <a class="btn btn-primary" href="asignar_practicantes.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+                    <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $_GET['id_grupo']?>"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
                 <center>
                     <h2>Asignar Practicante</h2>
@@ -214,7 +213,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <center><?php echo $solicitud['funciones']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,<?php echo $solicitud['id_empresa']; ?>),<?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
+                                                        <input type="hidden" id="id_grupo" value="<?php echo $_GET['id_grupo'] ?>">
+                                                        <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,
+                                                        <?php echo $solicitud['id_empresa']; ?>, <?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
                                                     </td>
                                                 </tr>
                                         <?php }
