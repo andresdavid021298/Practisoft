@@ -33,7 +33,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -152,7 +152,8 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <h4><strong>Areas</strong></h4>
                     <br>
                     <p>Seleccione el área de interés para aplicar a una empresa, de acuerdo con los siguientes criterios: <strong>Muy Interesado</strong>, <strong>Interesado</strong>, <strong>Medianamente Interesado</strong>,
-                        <strong>Poco Interesado</strong>, <strong>Nada Interesado</strong>, </p>
+                        <strong>Poco Interesado</strong>, <strong>Nada Interesado</strong>,
+                    </p>
                     <form>
                         <div class="form-group row">
                             <label for="select_area_desarrollo" class="col-sm-4">Desarrollo de Software</label>

@@ -33,7 +33,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -65,7 +65,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
                         <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
                         <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
-                        
+
                     </div>
                 </div>
             </li>

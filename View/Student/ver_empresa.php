@@ -33,7 +33,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -122,7 +122,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
                                     <b><?php echo $_SESSION['nombre_estudiante'] ?></b>
                                 </span>
-                                
+
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -155,61 +155,61 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 ?>
                     <center><strong style="color:#D61117">NO POSEE EMPRESA ASIGNADA EN EL SISTEMA</strong></center>
 
-                    <?php
+                <?php
                 } else {
 
-                    ?>
-                        <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
+                ?>
+                    <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
 
-                            <div class="container">
-                                <div class="row" style="justify-content: center;">
-                                    <div class="form-group mx-sm-3 mb-2">
-                                        <label for="Empresa">Nombre:</label>
-                                        <input value="<?php echo $datos_empresa['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
+                        <div class="container">
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="Empresa">Nombre:</label>
+                                    <input value="<?php echo $datos_empresa['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
+                            </div>
 
-                                <div class="row" style="justify-content: center;">
-                                    <div class="form-group mx-sm-3 mb-2">
-                                        <label for="Tutor">Tutor:</label>
-                                        <?php
-                                        if ($datos_empresa['nombre_tutor'] == NULL) {
-                                        ?>
-                                            <input value="Sin tutor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <input value="<?php echo $datos_empresa['nombre_tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="Tutor">Tutor:</label>
+                                    <?php
+                                    if ($datos_empresa['nombre_tutor'] == NULL) {
+                                    ?>
+                                        <input value="Sin tutor" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <input value="<?php echo $datos_empresa['nombre_tutor']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
+                            </div>
 
-                                <div class="row" style="justify-content: center;">
-                                    <div class="form-group mx-sm-3 mb-2">
-                                        <label for="Direccion">Direccion:</label>
-                                        <input value="<?php echo $datos_empresa['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="Direccion">Direccion:</label>
+                                    <input value="<?php echo $datos_empresa['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
+                            </div>
 
-                                <div class="row" style="justify-content: center;">
-                                    <div class="form-group mx-sm-3 mb-2">
-                                        <label for="Empresa">Celular:</label>
-                                        <input value="<?php echo $datos_empresa['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
+                            <div class="row" style="justify-content: center;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="Empresa">Celular:</label>
+                                    <input value="<?php echo $datos_empresa['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
-
-
-
-
                             </div>
 
 
-                        </form>
+
+
+                        </div>
+
+
+                    </form>
 
                 <?php
-                    }
+                }
                 ?>
                 <!-- Fin Formulario -->
                 <!-- End of Topbar -->

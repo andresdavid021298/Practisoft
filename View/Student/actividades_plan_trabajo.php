@@ -33,7 +33,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -163,16 +163,16 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 ?>
                                 <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
                             </div>
-                                <div>
-                                    <center>
-                                        <form action="crear_informe_actividades.php" method="post">
-                                            <div>
+                            <div>
+                                <center>
+                                    <form action="crear_informe_actividades.php" method="post">
+                                        <div>
                                             <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
-                                                <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
-                                            </div>
-                                        </form>
-                                    </center>
-                                </div>
+                                            <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
+                                        </div>
+                                    </form>
+                                </center>
+                            </div>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>

@@ -33,7 +33,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -191,15 +191,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <tr>
 
                                             <td>
-                                                <?php 
-                                                    if($lista['nombre_estudiante']== NULL){
-                                                        echo $lista['correo_estudiante'];
-                                                    }else{
-                                                        echo $lista['nombre_estudiante'];
-                                                    } 
+                                                <?php
+                                                if ($lista['nombre_estudiante'] == NULL) {
+                                                    echo $lista['correo_estudiante'];
+                                                } else {
+                                                    echo $lista['nombre_estudiante'];
+                                                }
                                                 ?>
                                             </td>
-                                            
+
                                             <td>
                                                 <?php
                                                 $cartaCompromisoria = mostrarDocumentoCartaCompromisoria($lista['id_estudiante']);
@@ -211,14 +211,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                             <p><?php echo $cartaCompromisoria['archivo_carta_compromisoria'] ?></p>
                                                         </center>
 
-                                                <?php
+                                                    <?php
                                                     }
-                                                }else{
+                                                } else {
+                                                    ?>
+                                                    <center>
+                                                        <p style="color: #D61117;">No ha cargado documento</p>
+                                                    </center>
+                                                <?php
+                                                }
                                                 ?>
-                                                <center><p style="color: #D61117;">No ha cargado documento</p></center>
-                                                <?php 
-                                            }
-                                            ?>
                                             </td>
                                             <td>
                                                 <?php
@@ -231,15 +233,17 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                             <p><?php echo $informeAvance['archivo_informe_avance'] ?></p>
                                                         </center>
 
-                                                <?php
+                                                    <?php
                                                     }
-                                                }else{
+                                                } else {
                                                     ?>
-                                                    <center><p style="color: #D61117;">No ha cargado documento</p></center>
-                                                    <?php 
+                                                    <center>
+                                                        <p style="color: #D61117;">No ha cargado documento</p>
+                                                    </center>
+                                                <?php
                                                 }
                                                 ?>
-                                                
+
                                             </td>
                                         </tr>
                                 <?php

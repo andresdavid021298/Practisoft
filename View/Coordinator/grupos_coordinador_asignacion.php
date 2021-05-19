@@ -33,7 +33,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -151,7 +151,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <div class="col text-center">
                                 <h1 class="h3 mb-0 text-gray-800">Grupos de Practicas Empresariales</h1>
                                 <br>
-                                <strong><p style="color: black;">Seleccione el grupo en el que desea realizar la asignación de practicantes</p></strong>
+                                <strong>
+                                    <p style="color: black;">Seleccione el grupo en el que desea realizar la asignación de practicantes</p>
+                                </strong>
                             </div>
                         </div>
                     </div>

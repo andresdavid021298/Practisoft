@@ -34,7 +34,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -129,7 +129,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
+                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_coordinador'] ?></b></span>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -145,7 +145,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <div style="padding-left: 10px;">
-                    <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $_GET['id_grupo']?>"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
+                    <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $_GET['id_grupo'] ?>"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
                 <center>
                     <h2>Asignar Practicante</h2>

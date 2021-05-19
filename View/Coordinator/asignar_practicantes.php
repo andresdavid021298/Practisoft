@@ -32,7 +32,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
 <body id="page-top">
     <div>
-        <img src="../../Img/prueba1.jpg" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -194,13 +194,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 <td>
                                                     <center>
                                                         <?php
-                                                        
-                                                            if(is_null($estudiante['nombre_estudiante'])){
-                                                                echo $estudiante['correo_estudiante'];
-                                                            }else{
-                                                                echo $estudiante['nombre_estudiante'];
-                                                            } 
-                                                             ?>
+
+                                                        if (is_null($estudiante['nombre_estudiante'])) {
+                                                            echo $estudiante['correo_estudiante'];
+                                                        } else {
+                                                            echo $estudiante['nombre_estudiante'];
+                                                        }
+                                                        ?>
                                                     </center>
                                                 </td>
                                                 <?php
@@ -233,7 +233,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <center><?php echo $encuesta_estudiante['otro']; ?></center>
                                                     </td>
                                                     <td>
-                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo?>">Asignar</a></center>
+                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo ?>">Asignar</a></center>
                                                     </td>
                                             </tr>
                                 <?php }
