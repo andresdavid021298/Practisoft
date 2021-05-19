@@ -35,6 +35,28 @@ if ($_SESSION['id_coordinador'] == NULL) {
             border: 2px solid black;
             margin-right: 10px;
         }
+
+        .zoom {
+            transition: 0.5s ease;
+            -moz-transition: 0.5s ease;
+            /* Firefox */
+            -webkit-transition: 0.5s ease;
+            /* Chrome - Safari */
+            -o-transition: 0.5s ease;
+            /* Opera */
+        }
+
+        .zoom:hover {
+            transform: scale(1.18);
+            -moz-transform: scale(1.18);
+            /* Firefox */
+            -webkit-transform: scale(1.18);
+            /* Chrome - Safari */
+            -o-transform: scale(1.18);
+            /* Opera */
+            -ms-transform: scale(1.18);
+            /* IE9 */
+        }
     </style>
 
 </head>
@@ -108,7 +130,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Informes -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
-                <i class="fas fa-file-contract"></i>
+                    <i class="fas fa-file-contract"></i>
                     <span>Informes</span>
                 </a>
                 <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -170,8 +192,143 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <div>
-
+                <div class="container-fluid">
+                    <div class="row">
+                        <?php
+                        require_once "../../Controller/Grupo/Grupo_Controller.php";
+                        $lista_grupos = listarGruposPorCoordinador($_SESSION['id_coordinador']);
+                        if (is_null($lista_grupos)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="grupos_coordinador.php">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Numero de Grupos Asignados</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene grupos asignados</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="grupos_coordinador.php">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Numero de Grupos Asignados</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_grupos); ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php }
+                        require_once "../../Controller/Solicitud/Solicitud_Controller.php";
+                        $solicitudes_en_espera = listaSolicitudEmpresas();
+                        if (is_null($solicitudes_en_espera)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="revision_solicitudes.php">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Solicitudes en Espera</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene solicitudes pendientes</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-pause fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="revision_solicitudes.php">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                        Solicitudes en Espera</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($solicitudes_en_espera); ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-pause fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        require_once "../../Controller/Empresa/Empresa_Controller.php";
+                        $lista_de_empresas = listarTodasLasEmpresas();
+                        if (is_null($lista_de_empresas)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="ver_empresas.php">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Numero de Empresas</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No existen empresas en el sistema</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="ver_empresas.php">
+                                    <div class="card border-left-primary shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Numero de Empresas</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_de_empresas); ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
             <!-- End of Page Wrapper -->

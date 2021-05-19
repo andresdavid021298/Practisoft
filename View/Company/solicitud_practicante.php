@@ -315,9 +315,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 $datos_solicitud = mostrarInformacion($id_empresa);
                                 if (is_null($datos_solicitud)) {
                                 ?>
-                                    <td colspan="4" style="color: #D61117;">
-                                        <center><strong>NO POSEE SOLICITUDES DE PRACTICANTES EN EL SISTEMA</strong></center>
-                                    </td>
+                                    <tr>
+                                        <td colspan="6" style="color: #D61117;">
+                                            <center><strong>NO POSEE SOLICITUDES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                        </td>
+                                    </tr>
                                     <?php
                                 } else {
 
@@ -328,59 +330,52 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <td><?php echo $datos['numero_practicantes'] ?></td>
                                             <td><?php echo $datos['funciones'] ?></td>
                                             <td><?php echo $datos['observaciones_solicitud'] ?></td>
-                                            <td>
-                                                <?php
-                                                if ($datos['estado_solicitud'] == 'En Espera') {
-                                                ?>
+                                            <?php
+                                            if ($datos['estado_solicitud'] == 'En Espera') {
+                                            ?>
+                                                <td>
                                                     <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-yellow?style=for-the-badge">
-                                            </td>
-                                            <td>
+                                                </td>
                                             <?php
-                                                } else if ($datos['estado_solicitud'] == 'Aprobada') {
+                                            } else if ($datos['estado_solicitud'] == 'Aprobada') {
                                             ?>
-                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-green?style=for-the-badge">
+                                                <td>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-green?style=for-the-badge">
+                                                </td>
                                             <?php
-                                                } else {
+                                            } else {
                                             ?>
-                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-red?style=for-the-badge">
-                                            </td>
-                                            <td>
+                                                <td>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $datos['estado_solicitud'] ?>-red?style=for-the-badge">
+                                                </td>
                                             <?php
-                                                } ?>
+                                            } ?>
                                             <?php if ($datos['estado_solicitud'] == 'En Espera') {
 
                                             ?>
-                                                <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
+                                                <td>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
+                                                </td>
                                             <?php
                                             } else if ($datos['estado_solicitud'] == 'Rechazada') {
 
                                             ?>
-                                                <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
+                                                <td>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
+                                                </td>
                                             <?php
                                             } else {
                                             ?>
-                                            <td style="text-align: center; display: table-cell; vertical-align: middle;">
-                                                <i class="fas fa-check-square"></i>
-                                            </td>
-                                        <?php
+                                                <td></td>
+                                            <?php
                                             }
-                                        ?>
-                                        </td>
+                                            ?>
                                         </tr>
                                 <?php
                                     }
                                 }
                                 ?>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Numero de Practicantes</th>
-                                    <th>Area</th>
-                                    <th>Observaciones</th>
-                                    <th>Estado</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
