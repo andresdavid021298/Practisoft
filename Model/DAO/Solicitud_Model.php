@@ -246,7 +246,7 @@ class SolicitudModel
             return 0;
         } else {
             $cantidad_practicantes = $this->cantidadDePracticantesPorSolicitud($id_solicitud);
-            if($cantidad_practicantes <= 0){
+            if ($cantidad_practicantes <= 0) {
                 $this->eliminarSolicitud($id_solicitud);
             }
             $stmt->closeCursor();
@@ -268,6 +268,25 @@ class SolicitudModel
             $numero_practicantes = $result['numero_practicantes'];
             $stmt->closeCursor();
             return $numero_practicantes;
+        }
+    }
+
+    // Metodo que retorna la cantidad de solicitudes de las empresas
+    public function cantidadSolicitudesPorEmpresa()
+    {
+        $query = "SELECT e.nombre_empresa, COUNT(s.id_empresa) as 'cantidad_solicitudes'
+        FROM empresa AS e LEFT JOIN solicitud AS s ON e.id_empresa=s.id_empresa GROUP BY e.nombre_empresa";
+        $cantidad_solicitudes = NULL;
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $cantidad_solicitudes[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $cantidad_solicitudes;
         }
     }
 }

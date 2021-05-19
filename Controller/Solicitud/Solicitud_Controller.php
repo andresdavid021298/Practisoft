@@ -18,12 +18,11 @@ if (isset($_POST['accion'])) {
             $response['location'] = "solicitud_practicante.php";
         }
         echo json_encode($response);
-    }
-    else if($_POST['accion'] == 'validar_solicitud'){
+    } else if ($_POST['accion'] == 'validar_solicitud') {
         $id_solicitud = $_POST['id_solicitud'];
         $solicitud = new SolicitudModel();
         $rta = $solicitud->cambiarSolicitudAprobada($id_solicitud);
-        if($rta == 0){
+        if ($rta == 0) {
             $response['title'] = "Error al validar la solicitud";
             $response['state'] = "error";
             $response['location'] = "revision_solicitudes.php";
@@ -33,13 +32,12 @@ if (isset($_POST['accion'])) {
             $response['location'] = "revision_solicitudes.php";
         }
         echo json_encode($response);
-    }
-    else if($_POST['accion'] == 'rechazar_solicitud'){
+    } else if ($_POST['accion'] == 'rechazar_solicitud') {
         $id_solicitud = $_POST['id_solicitud'];
         $observacion = $_POST['observacion'];
         $solicitud = new SolicitudModel();
         $rta = $solicitud->cambiarSolicitudRechazada($id_solicitud, $observacion);
-        if($rta == 0){
+        if ($rta == 0) {
             $response['title'] = "Error al rechazar la solicitud";
             $response['state'] = "error";
             $response['location'] = "revision_solicitudes.php";
@@ -49,12 +47,11 @@ if (isset($_POST['accion'])) {
             $response['location'] = "revision_solicitudes.php";
         }
         echo json_encode($response);
-    }
-    else if($_POST['accion'] == 'cancelar_solicitud'){
+    } else if ($_POST['accion'] == 'cancelar_solicitud') {
         $id_solicitud = $_POST['id_solicitud'];
         $solicitud = new SolicitudModel();
         $rta = $solicitud->eliminarSolicitud($id_solicitud);
-        if($rta == 0){
+        if ($rta == 0) {
             $response['title'] = "Error al cancelar la solicitud";
             $response['state'] = "error";
             $response['location'] = "solicitud_practicante.php";
@@ -88,19 +85,28 @@ function cantidadSolicitudesEnEspera($id_empresa)
 }
 
 // Metodo que conecta con la vista para enviar las solicitudes En Espera recibidas por parte de las empresas
-function listaSolicitudEmpresas(){
+function listaSolicitudEmpresas()
+{
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->listarSolicitudes();
 }
 
 // Metodo que conecta con la vista para enviar las solicitudes Aprobadas recibidas por parte de las empresas
-function listaSolicitudEmpresasAprobadas(){
+function listaSolicitudEmpresasAprobadas()
+{
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->listarSolicitudesAprobadas();
 }
 
 // Metodo que conecta con la vista para enviar las solicitudes Rechazadas recibidas por parte de las empresas
-function listaSolicitudEmpresasRechazadas(){
+function listaSolicitudEmpresasRechazadas()
+{
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->listarSolicitudesRechazadas();
+}
+// Metodo que conecta con el modelo para listar la cantidad de solicitudes por empresa
+function cantidadSolicitudesPorEmpresa()
+{
+    $obj_solicitud_model = new SolicitudModel();
+    return $obj_solicitud_model->cantidadSolicitudesPorEmpresa();
 }
