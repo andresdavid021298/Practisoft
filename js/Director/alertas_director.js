@@ -123,3 +123,38 @@ function editarDirector() {
         })
 
 }
+
+// Funcion que muestra una alerta cuando se abre el semestre
+function abrirSemestre() {
+    fecha = document.getElementById('fecha_inicio_semestre').value;
+    
+    let date = new Date(fecha);
+    var mes = date.getMonth() + 1;
+    var anio = date.getFullYear();
+    var semestre = "";
+    if(mes > 0 && mes <7){
+        semestre = "I Semestre del " + anio;        
+    }
+    else{
+        semestre = "II Semestre del " + anio;
+    }
+    
+    $.ajax({
+        url: "../../Controller/Semestre/Semestre_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "insertar_semestre",
+            "nombre_semestre": semestre
+        },
+        dataType: "JSON"
+    })
+    .done(function(response) {
+        swal.fire({
+            icon: response.state,
+            title: response.title
+        }).then(() => {
+            window.location = "semestre.php";
+        })
+    })
+
+}
