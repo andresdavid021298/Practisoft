@@ -38,13 +38,17 @@ if ($_GET['id_empresa'] == NULL || $_GET['token'] == NULL) {
                         <h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5>
                         <form class="form-signin" method="POST" enctype="multipart/form-data">
                             <p style="text-align: center;"><em>Ingrese la nueva clave para el restablecimiento de su contraseña.</em></p>
-                            <div class="form-label-group" onkeyup="validarClavesEnPerfil();">
-                                <input type="password" id="inputClave1" name="inputClave1" class="form-control" placeholder="Nueva clave" required>
-                                <label for="inputClave1">Nueva clave</label>
+                            <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">
+                                <div class="form-label-group" onkeyup="validarClavesEnPerfil();">
+                                    <input type="password" id="inputClave1" name="inputClave1" class="form-control" placeholder="Nueva clave" required>
+                                    <label for="inputClave1">Nueva clave</label>
+                                </div>
                             </div>
-                            <div class="form-label-group" onkeyup="validarClavesEnPerfil();">
-                                <input type="password" id="inputClave2" name="inputClave2" class="form-control" placeholder="Nueva clave" required>
-                                <label for="inputClave2">Nueva clave</label>
+                            <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">
+                                <div class="form-label-group" onkeyup="validarClavesEnPerfil();">
+                                    <input type="password" id="inputClave2" name="inputClave2" class="form-control" placeholder="Nueva clave" required>
+                                    <label for="inputClave2">Nueva clave</label>
+                                </div>
                             </div>
                             <hr>
                             <button onclick="restablecerClave();" class="btn btn-lg btn-block text-uppercase" style="background-color: #D61117; color: white;" id="btn_cambiar_clave" type="button" name="btn_registrar_empresa">Restablecer</button>
@@ -71,4 +75,10 @@ if ($_GET['id_empresa'] == NULL || $_GET['token'] == NULL) {
 <script src="../../js/Company/alertas_empresa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
 </html>

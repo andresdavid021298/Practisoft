@@ -394,7 +394,7 @@ function agregarSolicitud() {
         c5 = document.getElementById('check5').value;
         areas.push(c5);
     }
-    if (isCheckedOtra == true){
+    if (isCheckedOtra == true) {
         otro = document.getElementById('input_otra').value;
         areas.push(otro);
     }
@@ -461,6 +461,11 @@ function cambiarClave() {
         swal.fire({
             icon: "warning",
             title: "Hay campos vacios"
+        })
+    } else if (!validarTamañoClaveYCaracterNumerico(clave_empresa)) {
+        swal.fire({
+            icon: "warning",
+            title: "La clave no cumple con las condiciones establecidas"
         })
     } else {
         $.ajax({
@@ -739,7 +744,13 @@ function restablecerClave() {
             icon: "warning",
             title: "Hay campos vacios"
         })
-    } else {
+    } else if (!validarTamañoClaveYCaracterNumerico(inputClave1)) {
+        swal.fire({
+            icon: "warning",
+            title: "La clave no cumple con las condiciones establecidas"
+        })
+    }
+    else {
         $.ajax({
             url: "../../Controller/Empresa/Empresa_Controller.php",
             type: "POST",

@@ -161,7 +161,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <div class="form-group mx-sm-3 mb-2" onkeyup="validarClavesEnPerfil();">
                                 <center><label for="Contraseña">Nueva Contraseña</label></center>
                                 <label for="inputPassword2" class="sr-only">Password</label>
-                                <input type="password" class="form-control" id="inputClave1" placeholder="Digite la nueva contraseña">
+                                <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">
+                                    <input type="password" class="form-control" id="inputClave1" placeholder="Digite la nueva contraseña">
+                                </div>
                             </div>
                         </div>
                         <br><br>
@@ -169,7 +171,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <div class="form-group mx-sm-3 mb-2" onkeyup="validarClavesEnPerfil();">
                                 <center><label for="Contraseña">Repetir Nueva Contraseña</label></center>
                                 <label for="inputPassword2" class="sr-only">Password</label>
-                                <input type="password" class="form-control" id="inputClave2" placeholder="Digite la nueva contraseña">
+                                <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">
+                                    <input type="password" class="form-control" id="inputClave2" placeholder="Digite la nueva contraseña">
+                                </div>
                             </div>
                         </div>
                         <br><br>
@@ -210,9 +214,12 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
 <script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
 </html>
