@@ -18,6 +18,33 @@ if (isset($_POST['accion'])) {
             $response['location'] = "perfil.php";
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == "agregar_coordinador") {
+        $response = array();
+        $nombre_coordinador = $_POST['nombre_coordinador'];
+        $correo_coordinador = $_POST['correo_coordinador'];
+        $obj_coordinador_model = new CoordinadorModel();
+        $rta = $obj_coordinador_model->insertarCoordinador($nombre_coordinador, $correo_coordinador);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Coordinador Agregado Correctamente";
+        }
+        echo json_encode($response);
+    } else if ($_POST['accion'] == "eliminar_coordinador") {
+        $response = array();
+        $id_coordinador = $_POST['id_coordinador'];
+        $obj_coordinador_model = new CoordinadorModel();
+        $rta = $obj_coordinador_model->eliminarCoordinador($id_coordinador);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Coordinador Eliminado Correctamente";
+        }
+        echo json_encode($response);
     }
 }
 

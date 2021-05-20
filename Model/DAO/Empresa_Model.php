@@ -66,7 +66,7 @@ class EmpresaModel
     // Metodo que devuelve un listado con todas las empresas
     public function listarEmpresas()
     {
-        $query = "SELECT e.id_empresa,e.nombre_empresa, e.celular_empresa,e.direccion_empresa,e.representante_legal,e.sector_empresa,e.correo_empresa, c.fecha_inicio,c.fecha_expiracion FROM empresa AS e LEFT JOIN convenio AS c ON e.id_empresa = c.id_empresa";
+        $query = "SELECT e.id_empresa,e.nombre_empresa, e.celular_empresa,e.direccion_empresa,e.municipio_empresa,e.representante_legal,e.sector_empresa,e.actividad_empresa,e.correo_empresa, e.nit_empresa,c.fecha_inicio,c.fecha_expiracion FROM empresa AS e LEFT JOIN convenio AS c ON e.id_empresa = c.id_empresa";
         $lista_empresas = NULL;
         $stmt = $this->conexion->prepare($query);
         if (!$stmt->execute()) {

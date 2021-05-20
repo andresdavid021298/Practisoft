@@ -2,6 +2,8 @@
 session_start();
 if ($_SESSION['id_director'] == NULL) {
     header("Location: ../../index.php");
+} else if (is_null($_GET['id_empresa'])) {
+    header("Location: ver_empresas.php");
 }
 ?>
 <!DOCTYPE html>
@@ -158,86 +160,124 @@ if ($_SESSION['id_director'] == NULL) {
                     </ul>
 
                 </nav>
+                <div style="padding-left: 10px;">
+                    <a class="btn btn-primary" href="ver_empresas.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="mb-0 text-gray-800">Ver Coordinador</h2>
-                            <br>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarCoordinador">Agregar Nuevo Coordinador</button>
+                            <h2 class="mb-0 text-gray-800">Documentacion</h2>
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid">
-                    <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                require_once "../../Controller/Coordinador/Coodinador_Controller.php";
-                                $lista_coordinadores = listarCoordinadores();
-                                if (is_null($lista_coordinadores)) {
-                                ?>
+                <?php
+                require_once "../../Controller/Empresa/Empresa_Controller.php";
+                $empresa = mostrarDatos($_GET['id_empresa']);
+                if (!$empresa[0]) {
+                ?>
+                    <br>
+                    <center>
+                        <h3 style="color: #D61117;">No existe esta empresa</h3>
+                    </center>
+                <?php } else { ?>
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-striped table-bordered">
+                                <thead>
                                     <tr>
-                                        <td colspan="3" style="color: #D61117;"><b>No hay coordinadores registrados en el sistema</b></td>
+
+                                        <td colspan="4">
+                                            <center>
+                                                <b><?php echo $empresa[0]['nombre_empresa']; ?>
+                                                </b>
+                                            </center>
+                                        </td>
                                     </tr>
-                                    <?php } else {
-                                    foreach ($lista_coordinadores as $coordinador) {
+                                    <tr>
+                                        <td>Protocolos de Bioseguridad</td>
+                                        <td>Certificado de Existencia</td>
+                                        <td>Cedula del Representante</td>
+                                        <td>RUT</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                                    $documentos_empresa = listarDocumentosPorEmpresa($_GET['id_empresa']);
+                                    if (is_null($documentos_empresa)) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <center><?php echo $coordinador['nombre_coordinador']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><?php echo $coordinador['correo_coordinador']; ?></center>
-                                            </td>
-                                            <td>
-                                                <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar</button></center>
-                                            </td>
+                                            <td colspan="4">Esta empresa no presenta documentos</td>
                                         </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <td>
+                                            <?php
+                                            if (!is_null($documentos_empresa['archivo_protocolos_bio'])) {
+                                            ?>
+                                                <center>
+                                                    <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $documentos_empresa['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    <p><?php echo $documentos_empresa['archivo_protocolos_bio']; ?></p>
+                                                </center>
+                                            <?php } else { ?>
+                                                <center>
+                                                    <p>No posee este documento aún</p>
+                                                </center>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if (!is_null($documentos_empresa['archivo_certificado_existencia'])) {
+                                            ?>
+                                                <center>
+                                                    <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $documentos_empresa['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    <p><?php echo $documentos_empresa['archivo_certificado_existencia']; ?></p>
+                                                </center>
+                                            <?php } else { ?>
+                                                <center>
+                                                    <p>No posee este documento aún</p>
+                                                </center>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if (!is_null($documentos_empresa['archivo_cc_representante'])) {
+                                            ?>
+                                                <center>
+                                                    <a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $documentos_empresa['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    <p><?php echo $documentos_empresa['archivo_cc_representante']; ?></p>
+                                                </center>
+                                            <?php } else { ?>
+                                                <center>
+                                                    <p>No posee este documento aún</p>
+                                                </center>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if (!is_null($documentos_empresa['archivo_rut'])) {
+                                            ?>
+                                                <center>
+                                                    <a target="_blank" href="../../Documentos/RUT/<?php echo $documentos_empresa['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    <p><?php echo $documentos_empresa['archivo_rut']; ?></p>
+                                                </center>
+                                            <?php } else { ?>
+                                                <center>
+                                                    <p>No posee este documento aún</p>
+                                                </center>
+                                            <?php } ?>
+                                        </td>
+                                    <?php
+                                    }
+                                    ?>
 
-                <!-- Inicio Modal Agregar Coordinador -->
-                <div class="modal fade" id="agregarCoordinador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:#D61117;">
-                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Coordinador</h3>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <form action="../../Controller/Coordinador/Coordinador.php" method="POST">
-                                    <div class="form-group">
-                                        <label for="nombre_coordinador" class="col-form-label">Nombre del Coordinador:</label>
-                                        <input type="text" class="form-control" name="nombre_coordinador" id="nombre_coordinador">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="correo_coordinador" class="col-form-label">Correo del Coordinador:</label>
-                                        <input type="email" class="form-control" name="correo_coordinador" id="correo_coordinador">
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="button" onclick="agregarCoordinador()" class="btn btn-primary">Agregar</button>
-                                    </div>
-                                </form>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
-                <!-- Fin Modal Agregar Coordinador -->
+                <?php } ?>
             </div>
             <!-- End of Topbar -->
 
@@ -263,15 +303,10 @@ if ($_SESSION['id_director'] == NULL) {
     </div>
 
 </body>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="../../js/Director/alertas_director.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>

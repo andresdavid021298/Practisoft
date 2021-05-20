@@ -14,14 +14,12 @@ class CoordinadorModel
     }
 
     //Metodo para Insertar Coordinador
-    public function insertarCoordinador($nombre_coordinador, $correo_coordinador, $codigo_coordinador, $celular_coordinador)
+    public function insertarCoordinador($nombre_coordinador, $correo_coordinador)
     {
-        $query = "INSERT INTO coordinador VALUES(NULL, :nombre_coordinador, :correo_coordinador, :codigo_coordinador, :celular_coordinador)";
+        $query = "INSERT INTO coordinador(nombre_coordinador,correo_coordinador) VALUES(:nombre_coordinador, :correo_coordinador)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre_coordinador", $nombre_coordinador);
         $stmt->bindParam(":correo_coordinador", $correo_coordinador);
-        $stmt->bindParam(":codigo_coordinador", $codigo_coordinador);
-        $stmt->bindParam(":celular_coordinador", $celular_coordinador);
 
         if (!$stmt->execute()) {
             $stmt->closeCursor();
