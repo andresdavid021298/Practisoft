@@ -2,6 +2,7 @@
 
 require_once '../../Model/DAO/Estudiante_Model.php';
 require_once '../../Model/DAO/Coordinador_Model.php';
+require_once '../../Model/DAO/Director_Model.php';
 // require_once '../../Model/DAO/Coordinador_Model.php';
 // require_once '../../Model/DAO/Director_Model.php';
 require_once '../../vendor/autoload.php';
@@ -54,8 +55,18 @@ if (isset($_GET['code'])) {
                 $_SESSION['url_image'] = $image;
                 echo '<script type="text/javascript">window.location.href="../../View/Coordinator/index_coordinator.php"</script>';
             } else {
-                echo '<script type="text/javascript">alert("Usuario no registrado con este correo");</script>';
-                echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
+                $director = new DirectorModel();
+                $rta_director = $director->buscarDirectorPorCorreo($email);
+                if (!is_null($rta_director)) {
+                    session_start();
+                    $_SESSION['id_director'] = $rta_director['id_director'];
+                    $_SESSION['nombre_director'] = $rta_director['nombre_director'];
+                    $_SESSION['url_image'] = $image;
+                    echo '<script type="text/javascript">window.location.href="../../View/Director/index_director.php"</script>';
+                } else {
+                    echo '<script type="text/javascript">alert("Usuario no registrado con este correo");</script>';
+                    echo '<script type="text/javascript">window.location.href="../../index.php"</script>';
+                }
             }
         }
     }

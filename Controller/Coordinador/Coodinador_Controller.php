@@ -21,8 +21,16 @@ if (isset($_POST['accion'])) {
     }
 }
 
-function buscarCoordinador($id_coordinador){
+// Metodo que conecta con la vista para traer datos de un coordinador
+function buscarCoordinador($id_coordinador)
+{
     $obj_coordinador_model = new CoordinadorModel();
     return $obj_coordinador_model->buscarCoordinador($id_coordinador);
 }
 
+// Metodo que conecta con la vista para listar todos los coordinadores
+function listarCoordinadores()
+{
+    $obj_coordinador_model = new CoordinadorModel();
+    return $obj_coordinador_model->listarCoordinadores();
+}
