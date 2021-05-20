@@ -57,7 +57,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span>Mi Práctica</span>
+                    <span id="titulosSideBar">Mi Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -76,7 +76,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-user-circle"></i>
-                    <span>Mi Perfil</span>
+                    <span id="titulosSideBar">Mi Perfil</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -110,7 +110,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                        <i id="faBars" class="fa fa-bars"></i>
                     </button>
 
                     <!-- Topbar Navbar -->

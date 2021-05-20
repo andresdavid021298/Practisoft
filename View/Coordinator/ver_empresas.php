@@ -56,7 +56,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span>Gestión de Práctica</span>
+                    <span id="titulosSideBar">Gestión de Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -72,7 +72,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-building"></i>
-                    <span>Empresas</span>
+                    <span id="titulosSideBar">Empresas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -86,7 +86,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
                     <i class="fas fa-user-circle"></i>
-                    <span>Mi Perfil</span>
+                    <span id="titulosSideBar">Mi Perfil</span>
                 </a>
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -118,7 +118,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                        <i id="faBars" class="fa fa-bars"></i>
                     </button>
 
                     <!-- Topbar Navbar -->

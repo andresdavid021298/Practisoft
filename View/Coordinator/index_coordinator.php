@@ -87,7 +87,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span>Gestión de Práctica</span>
+                    <span id="titulosSideBar">Gestión de Práctica</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -103,7 +103,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-building"></i>
-                    <span>Empresas</span>
+                    <span id="titulosSideBar">Empresas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -117,7 +117,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos" aria-expanded="true" aria-controls="collapseDocumentos">
                     <i class="fas fa-user-circle"></i>
-                    <span>Mi Perfil</span>
+                    <span id="titulosSideBar">Mi Perfil</span>
                 </a>
                 <div id="collapseDocumentos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -130,14 +130,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
             <!-- Nav Item - Informes -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
-                    <i class="fas fa-file-contract"></i>
-                    <span>Informes</span>
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
                 </a>
                 <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="grafico_empresa_actividad.php"><i class="fas fa-passport"></i> Actividad de Empresas</a>
-                        <a class="collapse-item" href=""><i class="fas fa-landmark"></i> Sector de Empresas</a>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe</a>
                     </div>
                 </div>
             </li>
@@ -164,7 +163,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                        <i id="faBars" class="fa fa-bars"></i>
                     </button>
 
                     <!-- Topbar Navbar -->
@@ -174,7 +173,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
-                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small">
+                                <span id="nombreUsuario">
                                     <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
                                 </span>
                                 <i class="fas fa-power-off" style="color: white;"></i>
