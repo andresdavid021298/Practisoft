@@ -51,7 +51,9 @@ class GrupoModel
     // Metodo que muestra el listado de los grupos
     public function listarGrupo()
     {
-        $query = "SELECT id_grupo, nombre_grupo, id_coordinador FROM grupo";
+        $query = "SELECT g.id_grupo, g.nombre_grupo, g.id_coordinador, c.nombre_coordinador 
+                  FROM grupo AS g 
+                  LEFT JOIN coordinador as c ON g.id_coordinador = c.id_coordinador";
         $lista_grupo = NULL;
 
         $stmt = $this->conexion->prepare($query);
