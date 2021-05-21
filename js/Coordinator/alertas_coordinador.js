@@ -132,6 +132,10 @@ function actualizarPerfil() {
 //Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
 function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
     id_grupo = document.getElementById('id_grupo').value;
+    funciones = document.getElementById('funciones').value;
+    nombre_estudiante = document.getElementById('nombre_estudiante').value;
+    fecha_estudiante = document.getElementById('fecha_estudiante').value;
+    
     swal.fire({
         title: '¿Esta seguro de vincular al estudiante?',
         showCancelButton: true,
@@ -146,7 +150,10 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
                         "accion": "asignar_empresa_estudiante",
                         "id_estudiante": id_estudiante,
                         "id_empresa": id_empresa,
-                        "id_solicitud": id_solicitud
+                        "id_solicitud": id_solicitud,
+                        "funciones": funciones,
+                        "nombre_estudiante" : nombre_estudiante,
+                        "fecha_estudiante" : fecha_estudiante
                     },
                     dataType: "JSON"
                 })

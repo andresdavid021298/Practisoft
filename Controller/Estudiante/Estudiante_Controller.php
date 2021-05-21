@@ -1,6 +1,7 @@
 <?php
 require_once "../../Model/DAO/Estudiante_Model.php";
 require_once "../../Model/DAO/Solicitud_Model.php";
+require_once "../../Model/DAO/Historico_Model.php";
 
 // Metodo que conecta con la vista para mostrar informacion de practicantes asignados a una empresa
 function listarEstudiantesPorEmpresa($id_empresa)
@@ -74,10 +75,18 @@ if (isset($_POST['accion'])) {
         $id_estudiante = $_POST['id_estudiante'];
         $id_empresa = $_POST['id_empresa'];
         $id_solicitud = $_POST['id_solicitud'];
+        
+        $funciones = $_POST['funciones'];
+        $nombre_estudiante = $_POST['nombre_estudiante'];
+        $fecha_estudiante = $_POST['fecha_estudiante'];
+        
+        $obj_historico_model = new HistoricoModel();
+        $res = $obj_historico_model->insertarAlHistorico($nombre_estudiante, $id_empresa, $funciones, $fecha_estudiante);
         $obj_solicitud_model = new SolicitudModel();
         $result = $obj_solicitud_model->disminuirNumeroDePracticantes($id_solicitud);
         $obj_estudiante_model = new EstudianteModel();
         $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa, $id_solicitud);
+        
         if ($result == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";

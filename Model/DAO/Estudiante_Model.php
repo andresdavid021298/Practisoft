@@ -183,7 +183,7 @@ class EstudianteModel
     // Metodo para buscar y mostrar informacion de un estudiante
     public function buscarEstudiante($id_estudiante)
     {
-        $query = "SELECT id_estudiante,id_empresa,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante FROM estudiante WHERE id_estudiante=:id";
+        $query = "SELECT id_estudiante,id_empresa,nombre_estudiante, codigo_estudiante,correo_estudiante,celular_estudiante, fecha_registro FROM estudiante WHERE id_estudiante=:id";
         $informacion = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id", $id_estudiante);

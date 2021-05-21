@@ -174,6 +174,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <div class="container-fluid">
                             <div class="row">
                                 <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                                <input type="hidden" id="nombre_estudiante" value="<?php echo $estudiante['nombre_estudiante'] ?>">
+                                <input type="hidden" id="fecha_estudiante" value="<?php echo $estudiante['fecha_registro'] ?>">
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta"><i class="fas fa-eye"></i></button>
                             </div>
                             <div class="table-responsive">
@@ -219,6 +221,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                     </td>
                                                     <td>
                                                         <input type="hidden" id="id_grupo" value="<?php echo $_GET['id_grupo'] ?>">
+                                                        <input type="hidden" id="funciones" value="<?php echo $solicitud['funciones'];?>">
+        
                                                         <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,
                                                         <?php echo $solicitud['id_empresa']; ?>, <?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
                                                     </td>
