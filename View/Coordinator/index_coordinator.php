@@ -27,37 +27,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .imgRedonda {
-            width: 55px;
-            height: 55px;
-            border-radius: 150px;
-            border: 2px solid black;
-            margin-right: 10px;
-        }
-
-        .zoom {
-            transition: 0.5s ease;
-            -moz-transition: 0.5s ease;
-            /* Firefox */
-            -webkit-transition: 0.5s ease;
-            /* Chrome - Safari */
-            -o-transition: 0.5s ease;
-            /* Opera */
-        }
-
-        .zoom:hover {
-            transform: scale(1.18);
-            -moz-transform: scale(1.18);
-            /* Firefox */
-            -webkit-transform: scale(1.18);
-            /* Chrome - Safari */
-            -o-transform: scale(1.18);
-            /* Opera */
-            -ms-transform: scale(1.18);
-            /* IE9 */
-        }
-    </style>
 
 </head>
 
@@ -173,9 +142,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
-                                <span id="nombreUsuario">
-                                    <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
-                                </span>
+                                <div>
+                                    <span id="nombreUsuario">
+                                        <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
+                                    </span>
+                                </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->

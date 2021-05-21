@@ -27,15 +27,7 @@ if ($_SESSION['id_director'] == NULL) {
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .imgRedonda {
-            width: 55px;
-            height: 55px;
-            border-radius: 150px;
-            border: 2px solid black;
-            margin-right: 10px;
-        }
-    </style>
+
 </head>
 
 <body id="page-top">
@@ -141,7 +133,7 @@ if ($_SESSION['id_director'] == NULL) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <div>
-                                    <span id="nombreUsuarioCompany">
+                                    <span id="nombreUsuarioDirector">
                                         <b><?php echo $_SESSION['nombre_director'] ?></b>
                                     </span>
                                 </div>

@@ -131,7 +131,12 @@ if ($_SESSION['id_director'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_director'] ?></b></span>
+                                <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
+                                <div>
+                                    <span id="nombreUsuarioDirector">
+                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
+                                    </span>
+                                </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -167,14 +172,14 @@ if ($_SESSION['id_director'] == NULL) {
                         </div>
                     </div>
 
-                    
+
                     <?php
                     require_once '../../Controller/Coordinador/Coodinador_Controller.php';
                     $lista_coordinadores = listarCoordinadores();
 
                     ?>
-                    
-                    
+
+
 
                     <!-- Inicio Tabla Tutores -->
                     <div class="table-responsive">
@@ -190,7 +195,7 @@ if ($_SESSION['id_director'] == NULL) {
                             <tbody>
                                 <?php
                                 require_once '../../Controller/Grupo/Grupo_Controller.php';
-                                
+
                                 $datos_grupo = listarGrupos();
                                 if (is_null($datos_grupo)) {
                                 ?>
@@ -205,7 +210,7 @@ if ($_SESSION['id_director'] == NULL) {
                                         <tr>
                                             <td><?php echo $datos['nombre_grupo'] ?></td>
                                             <td><?php echo $datos['nombre_coordinador'] ?></td>
-                                            
+
                                             <td>
                                                 <center><button class="btn btn-danger" onclick="eliminarGrupo(<?php echo $datos['id_grupo']; ?>)"> Eliminar</button></center>
                                             </td>
@@ -230,51 +235,51 @@ if ($_SESSION['id_director'] == NULL) {
 
                 <!-- Inicio Modal Agregar Grupo -->
                 <div class="modal fade" id="agregarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background-color:#D61117;">
-                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Grupo</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#D61117;">
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Grupo</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
 
-                                    <form action="" method="POST">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Nombre del Grupo:</label>
-                                            <input type="text" class="form-control" name="nombreGrupo" id="nombre_grupo">
-                                        </div>
+                                <form action="" method="POST">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Nombre del Grupo:</label>
+                                        <input type="text" class="form-control" name="nombreGrupo" id="nombre_grupo">
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Coordinador:</label>
-                                            <select class="form-control" aria-label="Default select example" id="id_coordinador_option">
-                                                <?php foreach($lista_coordinadores as $lista){
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Coordinador:</label>
+                                        <select class="form-control" aria-label="Default select example" id="id_coordinador_option">
+                                            <?php foreach ($lista_coordinadores as $lista) {
 
-                                                ?>
+                                            ?>
                                                 <option value="<?php echo $lista['id_coordinador'] ?>"><?php echo $lista['id_coordinador'] ?> - <?php echo $lista['nombre_coordinador']; ?></option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
 
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col text-center">
-                                                    <button type="button" onclick="crearGrupo()" class="btn btn-primary">Agregar</button>
-                                                </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <button type="button" onclick="crearGrupo()" class="btn btn-primary">Agregar</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    
+                </div>
+
                 <!-- Fin Modal Agregar Grupo -->
 
-               
+
             </div>
             <!-- End of Page Wrapper -->
 

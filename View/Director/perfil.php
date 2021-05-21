@@ -129,7 +129,12 @@ if ($_SESSION['id_director'] == NULL) {
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span style="color: white; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="mr-2 d-none d-lg-inline text-white-600 small"><b><?php echo $_SESSION['nombre_director'] ?></b></span>
+                                <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
+                                <div>
+                                    <span id="nombreUsuarioDirector">
+                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
+                                    </span>
+                                </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -176,7 +181,7 @@ if ($_SESSION['id_director'] == NULL) {
                             <button onclick="editarDirector();" id="btn_editar_director" type="button" name="btn_editar_director" class="btn btn-primary">Actualizar</button>
                         </div>
                     </div>
-                    
+
                 </form>
 
 

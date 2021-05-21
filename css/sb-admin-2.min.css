@@ -11743,3 +11743,35 @@ footer {
         font-size: 13px;
     }
 }
+
+/* Efecto de hover al momento de pasar por las cards */
+
+.zoom {
+    transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    /* Firefox */
+    -webkit-transition: 0.5s ease;
+    /* Chrome - Safari */
+    -o-transition: 0.5s ease;
+    /* Opera */
+}
+
+.zoom:hover {
+    transform: scale(1.18);
+    -moz-transform: scale(1.18);
+    /* Firefox */
+    -webkit-transform: scale(1.18);
+    /* Chrome - Safari */
+    -o-transform: scale(1.18);
+    /* Opera */
+    -ms-transform: scale(1.18);
+    /* IE9 */
+}
+
+.imgRedonda {
+    width: 55px;
+    height: 55px;
+    border-radius: 150px;
+    border: 2px solid black;
+    margin-right: 10px;
+}

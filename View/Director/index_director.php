@@ -27,15 +27,6 @@ if ($_SESSION['id_director'] == NULL) {
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .imgRedonda {
-            width: 55px;
-            height: 55px;
-            border-radius: 150px;
-            border: 2px solid black;
-            margin-right: 10px;
-        }
-    </style>
 
 </head>
 
@@ -107,7 +98,7 @@ if ($_SESSION['id_director'] == NULL) {
             </li>
 
             <!-- Nav Item - Informes -->
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -141,9 +132,11 @@ if ($_SESSION['id_director'] == NULL) {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
-                                <span id="nombreUsuarioDirector">
-                                    <b><?php echo $_SESSION['nombre_director'] ?></b>
-                                </span>
+                                <div>
+                                    <span id="nombreUsuarioDirector">
+                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
+                                    </span>
+                                </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
                             </a>
                             <!-- Dropdown - User Information -->
