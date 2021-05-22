@@ -63,8 +63,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="agregar_coordinador.php"><i class="fas fa-user-cog"></i> Agregar Coordinador</a>
-                        <a class="collapse-item" href="crear_grupos.php"><i class="fas fa-users"></i> Crear Grupos </a>
-                        <a class="collapse-item" href="gestionar_semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
+                        <a class="collapse-item" href="semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
                         <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-chart-pie"></i> Informe Estadistico </a>
                     </div>
                 </div>
@@ -181,7 +180,7 @@ if ($_SESSION['id_director'] == NULL) {
                         <div class="container">
                             <div class="row">
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button>
+                                    <button type="button" class="btn btn-danger" onclick="finalizarSemestre();">Finalizar Semestre</button><br><br>
                                 </div>
                             </div>
                         </div>
@@ -231,6 +230,14 @@ if ($_SESSION['id_director'] == NULL) {
                                             </tr>
                                     <?php
                                         }
+                                        
+                                        ?>
+                                        <tr>
+                                            <td colspan="3" >
+                                                <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
+                                            </td>
+                                        </tr>
+                                        <?php
                                     }
                                     ?>
                                 </tbody>

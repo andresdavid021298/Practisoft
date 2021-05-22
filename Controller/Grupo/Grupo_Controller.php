@@ -26,12 +26,12 @@ if(isset($_POST['accion'])){
         if($rta == 0){
             $response['title'] = "Ocurrio un error";
             $response['state'] = "error";
-            $response['location'] = "crear_grupos.php";
+            $response['location'] = "semestre.php";
         }
         else{
             $response['title'] = "Grupo creado correctamente";
             $response['state'] = "success";
-            $response['location'] = "crear_grupos.php";
+            $response['location'] = "semestre.php";
         }
         echo json_encode($response);
     } else if($_POST['accion'] == "eliminar_grupo"){
@@ -41,12 +41,12 @@ if(isset($_POST['accion'])){
         if($rta == 0){
             $response['title'] = "Ocurrio un error";
             $response['state'] = "error";
-            $response['location'] = "crear_grupos.php";
+            $response['location'] = "semestre.php";
         }
         else{
             $response['title'] = "Grupo eliminado correctamente";
             $response['state'] = "success";
-            $response['location'] = "crear_grupos.php";
+            $response['location'] = "semestre.php";
         }
         echo json_encode($response);
     }

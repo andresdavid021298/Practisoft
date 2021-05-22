@@ -68,4 +68,43 @@ class DirectorModel
             return $datos_director;
         }
     }
+
+    // Metodo que permite eliminar los valores de la tabla grupo
+    public function vaciarTablaGrupo(){
+        $query = "DELETE FROM grupo";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    // Metodo que permite eliminar los valores de la tabla estudiante
+    public function vaciarTablaEstudiante(){
+        $query = "DELETE FROM estudiante";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    // Metodo que permite eliminar los valores de la tabla semestre
+    public function vaciarTablaSemestre(){
+        $query = "TRUNCATE TABLE semestre";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
 }
