@@ -251,38 +251,42 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <?php
                                 require_once '../../Controller/Tutor/Tutor_Controller.php';
                                 $lista_de_tutores = mostrarDatosTutorEmpresa($_SESSION['id_empresa']);
-
+                                if (is_null($lista_de_tutores)) {
                                 ?>
-                                <form action="" method="POST">
+                                    <h3>No tiene tutores agregados, por favor agregue <a href="ver_tutores.php">aqui</a></h3>
+                                <?php } else {
+                                ?>
+                                    <form action="" method="POST">
 
-                                    <div class="form-group">
-                                        <label for="message-text" class="col-form-label">Estudiante:</label>
-                                        <input type="text" class="form-control nombre_est" name="nombre_estudiante" id="nombre_estudiante_tut" readonly>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Estudiante:</label>
+                                            <input type="text" class="form-control nombre_est" name="nombre_estudiante" id="nombre_estudiante_tut" readonly>
+                                        </div>
 
-                                    <input type="hidden" class="form-control id_est" name="id_estudiante" id="id_estudiante_tut">
+                                        <input type="hidden" class="form-control id_est" name="id_estudiante" id="id_estudiante_tut">
 
-                                    <label for="message-text" class="col-form-label">Seleccione un Tutor:</label>
-                                    <select class="form-control" aria-label="Default select example">
-                                        <?php
-                                        foreach ($lista_de_tutores as $listado) {
-                                        ?>
-                                            <option id="id_tutor_est" value="<?php echo $listado['id_tutor'] ?>"><?php echo $listado['nombre_tutor'] ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
+                                        <label for="message-text" class="col-form-label">Seleccione un Tutor:</label>
+                                        <select class="form-control" aria-label="Default select example">
+                                            <?php
+                                            foreach ($lista_de_tutores as $listado) {
+                                            ?>
+                                                <option id="id_tutor_est" value="<?php echo $listado['id_tutor'] ?>"><?php echo $listado['nombre_tutor'] ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
 
 
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <br>
-                                                <button type="button" onclick="asignarTutor()" class="btn btn-primary">Asignar</button>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <br>
+                                                    <button type="button" onclick="asignarTutor()" class="btn btn-primary">Asignar</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                <?php } ?>
                             </div>
 
 

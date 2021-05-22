@@ -62,8 +62,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="agregar_coordinador.php"><i class="fas fa-user-cog"></i> Agregar Coordinador</a>
-                        <a class="collapse-item" href="crear_grupos.php"><i class="fas fa-users"></i> Crear Grupos </a>
-                        <a class="collapse-item" href="gestionar_semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
+                        <a class="collapse-item" href="semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
                         <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-chart-pie"></i> Informe Estadistico </a>
                     </div>
                 </div>
@@ -152,8 +151,137 @@ if ($_SESSION['id_director'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <div>
-
+                <div class="container-fluid">
+                    <div class="row">
+                        <?php
+                        require_once "../../Controller/Semestre/Semestre_Controller.php";
+                        $semestre = listarSemestre();
+                        if (is_null($semestre)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="semestre.php">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Semestre</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No tiene abierto un semestre academico</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-folder-open fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="semestre.php">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Semestre</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $semestre['nombre_semestre']; ?> en curso</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-folder-open fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php }
+                        require_once "../../Controller/Grupo/Grupo_Controller.php";
+                        $lista_grupos = listarGrupos();
+                        if (is_null($lista_grupos)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="semestre.php">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Grupos</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No hay grupos en el semestre actual</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-folder-open fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="semestre.php">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        Grupos</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_grupos) ?> en el semestre</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-folder-open fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } ?>
+                        <?php
+                        require_once "../../Controller/Empresa/Empresa_Controller.php";
+                        $lista_empresas = listarTodasLasEmpresas();
+                        if (is_null($lista_empresas)) {
+                        ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="ver_empresas.php">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Empresas</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">No existen empresas registradas en el sistema</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-xl-3 col-md-6 mb-4 zoom">
+                                <a href="ver_empresas.php">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        Empresas</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_empresas) ?> registradas en el sistema</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-building fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
