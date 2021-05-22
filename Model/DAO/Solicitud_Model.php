@@ -247,6 +247,7 @@ class SolicitudModel
         } else {
             $cantidad_practicantes = $this->cantidadDePracticantesPorSolicitud($id_solicitud);
             if ($cantidad_practicantes <= 0) {
+                $this->migrarSolicitudAlHistorico($id_solicitud);
                 $this->eliminarSolicitud($id_solicitud);
             }
             $stmt->closeCursor();
@@ -268,6 +269,41 @@ class SolicitudModel
             $numero_practicantes = $result['numero_practicantes'];
             $stmt->closeCursor();
             return $numero_practicantes;
+        }
+    }
+
+    // Metodo para migrar un solicitud al historico de solicitud
+    public function migrarSolicitudAlHistorico($id_solicitud)
+    {
+        $query = "SELECT id_empresa,funciones FROM solicitud WHERE id_solicitud=:id_solicitud";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_solicitud", $id_solicitud);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            if ($stmt->rowCount() > 0) {
+                $datos_solicitud = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->insertarSolicitudHistorico($datos_solicitud['id_empresa'], $datos_solicitud['funciones']);
+            }
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    // Metodo que inserta la informacion de una solicitud al historico
+    public function insertarSolicitudHistorico($id_empresa, $funciones)
+    {
+        $query = "INSERT INTO historico_solicitud(id_empresa,funciones) VALUES(:id_empresa,:funciones)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":funciones", $funciones);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
         }
     }
 

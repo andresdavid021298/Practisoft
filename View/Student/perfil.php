@@ -184,6 +184,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             <div class="col text-center">
                                 <button onclick="actualizarPerfil();" id="btn_editar_perfil" type="button" name="btn_editar_perfil" class="btn btn-primary">Guardar</button>
                             </div>
+                            <br>
                         </div>
                     </form>
                 </div>

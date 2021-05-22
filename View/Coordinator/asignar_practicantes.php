@@ -147,6 +147,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
+                <div style="padding-left: 10px;">
+                    <a class="btn btn-primary" href="grupos_coordinador_asignacion.php"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
+                </div>
                 <center>
                     <h2>Asignar Practicantes</h2>
                 </center>

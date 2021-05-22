@@ -79,27 +79,27 @@ function subirEstudiantes() {
     }
 }
 
-function eliminarEstudiante(id_estudiante){
+function eliminarEstudiante(id_estudiante) {
     console.log(id_estudiante);
     var input_id_grupo = document.getElementById('input_id_grupo').value;
     console.log(input_id_grupo);
     $.ajax({
-        url: "../../Controller/Estudiante/Estudiante_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "eliminar_estudiante",
-            "id_estudiante": id_estudiante
-        },
-        dataType: "JSON"
-    })
-    .done(function(response) {
-        swal.fire({
-            icon: response.state,
-            title: response.title
-        }).then(() => {
-            window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "eliminar_estudiante",
+                "id_estudiante": id_estudiante
+            },
+            dataType: "JSON"
         })
-    })
+        .done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+            })
+        })
 }
 
 //Metodo para actualizar datos de coordinador
@@ -130,12 +130,12 @@ function actualizarPerfil() {
 }
 
 //Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
-function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
+function vincularEstudianteConEmpresa(id_estudiante, id_empresa, funciones, id_solicitud) {
+    console.log(funciones);
     id_grupo = document.getElementById('id_grupo').value;
-    funciones = document.getElementById('funciones').value;
+    // funciones = document.getElementById('funciones').value;
     nombre_estudiante = document.getElementById('nombre_estudiante').value;
-    fecha_estudiante = document.getElementById('fecha_estudiante').value;
-    
+
     swal.fire({
         title: '¿Esta seguro de vincular al estudiante?',
         showCancelButton: true,
@@ -152,8 +152,7 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
                         "id_empresa": id_empresa,
                         "id_solicitud": id_solicitud,
                         "funciones": funciones,
-                        "nombre_estudiante" : nombre_estudiante,
-                        "fecha_estudiante" : fecha_estudiante
+                        "nombre_estudiante": nombre_estudiante
                     },
                     dataType: "JSON"
                 })
@@ -162,7 +161,7 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa, id_solicitud) {
                         icon: response.state,
                         title: response.title
                     }).then(() => {
-                        window.location = "asignar_practicantes.php?id_grupo="+id_grupo;
+                        window.location = "asignar_practicantes.php?id_grupo=" + id_grupo;
                     })
                 })
         }

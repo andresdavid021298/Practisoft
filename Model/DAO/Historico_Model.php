@@ -11,14 +11,12 @@ class HistoricoModel{
         $this->conexion = Conexion::conectar();
     }
 
-    public function insertarAlHistorico($nombre_estudiante, $id_empresa, $funciones, $fecha_estudiante){
-        $query = "INSERT INTO historico(nombre_estudiante, id_empresa, funciones, fecha_estudiante) VALUES(:nombre, :empresa, :funciones, :fecha)";
+    public function insertarAlHistoricoEstudiante($nombre_estudiante, $id_empresa, $funciones){
+        $query = "INSERT INTO historico_estudiante(nombre_estudiante, id_empresa, funciones) VALUES(:nombre, :empresa, :funciones)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":nombre", $nombre_estudiante);
         $stmt->bindParam(":empresa", $id_empresa);
-        $stmt->bindParam(":funciones", $funciones);
-        $stmt->bindParam(":fecha", $fecha_estudiante);
-        
+        $stmt->bindParam(":funciones", $funciones);        
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;

@@ -78,10 +78,9 @@ if (isset($_POST['accion'])) {
         
         $funciones = $_POST['funciones'];
         $nombre_estudiante = $_POST['nombre_estudiante'];
-        $fecha_estudiante = $_POST['fecha_estudiante'];
         
         $obj_historico_model = new HistoricoModel();
-        $res = $obj_historico_model->insertarAlHistorico($nombre_estudiante, $id_empresa, $funciones, $fecha_estudiante);
+        $res = $obj_historico_model->insertarAlHistoricoEstudiante($nombre_estudiante, $id_empresa, $funciones);
         $obj_solicitud_model = new SolicitudModel();
         $result = $obj_solicitud_model->disminuirNumeroDePracticantes($id_solicitud);
         $obj_estudiante_model = new EstudianteModel();
