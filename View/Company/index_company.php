@@ -168,20 +168,22 @@ if ($_SESSION['id_empresa'] == NULL) {
                         $cantidad_estudiantes = cantidadDeEstudiantesPorEmpresa($_SESSION['id_empresa']);
                         ?>
                         <div class="col-xl-3 col-md-6 mb-4 zoom">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Practicantes Asignados</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_estudiantes ?></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                            <a href="ver_practicantes.php">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Practicantes Asignados</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_estudiantes ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
 
                         <?php
@@ -190,20 +192,22 @@ if ($_SESSION['id_empresa'] == NULL) {
                         if ($cantidad_solicitudes_aprobadas > 0) {
                         ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Solicitudes Aprobadas</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_aprobadas ?></div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                <a href="solicitud_practicante.php">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Solicitudes Aprobadas</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_aprobadas ?></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         <?php } ?>
 
@@ -212,20 +216,22 @@ if ($_SESSION['id_empresa'] == NULL) {
                         $cantidad_solicitudes_en_espera = cantidadSolicitudesEnEspera($_SESSION['id_empresa']);
                         ?>
                         <div class="col-xl-3 col-md-6 mb-4 zoom">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Solicitudes en Espera</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_en_espera; ?></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-pause-circle fa-2x text-gray-300"></i>
+                            <a href="solicitud_practicante.php">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Solicitudes en Espera</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $cantidad_solicitudes_en_espera; ?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-pause-circle fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <?php
                         require_once "../../Controller/Convenio/Convenio_Controller.php";
@@ -243,35 +249,35 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     Documentos
                                                 </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
+
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
-                                                            Convenio
-                                                        </label>
+                                                        <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                     </div>
+
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_protocolos.php" class="form-check-label">
                                                             Protocolos Bio
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_certificado.php" class="form-check-label">
                                                             Cert. Existencia
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_representante.php" class="form-check-label">
                                                             CC Representante
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_rut.php" class="form-check-label">
                                                             RUT
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -294,33 +300,33 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <div class="mb-0 font-weight-bold text-gray-800">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_convenio.php" class="form-check-label">
                                                             Convenio
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_protocolos.php" class="form-check-label">
                                                             Protocolos Bio
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_certificado.php" class="form-check-label">
                                                             Cert. Existencia
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_representante.php" class="form-check-label">
                                                             CC Representante
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <label class="form-check-label" for="checkConvenio">
+                                                        <a href="documento_rut.php" class="form-check-label">
                                                             RUT
-                                                        </label>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,45 +352,45 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_convenio.php" class="form-check-label">
                                                                 Convenio
-                                                            </label>
+                                                            </a>
                                                         </div>
 
                                                     <?php } else {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_convenio.php" class="form-check-label">
                                                                 Convenio
-                                                            </label>
+                                                            </a>
                                                         </div>
                                                     <?php }
                                                     if (is_null($documentos_empresa)) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_protocolos.php" class="form-check-label">
                                                                 Protocolos Bio
-                                                            </label>
+                                                            </a>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_certificado.php" class="form-check-label">
                                                                 Cert. Existencia
-                                                            </label>
+                                                            </a>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_representante.php" class="form-check-label">
                                                                 CC Representante
-                                                            </label>
+                                                            </a>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <label class="form-check-label" for="checkConvenio">
+                                                            <a href="documento_rut.php" class="form-check-label">
                                                                 RUT
-                                                            </label>
+                                                            </a>
                                                         </div>
                                                     <?php } else { ?>
                                                         <?php
@@ -392,16 +398,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_protocolos.php" class="form-check-label">
                                                                     Protocolos Bio
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_protocolos.php" class="form-check-label">
                                                                     Protocolos Bio
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } ?>
                                                         <?php
@@ -409,16 +415,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_certificado.php" class="form-check-label">
                                                                     Cert. Existencia
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_certificado.php" class="form-check-label">
                                                                     Cert. Existencia
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } ?>
                                                         <?php
@@ -426,16 +432,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_representante.php" class="form-check-label">
                                                                     CC Representante
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_representante.php" class="form-check-label">
                                                                     CC Representante
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } ?>
                                                         <?php
@@ -443,16 +449,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_rut.php" class="form-check-label">
                                                                     RUT
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <label class="form-check-label" for="checkConvenio">
+                                                                <a href="documento_rut.php" class="form-check-label">
                                                                     RUT
-                                                                </label>
+                                                                </a>
                                                             </div>
                                                     <?php }
                                                     } ?>
