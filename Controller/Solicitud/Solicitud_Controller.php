@@ -27,7 +27,7 @@ if (isset($_POST['accion'])) {
             $response['state'] = "error";
             $response['location'] = "revision_solicitudes.php";
         } else {
-            $response['title'] = "Solicitud agregada correctamente";
+            $response['title'] = "Solicitud validada correctamente";
             $response['state'] = "success";
             $response['location'] = "revision_solicitudes.php";
         }

@@ -57,7 +57,7 @@ if (isset($_FILES['input_archivo_carta']['name'])) {
                 $response['title'] = "Error al subir la carta compromisoria";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información actualizada correctamente";
+                $response['title'] = "Carta compromisoria actualizada correctamente";
                 $response['state'] = "success";
             }
         }
@@ -95,7 +95,7 @@ if (isset($_FILES['input_archivo_carta']['name'])) {
                 $response['title'] = "Error al subir el informe de avance";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información actualizada correctamente";
+                $response['title'] = "Informe de avance actualizado correctamente";
                 $response['state'] = "success";
             }
         }

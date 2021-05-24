@@ -214,7 +214,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         </div>
                         <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
                         <div class="col text-center">
-                            <button onclick="guardarEncuestaInscripcion();" id="btn_guardar_encuesta_inscripcion" type="button" name="btn_guardar_encuesta_inscripcion" class="btn btn-primary">Guardar</button>
+                            <button onclick="guardarEncuestaInscripcion();" id="btn_guardar_encuesta_inscripcion" type="button" name="btn_guardar_encuesta_inscripcion" class="btn btn-primary">Guardar</button><br><br>
                         </div>
                     </form>
                 </div>

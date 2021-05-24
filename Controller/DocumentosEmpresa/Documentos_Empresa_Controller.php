@@ -17,25 +17,38 @@ if (isset($_FILES['input_archivo']['name'])) {
         $response['state'] = "warning";
     } else {
         move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
+
         $protocolos = new DocumentosEmpresaModel();
         $registros = verificarRegistros($idEmpresa);
+        $lista_documentos = verificarDocumentacion($idEmpresa);
         if ($registros == 0) {
             $rta = $protocolos->insertarDocumentoProtocolos($idEmpresa, $archivo);
             if ($rta == 0) {
-                $response['title'] = "Error al subir los protocolos de bioseguridad";
+                $response['title'] = "Error al subir el documento de protocolos de bioseguridad";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información cargada correctamente";
+                $response['title'] = "Documento protocolos de bioseguridad cargado correctamente";
                 $response['state'] = "success";
             }
         } else {
-            $rta = $protocolos->actualizarDocumentoProtocolos($idEmpresa, $archivo);
-            if ($rta == 0) {
-                $response['title'] = "Error al subir el convenio";
-                $response['state'] = "error";
+            if ($lista_documentos['archivo_protocolos_bio'] == NULL) {
+                $rta = $protocolos->actualizarDocumentoProtocolos($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el documento de protocolos de bioseguridad";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento protocolos de bioseguridad cargado correctamente";
+                    $response['state'] = "success";
+                }
             } else {
-                $response['title'] = "Información actualizada correctamente";
-                $response['state'] = "success";
+                $rta = $protocolos->actualizarDocumentoProtocolos($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el convenio";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento protocolos de bioseguridad actualizado correctamente";
+                    $response['state'] = "success";
+                }
             }
         }
     }
@@ -57,23 +70,35 @@ if (isset($_FILES['input_archivo']['name'])) {
         move_uploaded_file($_FILES['input_archivo_certificado']['tmp_name'], $location);
         $certificado = new DocumentosEmpresaModel();
         $registros = verificarRegistros($idEmpresa);
+        $lista_documentos = verificarDocumentacion($idEmpresa);
         if ($registros == 0) {
             $rta = $certificado->insertarDocumentoCertificado($idEmpresa, $archivo);
             if ($rta == 0) {
                 $response['title'] = "Error al subir el certificado de existencia";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información cargada correctamente";
+                $response['title'] = "Documento de certificado de existencia cargado correctamente";
                 $response['state'] = "success";
             }
         } else {
-            $rta = $certificado->actualizarDocumentoCertificado($idEmpresa, $archivo);
-            if ($rta == 0) {
-                $response['title'] = "Error al subir el convenio";
-                $response['state'] = "error";
+            if ($lista_documentos['archivo_certificado_existencia'] == NULL) {
+                $rta = $certificado->actualizarDocumentoCertificado($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el certificado de existencia";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento de certificado de existencia cargado correctamente";
+                    $response['state'] = "success";
+                }
             } else {
-                $response['title'] = "Información actualizada correctamente";
-                $response['state'] = "success";
+                $rta = $certificado->actualizarDocumentoCertificado($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el convenio";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento de certificado de existencia actualizado correctamente";
+                    $response['state'] = "success";
+                }
             }
         }
     }
@@ -95,28 +120,40 @@ if (isset($_FILES['input_archivo']['name'])) {
         move_uploaded_file($_FILES['input_archivo_rut']['tmp_name'], $location);
         $certificado = new DocumentosEmpresaModel();
         $registros = verificarRegistros($idEmpresa);
+        $lista_documentos = verificarDocumentacion($idEmpresa);
         if ($registros == 0) {
             $rta = $certificado->insertarDocumentoRUT($idEmpresa, $archivo);
             if ($rta == 0) {
                 $response['title'] = "Error al subir el RUT";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información cargada correctamente";
+                $response['title'] = "Documento RUT cargado correctamente";
                 $response['state'] = "success";
             }
         } else {
-            $rta = $certificado->actualizarDocumentoRUT($idEmpresa, $archivo);
-            if ($rta == 0) {
-                $response['title'] = "Error al subir el convenio";
-                $response['state'] = "error";
+            if ($lista_documentos['archivo_rut'] == NULL) {
+                $rta = $certificado->actualizarDocumentoRUT($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el convenio";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento RUT cargado correctamente";
+                    $response['state'] = "success";
+                }
             } else {
-                $response['title'] = "Información actualizada correctamente";
-                $response['state'] = "success";
+                $rta = $certificado->actualizarDocumentoRUT($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el convenio";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento RUT actualizado correctamente";
+                    $response['state'] = "success";
+                }
             }
         }
     }
     echo json_encode($response);
-}else if (isset($_FILES['input_archivo_representante']['name'])) {
+} else if (isset($_FILES['input_archivo_representante']['name'])) {
     $response = array();
     $nombreArchivo = $_FILES['input_archivo_representante']['name'];
     $idEmpresa = $_POST['id_empresa'];
@@ -133,23 +170,35 @@ if (isset($_FILES['input_archivo']['name'])) {
         move_uploaded_file($_FILES['input_archivo_representante']['tmp_name'], $location);
         $representante = new DocumentosEmpresaModel();
         $registros = verificarRegistros($idEmpresa);
+        $lista_documentos = verificarDocumentacion($idEmpresa);
         if ($registros == 0) {
             $rta = $representante->insertarDocumentoRepresentante($idEmpresa, $archivo);
             if ($rta == 0) {
                 $response['title'] = "Error al subir el documento del representante";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Documento de Representante cargada correctamente";
+                $response['title'] = "Documento de Representante cargado correctamente";
                 $response['state'] = "success";
             }
         } else {
-            $rta = $representante->actualizarDocumentoRepresentante($idEmpresa, $archivo);
-            if ($rta == 0) {
-                $response['title'] = "Error al actualizar documento";
-                $response['state'] = "error";
+            if ($lista_documentos['archivo_cc_representante'] == NULL) {
+                $rta = $representante->actualizarDocumentoRepresentante($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al actualizar documento";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento de representante cargado correctamente";
+                    $response['state'] = "success";
+                }
             } else {
-                $response['title'] = "Documento de representante actualizada correctamente";
-                $response['state'] = "success";
+                $rta = $representante->actualizarDocumentoRepresentante($idEmpresa, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al actualizar documento";
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento de representante actualizado correctamente";
+                    $response['state'] = "success";
+                }
             }
         }
     }
@@ -161,6 +210,12 @@ function verificarRegistros($id_empresa)
 {
     $obj_documentos_empresa_model = new DocumentosEmpresaModel();
     return $obj_documentos_empresa_model->verificarRegistroDocumento($id_empresa);
+}
+
+function verificarDocumentacion($id_empresa)
+{
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->verificarDocumentacion($id_empresa);
 }
 
 // Metodo que conecta con la vista para listar todos los documentos de una empresa
@@ -176,7 +231,8 @@ function mostrarDatosProtocolos($id_empresa)
     return $obj_documentos_empresa_model->mostrarProtocolos($id_empresa);
 }
 
-function mostrarDatosRepresentante($id_empresa){
+function mostrarDatosRepresentante($id_empresa)
+{
     $obj_documentos_empresa_model = new DocumentosEmpresaModel();
     return $obj_documentos_empresa_model->mostrarRepresentante($id_empresa);
 }

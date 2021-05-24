@@ -215,6 +215,11 @@ if ($_SESSION['id_director'] == NULL) {
                                         <td colspan="4" style="color: #D61117;">
                                             <center><strong>NO EXISTEN GRUPOS EN EL SISTEMA</strong></center>
                                         </td>
+                                        <tr>
+                                            <td colspan="3" >
+                                                <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
+                                            </td>
+                                        </tr>
                                         <?php
                                     } else {
 

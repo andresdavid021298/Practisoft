@@ -33,6 +33,25 @@ class DocumentosEmpresaModel
         }
     }
 
+    public function verificarDocumentacion($id_empresa)
+    {
+        $documentos = null;
+        $query = "SELECT * FROM documentos_empresa WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            if ($stmt->rowCount() > 0) {
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $documentos = $result;
+            }
+            $stmt->closeCursor();
+            return $documentos;
+        }
+    }
+
     // Metodo que retorna todos los documentos de una empresa
     public function verDocumentosEmpresa($id_empresa)
     {
@@ -55,7 +74,7 @@ class DocumentosEmpresaModel
     //Método para cargar el documento de protocolos de bioseguridad
     public function insertarDocumentoProtocolos($id_empresa, $nombre_archivo)
     {
-        $query = "INSERT INTO documentos_empresa VALUES(NULL, :id_empresa, :nombre_archivo, NULL, NULL, NULL)";
+        $query = "INSERT INTO documentos_empresa(id_empresa, archivo_protocolos_bio) VALUES(:id_empresa, :nombre_archivo)";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
         $stmt->bindParam(":nombre_archivo", $nombre_archivo);

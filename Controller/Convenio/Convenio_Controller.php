@@ -27,16 +27,16 @@ if (isset($_POST['fecha_inicio']) || isset($_POST['fecha_expiracion']) || isset(
                 $response['title'] = "Error al subir el convenio";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información cargada correctamente";
+                $response['title'] = "Convenio cargado correctamente";
                 $response['state'] = "success";
             }
         } else {
             $rta = $convenio->actualizarConvenio($idEmpresa, $archivo, $fechaInicio, $fechaExpiracion);
             if ($rta == 0) {
-                $response['title'] = "Error al subir el convenio";
+                $response['title'] = "Error al actualizar el convenio";
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Información actualizada correctamente";
+                $response['title'] = "Convenio actualizado correctamente";
                 $response['state'] = "success";
             }
         }
