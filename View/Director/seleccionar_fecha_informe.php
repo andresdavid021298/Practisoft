@@ -34,7 +34,7 @@
 
 <body id="page-top">
     <div>
-        <img class="imagen_header" src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
+        <img src="../../Img/imagen_header.png" alt="Cargando Imagen..." width="100%" height="200px">
     </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -131,8 +131,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <div>
-                                    <span id="nombreUsuario">
-                                        <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
+                                    <span id="nombreUsuarioDirector">
+                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
                                     </span>
                                 </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
@@ -149,13 +149,30 @@
 
                 </nav>
                 <!-- End of Topbar -->
-                <?php
-                include_once 'crear_informe_estadistico.php';
-                ?>
                 <div style="text-align: center;">
-                    <button class="btn btn-primary" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF</button>
+                    <strong>
+                        <h2>Informe Histórico</h2>
+                    </strong>
+                    <p>Seleccione una fecha de inicio y fecha de fin para generar los informes.</p>
                 </div>
-                <br>
+                <br><br>
+                <form method="POST" action="informe_historico.php" enctype="multipart/form-data">
+                    <div>
+                        <center>
+                            <strong><label>Fecha de Inicio:</label></strong>
+                            <input id="fecha_inicio" name="fecha_inicio" type="date" class="form-control col-3">
+                        </center>
+                        <br><br>
+                        <center>
+                            <strong> <label>Fecha de Fin:</label></strong>
+                            <input id="fecha_fin" name="fecha_fin" type="date" class="form-control col-3">
+                        </center>
+                        <br><br>
+                        <center>
+                            <button onclick="validarFechas();" type="button" class="btn btn-primary">Generar</button>
+                        </center>
+                    </div>
+                </form>
             </div>
             <!-- End of Page Wrapper -->
 
@@ -165,7 +182,7 @@
             </a>
 
             <!-- Footer -->
-            <footer class="foot">
+            <footer>
                 <div class="ufps-footer">
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
@@ -184,12 +201,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
-<script src="../../js/Coordinator/alertas_coordinador.js"></script>
+<script src="../../js/Director/alertas_director.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
 
 </html>

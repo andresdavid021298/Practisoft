@@ -267,3 +267,17 @@ function verCantidadEmpresasSegunSector()
     $obj_empresa_model = new EmpresaModel();
     return $obj_empresa_model->verCantidadEmpresasSegunSector();
 }
+
+// Metodo que conecta con el modelo para mostrar la cantidad de empresas según el sector y la fecha
+function verCantidadEmpresasSegunSectorHistorico($fecha_inicio, $fecha_fin)
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verCantidadEmpresasSegunSectorHistorico($fecha_inicio, $fecha_fin);
+}
+
+// Metodo que conecta con el modelo para mostrar la cantidad de empresas según el sector y la fecha
+function verCantidadEmpresasSegunActividadHistorico($fecha_inicio, $fecha_fin)
+{
+    $obj_empresa_model = new EmpresaModel();
+    return $obj_empresa_model->verCantidadEmpresasSegunActividadHistorico($fecha_inicio, $fecha_fin);
+}

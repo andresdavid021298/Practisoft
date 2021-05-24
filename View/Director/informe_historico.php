@@ -131,8 +131,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <div>
-                                    <span id="nombreUsuario">
-                                        <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
+                                    <span id="nombreUsuarioDirector">
+                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
                                     </span>
                                 </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
@@ -150,8 +150,9 @@
                 </nav>
                 <!-- End of Topbar -->
                 <?php
-                include_once 'crear_informe_estadistico.php';
+                include_once 'crear_informe_historico.php';
                 ?>
+                <br>
                 <div style="text-align: center;">
                     <button class="btn btn-primary" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF</button>
                 </div>
@@ -165,7 +166,7 @@
             </a>
 
             <!-- Footer -->
-            <footer class="foot">
+            <footer id="foot" class="foot">
                 <div class="ufps-footer">
                     <h3>Universidad Francisco de Paula Santander</h3>
                     <p>Programa Ingeniería de Sistemas</p>
@@ -184,7 +185,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
-<script src="../../js/Coordinator/alertas_coordinador.js"></script>
+<script src="../../js/Director/alertas_director.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

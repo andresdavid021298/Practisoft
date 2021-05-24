@@ -188,8 +188,34 @@ function finalizarSemestre() {
                         }).then(() => {
                             window.location = "semestre.php";
                         })
-                    })  
+                    })
             )
         }
     })
+}
+
+//Método para mostrar alerta en el momento de validar fechas
+function validarFechas() {
+    var fecha_inicio = document.getElementById("fecha_inicio").value;
+    var fecha_fin = document.getElementById("fecha_fin").value;
+    if ((fecha_inicio == "") || (fecha_fin == "")) {
+        swal.fire({
+            icon: "warning",
+            title: "Hay campos vacios"
+        })
+    } else {
+        window.location = 'informe_historico.php?fecha_inicio='+fecha_inicio+'&fecha_fin='+fecha_fin;
+    }
+}
+
+function imprimirInformeEstadistico() {
+    $('.imagen_header').hide();
+    $('.navbar-nav').hide();
+    $('#imprimirInforme').hide();
+    $('.foot').css("visibility", "hidden");
+    window.print();
+    $('.imagen_header').show();
+    $('.navbar-nav').show();
+    $('#imprimirInforme').show();
+    $('.foot').css("visibility", "visible");
 }

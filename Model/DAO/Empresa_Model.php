@@ -266,8 +266,52 @@ class EmpresaModel
     public function verCantidadEmpresasSegunSector()
     {
         $lista_empresas = NULL;
-        $query = "SELECT sector_empresa, COUNT(*) as cantidad_empresa FROM empresa GROUP BY sector_empresa";
+        $query = "SELECT sector_empresa, COUNT(*) AS cantidad_empresa FROM empresa GROUP BY sector_empresa";
         $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_empresas[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $lista_empresas;
+        }
+    }
+
+    // Metodo que duevuelve el total de empresas según el sector y una fecha determinada
+    public function verCantidadEmpresasSegunSectorHistorico($fecha_inicio, $fecha_fin)
+    {
+        $lista_empresas = NULL;
+        $query = "SELECT e.sector_empresa, COUNT(DISTINCT(h.id_empresa)) AS cantidad_empresa
+        FROM empresa AS e INNER JOIN historico_estudiante AS h ON e.id_empresa = h.id_empresa
+        WHERE h.fecha_estudiante >= :fecha_inicio AND h.fecha_estudiante <= :fecha_fin GROUP BY e.sector_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":fecha_inicio", $fecha_inicio);
+        $stmt->bindParam(":fecha_fin", $fecha_fin);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_empresas[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $lista_empresas;
+        }
+    }
+
+    // Metodo que duevuelve el total de empresas según la actividad y una fecha determinada
+    public function verCantidadEmpresasSegunActividadHistorico($fecha_inicio, $fecha_fin)
+    {
+        $lista_empresas = NULL;
+        $query = "SELECT e.actividad_empresa, COUNT(DISTINCT(h.id_empresa)) AS cantidad_empresa
+        FROM empresa AS e INNER JOIN historico_estudiante AS h ON e.id_empresa = h.id_empresa
+        WHERE h.fecha_estudiante >= :fecha_inicio AND h.fecha_estudiante <= :fecha_fin GROUP BY e.actividad_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":fecha_inicio", $fecha_inicio);
+        $stmt->bindParam(":fecha_fin", $fecha_fin);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;

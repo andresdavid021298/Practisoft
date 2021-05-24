@@ -5,7 +5,6 @@ $obj_empresa_actividad = verCantidadEmpresasSegunActividad();
 $obj_empresa_sector = verCantidadEmpresasSegunSector();
 $obj_solicitud = cantidadSolicitudesPorEmpresa();
 ?>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {
@@ -51,7 +50,7 @@ $obj_solicitud = cantidadSolicitudesPorEmpresa();
     ]);
 
     var options = {
-      title: 'Gráfico Circular - Cantidad de Empresas Según el Sector'
+      title: 'Diagrama de Barras - Cantidad de Empresas Según el Sector'
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('piechartEmpresaSector'));
@@ -87,7 +86,7 @@ $obj_solicitud = cantidadSolicitudesPorEmpresa();
     ]);
 
     var options = {
-      title: "Diagrama de Barras - Cantidad de Solicitudes por Empresa",
+      title: "Gráfico Circular - Cantidad de Solicitudes por Empresa",
       width: 800,
       height: 400,
       is3D: true,

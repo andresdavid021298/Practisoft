@@ -310,10 +310,32 @@ class SolicitudModel
     // Metodo que retorna la cantidad de solicitudes de las empresas
     public function cantidadSolicitudesPorEmpresa()
     {
-        $query = "SELECT e.nombre_empresa, COUNT(s.id_empresa) as 'cantidad_solicitudes'
-        FROM empresa AS e LEFT JOIN solicitud AS s ON e.id_empresa=s.id_empresa GROUP BY e.nombre_empresa";
         $cantidad_solicitudes = NULL;
+        $query = "SELECT e.nombre_empresa, COUNT(s.id_empresa) as 'cantidad_solicitudes'
+        FROM empresa AS e LEFT JOIN solicitud AS s ON e.id_empresa=s.id_empresa GROUP BY e.nombre_empresa ORDER BY COUNT(S.id_empresa) DESC LIMIT 10";
         $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($cantidad = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $cantidad_solicitudes[] = $cantidad;
+            }
+            $stmt->closeCursor();
+            return $cantidad_solicitudes;
+        }
+    }
+
+    // Metodo que retorna la cantidad de solicitudes de las empresas según una fecha determinada
+    public function cantidadSolicitudesPorEmpresaYFecha($fecha_inicio, $fecha_fin)
+    {
+        $cantidad_solicitudes = NULL;
+        $query = "SELECT e.nombre_empresa, COUNT(h.id_empresa) as 'cantidad_solicitudes'
+        FROM empresa AS e LEFT JOIN historico_solicitud AS h ON e.id_empresa=h.id_empresa
+        WHERE h.fecha >= :fecha_inicio AND h.fecha <= :fecha_fin GROUP BY e.nombre_empresa ORDER BY COUNT(h.id_empresa) DESC LIMIT 10";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":fecha_inicio", $fecha_inicio);
+        $stmt->bindParam(":fecha_fin", $fecha_fin);
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;

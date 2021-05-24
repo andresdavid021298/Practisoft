@@ -104,9 +104,17 @@ function listaSolicitudEmpresasRechazadas()
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->listarSolicitudesRechazadas();
 }
+
 // Metodo que conecta con el modelo para listar la cantidad de solicitudes por empresa
 function cantidadSolicitudesPorEmpresa()
 {
     $obj_solicitud_model = new SolicitudModel();
     return $obj_solicitud_model->cantidadSolicitudesPorEmpresa();
+}
+
+// Metodo que conecta con el modelo para listar la cantidad de solicitudes por empresa
+function cantidadSolicitudesPorEmpresaYFecha($fecha_inicio, $fecha_fin)
+{
+    $obj_solicitud_model = new SolicitudModel();
+    return $obj_solicitud_model->cantidadSolicitudesPorEmpresaYFecha($fecha_inicio, $fecha_fin);
 }
