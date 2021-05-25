@@ -175,13 +175,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     </form>
                                 </center>
                             </div>
+                            <br>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Descripcion Actividad</th>
-                                            <th>Numero de Horas Establecidas</th>
-                                            <th>Opciones</th>
+                                            <th id="th">Descripcion Actividad</th>
+                                            <th id="th">Numero de Horas Establecidas</th>
+                                            <th id="th">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -189,9 +190,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                         foreach ($lista_actividades as $actividad) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
-                                                <td><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
-                                                <td><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
+                                                <td id="td"><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
+                                                <td id="td"><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
+                                                <td id="td"><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

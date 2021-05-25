@@ -196,21 +196,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     </thead>
                                     <thead>
                                         <tr>
-                                            <th>
-                                                <center>Fecha</center>
-                                            </th>
-                                            <th>
-                                                <center>Descripcion</center>
-                                            </th>
-                                            <th>
-                                                <center>Horas</center>
-                                            </th>
-                                            <th>
-                                                <center>Estado</center>
-                                            </th>
-                                            <th>
-                                                <center>Opciones</center>
-                                            </th>
+                                            <th id="th">Fecha</th>
+                                            <th id="th">Descripcion</th>
+                                            <th id="th">Horas</th>
+                                            <th id="th">Estado</th>
+                                            <th id="th">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -228,25 +218,45 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             foreach ($lista_de_actividades as $actividad) {
                                             ?>
                                                 <tr>
-                                                    <td>
+                                                    <td id="td">
                                                         <center><?php echo $actividad['fecha_actividad']; ?></center>
                                                     </td>
-                                                    <td>
+                                                    <td id="td">
                                                         <center><?php echo $actividad['descripcion_actividad']; ?></center>
                                                     </td>
-                                                    <td>
+                                                    <td id="td">
                                                         <center><?php echo $actividad['horas_actividad']; ?></center>
                                                     </td>
-                                                    <td>
-                                                        <center><?php echo $actividad['estado_actividad']; ?></center>
-                                                    </td>
+                                                    <?php
+                                                    if ($actividad['estado_actividad'] == 'En Espera') {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $actividad['estado_actividad'] ?>-yellow?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    } else if ($actividad['estado_actividad'] == 'Aprobada') {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $actividad['estado_actividad'] ?>-green?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $actividad['estado_actividad'] ?>-red?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <td>
                                                         <?php
                                                         if ($actividad['estado_actividad'] == "En Espera") { ?>
                                                             <center><button class="btn btn-success" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $_GET['id_actividad'] ?>)">Validar</button></center>
                                                             <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
                                                         <?php } else { ?>
-                                                            <center>----------</center>
+                                                            <center>
+                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
+                                                            </center>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -254,7 +264,17 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         }
                                         ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th id="th">Fecha</th>
+                                            <th id="th">Descripcion</th>
+                                            <th id="th">Horas</th>
+                                            <th id="th">Estado</th>
+                                            <th id="th">Opciones</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
+                                <br><br><br>
                             </div>
                         </div>
                 <?php }

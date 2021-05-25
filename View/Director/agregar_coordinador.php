@@ -163,9 +163,9 @@ if ($_SESSION['id_director'] == NULL) {
                         <table id="example" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,13 +181,13 @@ if ($_SESSION['id_director'] == NULL) {
                                     foreach ($lista_coordinadores as $coordinador) {
                                     ?>
                                         <tr>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $coordinador['nombre_coordinador']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $coordinador['correo_coordinador']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar</button></center>
                                             </td>
                                         </tr>

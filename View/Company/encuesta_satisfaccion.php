@@ -215,7 +215,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <center><strong>NO HA COMPLETADO LA TOTALIDAD DE HORAS</strong></center>
+                                                    <center><strong style="color: #D61117;">NO HA COMPLETADO LA TOTALIDAD DE HORAS</strong></center>
                                             </td>
                                         <?php
                                                 }

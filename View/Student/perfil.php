@@ -153,28 +153,28 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">
                         <div class="container">
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group">
+                                <div class="col-3">
                                     <center><label for="input_nombre">Nombre</label></center>
                                     <input type="text" class="form-control" id="input_nombre" disabled value="<?php echo $_SESSION['nombre_estudiante']; ?>">
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="col-3">
                                     <center><label for="input_correo">Correo</label></center>
                                     <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_estudiante['correo_estudiante']; ?>" disabled>
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="col-3">
                                     <center><label for="input_codigo">Codigo</label>
                                         <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_estudiante['codigo_estudiante']; ?>" placeholder="Digite su codigo">
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="col-3">
                                     <center><label for="input_celular">Numero de Telefono Movil</label></center>
                                     <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
                                 </div>

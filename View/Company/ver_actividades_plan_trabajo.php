@@ -182,27 +182,19 @@ if ($_SESSION['id_empresa'] == NULL) {
                         ?>
                         <h4>Número de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
                     </center>
+                    <br>
                     <div class="container-fluid">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <center>Descripción</center>
-                                        </th>
-                                        <th>
-                                            <center>Horas Definidas</center>
-                                        </th>
-                                        <th>
-                                            <center>Horas Cumplidas</center>
-                                        </th>
-                                        <th>
-                                            <center>Opciones</center>
-                                        </th>
+                                        <th id="th">Descripción</th>
+                                        <th id="th">Horas Definidas</th>
+                                        <th id="th">Horas Cumplidas</th>
+                                        <th id="th">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php
                                     require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
                                     $actividades_plan_trabajo = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
@@ -236,7 +228,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <?php }
                                     } ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th id="th">Descripción</th>
+                                        <th id="th">Horas Definidas</th>
+                                        <th id="th">Horas Cumplidas</th>
+                                        <th id="th">Opciones</th>
+                                    </tr>
+                                </tfoot>
                             </table>
+                            <br><br><br>
                         </div>
                     </div>
                 <?php } ?>

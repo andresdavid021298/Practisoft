@@ -244,12 +244,12 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     </thead>
                                     <thead>
                                         <tr>
-                                            <th>Fecha</th>
-                                            <th>Descripcion</th>
-                                            <th>Numero de Horas</th>
-                                            <th>Estado</th>
-                                            <th>Observaciones</th>
-                                            <th>Opciones</th>
+                                            <th id="th">Fecha</th>
+                                            <th id="th">Descripción</th>
+                                            <th id="th">Número de Horas</th>
+                                            <th id="th">Estado</th>
+                                            <th id="th">Observaciones</th>
+                                            <th id="th">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -267,12 +267,32 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                             foreach ($lista_actividad as $listado) {
                                             ?>
                                                 <tr>
-                                                    <td><?php echo $listado['fecha_actividad'] ?></td>
-                                                    <td><?php echo $listado['descripcion_actividad'] ?></td>
-                                                    <td><?php echo $listado['horas_actividad'] ?></td>
-                                                    <td><?php echo $listado['estado_actividad'] ?></td>
-                                                    <td><?php echo $listado['observaciones_actividad'] ?></td>
-                                                    <td>
+                                                    <td id="td"><?php echo $listado['fecha_actividad'] ?></td>
+                                                    <td id="td"><?php echo $listado['descripcion_actividad'] ?></td>
+                                                    <td id="td"><?php echo $listado['horas_actividad'] ?></td>
+                                                    <?php
+                                                    if ($listado['estado_actividad'] == 'En Espera') {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-yellow?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    } else if ($listado['estado_actividad'] == 'Aprobada') {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-green?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <td id="td">
+                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-red?style=for-the-badge">
+                                                        </td>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <td id="td"><?php echo $listado['observaciones_actividad'] ?></td>
+                                                    <td id="td">
                                                         <?php
                                                         if ($listado['estado_actividad'] == 'En Espera') {
                                                         ?>
@@ -286,7 +306,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                                         <?php
                                                         } else {
                                                         ?>
-                                                            <center>----------</center>
+                                                            <center>
+                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
+                                                            </center>
                                                         <?php
                                                         }
                                                         ?>
@@ -299,15 +321,16 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Fecha</th>
-                                            <th>Descripcion</th>
-                                            <th>Numero de Horas</th>
-                                            <th>Estado</th>
-                                            <th>Observaciones</th>
-                                            <th>Opciones</th>
+                                            <th id="th">Fecha</th>
+                                            <th id="th">Descripción</th>
+                                            <th id="th">Número de Horas</th>
+                                            <th id="th">Estado</th>
+                                            <th id="th">Observaciones</th>
+                                            <th id="th">Opciones</th>
                                         </tr>
                                     </tfoot>
                                 </table>
+                                <br><br><br>
                             </div>
 
                         <?php }

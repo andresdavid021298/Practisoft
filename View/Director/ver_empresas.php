@@ -161,16 +161,15 @@ if ($_SESSION['id_director'] == NULL) {
                         <table id="example" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Representante Legal</th>
-                                    <th>NIT</th>
-                                    <th>Direccion</th>
-                                    <th>Teléfono Móvil</th>
-                                    <th>Correo</th>
-                                    <th>Sector</th>
-                                    <th>Actividad Económica</th>
-                                    <th>Documentos</th>
-
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Representante Legal</th>
+                                    <th id="th">NIT</th>
+                                    <th id="th">Direccion</th>
+                                    <th id="th">Teléfono Móvil</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Sector</th>
+                                    <th id="th">Actividad Económica</th>
+                                    <th id="th">Documentos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -186,28 +185,38 @@ if ($_SESSION['id_director'] == NULL) {
                                     foreach ($lista_empresas as $empresa) {
                                     ?>
                                         <tr>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['nombre_empresa']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['representante_legal']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['nit_empresa']; ?></center>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['direccion_empresa'] . "- de " . $empresa['municipio_empresa']; ?></center>
-                                            </td>
-                                            <td>
+                                            <?php
+                                            if ($empresa['direccion_empresa'] == NULL) {
+                                            ?>
+                                            <td></td>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <td id="td">
+                                                    <center><?php echo $empresa['direccion_empresa'] . "- de " . $empresa['municipio_empresa']; ?></center>
+                                                </td>
+                                            <?php
+                                            }
+                                            ?>
+                                            <td id="td">
                                                 <center><?php echo $empresa['celular_empresa']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['correo_empresa']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['sector_empresa']; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $empresa['actividad_empresa']; ?></center>
                                             </td>
                                             <?php
@@ -215,11 +224,13 @@ if ($_SESSION['id_director'] == NULL) {
                                             $lista_documentos = listarDocumentosPorEmpresa($empresa['id_empresa']);
                                             if (is_null($lista_documentos)) {
                                             ?>
-                                                <td>No ha subido ningun documento</td>
+                                                <td id="td">
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge">
+                                                </td>
                                             <?php
                                             } else {
                                             ?>
-                                                <td>
+                                                <td id="td">
                                                     <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
                                                 </td>
                                             <?php } ?>
@@ -227,7 +238,21 @@ if ($_SESSION['id_director'] == NULL) {
                                 <?php }
                                 } ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Representante Legal</th>
+                                    <th id="th">NIT</th>
+                                    <th id="th">Direccion</th>
+                                    <th id="th">Teléfono Móvil</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Sector</th>
+                                    <th id="th">Actividad Económica</th>
+                                    <th id="th">Documentos</th>
+                                </tr>
+                            </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                 </div>
             </div>

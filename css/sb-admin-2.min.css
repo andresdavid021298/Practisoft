@@ -11775,3 +11775,8 @@ footer {
     border: 2px solid black;
     margin-right: 10px;
 }
+
+#td, #th{
+    text-align: center;
+    vertical-align: middle;
+}

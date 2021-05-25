@@ -228,10 +228,10 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -250,10 +250,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     foreach ($datos_tutor as $datos) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $datos['nombre_tutor'] ?></td>
-                                            <td><?php echo $datos['correo_tutor'] ?></td>
-                                            <td><?php echo $datos['celular_tutor'] ?></td>
-                                            <td>
+                                            <td id="td"><?php echo $datos['nombre_tutor'] ?></td>
+                                            <td id="td"><?php echo $datos['correo_tutor'] ?></td>
+                                            <td id="td"><?php echo $datos['celular_tutor'] ?></td>
+                                            <td id="td">
 
                                                 <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" data-nombre="<?php echo $datos['nombre_tutor']; ?>" data-correo="<?php echo $datos['correo_tutor']; ?>" data-celular="<?php echo $datos['celular_tutor']; ?>" data-tutor="<?php echo $datos['id_tutor']; ?>">Actualizar</button></center><br>
 
@@ -268,10 +268,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -157,7 +157,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="mb-0 text-gray-800">Documentacion</h2>
+                            <h2 class="mb-0 text-gray-800">Documentación</h2>
                         </div>
                     </div>
                 </div>
@@ -185,10 +185,10 @@ if ($_SESSION['id_director'] == NULL) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Protocolos de Bioseguridad</td>
-                                        <td>Certificado de Existencia</td>
-                                        <td>Cedula del Representante</td>
-                                        <td>RUT</td>
+                                        <th id="th">Protocolos de Bioseguridad</th>
+                                        <th id="th">Certificado de Existencia</th>
+                                        <th id="th">Cedula del Representante</th>
+                                        <th id="th">RUT</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -199,12 +199,12 @@ if ($_SESSION['id_director'] == NULL) {
                                     if (is_null($documentos_empresa)) {
                                     ?>
                                         <tr>
-                                            <td colspan="4">Esta empresa no presenta documentos</td>
+                                            <td style="color: #D61117; text-align: center;" colspan="4"><strong>Sin Documentación</strong></td>
                                         </tr>
                                     <?php
                                     } else {
                                     ?>
-                                        <td>
+                                        <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_protocolos_bio'])) {
                                             ?>
@@ -214,11 +214,11 @@ if ($_SESSION['id_director'] == NULL) {
                                                 </center>
                                             <?php } else { ?>
                                                 <center>
-                                                    <p>No posee este documento aún</p>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
                                                 </center>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_certificado_existencia'])) {
                                             ?>
@@ -228,11 +228,11 @@ if ($_SESSION['id_director'] == NULL) {
                                                 </center>
                                             <?php } else { ?>
                                                 <center>
-                                                    <p>No posee este documento aún</p>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                 </center>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_cc_representante'])) {
                                             ?>
@@ -242,11 +242,11 @@ if ($_SESSION['id_director'] == NULL) {
                                                 </center>
                                             <?php } else { ?>
                                                 <center>
-                                                    <p>No posee este documento aún</p>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                 </center>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                        <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_rut'])) {
                                             ?>
@@ -256,7 +256,7 @@ if ($_SESSION['id_director'] == NULL) {
                                                 </center>
                                             <?php } else { ?>
                                                 <center>
-                                                    <p>No posee este documento aún</p>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                 </center>
                                             <?php } ?>
                                         </td>

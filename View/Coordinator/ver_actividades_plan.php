@@ -215,9 +215,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                                                     <thead>
                                                         <tr>
-                                                            <th>Descripcion</th>
-                                                            <th>Horas Dedicadas</th>
-                                                            <th>Estado</th>
+                                                            <th id="th">Descripción</th>
+                                                            <th id="th">Horas Dedicadas</th>
+                                                            <th id="th">Estado</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -228,10 +228,29 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         ?>
                                                             <tr>
 
-                                                                <td><?php echo $subactividad['descripcion_actividad'] ?></td>
-                                                                <td><?php echo $subactividad['horas_actividad'] ?></td>
-                                                                <td><?php echo $subactividad['estado_actividad'] ?></td>
-
+                                                                <td id="td"><?php echo $subactividad['descripcion_actividad'] ?></td>
+                                                                <td id="td"><?php echo $subactividad['horas_actividad'] ?></td>
+                                                                <?php
+                                                                if ($subactividad['estado_actividad'] == 'En Espera') {
+                                                                ?>
+                                                                    <td id="td">
+                                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $subactividad['estado_actividad'] ?>-yellow?style=for-the-badge">
+                                                                    </td>
+                                                                <?php
+                                                                } else if ($subactividad['estado_actividad'] == 'Aprobada') {
+                                                                ?>
+                                                                    <td id="td">
+                                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $subactividad['estado_actividad'] ?>-green?style=for-the-badge">
+                                                                    </td>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <td id="td">
+                                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $subactividad['estado_actividad'] ?>-red?style=for-the-badge">
+                                                                    </td>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </tr>
                                                         <?php
                                                         }
@@ -240,15 +259,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Descripcion</th>
-                                                            <th>Horas Dedicadas</th>
-                                                            <th>Estado</th>
+                                                            <th id="th">Descripción</th>
+                                                            <th id="th">Horas Dedicadas</th>
+                                                            <th id="th">Estado</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
                                             <?php
                                             }
-
                                             ?>
                                         </div>
                                     </div>
