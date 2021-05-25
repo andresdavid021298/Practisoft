@@ -170,8 +170,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,9 +191,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $lista['nombre_grupo'] ?></td>
-                                            <td>
-                                                <center><a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Ver y Asignar</a></center><br>
+                                            <td id="td"><?php echo $lista['nombre_grupo'] ?></td>
+                                            <td id="td">
+                                                <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Ver y Asignar</a>
                                             </td>
                                         </tr>
                                 <?php
@@ -203,8 +203,8 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>

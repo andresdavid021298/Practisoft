@@ -161,9 +161,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </div>
                         </div>
                     </div>
-
-
-
+                    <br>
                     <!-- Inicio Tabla Solicitudes -->
 
                     <div class="table-responsive">
@@ -171,9 +169,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Estudiante</th>
-                                    <th>Carta Compromisoria </th>
-                                    <th>Informe de Avance</th>
+                                    <th id="th">Estudiante</th>
+                                    <th id="th">Carta Compromisoria </th>
+                                    <th id="th">Informe de Avance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -193,7 +191,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     ?>
                                         <tr>
 
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 if ($lista['nombre_estudiante'] == NULL) {
                                                     echo $lista['correo_estudiante'];
@@ -203,50 +201,41 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 ?>
                                             </td>
 
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 $cartaCompromisoria = mostrarDocumentoCartaCompromisoria($lista['id_estudiante']);
                                                 if ($cartaCompromisoria == true) {
                                                     if ($cartaCompromisoria['archivo_carta_compromisoria'] != NULL) {
                                                 ?>
-                                                        <center><a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $cartaCompromisoria['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-                                                        <center>
-                                                            <p><?php echo $cartaCompromisoria['archivo_carta_compromisoria'] ?></p>
-                                                        </center>
+                                                        <a target="_blank" href="../../Documentos/CartaCompromisoria/<?php echo $cartaCompromisoria['archivo_carta_compromisoria']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                        <p><?php echo $cartaCompromisoria['archivo_carta_compromisoria'] ?></p>
 
                                                     <?php
                                                     }
                                                 } else {
                                                     ?>
-                                                    <center>
-                                                        <p style="color: #D61117;">No ha cargado documento</p>
-                                                    </center>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                 <?php
                                                 }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 $informeAvance = mostrarDocumentoInformeDeAvance($lista['id_estudiante']);
                                                 if ($informeAvance == true) {
                                                     if ($informeAvance['archivo_informe_avance'] != NULL) {
                                                 ?>
-                                                        <center><a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informeAvance['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-                                                        <center>
-                                                            <p><?php echo $informeAvance['archivo_informe_avance'] ?></p>
-                                                        </center>
+                                                        <a target="_blank" href="../../Documentos/InformeAvance/<?php echo $informeAvance['archivo_informe_avance']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                        <p><?php echo $informeAvance['archivo_informe_avance'] ?></p>
 
                                                     <?php
                                                     }
                                                 } else {
                                                     ?>
-                                                    <center>
-                                                        <p style="color: #D61117;">No ha cargado documento</p>
-                                                    </center>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                 <?php
                                                 }
                                                 ?>
-
                                             </td>
                                         </tr>
                                 <?php
@@ -256,9 +245,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Estudiante</th>
-                                    <th>Carta Compromisoria </th>
-                                    <th>Informe de Avance</th>
+                                    <th id="th">Estudiante</th>
+                                    <th id="th">Carta Compromisoria </th>
+                                    <th id="th">Informe de Avance</th>
                                 </tr>
                             </tfoot>
                         </table>

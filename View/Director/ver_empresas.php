@@ -97,8 +97,20 @@ if ($_SESSION['id_director'] == NULL) {
             </li>
 
             <!-- Nav Item - Informes -->
-
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
+                </a>
+                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
+                        <a class="collapse-item" href="seleccionar_fecha_informe.php"><i class="fas fa-book"></i> Informe Histórico</a>
+                    </div>
+                </div>
+            </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

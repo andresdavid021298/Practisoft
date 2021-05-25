@@ -153,6 +153,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <center>
                     <h2>Asignar Practicantes</h2>
                 </center>
+                <br>
                 <?php
                 require_once "../../Controller/Estudiante/Estudiante_Controller.php";
                 $grupo = $_GET['id_grupo'];
@@ -168,30 +169,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <table id="example" class="table table-striped table-bordered" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <center>Nombre</center>
-                                        </th>
-                                        <th>
-                                            <center>Área de Desarrollo de Software</center>
-                                        </th>
-                                        <th>
-                                            <center>Área de Redes</center>
-                                        </th>
-                                        <th>
-                                            <center>Área de Mantenimiento</center>
-                                        </th>
-                                        <th>
-                                            <center>Área de Capacitación</center>
-                                        </th>
-                                        <th>
-                                            <center>Área de Servidores y Computación en la Nube</center>
-                                        </th>
-                                        <th>
-                                            <center>Otro</center>
-                                        </th>
-                                        <th>
-                                            <center>Opciones</center>
-                                        </th>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Área de Desarrollo de Software</th>
+                                        <th id="th">Área de Redes</th>
+                                        <th id="th">Área de Mantenimiento</th>
+                                        <th id="th">Área de Capacitación</th>
+                                        <th id="th">Área de Servidores y Computación en la Nube</th>
+                                        <th id="th">Otro</th>
+                                        <th id="th">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -199,7 +184,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     foreach ($lista_estudiantes as $estudiante) {
                                         if (is_null($estudiante['nombre_empresa'])) {
                                     ?><tr>
-                                                <td>
+                                                <td id="td">
                                                     <center>
                                                         <?php
 
@@ -217,37 +202,35 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 if (is_null($encuesta_estudiante)) {
                                                 ?>
                                                     <td colspan="7" style="color: #D61117;">
-                                                        <center>NO PRESENTA ENCUESTA DE INSCRIPCIÓN</center>
+                                                        <strong><center>NO PRESENTA ENCUESTA DE INSCRIPCIÓN</center></strong>
                                                     </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['area_desarrollo']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['area_redes']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['area_mantenimiento']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['area_capacitacion']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['area_servidores']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><?php echo $encuesta_estudiante['otro']; ?></center>
-                                                    </td>
-                                                    <td>
-                                                        <center><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo ?>">Asignar</a></center>
-                                                    </td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['area_desarrollo']; ?></td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['area_redes']; ?></td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['area_mantenimiento']; ?></td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['area_capacitacion']; ?></td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['area_servidores']; ?></td>
+                                                    <td id="td"><?php echo $encuesta_estudiante['otro']; ?></td>
+                                                    <td id="td"><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo ?>">Asignar</a></td>
                                             </tr>
                                 <?php }
                                             }
                                         } ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Área de Desarrollo de Software</th>
+                                        <th id="th">Área de Redes</th>
+                                        <th id="th">Área de Mantenimiento</th>
+                                        <th id="th">Área de Capacitación</th>
+                                        <th id="th">Área de Servidores y Computación en la Nube</th>
+                                        <th id="th">Otro </th>
+                                        <th id="th">Opciones</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -330,6 +330,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 </tr>
                             </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                     <!-- Fin de tabla Solicitudes -->
 

@@ -174,9 +174,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     </strong>
                                     <div class="fileUpload btn">
                                         <label for="inputArchivo">Seleccione su archivo</label>
-                                        <input type="file" name="input_archivo" id="input_archivo">
+                                        <input type="file" class="form-control-file" name="input_archivo" id="input_archivo">
                                         <input type="hidden" id="input_id_grupo" name="id_grupo" value="<?php echo $_GET['id_grupo']; ?>">
-                                        <button type="button" class="btn btn-danger" onclick="subirEstudiantes()">Subir</button>
+                                        <br>
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="subirEstudiantes()">Subir</button>
                                     </div>
                                 </div>
                             </div>
@@ -186,12 +187,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <div>
                         <center>
                             <a class="btn btn-primary" href="crear_informe_estudiantes.php?id_grupo=<?php echo $_GET['id_grupo']; ?>">Exportar PDF</a>
-                            <!-- <form action="crear_informe_estudiantes.php" method="post">
-                                <div>
-                                    
-                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
-                                </div>
-                            </form> -->
                         </center>
                     </div>
 
@@ -205,12 +200,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Código</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Empresa</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -230,12 +225,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $estudiante['nombre_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['codigo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['correo_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['celular_estudiante'] ?></td>
-                                            <td><?php echo $estudiante['nombre_empresa'] ?></td>
-                                            <td>
+                                            <td id="td"><?php echo $estudiante['nombre_estudiante'] ?></td>
+                                            <td id="td"><?php echo $estudiante['codigo_estudiante'] ?></td>
+                                            <td id="td"><?php echo $estudiante['correo_estudiante'] ?></td>
+                                            <td id="td"><?php echo $estudiante['celular_estudiante'] ?></td>
+                                            <td id="td"><?php echo $estudiante['nombre_empresa'] ?></td>
+                                            <td id="td">
                                                 <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center><br>
 
                                                 <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Eliminar Estudiante</button></center>
@@ -248,15 +243,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Código</th>
-                                    <th>Correo</th>
-                                    <th>Celular</th>
-                                    <th>Empresa</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Código</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Empresa</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                 </div>
                 <!-- Fin de tabla Solicitudes -->

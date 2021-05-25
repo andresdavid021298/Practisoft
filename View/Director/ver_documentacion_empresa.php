@@ -99,7 +99,19 @@ if ($_SESSION['id_director'] == NULL) {
             </li>
 
             <!-- Nav Item - Informes -->
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
+                </a>
+                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
+                        <a class="collapse-item" href="seleccionar_fecha_informe.php"><i class="fas fa-book"></i> Informe Histórico</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -161,6 +173,7 @@ if ($_SESSION['id_director'] == NULL) {
                         </div>
                     </div>
                 </div>
+                <br>
                 <?php
                 require_once "../../Controller/Empresa/Empresa_Controller.php";
                 $empresa = mostrarDatos($_GET['id_empresa']);
@@ -208,56 +221,40 @@ if ($_SESSION['id_director'] == NULL) {
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_protocolos_bio'])) {
                                             ?>
-                                                <center>
-                                                    <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $documentos_empresa['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                                    <p><?php echo $documentos_empresa['archivo_protocolos_bio']; ?></p>
-                                                </center>
+                                                <a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $documentos_empresa['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                <p><?php echo $documentos_empresa['archivo_protocolos_bio']; ?></p>
                                             <?php } else { ?>
-                                                <center>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
-                                                </center>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                             <?php } ?>
                                         </td>
                                         <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_certificado_existencia'])) {
                                             ?>
-                                                <center>
-                                                    <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $documentos_empresa['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                                    <p><?php echo $documentos_empresa['archivo_certificado_existencia']; ?></p>
-                                                </center>
+                                                <a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $documentos_empresa['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                <p><?php echo $documentos_empresa['archivo_certificado_existencia']; ?></p>
                                             <?php } else { ?>
-                                                <center>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
-                                                </center>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                             <?php } ?>
                                         </td>
                                         <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_cc_representante'])) {
                                             ?>
-                                                <center>
-                                                    <a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $documentos_empresa['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                                    <p><?php echo $documentos_empresa['archivo_cc_representante']; ?></p>
-                                                </center>
+                                                <a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $documentos_empresa['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                <p><?php echo $documentos_empresa['archivo_cc_representante']; ?></p>
                                             <?php } else { ?>
-                                                <center>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
-                                                </center>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                             <?php } ?>
                                         </td>
                                         <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_rut'])) {
                                             ?>
-                                                <center>
-                                                    <a target="_blank" href="../../Documentos/RUT/<?php echo $documentos_empresa['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                                    <p><?php echo $documentos_empresa['archivo_rut']; ?></p>
-                                                </center>
+                                                <a target="_blank" href="../../Documentos/RUT/<?php echo $documentos_empresa['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                <p><?php echo $documentos_empresa['archivo_rut']; ?></p>
                                             <?php } else { ?>
-                                                <center>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
-                                                </center>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                             <?php } ?>
                                         </td>
                                     <?php
