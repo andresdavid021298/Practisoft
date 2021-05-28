@@ -151,7 +151,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <a class="btn btn-primary" href="grupos_coordinador_asignacion.php"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
                 <center>
-                    <h2>Asignar Practicantes</h2>
+                    <h2 id="h2">Asignar Practicantes</h2>
                 </center>
                 <br>
                 <?php

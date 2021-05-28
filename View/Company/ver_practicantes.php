@@ -161,7 +161,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <center>
-                    <h2>Ver Practicantes</h2>
+                    <h2 id="h2">Ver Practicantes</h2>
                 </center>
                 <div class="container-fluid">
                     <div class="table-responsive">
@@ -225,7 +225,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                                                 <?php } else {
                                                 ?>
-                                                    <center><label>Tutor Asignado</label></center>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Tutor Asignado' ?>-green?style=for-the-badge">
                                                 <?php } ?>
                                             </td>
                                         </tr>

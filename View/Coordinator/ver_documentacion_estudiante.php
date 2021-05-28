@@ -156,12 +156,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 require_once '../../Controller/Grupo/Grupo_Controller.php';
                                 $grupo = buscarGrupo($_GET['id_grupo']);
                                 ?>
-                                <h1 class="h3 mb-0 text-gray-800">Documentos de Estudiantes <?php echo $grupo['nombre_grupo'] ?> </h1>
+                                <h2 id="h2">Documentos de Estudiantes <?php echo $grupo['nombre_grupo'] ?> </h2>
                                 <br>
                             </div>
                         </div>
                     </div>
-                    <br>
                     <!-- Inicio Tabla Solicitudes -->
 
                     <div class="table-responsive">

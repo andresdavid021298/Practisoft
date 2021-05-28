@@ -157,7 +157,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <!-- End of Topbar -->
 
                 <center>
-                    <h2>Ver Plan de Trabajo</h2>
+                    <h2 id="h2">Ver Plan de Trabajo</h2>
                 </center>
 
                 <div class="container-fluid">

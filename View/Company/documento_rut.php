@@ -158,7 +158,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2>RUT (Registro Único Tributario)</h2>
+                            <h2 id="h2">RUT (Registro Único Tributario)</h2>
                             <br>
                             <img src="../../Img/rut.jpeg" style="width: 100px; height: 100px;" />
                             <?php

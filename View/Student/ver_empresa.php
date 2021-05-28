@@ -143,11 +143,10 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h3>Ver Empresa</h3>
+                            <h2 id="h2">Ver Empresa</h2>
                         </div>
                     </div>
                 </div>
-
                 <br>
                 <?php
                 require_once '../../Controller/Empresa/Empresa_Controller.php';

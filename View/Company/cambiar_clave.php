@@ -156,7 +156,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <center>
-                    <h2>Cambiar Clave</h2>
+                    <h2 id="h2">Cambiar Clave</h2>
                 </center>
                 <br><br><br>
                 <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">

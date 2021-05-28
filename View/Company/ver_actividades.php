@@ -156,9 +156,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-
                 <center>
-                    <h2>Seleccione un estudiante</h2>
+                    <h2 id="h2">Seleccione un estudiante</h2>
                 </center>
                 <div class="container-fluid">
                     <div class="table-responsive">
@@ -177,7 +176,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php
                                 require_once '../../Controller/Estudiante/Estudiante_Controller.php';
                                 $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);

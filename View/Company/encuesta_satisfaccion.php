@@ -163,7 +163,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Estudiantes a Evaluar</h1>
+                                <h2 id="h2">Estudiantes a Evaluar</h2>
                                 <br>
                             </div>
                         </div>

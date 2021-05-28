@@ -162,7 +162,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Solicitud de Practicantes</h1>
+                                <h2 id="h2">Solicitud de Practicantes</h2>
                                 <br>
                             </div>
                         </div>

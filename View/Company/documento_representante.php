@@ -158,7 +158,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2>Documento de C.C del Representante Legal</h2>
+                            <h2 id="h2">Documento de C.C del Representante Legal</h2>
                             <br>
                             <img src="../../Img/icon_representante.jpg" style="width: 100px; height: 100px;" />
                             <?php

@@ -143,7 +143,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2>Carta Compromisoria</h2>
+                            <h2 id="h2">Carta Compromisoria</h2>
                             <br>
                             <?php
                             require_once '../../Controller/Estudiante/Estudiante_Controller.php';

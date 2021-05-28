@@ -148,8 +148,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <center>
-                    <h2>Ver Empresas</h2>
+                    <h2 id="h2">Ver Empresas</h2>
                 </center>
+                <br>
                 <div class="table-responsive">
                     <div>
                         <center>
@@ -160,31 +161,18 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </form>
                         </center>
                     </div>
+                    <br>
                     <div class="container-fluid">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <center>Nombre</center>
-                                    </th>
-                                    <th>
-                                        <center>Representante Legal</center>
-                                    </th>
-                                    <th>
-                                        <center>Direccion</center>
-                                    </th>
-                                    <th>
-                                        <center>Celular</center>
-                                    </th>
-                                    <th>
-                                        <center>Correo</center>
-                                    </th>
-                                    <th>
-                                        <center>Sector</center>
-                                    </th>
-                                    <th>
-                                        <center>Convenio</center>
-                                    </th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Representante Legal</th>
+                                    <th id="th">Direccion</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Sector</th>
+                                    <th id="th">Convenio</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -202,33 +190,33 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     foreach ($lista_empresas as $empresa) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <center><?php echo $empresa['nombre_empresa']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['nombre_empresa']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['representante_legal']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['representante_legal']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['direccion_empresa']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['direccion_empresa']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['celular_empresa']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['celular_empresa']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['correo_empresa']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['correo_empresa']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $empresa['sector_empresa']; ?></center>
+                                            <td id="td">
+                                                <?php echo $empresa['sector_empresa']; ?>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 if ($empresa['fecha_inicio'] == NULL && $empresa['fecha_expiracion'] == NULL) {
                                                 ?>
-                                                    <center>NO PRESENTA CONVENIO</center>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Convenio' ?>-gray?style=for-the-badge">
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <center><strong>Inicio:</strong> <?php echo $empresa['fecha_inicio']; ?><strong> / Expiracion:</strong> <?php echo $empresa['fecha_expiracion']; ?></center>
+                                                    <strong>Inicio:</strong> <?php echo $empresa['fecha_inicio']; ?><strong> / Expiracion:</strong> <?php echo $empresa['fecha_expiracion']; ?>
                                                 <?php
                                                 }
                                                 ?>
@@ -237,7 +225,19 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <?php }
                                 } ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Representante Legal</th>
+                                    <th id="th">Direccion</th>
+                                    <th id="th">Celular</th>
+                                    <th id="th">Correo</th>
+                                    <th id="th">Sector</th>
+                                    <th id="th">Convenio</th>
+                                </tr>
+                            </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                 </div>
             </div>

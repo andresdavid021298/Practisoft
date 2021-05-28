@@ -151,7 +151,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 <div class="container-fluid">
                     <center>
-                        <h2>Mi Perfil</h2>
+                        <h2 id="h2">Mi Perfil</h2>
                     </center>
                     <br>
                     <?php

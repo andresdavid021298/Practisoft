@@ -110,7 +110,7 @@ if ($_SESSION['id_director'] == NULL) {
                     </div>
                 </div>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -168,6 +168,17 @@ if ($_SESSION['id_director'] == NULL) {
                         </div>
                     </div>
                 </div>
+                <br>
+                <div>
+                    <center>
+                        <form action="crear_informe_empresas.php" method="post">
+                            <div>
+                                <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                            </div>
+                        </form>
+                    </center>
+                </div>
+                <br>
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table id="example" class="table table-striped table-bordered">
@@ -209,7 +220,7 @@ if ($_SESSION['id_director'] == NULL) {
                                             <?php
                                             if ($empresa['direccion_empresa'] == NULL) {
                                             ?>
-                                            <td></td>
+                                                <td></td>
                                             <?php
                                             } else {
                                             ?>

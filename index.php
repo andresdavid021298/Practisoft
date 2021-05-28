@@ -27,8 +27,9 @@ session_destroy();
                     </div>
                     <div class="card-body">
                         <center><img src="Img/logo_ingsistemas.png" width="350px" height="120px"></center>
-                        <h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5>
-                        <center><em>Ingrese con sus credenciales</em></center>
+                        <em><h5 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><strong>PRACTISOFT</strong></h5></em>
+                        <em><p class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Sistema para la gestión de prácticas empresariales</p></em>
+                        <center><em class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Ingrese con sus credenciales</em></center>
                         <br>
                         <form class="form-signin">
                             <div class="form-label-group">

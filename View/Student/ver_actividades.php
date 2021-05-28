@@ -259,7 +259,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                         if (is_null($lista_actividad)) {
                                         ?>
                                             <td colspan="6" style="color: #D61117;">
-                                                <center><strong>NO POSEE ACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
+                                                <center><strong>NO POSEE SUBACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
                                             </td>
                                             <?php
                                         } else {

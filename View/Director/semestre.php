@@ -173,7 +173,8 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h3>Semestre</h3><br>
+                                <h2 id="h2">Semestre</h2>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -231,7 +232,7 @@ if ($_SESSION['id_director'] == NULL) {
                                             <center><strong>NO EXISTEN GRUPOS EN EL SISTEMA</strong></center>
                                         </td>
                                         <tr>
-                                            <td colspan="3" >
+                                            <td colspan="3">
                                                 <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
                                             </td>
                                         </tr>
@@ -248,16 +249,16 @@ if ($_SESSION['id_director'] == NULL) {
                                                     <center><button class="btn btn-danger" onclick="eliminarGrupo(<?php echo $datos['id_grupo']; ?>)"> Eliminar</button></center>
                                                 </td>
                                             </tr>
-                                    <?php
+                                        <?php
                                         }
-                                        
+
                                         ?>
                                         <tr>
-                                            <td colspan="3" >
+                                            <td colspan="3">
                                                 <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
                                             </td>
                                         </tr>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </tbody>

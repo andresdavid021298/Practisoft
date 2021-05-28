@@ -161,7 +161,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <!-- End of Topbar -->
 
                 <center>
-                    <h2>Mi Perfil</h2>
+                    <h2 id="h2">Mi Perfil</h2>
                 </center>
                 <br>
                 <?php

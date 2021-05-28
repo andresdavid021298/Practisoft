@@ -164,7 +164,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="mb-0 text-gray-800">Ver Coordinador</h2>
+                            <h2 id="h2">Ver Coordinador</h2>
                             <br>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarCoordinador">Agregar Nuevo Coordinador</button>
                         </div>

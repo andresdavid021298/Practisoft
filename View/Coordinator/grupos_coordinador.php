@@ -152,7 +152,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Grupos de Practicas Empresariales</h1>
+                                <h2 id="h2">Grupos de Practicas Empresariales</h2>
                                 <br>
                             </div>
                         </div>

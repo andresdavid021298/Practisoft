@@ -152,18 +152,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
-
-
-
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Revisión de Solicitudes Rechazadas</h1>
+                                <h2 id="h2">Revisión de Solicitudes Rechazadas</h2>
                                 <br>
                             </div>
                         </div>
                     </div>
-
                     <nav>
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
@@ -185,15 +181,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                             <thead>
                                 <tr>
-                                    <th>Empresa</th>
-                                    <th>Fecha Solicitud</th>
-                                    <th>N° de Practicantes</th>
-                                    <th>Areas</th>
-                                    <th>Protocolos</th>
-                                    <th>Convenio</th>
-                                    <th>CC Representante</th>
-                                    <th>Certificado Existencia</th>
-                                    <th>RUT</th>
+                                    <th id="th">Empresa</th>
+                                    <th id="th">Fecha Solicitud</th>
+                                    <th id="th">N° de Practicantes</th>
+                                    <th id="th">Areas</th>
+                                    <th id="th">Protocolos</th>
+                                    <th id="th">Convenio</th>
+                                    <th id="th">CC Representante</th>
+                                    <th id="th">Certificado Existencia</th>
+                                    <th id="th">RUT</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -216,11 +212,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     ?>
                                         <tr>
 
-                                            <td><?php echo $solicitud['nombre_empresa'] ?></td>
-                                            <td><?php echo $solicitud['fecha_solicitud'] ?></td>
-                                            <td><?php echo $solicitud['numero_practicantes'] ?></td>
-                                            <td><?php echo $solicitud['funciones'] ?></td>
-                                            <td>
+                                            <td id="td"><?php echo $solicitud['nombre_empresa'] ?></td>
+                                            <td id="td"><?php echo $solicitud['fecha_solicitud'] ?></td>
+                                            <td id="td"><?php echo $solicitud['numero_practicantes'] ?></td>
+                                            <td id="td"><?php echo $solicitud['funciones'] ?></td>
+                                            <td id="td">
                                                 <?php
                                                 $protocolos = mostrarDatosProtocolos($solicitud['id_empresa']);
                                                 if ($protocolos == true) {
@@ -233,7 +229,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 $empresa = mostrarConvenio($solicitud['id_empresa']);
                                                 if ($empresa == true) {
@@ -246,7 +242,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 ?>
 
                                             </td>
-                                            <td>
+                                            <td id="td">
 
                                                 <?php
                                                 $representante = mostrarDatosRepresentante($solicitud['id_empresa']);
@@ -260,7 +256,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td id="td">
 
                                                 <?php
                                                 $certificado = mostrarDatosCertificado($solicitud['id_empresa']);
@@ -273,8 +269,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 }
                                                 ?>
                                             </td>
-
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 $rut = mostrarDatosRUT($solicitud['id_empresa']);
                                                 if ($rut == true) {
@@ -295,22 +290,21 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Empresa</th>
-                                    <th>Fecha Solicitud</th>
-                                    <th>N° de Practicantes</th>
-                                    <th>Funciones</th>
-                                    <th>Protocolos</th>
-                                    <th>Convenio</th>
-                                    <th>CC Representante</th>
-                                    <th>Certificado Existencia</th>
-                                    <th>RUT</th>
+                                    <th id="th">Empresa</th>
+                                    <th id="th">Fecha Solicitud</th>
+                                    <th id="th">N° de Practicantes</th>
+                                    <th id="th">Funciones</th>
+                                    <th id="th">Protocolos</th>
+                                    <th id="th">Convenio</th>
+                                    <th id="th">CC Representante</th>
+                                    <th id="th">Certificado Existencia</th>
+                                    <th id="th">RUT</th>
                                 </tr>
                             </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                     <!-- Fin de tabla Solicitudes -->
-
-
 
                     <!-- Inicio Modal Actualizar Tutor -->
                     <div class="modal fade" id="modalRechazarSolicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -282,7 +282,7 @@ if ($_SESSION['id_director'] == NULL) {
                                                 <div class="col mr-2">
                                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         Empresas</div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_empresas) ?> registradas en el sistema</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo count($lista_empresas) ?> registrada(s) en el sistema</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-building fa-2x text-gray-300"></i>

@@ -153,7 +153,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Actividades</h1>
+                                <h2 id="h2">Actividades</h2>
                                 <br>
                             </div>
                         </div>
@@ -180,10 +180,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <?php
                         } else {
                         ?>
-
-
                             <div class="card">
-
                                 <?php
                                 $cont = 0;
                                 foreach ($actividad_plan as $actividades) {
@@ -196,9 +193,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             </button>
                                         </h5>
                                     </div>
-
-
-
                                     <div id="collapse<?php echo $cont ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <?php

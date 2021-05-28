@@ -142,8 +142,9 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 <div class="container-fluid">
                     <div class="col text-center">
-                        <h3>Mis Actividades</h3>
+                        <h2 id="h2">Mis Actividades</h2>
                     </div>
+                    <br>
                     <?php
                     require_once "../../Controller/Empresa/Empresa_Controller.php";
                     $info_empresa = mostrarEmpresaAsignadaEstudiante($_SESSION['id_estudiante']);

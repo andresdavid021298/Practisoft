@@ -176,7 +176,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     } else {
                     ?>
                         <center>
-                            <h2>Ver SubActividades</h2>
+                            <h2 id="h2">Ver SubActividades</h2>
                             <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
                             <!-- <h5>Numero de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $actividad_plan_trabajo['numero_horas_actividad_plan_trabajo']; ?></h5> -->
                         </center>

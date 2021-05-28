@@ -85,9 +85,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     </div>
                 </div>
             </li>
-
-
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -142,7 +139,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 <div class="container-fluid">
                     <center>
-                        <h2>Encuesta de Inscripción</h2>
+                        <h2 id="h2">Encuesta de Inscripción</h2>
                     </center>
                     <br>
                     <div class="form-group row">

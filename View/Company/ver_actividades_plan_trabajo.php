@@ -174,7 +174,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 } else {
                 ?>
                     <center>
-                        <h2>Ver Actividades</h2>
+                        <h2 id="h2">Ver Actividades</h2>
                         <h3><?php echo $info_estudiante['nombre_estudiante']; ?></h3>
                         <?php
                         require_once '../../Controller/Actividad/Actividad_Controller.php';

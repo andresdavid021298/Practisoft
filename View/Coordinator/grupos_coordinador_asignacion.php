@@ -145,14 +145,13 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         </li>
 
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
                 <div class="container-fluid">
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">Grupos de Practicas Empresariales</h1>
+                                <h2 id="h2">Grupos de Practicas Empresariales</h2>
                                 <br>
                                 <strong>
                                     <p style="color: black;">Seleccione el grupo en el que desea realizar la asignación de practicantes</p>
@@ -160,9 +159,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             </div>
                         </div>
                     </div>
-
-
-
                     <!-- Inicio Tabla Solicitudes -->
 
                     <div class="table-responsive">
