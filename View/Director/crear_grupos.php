@@ -328,26 +328,10 @@ if ($_SESSION['id_director'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
-<!-- <script>
-var table = $('#example').DataTable({
-    language: {
-        "emptyTable": "No hay información",
-        "search": "Buscar:",
-        "show": "Mostrar",
-        "zeroRecords": "Sin resultados encontrados",
-        
-    },
-});
-</script> -->
-<script>
-    $(document).ready(function() {
         $('#prueba').DataTable({
             "language": {
             "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Nada encontrado - disculpa",
+            "zeroRecords": "Sin Registros",
             "info": "Mostrando la pagina _PAGE_ de _PAGES_",
             "infoEmpty": "No hay registros disponibles",
             "infoFiltered": "(filtrado de _MAX_ registros totales)",
