@@ -78,6 +78,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="ver_empresas.php"><i class="fas fa-building"></i> Ver Empresas</a>
+                        <a class="collapse-item" href="gestionar_documentos_semestre.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -200,6 +201,11 @@ if ($_SESSION['id_director'] == NULL) {
                                                 <center><?php echo $coordinador['correo_coordinador']; ?></center>
                                             </td>
                                             <td id="td">
+                                                <center>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarCoordinador" 
+                                                    data-id="<?php echo $coordinador['id_coordinador']; ?>" 
+                                                    data-nombre="<?php echo $coordinador['nombre_coordinador']; ?>" 
+                                                    data-correo="<?php echo $coordinador['correo_coordinador']; ?>">Actualizar</button></center><br>
                                                 <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar</button></center>
                                             </td>
                                         </tr>
@@ -225,12 +231,12 @@ if ($_SESSION['id_director'] == NULL) {
                                 <form action="../../Controller/Coordinador/Coordinador.php" method="POST">
                                     <div class="form-group">
                                         <label for="nombre_coordinador" class="col-form-label">Nombre del Coordinador:</label>
-                                        <input type="text" class="form-control" name="nombre_coordinador" id="nombre_coordinador">
+                                        <input type="text" class="form-control" name="nombre_coordinador" id="nombre_coordinador" placeholder="Nombre del Coordinador">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="correo_coordinador" class="col-form-label">Correo del Coordinador:</label>
-                                        <input type="email" class="form-control" name="correo_coordinador" id="correo_coordinador">
+                                        <input type="email" class="form-control" name="correo_coordinador" id="correo_coordinador" placeholder="Correo Institucional del Coordinador">
                                     </div>
                                     <div class="text-center">
                                         <button type="button" onclick="agregarCoordinador()" class="btn btn-primary">Agregar</button>
@@ -241,6 +247,40 @@ if ($_SESSION['id_director'] == NULL) {
                     </div>
                 </div>
                 <!-- Fin Modal Agregar Coordinador -->
+
+                <!-- Inicio Modal Actualizar Coordinador -->
+                <div class="modal fade" id="actualizarCoordinador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:#D61117;">
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar Coordinador</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="../../Controller/Coordinador/Coordinador.php" method="POST">
+                                    <div class="form-group">
+                                        <label for="nombre_coordinador" class="col-form-label">Nombre del Coordinador:</label>
+                                        <input type="text" class="form-control nombre_coo" name="nombre_coordinador" id="nombre_coordinador_act" placeholder="Nombre del Coordinador">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="correo_coordinador" class="col-form-label">Correo del Coordinador:</label>
+                                        <input type="email" class="form-control correo_coo" name="correo_coordinador" id="correo_coordinador_act" placeholder="Correo Institucional del Coordinador">
+                                    </div>
+
+                                    <input type="hidden" class="id_coo" id="id_coordinador_act">
+                                    <div class="text-center">
+                                        <button type="button" onclick="actualizarCoordinador();" class="btn btn-primary">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal Actualizar Coordinador -->
             </div>
             <!-- End of Topbar -->
 
@@ -271,10 +311,8 @@ if ($_SESSION['id_director'] == NULL) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/Director/alertas_director.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
@@ -282,5 +320,19 @@ if ($_SESSION['id_director'] == NULL) {
         $('#example').DataTable();
     });
 </script>
-
+<script>
+    $('#actualizarCoordinador').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        //var recipient = button.data('whatever')
+        var id = button.data('id');
+        var nombre = button.data('nombre') // Extract info from data-* attributes
+        var correo = button.data('correo')
+        var modal = $(this)
+        //modal.find('.modal-title').text('Actividad: ' + fecha)
+        //modal.find('.modal-body input').val(num_horas)
+        modal.find('.id_coo').val(id)
+        modal.find('.nombre_coo').val(nombre)
+        modal.find('.correo_coo').val(correo)
+    })
+</script>
 </html>

@@ -22,14 +22,22 @@ if (isset($_POST['accion'])) {
         $response = array();
         $nombre_coordinador = $_POST['nombre_coordinador'];
         $correo_coordinador = $_POST['correo_coordinador'];
-        $obj_coordinador_model = new CoordinadorModel();
-        $rta = $obj_coordinador_model->insertarCoordinador($nombre_coordinador, $correo_coordinador);
-        if ($rta == 0) {
+        // Validar la extensión ufps.edu.co
+        $extension = strrchr($correo_coordinador, "@");
+
+        if ($extension != "@ufps.edu.co") {
             $response['state'] = "error";
-            $response['title'] = "Ocurrio un error";
+            $response['title'] = "El correo debe ser institucional";
         } else {
-            $response['state'] = "success";
-            $response['title'] = "Coordinador Agregado Correctamente";
+            $obj_coordinador_model = new CoordinadorModel();
+            $rta = $obj_coordinador_model->insertarCoordinador($nombre_coordinador, $correo_coordinador);
+            if ($rta == 0) {
+                $response['state'] = "error";
+                $response['title'] = "Ocurrio un error";
+            } else {
+                $response['state'] = "success";
+                $response['title'] = "Coordinador Agregado Correctamente";
+            }
         }
         echo json_encode($response);
     } else if ($_POST['accion'] == "eliminar_coordinador") {
@@ -43,6 +51,28 @@ if (isset($_POST['accion'])) {
         } else {
             $response['state'] = "success";
             $response['title'] = "Coordinador Eliminado Correctamente";
+        }
+        echo json_encode($response);
+    } else if ($_POST['accion'] == "actualizar_coordinador") {
+        $response = array();
+        $id_coordinador = $_POST['id_coordinador'];
+        $nombre_coordinador = $_POST['nombre_coordinador'];
+        $correo_coordinador = $_POST['correo_coordinador'];
+        $extension = strrchr($correo_coordinador, "@");
+
+        if ($extension != "@ufps.edu.co") {
+            $response['state'] = "error";
+            $response['title'] = "El correo debe ser institucional";
+        } else {
+            $obj_coordinador_model = new CoordinadorModel();
+            $rta = $obj_coordinador_model->actualizarCoordinadorDesdeDirector($id_coordinador, $nombre_coordinador, $correo_coordinador);
+            if ($rta == 0) {
+                $response['state'] = "error";
+                $response['title'] = "Ocurrio un error";
+            } else {
+                $response['state'] = "success";
+                $response['title'] = "Coordinador Actualizado Correctamente";
+            }
         }
         echo json_encode($response);
     }

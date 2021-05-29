@@ -48,6 +48,24 @@ class CoordinadorModel
         }
     }
 
+    //Metodo para actualizar desde Director al Coordinador
+    public function actualizarCoordinadorDesdeDirector($id_coordinador, $nombre_coordinador, $correo_coordinador){
+        $query = "UPDATE coordinador SET nombre_coordinador=:nombre, correo_coordinador=:correo WHERE id_coordinador=:id";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id", $id_coordinador);
+        $stmt->bindParam(":nombre", $nombre_coordinador);
+        $stmt->bindParam(":correo", $correo_coordinador);
+
+        if(!$stmt->execute()){
+            $stmt->closeCursor();
+            return 0;
+        }
+        else{
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
     // Metodo que muestra el listado de los coordinadores
     public function listarCoordinadores()
     {
