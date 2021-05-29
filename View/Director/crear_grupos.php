@@ -197,7 +197,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                     <!-- Inicio Tabla Tutores -->
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="prueba" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
@@ -331,6 +331,34 @@ if ($_SESSION['id_director'] == NULL) {
         $('#example').DataTable();
     });
 </script>
-
+<!-- <script>
+var table = $('#example').DataTable({
+    language: {
+        "emptyTable": "No hay información",
+        "search": "Buscar:",
+        "show": "Mostrar",
+        "zeroRecords": "Sin resultados encontrados",
+        
+    },
+});
+</script> -->
+<script>
+    $(document).ready(function() {
+        $('#prueba').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Nada encontrado - disculpa",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
+    });
+</script>
 
 </html>
