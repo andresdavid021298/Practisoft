@@ -79,6 +79,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="ver_empresas.php"><i class="fas fa-building"></i> Ver Empresas</a>
+                        <a class="collapse-item" href="gestionar_documentos_semestre.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -196,6 +197,7 @@ if ($_SESSION['id_director'] == NULL) {
                         <div class="container">
                             <div class="row">
                                 <div class="col text-center">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button>
                                     <button type="button" class="btn btn-danger" onclick="finalizarSemestre();">Finalizar Semestre</button><br><br>
                                 </div>
                             </div>
@@ -231,11 +233,6 @@ if ($_SESSION['id_director'] == NULL) {
                                         <td colspan="4" style="color: #D61117;">
                                             <center><strong>NO EXISTEN GRUPOS EN EL SISTEMA</strong></center>
                                         </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
-                                            </td>
-                                        </tr>
                                         <?php
                                     } else {
 
@@ -253,11 +250,6 @@ if ($_SESSION['id_director'] == NULL) {
                                         }
 
                                         ?>
-                                        <tr>
-                                            <td colspan="3">
-                                                <center><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarGrupo">Agregar Nuevo Grupo</button></center>
-                                            </td>
-                                        </tr>
                                     <?php
                                     }
                                     ?>

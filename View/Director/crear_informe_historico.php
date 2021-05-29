@@ -13,6 +13,8 @@ $obj_historico_mantenimiento = cantidadAreasMantenimientoPorEmpresaYFecha($fecha
 $obj_historico_servidores = cantidadAreasServidoresPorEmpresaYFecha($fecha_inicio, $fecha_fin);
 $obj_historico_redes = cantidadAreasRedesPorEmpresaYFecha($fecha_inicio, $fecha_fin);
 ?>
+<!-- Custom styles for this template-->
+<link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {
@@ -155,28 +157,28 @@ $obj_historico_redes = cantidadAreasRedesPorEmpresaYFecha($fecha_inicio, $fecha_
   <div class="row">
     <div class="col text-center">
       <br><br>
-      <h1>Informe Estadístico</h1>
-      <br><br><br><br>
+      <h2 id="h2">Informe Estadístico</h2>
+      <br><br>
       <center>
-        <h2>Empresas por Actividad</h2>
+        <h2 id="h2">Empresas por Actividad</h2>
         <br>
         <div id="piechartEmpresaActividad" style="width: 900px; height: 500px;"></div>
       </center>
       <br><br><br>
       <center>
-        <h2>Empresas por Sector</h2>
+        <h2 id="h2">Empresas por Sector</h2>
         <br>
         <div id="piechartEmpresaSector" style="width: 800px; height: 500px;"></div>
       </center>
-      <br><br><br>
+      <br><br><br><br>
       <center>
-        <h2>Solicitudes por Empresa</h2>
+        <h2 id="h2">Solicitudes por Empresa</h2>
         <br>
         <div id="columnchart_values" style="width: 900px; height: 500px;"></div>
       </center>
-      <br><br>
+      <br><br><br><br>
       <center>
-        <h2>Áreas Más Solicitadas por las Empresas</h2>
+        <h2 id="h2">Áreas Más Solicitadas por las Empresas</h2>
         <br>
         <div id="donutchart" style="width: 900px; height: 500px;"></div>
       </center>

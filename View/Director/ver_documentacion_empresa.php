@@ -80,6 +80,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="ver_empresas.php"><i class="fas fa-building"></i> Ver Empresas</a>
+                        <a class="collapse-item" href="gestionar_documentos_semestre.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -169,7 +170,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="mb-0 text-gray-800">Documentación</h2>
+                            <h2 id="h2" class="mb-0 text-gray-800">Documentación</h2>
                         </div>
                     </div>
                 </div>
@@ -190,7 +191,7 @@ if ($_SESSION['id_director'] == NULL) {
                                 <thead>
                                     <tr>
 
-                                        <td colspan="4">
+                                        <td colspan="5">
                                             <center>
                                                 <b><?php echo $empresa[0]['nombre_empresa']; ?>
                                                 </b>
@@ -198,9 +199,10 @@ if ($_SESSION['id_director'] == NULL) {
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th id="th">Convenio</th>
                                         <th id="th">Protocolos de Bioseguridad</th>
                                         <th id="th">Certificado de Existencia</th>
-                                        <th id="th">Cedula del Representante</th>
+                                        <th id="th">Cédula del Representante</th>
                                         <th id="th">RUT</th>
                                     </tr>
                                 </thead>
@@ -212,11 +214,22 @@ if ($_SESSION['id_director'] == NULL) {
                                     if (is_null($documentos_empresa)) {
                                     ?>
                                         <tr>
-                                            <td style="color: #D61117; text-align: center;" colspan="4"><strong>Sin Documentación</strong></td>
+                                            <td style="color: #D61117; text-align: center;" colspan="5"><strong>Sin Documentación</strong></td>
                                         </tr>
                                     <?php
                                     } else {
                                     ?>
+                                        <td id="td">
+                                            <?php
+                                            if (!is_null($documentos_empresa['nombre_archivo'])) {
+                                            ?>
+                                                <a target="_blank" href="../../Documentos/Convenios/<?php echo $documentos_empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                <p><?php echo $documentos_empresa['nombre_archivo']; ?></p>
+                                            <?php } else { ?>
+                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
+                                            <?php } ?>
+                                        </td>
+
                                         <td id="td">
                                             <?php
                                             if (!is_null($documentos_empresa['archivo_protocolos_bio'])) {
