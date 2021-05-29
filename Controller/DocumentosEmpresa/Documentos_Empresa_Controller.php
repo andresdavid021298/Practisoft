@@ -205,6 +205,54 @@ if (isset($_FILES['input_archivo']['name'])) {
     echo json_encode($response);
 }
 
+if (isset($_POST['accion'])) {
+    if ($_POST['accion'] == "crear_documento_BD") {
+        $nombre_documento = $_POST['nombre_documento'];
+        $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+        $rta = $obj_documentos_empresa_model->agregarDocumentoBD($nombre_documento);
+        if ($rta == 0) {
+            $response['title'] = "Error al crear documento";
+            $response['state'] = "error";
+        } else {
+            $response['title'] = "Documento creado correctamente";
+            $response['state'] = "success";
+        }
+        echo json_encode($response);
+    } else if ($_POST['accion'] == "actualizar_documento_BD") {
+        $nombre_documento_nuevo = $_POST['nombre_documento_nuevo'];
+        $nombre_documento_antiguo = $_POST['nombre_documento_antiguo'];
+        $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+        $rta = $obj_documentos_empresa_model->actualizarDocumentoBD($nombre_documento_antiguo, $nombre_documento_nuevo);
+        if ($rta == 0) {
+            $response['title'] = "Error al actualizar el documento";
+            $response['state'] = "error";
+        } else {
+            $response['title'] = "Documento actualizado correctamente";
+            $response['state'] = "success";
+        }
+        echo json_encode($response);
+    } else if($_POST['accion'] == "eliminar_documento_BD"){
+        $nombre_documento = $_POST['nombre_documento'];
+        $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+        $rta = $obj_documentos_empresa_model->eliminarDocumentoBD($nombre_documento);
+        if ($rta == 0) {
+            $response['title'] = "Error al eliminar el documento";
+            $response['state'] = "error";
+        } else {
+            $response['title'] = "Documento eliminado correctamente";
+            $response['state'] = "success";
+        }
+        echo json_encode($response);
+    }
+}
+
+//Método para listar los documentos de la BD
+function verDocumentosBD()
+{
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->verDocumentosBD();
+}
+
 // Metodo que conecta con la vista para verificar si existe registro de algun documento para una empresa
 function verificarRegistros($id_empresa)
 {
