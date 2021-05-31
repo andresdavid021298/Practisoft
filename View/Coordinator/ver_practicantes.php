@@ -158,7 +158,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 $grupo = buscarGrupo($_GET['id_grupo']);
                                 ?>
                                 <h2 id="h2">Estudiantes <?php echo $grupo['nombre_grupo'] ?></h2>
-                                <br>
                             </div>
                         </div>
                     </div>
@@ -185,13 +184,48 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <hr>
                     </form>
                     <div>
-                        <center>
+                        <div style="text-align: center; display: block;">
                             <a class="btn btn-primary" href="crear_informe_estudiantes.php?id_grupo=<?php echo $_GET['id_grupo']; ?>">Exportar PDF</a>
-                        </center>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agregar Estudiante</button>
+                        </div>
                     </div>
-
-
+                    <br>
                     <!-- Fin -->
+
+                    <!--Modal-->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:#D61117;">
+                                    <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar Estudiante</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <br>
+                                    <form>
+                                        <div style="text-align: center;">
+                                            <p><strong>Agregue sólo el correo del estudiante que desea insertar. Los demás datos serán completados por el estudiante.</strong></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Correo:</label>
+                                            <input type="mail" class="form-control" name="correo_estudiante" id="correo_estudiante">
+                                            <input type="hidden" id="input_id_grupo" name="id_grupo" value="<?php echo $_GET['id_grupo']; ?>">
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button type="button" onclick="agregarEstudianteIndividual()" class="btn btn-primary">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Modal-->
 
                     <!-- Inicio Tabla Solicitudes -->
 
