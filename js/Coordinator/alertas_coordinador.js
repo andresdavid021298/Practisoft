@@ -1,16 +1,15 @@
 //Metodo para mostrar alerta cuando se valida la solicitud de practicantes de una empresa
 function validarSolicitud(id_solicitud) {
-    console.log(id_solicitud);
     $.ajax({
-        url: "../../Controller/Solicitud/Solicitud_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "validar_solicitud",
-            "id_solicitud": id_solicitud
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Solicitud/Solicitud_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "validar_solicitud",
+                "id_solicitud": id_solicitud
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -26,16 +25,16 @@ function rechazarSolicitud() {
     var observacion = document.getElementById('observacion_solicitud').value;
 
     $.ajax({
-        url: "../../Controller/Solicitud/Solicitud_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "rechazar_solicitud",
-            "id_solicitud": id_solicitud,
-            "observacion": observacion
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Solicitud/Solicitud_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "rechazar_solicitud",
+                "id_solicitud": id_solicitud,
+                "observacion": observacion
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -49,8 +48,6 @@ function rechazarSolicitud() {
 function subirEstudiantes() {
     var inputArchivo = document.getElementById('input_archivo').value;
     var input_id_grupo = document.getElementById('input_id_grupo').value;
-    console.log(inputArchivo);
-    console.log(input_id_grupo);
     var fd = new FormData();
     var files = $('#input_archivo')[0].files;
     if (inputArchivo == "") {
@@ -68,7 +65,7 @@ function subirEstudiantes() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function (response) {
+        }).done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -79,20 +76,42 @@ function subirEstudiantes() {
     }
 }
 
-function eliminarEstudiante(id_estudiante) {
-    console.log(id_estudiante);
+// Metodo que permite agregar estudiante de forma individual
+function agregarEstudianteIndividual() {
+    var correo_estudiante = document.getElementById('correo_estudiante').value;
     var input_id_grupo = document.getElementById('input_id_grupo').value;
-    console.log(input_id_grupo);
     $.ajax({
-        url: "../../Controller/Estudiante/Estudiante_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "eliminar_estudiante",
-            "id_estudiante": id_estudiante
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregar_estudiante_individual",
+                "correo_estudiante": correo_estudiante,
+                "input_id_grupo": input_id_grupo
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+            })
+        })
+}
+
+function eliminarEstudiante(id_estudiante) {
+    var input_id_grupo = document.getElementById('input_id_grupo').value;
+    $.ajax({
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "eliminar_estudiante",
+                "id_estudiante": id_estudiante
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -109,17 +128,17 @@ function actualizarPerfil() {
     var celular_coordinador = document.getElementById('input_celular').value;
 
     $.ajax({
-        url: "../../Controller/Coordinador/Coodinador_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "actualizar_perfil",
-            "id_coordinador": id_coordinador,
-            "codigo_coordinador": codigo_coordinador,
-            "celular_coordinador": celular_coordinador
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Coordinador/Coodinador_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_perfil",
+                "id_coordinador": id_coordinador,
+                "codigo_coordinador": codigo_coordinador,
+                "celular_coordinador": celular_coordinador
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -130,10 +149,8 @@ function actualizarPerfil() {
 }
 
 //Metodo para mostrar alerta al momento de vincular un estudiante con una empresa
-function vincularEstudianteConEmpresa(id_estudiante, id_empresa, funciones, id_solicitud) {
-    console.log(funciones);
+function vincularEstudianteConEmpresa(id_estudiante, id_empresa, nombre_empresa, funciones, id_solicitud) {
     id_grupo = document.getElementById('id_grupo').value;
-    // funciones = document.getElementById('funciones').value;
     nombre_estudiante = document.getElementById('nombre_estudiante').value;
 
     swal.fire({
@@ -144,19 +161,20 @@ function vincularEstudianteConEmpresa(id_estudiante, id_empresa, funciones, id_s
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             $.ajax({
-                url: "../../Controller/Estudiante/Estudiante_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "asignar_empresa_estudiante",
-                    "id_estudiante": id_estudiante,
-                    "id_empresa": id_empresa,
-                    "id_solicitud": id_solicitud,
-                    "funciones": funciones,
-                    "nombre_estudiante": nombre_estudiante
-                },
-                dataType: "JSON"
-            })
-                .done(function (response) {
+                    url: "../../Controller/Estudiante/Estudiante_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "asignar_empresa_estudiante",
+                        "id_estudiante": id_estudiante,
+                        "id_empresa": id_empresa,
+                        "id_solicitud": id_solicitud,
+                        "funciones": funciones,
+                        "nombre_empresa": nombre_empresa,
+                        "nombre_estudiante": nombre_estudiante
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title

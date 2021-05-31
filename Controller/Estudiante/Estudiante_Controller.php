@@ -2,6 +2,7 @@
 require_once "../../Model/DAO/Estudiante_Model.php";
 require_once "../../Model/DAO/Solicitud_Model.php";
 require_once "../../Model/DAO/Historico_Model.php";
+include_once "../../vendor/autoload.php";
 
 // Metodo que conecta con la vista para mostrar informacion de practicantes asignados a una empresa
 function listarEstudiantesPorEmpresa($id_empresa)
@@ -75,17 +76,18 @@ if (isset($_POST['accion'])) {
         $id_estudiante = $_POST['id_estudiante'];
         $id_empresa = $_POST['id_empresa'];
         $id_solicitud = $_POST['id_solicitud'];
-        
+
         $funciones = $_POST['funciones'];
         $nombre_estudiante = $_POST['nombre_estudiante'];
-        
+        $nombre_empresa = $_POST['nombre_empresa'];
+
         $obj_historico_model = new HistoricoModel();
         $res = $obj_historico_model->insertarAlHistoricoEstudiante($nombre_estudiante, $id_empresa, $funciones);
         $obj_solicitud_model = new SolicitudModel();
         $result = $obj_solicitud_model->disminuirNumeroDePracticantes($id_solicitud);
         $obj_estudiante_model = new EstudianteModel();
+        $datos_estudiante = buscarEstudiante($id_estudiante);
         $rta = $obj_estudiante_model->vincularEstudianteConEmpresa($id_estudiante, $id_empresa, $id_solicitud);
-        
         if ($result == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
@@ -129,13 +131,14 @@ if (isset($_POST['accion'])) {
     } else {
         move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
         $content = file($location);
-
+        unlink($location);
         $obj_estudiante_model = new EstudianteModel();
         $cont = 0;
 
         foreach ($content as $correo) {
             if ($cont > 1) {
-                $obj_estudiante_model->insertarEstudiante($correo, $id_grupo);
+                $correo_sin_espacios = trim($correo);
+                $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
             }
             $cont++;
         }
@@ -143,6 +146,20 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Estudiantes Agregados Correctamente";
             $response['state'] = "success";
         }
+    }
+    echo json_encode($response);
+} else if ($_POST['accion'] == "agregar_estudiante_individual") {
+    $response = array();
+    $correo_estudiante = $_POST['correo_estudiante'];
+    $id_grupo = $_POST['input_id_grupo'];
+    $obj_estudiante_model = new EstudianteModel();
+    $rta = $obj_estudiante_model->insertarEstudiante($correo_estudiante, $id_grupo);
+    if ($rta == 0) {
+        $response['state'] = "error";
+        $response['title'] = "Ocurrio un error";
+    } else {
+        $response['state'] = "success";
+        $response['title'] = "Estudiante agregado correctamente";
     }
     echo json_encode($response);
 }

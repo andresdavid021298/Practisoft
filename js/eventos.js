@@ -33,16 +33,15 @@ function validarClaves() {
     }
 }
 
-function validarInputOtra(){
+function validarInputOtra() {
     var isCheckedOtra = document.getElementById('checkOtra').checked;
-    
-    if(isCheckedOtra == false){
+
+    if (isCheckedOtra == false) {
         document.getElementById("input_otra").disabled = true;
-    }
-    else{
+    } else {
         document.getElementById("input_otra").disabled = false;
     }
-    
+
 }
 
 function validarClavesEnPerfil() {
@@ -129,70 +128,40 @@ function SeleccionarcheckboxRedes() {
 
     }
 }
-
-function agregarActividadesDinamicamente() {
-
-    // Crear el nuevo div con clase row
-    var newDivRow = document.createElement("div");
-    newDivRow.className = "row";
-    newDivRow.id = "newRow";
-
-    // Crear un nuevo div de descripcion
-    var newDiv_descripcion = document.createElement("div");
-    newDiv_descripcion.className = "form-group col-md-8";
-    newDiv_descripcion.id = "newID_descripcion";
-
-    // Crear un nuevo div del numero de horas
-    var newDiv_horas = document.createElement("div");
-    newDiv_horas.className = "form-group col-md-4";
-    newDiv_horas.id = "newID_horas";
-
-    // Crear nuevo Label de descripcion y añadirle un texto
-    var newLabel = document.createElement("label");
-    var textLabel = document.createTextNode("Nueva Actividad");
-    newLabel.appendChild(textLabel);
-
-    // Crear nuevo Input de descripcion
-    var newInput = document.createElement("textarea");
-    newInput.className = "form-control form-control-lg";
-    newInput.id = "actividad_nueva";
-    newInput.rows = 1
-
-    // Crear nuevo Label de numero de horas y añadirle un texto
-    var newLabel_horas = document.createElement("label");
-    var textLabel_horas = document.createTextNode("Numero de Horas");
-    newLabel_horas.appendChild(textLabel_horas);
-
-    // Crear nuevo Input de numero de horas
-    var newInput_horas = document.createElement("input");
-    newInput_horas.className = "form-control form-control-lg";
-    newInput_horas.id = "numero_horas_nueva";
-    newInput_horas.type = "number";
-
-    // Añadir a la vista el div row
-    const app = document.querySelector("#primer_row");
-    app.insertAdjacentElement("afterend", newDivRow);
-
-    // Añadir a la vista el div de descripcion
-    const app1 = document.querySelector("#newRow");
-    app1.insertAdjacentElement("afterbegin", newDiv_descripcion);
-
-    const app3 = document.querySelector("#newRow");
-    app3.insertAdjacentElement("beforeend", newDiv_horas);
-
-    // Añadirle al nuevo div de descripcion el label y el input
-    const app2 = document.querySelector("#newID_descripcion");
-    app2.insertAdjacentElement("beforeend", newLabel);
-    app2.insertAdjacentElement("beforeend", newInput);
-
-    // Añadirle al nuevo div de horas el label y el input
-    const app5 = document.querySelector("#newID_horas");
-    app5.insertAdjacentElement("beforeend", newLabel_horas);
-    app5.insertAdjacentElement("beforeend", newInput_horas);
-
-
+// Funcion que permite agregar campos dinamicamente en el plan de trabajo
+function AgregarMas() {
+    $("<div>").load("InputDinamico.php", function() {
+        $("#productos").append($(this).html());
+    });
 }
 
-function eliminarActividadesDinamicamente() {
-    $('#newRow').remove();
+// Funcion que permite borrar campos dinamicamente en el plan de trabajo
+function BorrarRegistro() {
+    $('div.lista-producto').each(function(index, item) {
+        jQuery(':checkbox', this).each(function() {
+            if ($(this).is(':checked')) {
+                $(item).remove();
+            }
+        });
+    });
+    sumatoriaNumeroHorasActividadesPlanTrabajo();
+}
+
+//Función que realiza la suma de las actividades del plan de trabajo
+function sumatoriaNumeroHorasActividadesPlanTrabajo() {
+    var inputs_actividades = document.getElementsByClassName("numero_horas");
+    var p_sumatoria_horas = document.getElementById('sumatoria');
+    var longitud = inputs_actividades.length;
+    var cantidad_horas = 0;
+    for (let index = 0; index < longitud; index++) {
+        if (inputs_actividades[index].value != "") {
+            //     console.log(cantidad_horas);
+            // } else {
+            cantidad_horas = cantidad_horas + parseInt(inputs_actividades[index].value);
+            // console.log(cantidad_horas);
+            // console.log(inputs_actividades[index].value);
+            // document.suma.resultado.value = cantidad_horas;
+        }
+    }
+    p_sumatoria_horas.textContent = "Sumatoria de horas = " + cantidad_horas + " / 320";
 }

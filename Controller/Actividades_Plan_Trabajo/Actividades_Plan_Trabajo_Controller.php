@@ -73,6 +73,33 @@ if (isset($_POST['accion'])) {
             $response['state'] = "success";
         }
         echo json_encode($response);
+    } else  if ($_POST['accion'] == "actualizar_plan_trabajo") {
+        $id_estudiante = $_POST['id_estudiante'];
+        $actividades = $_POST['actividades'];
+        $response = array();
+        $aux = 1;
+        $obj_actividad_plan_trabajo = new ActividadPlanTabajoModel();
+        $rta_eliminar = $obj_actividad_plan_trabajo->eliminarTodasActividadesPlanTrabajoPorEstudiante($id_estudiante);
+        if ($rta_eliminar == 1) {
+            for ($i = 0; $i < count($actividades); $i = $i + 2) {
+                $rta = $obj_actividad_plan_trabajo->insertarActividadPlanTrabajo($id_estudiante, $actividades[$i], $actividades[$i + 1]);
+                if ($rta == 0) {
+                    $aux = 0;
+                    break;
+                }
+            }
+            if ($aux == 0) {
+                $response['title'] = "Ocurrio un error";
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Plan de Trabajo Actualizado Correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            $response['title'] = "Ocurrio un error";
+            $response['state'] = "error";
+        }
+        echo json_encode($response);
     } else if ($_POST['accion'] == "eliminar_todas_actividad_plan_trabajo") {
         $id_estudiante = $_POST['id_estudiante'];
         $response = array();

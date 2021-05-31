@@ -153,7 +153,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $_GET['id_grupo'] ?>"> <i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
                 <center>
-                    <h2>Asignar Practicante</h2>
+                    <h2 id="h2">Asignar Practicante</h2>
                 </center>
                 <?php
                 require_once "../../Controller/Estudiante/Estudiante_Controller.php";
@@ -223,7 +223,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <input type="hidden" id="nombre_estudiante" value="<?php echo $estudiante['nombre_estudiante'] ?>">
 
                                                         <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,
-                                                        <?php echo $solicitud['id_empresa']; ?>, '<?php echo $solicitud['funciones']; ?>',<?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
+                                                        <?php echo $solicitud['id_empresa']; ?>, '<?php echo $solicitud['nombre_empresa']; ?>' ,'<?php echo $solicitud['funciones']; ?>',<?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
                                                     </td>
                                                 </tr>
                                         <?php }
