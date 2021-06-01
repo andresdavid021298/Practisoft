@@ -114,6 +114,20 @@ if (isset($_POST['accion'])) {
             $response['title'] = "Estudiante eliminado correctamente";
         }
         echo json_encode($response);
+    } else if ($_POST['accion'] == "agregar_estudiante_individual") {
+        $response = array();
+        $correo_estudiante = $_POST['correo_estudiante'];
+        $id_grupo = $_POST['input_id_grupo'];
+        $obj_estudiante_model = new EstudianteModel();
+        $rta = $obj_estudiante_model->insertarEstudiante($correo_estudiante, $id_grupo);
+        if ($rta == 0) {
+            $response['state'] = "error";
+            $response['title'] = "Ocurrio un error";
+        } else {
+            $response['state'] = "success";
+            $response['title'] = "Estudiante agregado correctamente";
+        }
+        echo json_encode($response);
     }
 } else if (isset($_FILES['input_archivo']['name'])) {
     $response = array();
@@ -133,33 +147,21 @@ if (isset($_POST['accion'])) {
         $content = file($location);
         unlink($location);
         $obj_estudiante_model = new EstudianteModel();
-        $cont = 0;
+        $result = NULL;
+
 
         foreach ($content as $correo) {
-            if ($cont > 1) {
-                $correo_sin_espacios = trim($correo);
+            $correo_estudiante = str_replace(',', '', $correo);
+            $result = stristr($correo_estudiante, '@ufps.edu.co');
+            if ($result != false) {
+                $correo_sin_espacios = trim($correo_estudiante);
                 $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
             }
-            $cont++;
         }
-        if ($cont > 0) {
+        if ($result != NULL) {
             $response['title'] = "Estudiantes Agregados Correctamente";
             $response['state'] = "success";
         }
-    }
-    echo json_encode($response);
-} else if ($_POST['accion'] == "agregar_estudiante_individual") {
-    $response = array();
-    $correo_estudiante = $_POST['correo_estudiante'];
-    $id_grupo = $_POST['input_id_grupo'];
-    $obj_estudiante_model = new EstudianteModel();
-    $rta = $obj_estudiante_model->insertarEstudiante($correo_estudiante, $id_grupo);
-    if ($rta == 0) {
-        $response['state'] = "error";
-        $response['title'] = "Ocurrio un error";
-    } else {
-        $response['state'] = "success";
-        $response['title'] = "Estudiante agregado correctamente";
     }
     echo json_encode($response);
 }
