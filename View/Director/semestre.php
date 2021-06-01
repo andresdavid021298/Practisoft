@@ -281,31 +281,42 @@ if ($_SESSION['id_director'] == NULL) {
                             <div class="modal-body">
 
                                 <form action="" method="POST">
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Nombre del Grupo:</label>
-                                        <input type="text" class="form-control" name="nombreGrupo" id="nombre_grupo">
-                                    </div>
+                                    <?php
+                                    if (is_null($lista_coordinadores)) {
+                                    ?>
+                                        <h3>No hay Coordinadores registrados en el sistema en este momento, registra coordinador dando click <a href="agregar_coordinador.php">aqui</a></h3>
+                                    <?php
+                                    } else {
 
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Coordinador:</label>
-                                        <select class="form-control" aria-label="Default select example" id="id_coordinador_option">
-                                            <?php foreach ($lista_coordinadores as $lista) {
+                                    ?>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Nombre del Grupo:</label>
+                                            <input type="text" class="form-control" name="nombreGrupo" id="nombre_grupo">
+                                        </div>
 
-                                            ?>
-                                                <option value="<?php echo $lista['id_coordinador'] ?>"><?php echo $lista['nombre_coordinador']; ?></option>
-                                            <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Coordinador:</label>
+                                            <select class="form-control" aria-label="Default select example" id="id_coordinador_option">
+                                                <?php foreach ($lista_coordinadores as $lista) {
 
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <button type="button" onclick="crearGrupo()" class="btn btn-primary">Agregar</button>
+                                                ?>
+                                                    <option value="<?php echo $lista['id_coordinador'] ?>"><?php echo $lista['nombre_coordinador']; ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col text-center">
+                                                    <button type="button" onclick="crearGrupo()" class="btn btn-primary">Agregar</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </form>
                             </div>
                         </div>

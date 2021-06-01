@@ -173,7 +173,7 @@ if ($_SESSION['id_director'] == NULL) {
                 </div>
                 <div class="container-fluid">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered">
+                        <table id="tabla" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th id="th">Nombre</th>
@@ -187,9 +187,11 @@ if ($_SESSION['id_director'] == NULL) {
                                 $lista_coordinadores = listarCoordinadores();
                                 if (is_null($lista_coordinadores)) {
                                 ?>
-                                    <tr>
-                                        <td colspan="3" style="color: #D61117;"><b>No hay coordinadores registrados en el sistema</b></td>
-                                    </tr>
+
+                                    <td colspan="3" style="color: #D61117;">
+                                        <center><strong>No hay coordinadores registrados en el sistema</strong></center>
+                                    </td>
+
                                     <?php } else {
                                     foreach ($lista_coordinadores as $coordinador) {
                                     ?>
@@ -202,10 +204,8 @@ if ($_SESSION['id_director'] == NULL) {
                                             </td>
                                             <td id="td">
                                                 <center>
-                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarCoordinador" 
-                                                    data-id="<?php echo $coordinador['id_coordinador']; ?>" 
-                                                    data-nombre="<?php echo $coordinador['nombre_coordinador']; ?>" 
-                                                    data-correo="<?php echo $coordinador['correo_coordinador']; ?>">Actualizar</button></center><br>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarCoordinador" data-id="<?php echo $coordinador['id_coordinador']; ?>" data-nombre="<?php echo $coordinador['nombre_coordinador']; ?>" data-correo="<?php echo $coordinador['correo_coordinador']; ?>">Actualizar</button>
+                                                </center><br>
                                                 <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar</button></center>
                                             </td>
                                         </tr>
@@ -316,11 +316,6 @@ if ($_SESSION['id_director'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
-<script>
     $('#actualizarCoordinador').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         //var recipient = button.data('whatever')
@@ -335,4 +330,23 @@ if ($_SESSION['id_director'] == NULL) {
         modal.find('.correo_coo').val(correo)
     })
 </script>
+<script>
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
+    });
+</script>
+
 </html>
