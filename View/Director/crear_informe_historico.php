@@ -164,7 +164,7 @@ $obj_historico_redes = cantidadAreasRedesPorEmpresaYFecha($fecha_inicio, $fecha_
         <br>
         <div id="piechartEmpresaActividad" style="width: 900px; height: 500px;"></div>
       </center>
-      <br><br><br>
+      <br><br><br><br>
       <center>
         <h2 id="h2">Empresas por Sector</h2>
         <br>

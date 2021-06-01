@@ -153,7 +153,7 @@
                 include_once 'crear_informe_estadistico.php';
                 ?>
                 <div style="text-align: center;">
-                    <button class="btn btn-primary" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF</button>
+                    <button  style="background-color: #D61117; color: white;" class="btn" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF <i class="fas fa-file-pdf"></i></button>
                 </div>
                 <br>
             </div>

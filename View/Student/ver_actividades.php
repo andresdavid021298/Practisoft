@@ -165,7 +165,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <div class="row">
                                     <div class="col text-center">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva SubActividad</button>
-                                        <!-- <button type="button" class="btn btn-primary">Descargar Registro</button><br><br> -->
                                         <div style="display: inline-block;">
                                             <center>
                                                 <form action="crear_informe_subactividades.php" method="post">

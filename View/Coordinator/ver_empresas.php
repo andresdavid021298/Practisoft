@@ -152,16 +152,17 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </center>
                 <br>
                 <div class="table-responsive">
-                    <div>
-                        <center>
-                            <form action="crear_informe_empresas.php" method="post">
-                                <div>
-                                    <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
-                                </div>
-                            </form>
-                        </center>
+                    <div class="container">
+                        <div class="row" style="justify-content: center;">
+                            <div style="display: inline-flex;">
+                                <form action="crear_informe_empresas.php" method="post">
+                                    <button type="submit" id="submit" name="import" class="btn btn-primary" style="background-color: #D61117; color: white;">Exportar PDF <i class="fas fa-file-pdf"></i></button>
+                                </form>
+                                <a class="btn btn-success" href="crear_informe_empresas_excel.php">Exportar Excel <i class="fas fa-file-excel"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <br>
+                    <br><br>
                     <div class="container-fluid">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>

@@ -174,7 +174,8 @@ if ($_SESSION['id_director'] == NULL) {
                     <center>
                         <form action="crear_informe_empresas.php" method="post">
                             <div>
-                                <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                                <button type="submit" id="submit" name="import" class="btn btn-primary" style="background-color: #D61117; color: white;">Exportar PDF <i class="fas fa-file-pdf"></i></button>
+                                <a class="btn btn-success" href="crear_informe_empresas_excel.php">Exportar Excel <i class="fas fa-file-excel"></i></a>
                             </div>
                         </form>
                     </center>
