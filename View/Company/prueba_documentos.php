@@ -53,7 +53,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Gestion de Practicantes -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
@@ -155,85 +155,57 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-
-                <!-- Tabla de estudiantes que serán evaluados -->
-
-                <div class="container-fluid">
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <h2 id="h2">Estudiantes a Evaluar</h2>
-                                <br>
-                            </div>
+                <center>
+                    <h2 id="h2">Mis Documentos</h2>
+                </center>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img src="https://cdn.pixabay.com/photo/2017/06/10/07/24/note-2389227_960_720.png" style="width: 200px; height: 200px;" />
+                            <?php
+                            require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                            $nombres_columnas = verDocumentosBD();
+                            if (count($nombres_columnas) - 2 > 0) {
+                            ?>
+                                <div class="table-responsive">
+                                    <table id="tabla" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <?php
+                                                $aux = 2;
+                                                while ($aux < count($nombres_columnas)) { ?>
+                                                    <th><?php echo strtoupper(str_replace("archivo","",str_replace("_", " ", $nombres_columnas[$aux]["COLUMN_NAME"]))); ?></th>
+                                                <?php
+                                                    $aux++;
+                                                } ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php } ?>
+                            <br><br>
+                            <b>
+                                <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
+                            </b>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <center>Estudiante</center>
-                                    </th>
-                                    <th>
-                                        <center>Horas</center>
-                                    </th>
-                                    <th>
-                                        <center>Opciones</center>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                require_once '../../Controller/Estudiante/Estudiante_Controller.php';
-                                $lista_de_estudiantes = listarEstudiantesPorEmpresa($_SESSION['id_empresa']);
-                                if (is_null($lista_de_estudiantes)) {
-                                ?>
-                                    <td colspan="4" style="color: #D61117;">
-                                        <center><strong>NO TIENE PRACTICANTES ASIGNADOS</strong></center>
-                                    </td>
-                                    <?php
-                                } else {
-                                    foreach ($lista_de_estudiantes as $estudiante) {
-                                    ?>
-                                        <tr>
-                                            <td>
-                                                <center><?php echo $estudiante['nombre_estudiante']; ?></center>
-                                            </td>
-                                            <?php
-                                            require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                            $horas_estudiante = verHorasPorEstudiante($estudiante['id_estudiante']);
-                                            // $horas_estudiante = 320;
-                                            ?>
-                                            <td>
-                                                <center><?php echo $horas_estudiante; ?></center>
-                                            </td>
-                                            <td>
-                                                <?php if ($horas_estudiante >= 320) { ?>
-                                                    <center><a class="btn btn-primary" target="_blank" href="https://forms.gle/7TGp9TQt16DcHnsd6">Completar Encuesta</a></center>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <center><strong style="color: #D61117;">NO HA COMPLETADO LA TOTALIDAD DE HORAS</strong></center>
-                                            </td>
-                                        <?php
-                                                }
-                                        ?>
-                                        </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
+
+
             </div>
-            <!-- Fin de tabla -->
+            <!-- End of Page Wrapper -->
 
             <!-- Scroll to Top Button-->
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
+
             <!-- Footer -->
             <footer>
                 <div class="ufps-footer">
@@ -245,17 +217,17 @@ if ($_SESSION['id_empresa'] == NULL) {
             </footer>
             <!-- End of Footer -->
         </div>
-    </div>
+
     </div>
 
 </body>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../../js/Company/alertas_empresa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable({

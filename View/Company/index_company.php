@@ -473,6 +473,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </div>
                         <?php } ?>
                     </div>
+                    <!-- <iframe allowfullscreen="allowfullscreen" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/15d265eab8.html" style="border: 1px solid lightgray; width: 100%; height: 500px;"></iframe> -->
                 </div>
             </div>
             <!-- End of Page Wrapper -->
