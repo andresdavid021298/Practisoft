@@ -97,10 +97,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
-                        <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
-                        <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
-                        <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a></a>
-                        <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
+                        <a class="collapse-item" href="gestionar_documentacion.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -237,8 +234,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                         require_once "../../Controller/Convenio/Convenio_Controller.php";
                         require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
                         $datos_convenio = mostrarConvenio($_SESSION['id_empresa']);
-                        $documentos_empresa = listarDocumentosPorEmpresa($_SESSION['id_empresa']);
-                        if (is_null($documentos_empresa) && is_null($datos_convenio)) {
+                        $nombre_columnas = verDocumentosBD();
+                        $documentos_empresa = verificarDocumentacion($_SESSION['id_empresa']);
+                        if (is_null($datos_convenio) && is_null($documentos_empresa)) {
                         ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
                                 <div class="card border-left-danger shadow h-100 py-2">
@@ -249,36 +247,23 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     Documentos
                                                 </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
                                                         <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                     </div>
-
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <a href="documento_protocolos.php" class="form-check-label">
-                                                            Protocolos Bio
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <a href="documento_certificado.php" class="form-check-label">
-                                                            Cert. Existencia
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <a href="documento_representante.php" class="form-check-label">
-                                                            CC Representante
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                        <a href="documento_rut.php" class="form-check-label">
-                                                            RUT
-                                                        </a>
-                                                    </div>
+                                                    <?php
+                                                    $aux = 2;
+                                                    while ($aux < count($nombre_columnas)) {
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
+                                                            <a href="gestionar_documentacion.php" class="form-check-label">
+                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                            </a>
+                                                        </div>
+                                                    <?php
+                                                        $aux++;
+                                                    } ?>
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -288,7 +273,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     </div>
                                 </div>
                             </div>
-                        <?php } else if (!is_null($documentos_empresa) && !in_array(NULL, $documentos_empresa) && !is_null($datos_convenio)) { ?>
+                        <?php } else if (!is_null($documentos_empresa) && !in_array(NULL, $documentos_empresa) && !is_null($datos_convenio)) {
+                        ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
@@ -299,35 +285,22 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <a href="documento_convenio.php" class="form-check-label">
-                                                            Convenio
-                                                        </a>
+                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                        <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                     </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <a href="documento_protocolos.php" class="form-check-label">
-                                                            Protocolos Bio
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <a href="documento_certificado.php" class="form-check-label">
-                                                            Cert. Existencia
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <a href="documento_representante.php" class="form-check-label">
-                                                            CC Representante
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                        <a href="documento_rut.php" class="form-check-label">
-                                                            RUT
-                                                        </a>
-                                                    </div>
+                                                    <?php
+                                                    $aux = 2;
+                                                    while ($aux < count($nombre_columnas)) {
+                                                    ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                            <a href="gestionar_documentacion.php" class="form-check-label">
+                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                            </a>
+                                                        </div>
+                                                    <?php
+                                                        $aux++;
+                                                    } ?>
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -336,8 +309,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php } else { ?>
+                            </div> <?php
+                                } else if (count($nombre_columnas) - 2 > 0) {
+                                    ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
@@ -347,120 +321,43 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     Documentos
                                                 </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    <?php
-                                                    if (is_null($datos_convenio)) {
+                                                    <?php if (is_null($datos_convenio['nombre_archivo'])) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <a href="documento_convenio.php" class="form-check-label">
-                                                                Convenio
-                                                            </a>
+                                                            <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                         </div>
-
                                                     <?php } else {
                                                     ?>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" checked disabled>
-                                                            <a href="documento_convenio.php" class="form-check-label">
-                                                                Convenio
-                                                            </a>
+                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
+                                                            <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                         </div>
-                                                    <?php }
-                                                    if (is_null($documentos_empresa)) {
-                                                    ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <a href="documento_protocolos.php" class="form-check-label">
-                                                                Protocolos Bio
-                                                            </a>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <a href="documento_certificado.php" class="form-check-label">
-                                                                Cert. Existencia
-                                                            </a>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <a href="documento_representante.php" class="form-check-label">
-                                                                CC Representante
-                                                            </a>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                            <a href="documento_rut.php" class="form-check-label">
-                                                                RUT
-                                                            </a>
-                                                        </div>
-                                                    <?php } else { ?>
                                                         <?php
-                                                        if (is_null($documentos_empresa['archivo_protocolos_bio'])) {
+                                                    }
+                                                    $aux = 2;
+                                                    while ($aux < count($nombre_columnas)) {
+                                                        if (is_null($documentos_empresa[$nombre_columnas[$aux]['COLUMN_NAME']])) {
                                                         ?>
+
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <a href="documento_protocolos.php" class="form-check-label">
-                                                                    Protocolos Bio
+                                                                <a href="gestionar_documentacion.php" class="form-check-label">
+                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
                                                                 </a>
                                                             </div>
-                                                        <?php } else { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <a href="documento_protocolos.php" class="form-check-label">
-                                                                    Protocolos Bio
-                                                                </a>
-                                                            </div>
-                                                        <?php } ?>
                                                         <?php
-                                                        if (is_null($documentos_empresa['archivo_certificado_existencia'])) {
+                                                        } else {
                                                         ?>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <a href="documento_certificado.php" class="form-check-label">
-                                                                    Cert. Existencia
-                                                                </a>
-                                                            </div>
-                                                        <?php } else { ?>
-                                                            <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <a href="documento_certificado.php" class="form-check-label">
-                                                                    Cert. Existencia
+                                                                <a href="gestionar_documentacion.php" class="form-check-label">
+                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
                                                                 </a>
                                                             </div>
-                                                        <?php } ?>
-                                                        <?php
-                                                        if (is_null($documentos_empresa['archivo_cc_representante'])) {
-                                                        ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <a href="documento_representante.php" class="form-check-label">
-                                                                    CC Representante
-                                                                </a>
-                                                            </div>
-                                                        <?php } else { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <a href="documento_representante.php" class="form-check-label">
-                                                                    CC Representante
-                                                                </a>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php
-                                                        if (is_null($documentos_empresa['archivo_rut'])) {
-                                                        ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
-                                                                <a href="documento_rut.php" class="form-check-label">
-                                                                    RUT
-                                                                </a>
-                                                            </div>
-                                                        <?php } else { ?>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
-                                                                <a href="documento_rut.php" class="form-check-label">
-                                                                    RUT
-                                                                </a>
-                                                            </div>
-                                                    <?php }
+                                                    <?php
+                                                        }
+                                                        $aux++;
                                                     } ?>
                                                 </div>
                                             </div>
