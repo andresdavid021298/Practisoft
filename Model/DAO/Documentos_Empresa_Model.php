@@ -14,28 +14,30 @@ class DocumentosEmpresaModel
     }
 
     //Método para traer los nombres de los archivos de la base de datos
-    public function verDocumentosBD(){
+    public function verDocumentosBD()
+    {
         $lista_documentos = NULL;
         $query = "select COLUMN_NAME 
                   from INFORMATION_SCHEMA.COLUMNS
                   where TABLE_SCHEMA = 'practisoft' and TABLE_NAME = 'documentos_empresa'
                   order by ORDINAL_POSITION";
         $stmt = $this->conexion->prepare($query);
-        
+
         if (!$stmt->execute()) {
             $stmt->closeCursor();
             return 0;
         } else {
-            while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $lista_documentos[] = $result;
-            } 
+            }
             $stmt->closeCursor();
             return $lista_documentos;
         }
     }
 
     //Método para agregar nuevo documento a la BD
-    public function agregarDocumentoBD($nombre){
+    public function agregarDocumentoBD($nombre)
+    {
         $query =  "ALTER TABLE documentos_empresa ADD $nombre VARCHAR(120)";
         $stmt = $this->conexion->prepare($query);
 
@@ -49,7 +51,8 @@ class DocumentosEmpresaModel
     }
 
     //Método para actualizar documento de la BD
-    public function actualizarDocumentoBD($nombreAnterior, $nombreNuevo){
+    public function actualizarDocumentoBD($nombreAnterior, $nombreNuevo)
+    {
         $query = "ALTER TABLE documentos_empresa CHANGE $nombreAnterior $nombreNuevo VARCHAR(120)";
         $stmt = $this->conexion->prepare($query);
 
@@ -63,7 +66,8 @@ class DocumentosEmpresaModel
     }
 
     //Método para eliminar documento de la BD
-    public function eliminarDocumentoBD($nombre){
+    public function eliminarDocumentoBD($nombre)
+    {
         $query = "ALTER TABLE documentos_empresa DROP $nombre";
         $stmt = $this->conexion->prepare($query);
 
@@ -74,7 +78,6 @@ class DocumentosEmpresaModel
             $stmt->closeCursor();
             return 1;
         }
-
     }
 
     //ALTER TABLE `documentos_empresa` DROP `archivo_model`;
@@ -122,10 +125,11 @@ class DocumentosEmpresaModel
     public function verDocumentosEmpresa($id_empresa)
     {
         $lista_documentos = NULL;
-        $query = "SELECT c.nombre_archivo, d.archivo_protocolos_bio, d.archivo_cc_representante, d.archivo_certificado_existencia, d.archivo_rut FROM empresa e
-        LEFT JOIN convenio c ON e.id_empresa=c.id_empresa
-        LEFT JOIN documentos_empresa d ON c.id_empresa=d.id_empresa
-        WHERE e.id_empresa=:id_empresa";
+        $query = "SELECT d.*,c.nombre_archivo 
+                  FROM documentos_empresa AS d 
+                  RIGHT JOIN empresa AS e ON d.id_empresa =  e.id_empresa 
+                  LEFT JOIN convenio AS c ON e.id_empresa= c.id_empresa 
+                  WHERE e.id_empresa = :id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
         if (!$stmt->execute()) {

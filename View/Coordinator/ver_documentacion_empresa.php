@@ -1,9 +1,8 @@
 <?php
 session_start();
-if ($_SESSION['id_director'] == NULL) {
+if ($_SESSION['id_coordinador'] == NULL) {
+
     header("Location: ../../index.php");
-} else if (is_null($_GET['id_empresa'])) {
-    header("Location: ver_empresas.php");
 }
 ?>
 <!DOCTYPE html>
@@ -47,7 +46,7 @@ if ($_SESSION['id_director'] == NULL) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" style="text-align: center;" href="index_director.php">
+                <a class="nav-link" style="text-align: center;" href="index_coordinator.php">
                     <span style="font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">INICIO</span></a>
             </li>
 
@@ -63,9 +62,9 @@ if ($_SESSION['id_director'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="agregar_coordinador.php"><i class="fas fa-user-cog"></i> Agregar Coordinador</a>
-                        <a class="collapse-item" href="semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
-                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-chart-pie"></i> Informe Estadistico </a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
+                        <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
+                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -80,7 +79,6 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="ver_empresas.php"><i class="fas fa-building"></i> Ver Empresas</a>
-                        <a class="collapse-item" href="gestionar_documentos_semestre.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -95,21 +93,6 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="perfil.php"><i class="fas fa-edit"></i></i> Mi Perfil</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Informes -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
-                    <i class="fas fa-signal"></i>
-                    <span id="titulosSideBar">Informe Estadístico</span>
-                </a>
-                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
-                        <a class="collapse-item" href="seleccionar_fecha_informe.php"><i class="fas fa-book"></i> Informe Histórico</a>
                     </div>
                 </div>
             </li>
@@ -136,7 +119,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars" id="faBars"></i>
+                        <i id="faBars" class="fa fa-bars"></i>
                     </button>
 
                     <!-- Topbar Navbar -->
@@ -147,8 +130,8 @@ if ($_SESSION['id_director'] == NULL) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="imgRedonda" src="<?php echo $_SESSION['url_image'] ?>" alt="Imagen de Perfil">
                                 <div>
-                                    <span id="nombreUsuarioDirector">
-                                        <b><?php echo $_SESSION['nombre_director'] ?></b>
+                                    <span id="nombreUsuario">
+                                        <b><?php echo $_SESSION['nombre_coordinador'] ?></b>
                                     </span>
                                 </div>
                                 <i class="fas fa-power-off" style="color: white;"></i>
@@ -164,6 +147,7 @@ if ($_SESSION['id_director'] == NULL) {
                     </ul>
 
                 </nav>
+                <!-- End of Topbar -->
                 <div style="padding-left: 10px;">
                     <a class="btn btn-primary" href="ver_empresas.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
                 </div>
@@ -290,7 +274,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <?php }
                 ?>
             </div>
-            <!-- End of Topbar -->
+
 
             <!-- End of Page Wrapper -->
 
@@ -314,29 +298,12 @@ if ($_SESSION['id_director'] == NULL) {
     </div>
 
 </body>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 <script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
+<script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#tabla').DataTable({
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "Sin Registros",
-                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                "search": "Buscar:",
-                "paginate": {
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            }
-        });
-    });
-</script>
 
 </html>

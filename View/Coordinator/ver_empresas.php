@@ -169,11 +169,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <tr>
                                     <th id="th">Nombre</th>
                                     <th id="th">Representante Legal</th>
-                                    <th id="th">Direccion</th>
+                                    <th id="th">Dirección</th>
                                     <th id="th">Celular</th>
                                     <th id="th">Correo</th>
                                     <th id="th">Sector</th>
-                                    <th id="th">Convenio</th>
+                                    <th id="th">Actividad Económica</th>
+                                    <th id="th">Documentación</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -210,18 +211,26 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 <?php echo $empresa['sector_empresa']; ?>
                                             </td>
                                             <td id="td">
-                                                <?php
-                                                if ($empresa['fecha_inicio'] == NULL && $empresa['fecha_expiracion'] == NULL) {
-                                                ?>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Convenio' ?>-gray?style=for-the-badge">
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <strong>Inicio:</strong> <?php echo $empresa['fecha_inicio']; ?><strong> / Expiracion:</strong> <?php echo $empresa['fecha_expiracion']; ?>
-                                                <?php
-                                                }
-                                                ?>
+                                                <?php echo $empresa['actividad_empresa']; ?>
                                             </td>
+
+                                            <?php
+                                            require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                                            $lista_documentos = listarDocumentosPorEmpresa($empresa['id_empresa']);
+                                            if (is_null($lista_documentos)) {
+                                            ?>
+                                                <td id="td">
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge">
+                                                </td>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <td id="td">
+                                                    <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
+                                                </td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tr>
                                 <?php }
                                 } ?>
@@ -230,11 +239,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <tr>
                                     <th id="th">Nombre</th>
                                     <th id="th">Representante Legal</th>
-                                    <th id="th">Direccion</th>
+                                    <th id="th">Dirección</th>
                                     <th id="th">Celular</th>
                                     <th id="th">Correo</th>
                                     <th id="th">Sector</th>
-                                    <th id="th">Convenio</th>
+                                    <th id="th">Actividad Económica</th>
+                                    <th id="th">Documentación</th>
                                 </tr>
                             </tfoot>
                         </table>
