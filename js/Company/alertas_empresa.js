@@ -768,3 +768,44 @@ function restablecerClave() {
             })
     }
 }
+
+function subirDocumento(){
+    //Nombre de la columna separado por _
+    var columna = document.getElementById('id_documento_option').value;
+    //Nombre del documento
+    var documento = columna.replace('archivo_', '');
+    //archivo
+    var inputArchivo = document.getElementById('input_archivo_documentos').value;
+    var nombreEmpresa = document.getElementById('nombre_empresa').value;
+    var idEmpresa = document.getElementById('id_empresa').value;
+    var fd = new FormData();
+    var files = $('#input_archivo_documentos')[0].files;
+    if (inputArchivo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Seleccione un archivo para cargar"
+        })
+    } else{
+        fd.append('columna', columna);
+        fd.append('nombre_documento', documento);
+        fd.append('id_empresa', idEmpresa);
+        fd.append('nombre_empresa', nombreEmpresa);
+        fd.append('input_archivo_documentos', files[0]);
+        $.ajax({
+            url: '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php',
+            type: 'post',
+            dataType: "JSON",
+            data: fd,
+            contentType: false,
+            processData: false,
+        }).done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = "gestionar_documentacion.php"
+            })
+        })
+    }
+    
+}

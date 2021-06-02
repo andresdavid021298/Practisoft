@@ -80,7 +80,37 @@ class DocumentosEmpresaModel
         }
     }
 
-    //ALTER TABLE `documentos_empresa` DROP `archivo_model`;
+    //Método para cargar un documento
+    public function insertarDocumento($id_empresa, $columna, $nombre_archivo)
+    {
+        $query = "INSERT INTO documentos_empresa(id_empresa, $columna) VALUES(:id_empresa, :nombre_archivo)";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Metodo para actualizar un documento
+    public function actualizarDocumento($id_empresa, $columna, $nombre_archivo)
+    {
+        $query = "UPDATE documentos_empresa SET $columna = :nombre_archivo WHERE id_empresa=:id_empresa";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_empresa", $id_empresa);
+        $stmt->bindParam(":nombre_archivo", $nombre_archivo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
 
     //Método para verificar si hay un registro de documento
     public function verificarRegistroDocumento($id_empresa)

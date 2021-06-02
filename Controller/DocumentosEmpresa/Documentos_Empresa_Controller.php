@@ -203,6 +203,58 @@ if (isset($_FILES['input_archivo']['name'])) {
         }
     }
     echo json_encode($response);
+} else if (isset($_FILES['input_archivo_documentos']['name'])) {
+    $response = array();
+    $nombreArchivo = $_FILES['input_archivo_documentos']['name'];
+    $columna = $_POST['columna'];
+    $nombre_documento = $_POST['nombre_documento'];
+    $idEmpresa = $_POST['id_empresa'];
+    $nombre_empresa = $_POST['nombre_empresa'];
+    $formatoNombre = $nombre_documento ."_" . $nombre_empresa;
+    $extension = strrchr($nombreArchivo, ".");
+    $archivo = $formatoNombre . $extension;
+    $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/' . $archivo;
+    $tipoArchivo = $_FILES['input_archivo_documentos']['type'];
+    if ($tipoArchivo != "application/pdf") {
+        $response['title'] = "Solo se permiten archivos PDF";
+        $response['state'] = "warning";
+    } else {
+        move_uploaded_file($_FILES['input_archivo_documentos']['tmp_name'], $location);
+        $nuevo_documento = new DocumentosEmpresaModel();
+        $registros = verificarRegistros($idEmpresa);
+        $lista_documentos = verificarDocumentacion($idEmpresa);
+        if ($registros == 0) {
+            $rta = $nuevo_documento->insertarDocumento($idEmpresa, $columna, $archivo);
+            if ($rta == 0) {
+                $response['title'] = "Error al subir el documento " . $nombre_documento;
+                $response['state'] = "error";
+            } else {
+                $response['title'] = "Documento cargado correctamente";
+                $response['state'] = "success";
+            }
+        } else {
+            if ($lista_documentos[$columna] == NULL) {
+                $rta = $nuevo_documento->actualizarDocumento($idEmpresa, $columna, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el documento " . $nombre_documento;
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento " . $nombre_documento . " cargado correctamente";
+                    $response['state'] = "success";
+                }
+            } else {
+                $rta = $nuevo_documento->actualizarDocumento($idEmpresa, $columna, $archivo);
+                if ($rta == 0) {
+                    $response['title'] = "Error al subir el documento " . $nombre_documento;
+                    $response['state'] = "error";
+                } else {
+                    $response['title'] = "Documento " . $nombre_documento . " actualizado correctamente";
+                    $response['state'] = "success";
+                }
+            }
+        }
+    }
+    echo json_encode($response);
 }
 
 if (isset($_POST['accion'])) {
