@@ -164,13 +164,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                 <?php require_once '../../Controller/Actividad/Actividad_Controller.php';
                                 $suma_horas_totales = verHorasPorEstudiante($_SESSION['id_estudiante']);
                                 ?>
-                                <h5>Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
+                                <h5 id="h2">Horas Totales Aprobadas: <?php echo $suma_horas_totales; ?> / 320</h5>
                             </div>
                             <div>
+                            <br>
                                 <center>
                                     <form action="crear_informe_actividades.php" method="post">
                                         <div>
-                                            <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
+                                            <button type="submit" id="submit" name="import" class="btn btn-primary" style="background-color: #D61117; color: white;">Exportar PDF <i class="fas fa-file-pdf"></i></button>
                                             <input name="id_estudiante" type="hidden" value="<?php echo $_SESSION['id_estudiante'] ?>">
                                         </div>
                                     </form>
@@ -178,7 +179,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             </div>
                             <br>
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <table id="tabla" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th id="th">Descripcion Actividad</th>
@@ -198,6 +199,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                         <?php } ?>
                                     </tbody>
                                 </table>
+                                <br><br><br>
                             </div>
                     <?php }
                     } ?>
@@ -239,13 +241,21 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
     });
 </script>
-<!-- <script>
-function ventanaNueva(){
-   window.open('informe_actividades.php');
-}
-</script> -->
 
 </html>

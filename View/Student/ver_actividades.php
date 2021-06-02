@@ -141,12 +141,10 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
-
-
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <h1 class="h3 mb-0 text-gray-800">SubActividades</h1>
+                                <h2 id="h2"">SubActividades</h2>
                                 <br>
                             </div>
                         </div>
@@ -157,264 +155,260 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         $info_actividad = buscarActividaPlanTrabajo($_GET['id_actividad']);
                         if ($info_actividad == NULL || $info_actividad['id_estudiante'] = !$_SESSION['id_estudiante']) {
                     ?>
-                            <h2 style="color: #D61117; text-align: center;">Esta Actividad NO Está Visible</h2>
-                        <?php
+                            <h2 style=" color: #D61117; text-align: center;">Esta Actividad NO Está Visible</h2>
+                            <?php
                         } else {
-                        ?>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva SubActividad</button>
-                                        <div style="display: inline-block;">
-                                            <center>
-                                                <form action="crear_informe_subactividades.php" method="post">
-                                                    <div>
-                                                        <button type="submit" id="submit" name="import" class="btn btn-primary">Exportar PDF</button>
-                                                        <input name="id_actividad" type="hidden" value="<?php echo $_GET['id_actividad']; ?>">
-                                                    </div>
-                                                </form>
-                                            </center>
-                                        </div>
-                                        <br><br>
-                                        <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
-                                        <b>
-                                            <h5>Total de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $info_actividad['numero_horas_actividad_plan_trabajo'] ?></h5>
-                                        </b>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Modal-->
-
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color:#D61117;">
-                                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar SubActividad</h3>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="col-form-label">Fecha de Realización:</label>
-                                                    <input type="date" class="form-control" name="fecha_realizacion" max="<?php echo date("Y-m-d"); ?>" id="fecha">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
-                                                    <input type="number" class="form-control" name="num_horas" id="horas">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="message-text" class="col-form-label">Descripcion:</label>
-                                                    <input type="text" class="form-control" name="descripcion_actividad" id="descripcion">
-                                                </div>
-                                                <input type="hidden" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad'] ?>">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col text-center">
-                                                            <button type="button" onclick="agregarActividad()" class="btn btn-primary">Agregar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Modal-->
-
-                            <!-- Data Table -->
-
-                            <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <td colspan="1">
-                                                <center><strong>Actividad:</strong></center>
-                                            </td>
-                                            <td colspan="5">
-                                                <center><strong><em><?php echo $info_actividad['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                    <thead>
-                                        <tr>
-                                            <th id="th">Fecha</th>
-                                            <th id="th">Descripción</th>
-                                            <th id="th">Número de Horas</th>
-                                            <th id="th">Estado</th>
-                                            <th id="th">Observaciones</th>
-                                            <th id="th">Opciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        require_once '../../Controller/Actividad/Actividad_Controller.php';
-                                        $lista_actividad = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
-                                        if (is_null($lista_actividad)) {
-                                        ?>
-                                            <td colspan="6" style="color: #D61117;">
-                                                <center><strong>NO POSEE SUBACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
-                                            </td>
-                                            <?php
-                                        } else {
-
-                                            foreach ($lista_actividad as $listado) {
-                                            ?>
-                                                <tr>
-                                                    <td id="td"><?php echo $listado['fecha_actividad'] ?></td>
-                                                    <td id="td"><?php echo $listado['descripcion_actividad'] ?></td>
-                                                    <td id="td"><?php echo $listado['horas_actividad'] ?></td>
-                                                    <?php
-                                                    if ($listado['estado_actividad'] == 'En Espera') {
-                                                    ?>
-                                                        <td id="td">
-                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-yellow?style=for-the-badge">
-                                                        </td>
-                                                    <?php
-                                                    } else if ($listado['estado_actividad'] == 'Aprobada') {
-                                                    ?>
-                                                        <td id="td">
-                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-green?style=for-the-badge">
-                                                        </td>
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <td id="td">
-                                                            <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-red?style=for-the-badge">
-                                                        </td>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                    <td id="td"><?php echo $listado['observaciones_actividad'] ?></td>
-                                                    <td id="td">
-                                                        <?php
-                                                        if ($listado['estado_actividad'] == 'En Espera') {
-                                                        ?>
-                                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                                            <br>
-                                                            <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
-                                                        <?php
-                                                        } else if ($listado['estado_actividad'] == 'Reprobada') {
-                                                        ?>
-                                                            <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <center>
-                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
-                                                            </center>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                </tr>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th id="th">Fecha</th>
-                                            <th id="th">Descripción</th>
-                                            <th id="th">Número de Horas</th>
-                                            <th id="th">Estado</th>
-                                            <th id="th">Observaciones</th>
-                                            <th id="th">Opciones</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                <br><br><br>
-                            </div>
-
-                        <?php }
-                    } else { ?>
-                        <h2 style="color: #D61117; text-align: center;">Informacion Erronea</h2>
-                    <?php } ?>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- inicio modal Actualizar Actividad -->
-
-
-            <div class="modal fade" id="modalActualizarActividad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#D61117;">
-                            <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar SubActividad</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
-
-
-
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Fecha:</label>
-                                    <input type="date" class="form-control fecha_act" max="<?php echo date("Y-m-d"); ?>" id="fecha_input">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
-                                    <input type="number" class="form-control numero_horas" name="num_horas" id="horas_input">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Descripcion:</label>
-                                    <input type="text" class="form-control descripcion_act" name="descripcion_actividad" id="descripcion_input">
-                                </div>
-
-                                <input type="hidden" class="form-control id_act" name="id_actividad" id="id_input">
-                                <input type="hidden" class="form-control id_act" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad']; ?>">
-
+                            ?>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <button type="button" onclick="actualizarActividad()" class="btn btn-primary">Actualizar</button>
+                                            <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
+                                            <h5 id="h2">Total de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $info_actividad['numero_horas_actividad_plan_trabajo'] ?></h5>
+                                            <br>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Nueva SubActividad</button>
+                                            <div style="display: inline-block;">
+                                                <center>
+                                                    <form action="crear_informe_subactividades.php" method="post">
+                                                        <div>
+                                                            <button type="submit" id="submit" name="import" class="btn btn-primary" style="background-color: #D61117; color: white;">Exportar PDF <i class="fas fa-file-pdf"></i></button>
+                                                            <input name="id_actividad" type="hidden" value="<?php echo $_GET['id_actividad']; ?>">
+                                                        </div>
+                                                    </form>
+                                                </center>
+                                            </div>
+                                            <br><br>
+                                            <br>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <!--Modal-->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color:#D61117;">
+                                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Agregar SubActividad</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="col-form-label">Fecha de Realización:</label>
+                                                        <input type="date" class="form-control" name="fecha_realizacion" max="<?php echo date("Y-m-d"); ?>" id="fecha">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
+                                                        <input type="number" class="form-control" name="num_horas" id="horas">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Descripcion:</label>
+                                                        <input type="text" class="form-control" name="descripcion_actividad" id="descripcion">
+                                                    </div>
+                                                    <input type="hidden" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad'] ?>">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col text-center">
+                                                                <button type="button" onclick="agregarActividad()" class="btn btn-primary">Agregar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Modal-->
+
+                                <!-- Data Table -->
+
+                                <div class="table-responsive">
+                                    <table id="tabla" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="1">
+                                                    <center><strong>Actividad:</strong></center>
+                                                </td>
+                                                <td colspan="5">
+                                                    <center><strong><em><?php echo $info_actividad['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th id="th">Fecha</th>
+                                                <th id="th">Descripción</th>
+                                                <th id="th">Número de Horas</th>
+                                                <th id="th">Estado</th>
+                                                <th id="th">Observaciones</th>
+                                                <th id="th">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require_once '../../Controller/Actividad/Actividad_Controller.php';
+                                            $lista_actividad = listarActividadesPorActividadPlanTrabajo($_GET['id_actividad']);
+                                            if (is_null($lista_actividad)) {
+                                            ?>
+                                                <td colspan="6" style="color: #D61117;">
+                                                    <center><strong>NO POSEE SUBACTIVIDADES REGISTRADAS EN EL SISTEMA</strong></center>
+                                                </td>
+                                                <?php
+                                            } else {
+
+                                                foreach ($lista_actividad as $listado) {
+                                                ?>
+                                                    <tr>
+                                                        <td id="td"><?php echo $listado['fecha_actividad'] ?></td>
+                                                        <td id="td"><?php echo $listado['descripcion_actividad'] ?></td>
+                                                        <td id="td"><?php echo $listado['horas_actividad'] ?></td>
+                                                        <?php
+                                                        if ($listado['estado_actividad'] == 'En Espera') {
+                                                        ?>
+                                                            <td id="td">
+                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-yellow?style=for-the-badge">
+                                                            </td>
+                                                        <?php
+                                                        } else if ($listado['estado_actividad'] == 'Aprobada') {
+                                                        ?>
+                                                            <td id="td">
+                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-green?style=for-the-badge">
+                                                            </td>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <td id="td">
+                                                                <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo $listado['estado_actividad'] ?>-red?style=for-the-badge">
+                                                            </td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <td id="td"><?php echo $listado['observaciones_actividad'] ?></td>
+                                                        <td id="td">
+                                                            <?php
+                                                            if ($listado['estado_actividad'] == 'En Espera') {
+                                                            ?>
+                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                                <br>
+                                                                <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
+                                                            <?php
+                                                            } else if ($listado['estado_actividad'] == 'Reprobada') {
+                                                            ?>
+                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <center>
+                                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">
+                                                                </center>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th id="th">Fecha</th>
+                                                <th id="th">Descripción</th>
+                                                <th id="th">Número de Horas</th>
+                                                <th id="th">Estado</th>
+                                                <th id="th">Observaciones</th>
+                                                <th id="th">Opciones</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <br><br><br>
+                                </div>
+
+                            <?php }
+                    } else { ?>
+                            <h2 style="color: #D61117; text-align: center;">Informacion Erronea</h2>
+                        <?php } ?>
+
+                            </div>
+
                         </div>
 
 
+
+                        <!-- inicio modal Actualizar Actividad -->
+
+
+                        <div class="modal fade" id="modalActualizarActividad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color:#D61117;">
+                                        <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Actualizar SubActividad</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="../../Controller/Actividad/Actividad_Controller.php" method="POST">
+
+
+
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Fecha:</label>
+                                                <input type="date" class="form-control fecha_act" max="<?php echo date("Y-m-d"); ?>" id="fecha_input">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Horas Dedicadas:</label>
+                                                <input type="number" class="form-control numero_horas" name="num_horas" id="horas_input">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Descripcion:</label>
+                                                <input type="text" class="form-control descripcion_act" name="descripcion_actividad" id="descripcion_input">
+                                            </div>
+
+                                            <input type="hidden" class="form-control id_act" name="id_actividad" id="id_input">
+                                            <input type="hidden" class="form-control id_act" name="id_actividad_plan_trabajo" id="id_actividad_plan_trabajo" value="<?php echo $_GET['id_actividad']; ?>">
+
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col text-center">
+                                                        <button type="button" onclick="actualizarActividad()" class="btn btn-primary">Actualizar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin modal -->
+                        <!-- End of Page Wrapper -->
+
+
+
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+
+                        <!-- Footer -->
+                        <footer>
+                            <div class="ufps-footer">
+                                <h3>Universidad Francisco de Paula Santander</h3>
+                                <p>Programa Ingeniería de Sistemas</p>
+                                <p>PractiSoft 2021</p>
+                                <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
+                            </div>
+                        </footer>
+                        <!-- End of Footer -->
                     </div>
+
                 </div>
-            </div>
-            <!-- fin modal -->
-            <!-- End of Page Wrapper -->
-
-
-
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
-
-            <!-- Footer -->
-            <footer>
-                <div class="ufps-footer">
-                    <h3>Universidad Francisco de Paula Santander</h3>
-                    <p>Programa Ingeniería de Sistemas</p>
-                    <p>PractiSoft 2021</p>
-                    <p>Desarrollado por: Andres Ariza(adac021298@gmail.com) - Diego Navas(dieg9928.dn@gmail.com) - Jorge Mojica(jorgemojica32@gmail.com)</p>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-        </div>
-
-    </div>
 
 </body>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
@@ -428,7 +422,20 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#tabla').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+        });
     });
 </script>
 <script>

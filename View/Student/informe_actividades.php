@@ -32,16 +32,16 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeActividades($id_estu
 <body>
 	<table border="1" align="center" cellspacing="0" cellpadding="5">
 		<tr align="center" bgcolor="#D61117">
-			<td colspan="2" style="color: white;"><b>ACTIVIDADES Y SUBACTIVIDADES <br>
+			<td colspan="3" style="color: white;"><b>ACTIVIDADES Y SUBACTIVIDADES <br>
 					PRACTICA EMPRESARIAL</b></td>
 		</tr>
 		<tr>
 			<td colspan="1"><b>EMPRESA: </b><?php echo $obj_actividad_model_encabezado['nombre_empresa']; ?></td>
-			<td colspan="1"><b>TUTOR EMPRESARIAL: </b><?php echo $obj_actividad_model_encabezado['nombre_tutor']; ?></td>
+			<td colspan="2"><b>TUTOR EMPRESARIAL: </b><?php echo $obj_actividad_model_encabezado['nombre_tutor']; ?></td>
 		</tr>
 		<tr>
 			<td colspan="1"><b>CODIGO: </b><?php echo $obj_actividad_model_encabezado['codigo_estudiante']; ?></td>
-			<td colspan="1"><b>ESTUDIANTE: </b><?php echo $obj_actividad_model_encabezado['nombre_estudiante']; ?></td>
+			<td colspan="2"><b>ESTUDIANTE: </b><?php echo $obj_actividad_model_encabezado['nombre_estudiante']; ?></td>
 		</tr>
 		<?php
 		foreach ($obj_actividad_model as $rowActividad) {
@@ -50,12 +50,13 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeActividades($id_estu
 			<tr>
 				<td colspan="1" style="text-align: center;"><b><?php echo $rowActividad['descripcion_actividad_plan_trabajo']; ?></b></td>
 				<td colspan="1" style="text-align: center;"><b>Horas aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($rowActividad['id_actividad_plan_trabajo']); ?> / <?php echo $rowActividad['numero_horas_actividad_plan_trabajo']; ?></b></td>
+				<td colspan="1" style="text-align: center;"><b>Estado</b></td>
 				<?php
 				$obj_subactividad_model = listarActividadesPorActividadPlanTrabajo($rowActividad['id_actividad_plan_trabajo']);
 				if ($obj_subactividad_model == NULL) {
 				?>
 			<tr>
-				<td colspan="2" style="text-align: center; color: #D61117;"><b>No tiene subactividades asociadas</b></td>
+				<td colspan="3" style="text-align: center; color: #D61117;"><b>No tiene subactividades asociadas</b></td>
 			</tr>
 			<?php
 				} else {
@@ -65,6 +66,7 @@ $obj_actividad_model_encabezado = generarEncabezadoInformeDeActividades($id_estu
 				<tr>
 					<td colspan="1" style="text-align: center;"><?php echo $rowSubactividad['descripcion_actividad']; ?></td>
 					<td colspan="1" style="text-align: center;"><?php echo $rowSubactividad['horas_actividad']; ?></td>
+					<td colspan="1" style="text-align: center;"><?php echo $rowSubactividad['estado_actividad']; ?></td>
 		<?php
 					}
 				}

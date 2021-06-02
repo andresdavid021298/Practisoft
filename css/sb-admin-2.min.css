@@ -11785,3 +11785,200 @@ footer {
     color: black;
     font-weight: bold;
 }
+
+
+
+
+
+
+.float-clear {
+    clear: both;
+}
+
+.float-left {
+    float: left;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+.product-item input[type="number"] {
+    padding: 5px;
+    border: #ccc 1px solid;
+    border-radius: 4px;
+    margin: 0px 10px;
+}
+
+.product-item input[type="checkbox"] {
+    margin: 10px;
+}
+
+.col-heading {
+    width: 220px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-right: 350px;
+}
+
+.col-heading2 {
+    width: 180px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#header {
+    padding: 12px 15px 15px;
+    background: #D61117;
+    height: 60px;
+    width: 620px;
+    color: #FFF;
+}
+
+.btn-action {
+    padding: 10px 0;
+}
+
+#productos {
+    width: 620px;
+}
+
+#sumatoria {
+    color: black;
+}
+
+#plan{
+    display: flex;
+    align-items: center;
+    width: 620px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 940px){
+    .float-clear {
+        clear: both;
+    }
+    
+    .float-left {
+        float: left;
+        margin-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .product-item input[type="number"] {
+        padding: 5px;
+        border: #ccc 1px solid;
+        border-radius: 4px;
+        margin: 0px 10px;
+    }
+    
+    .product-item input[type="checkbox"] {
+        margin: 10px;
+    }
+    
+    .col-heading {
+        width: 220px;
+        font-size: 16px;
+        font-weight: bold;
+        padding-right: 100px;
+    }
+    
+    .col-heading2 {
+        width: 180px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    #header {
+        padding: 12px 15px 15px;
+        background: #D61117;
+        height: 60px;
+        width: 510px;
+        color: #FFF;
+        float: left;
+    }
+    
+    .btn-action {
+        padding: 10px 0;
+    }
+    
+    #productos {
+        width: 620px;
+    }
+    
+    #sumatoria {
+        color: black;
+    }
+    
+    #plan{
+        display: flex;
+        align-items: center;
+        width: 510px;
+    }
+
+}
+
+@media only screen and (min-width: 400px) and (max-width: 767px){
+    .float-clear {
+        clear: both;
+    }
+    
+    .float-left {
+        float: left;
+        /* margin-left: 10px;
+        padding-right: 10px; */
+    }
+    
+    .product-item input[type="number"] {
+        padding: 5px;
+        border: #ccc 1px solid;
+        border-radius: 4px;
+        margin: 0px 10px;
+    }
+    
+    .product-item input[type="checkbox"] {
+        margin: 10px;
+    }
+    
+    .col-heading {
+        width: 120px;
+        font-size: 16px;
+        font-weight: bold;
+        padding-right: 10px;
+        float: left;
+        text-align: left;
+    }
+    
+    .col-heading2 {
+        width: 180px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    #header {
+        padding: 12px 15px 15px;
+        background: #D61117;
+        height: 60px;
+        width: 450px;
+        color: #FFF;
+        float: left;
+    }
+    
+    .btn-action {
+        padding: 10px 0;
+    }
+    
+    #productos {
+        width: 620px;
+    }
+    
+    #sumatoria {
+        color: black;
+    }
+    
+    #plan{
+        display: flex;
+        align-items: center;
+        width: 450px;
+    }
+    .plan_trabajo{
+        width: 130px;
+    }
+}

@@ -30,63 +30,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<style>
-    .float-clear {
-        clear: both;
-    }
-
-    .float-left {
-        float: left;
-        margin-left: 10px;
-    }
-
-    .product-item input[type="number"] {
-        padding: 5px;
-        border: #ccc 1px solid;
-        border-radius: 4px;
-        margin: 0px 10px;
-    }
-
-    .product-item input[type="checkbox"] {
-        margin: 10px;
-    }
-
-    #header div {
-        padding: 12px 15px 15px;
-        margin: 0px 0px;
-    }
-
-    .col-heading {
-        width: 220px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .col-heading2 {
-        width: 180px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    #header {
-        background: #D61117;
-        height: 60px;
-        width: 620px;
-        color: #FFF
-    }
-
-    .btn-action {
-        padding: 10px 0;
-    }
-
-    #productos {
-        width: 620px;
-    }
-
-    #sumatoria {
-        color: black;
-    }
-</style>
 
 <body id="page-top" onload="sumatoriaNumeroHorasActividadesPlanTrabajo();">
     <div>
@@ -201,9 +144,12 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <h2 id="h2">Plan de Trabajo</h2>
                     </center>
                     <br>
-                    <span>
-                        <p id="sumatoria">Sumatoria de horas: </p>
-                    </span>
+                    <div>
+                        <span style="text-align: center; font-weight: bold;">
+                            <h5 id="sumatoria">Sumatoria de horas: </h5>
+                        </span>
+                    </div>
+                    <br>
                     <!-- Valida si esta asignada a una empresa -->
                     <?php
                     require_once "../../Controller/Empresa/Empresa_Controller.php";
@@ -219,36 +165,39 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         ?>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-12 col-md-12">
-                                        <form name="frmProduct" method="post" action="">
-                                            <div id="outer">
-                                                <div id="header">
-                                                    <div class="float-left">&nbsp; Nro.</div>
-                                                    <div class="float-left col-heading"> Descripcion</div>
-                                                    <div class="float-left col-heading2">Numero de Horas</div>
-                                                </div>
-                                                <div id="productos">
-                                                    <div class="lista-producto float-clear" style="clear:both;">
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item">
-                                                                <div class="float-left"><input type="checkbox" name="item_index[]" /></div>
-                                                                <div class="float-left"><textarea class="form-control plan_trabajo" name="pro_nombre[]" cols="29"></textarea></div>
-                                                                <div class="float-left"><input class="form-control plan_trabajo numero_horas" type="number" max="320" min="0" name="pro_precio[]" /></div>
-                                                            </li>
-                                                        </ul>
+                                    <div class="col">
+                                        <center>
+                                            <form name="frmProduct" method="post" action="">
+                                                <div id="outer">
+                                                    <div id="header">
+                                                        <div class="float-left">N°</div>
+                                                        <div class="float-left col-heading">Descripción</div>
+                                                        <div class="float-left col-heading2">Número de Horas</div>
+                                                    </div>
+                                                    <div id="productos">
+                                                        <div class="lista-producto float-clear" style="clear:both;">
+                                                            <ul class="list-group">
+                                                                <li id="plan" class="list-group-item">
+                                                                    <div class="float-left"><input type="checkbox" name="item_index[]" /></div>
+                                                                    <div class="float-left"><textarea class="form-control plan_trabajo" name="pro_nombre[]" cols="40" rows="2"></textarea></div>
+                                                                    <div class="float-left"><input class="form-control plan_trabajo numero_horas" type="number" style="height: 60px;" max="320" min="0" name="pro_precio[]" /></div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <p style="color:black">* Seleccione el check de los campos que desea borrar</p>
+                                                    <div class="btn-action float-clear">
+                                                        <input class="btn btn-success" type="button" name="agregar_registros" value="Agregar Mas" onclick="AgregarMas();" />
+                                                        <input class="btn" style="background-color: #D61117; color: white;" type="button" name="borrar_registros" value="Borrar Campos(*)" onclick="BorrarRegistro();" />
+                                                    </div>
+                                                    <div style="position: relative;">
+                                                        <input class="btn btn-primary" name="guardar" value="Guardar Plan de Trabajo" onclick="agregarPlanTrabajo(<?php echo $_SESSION['id_estudiante']; ?>);" />
+                                                        <br><br>
                                                     </div>
                                                 </div>
-                                                <div class="btn-action float-clear">
-                                                    <input class="btn btn-success" type="button" name="agregar_registros" value="Agregar Mas" onclick="AgregarMas();" />
-                                                    <input class="btn btn-danger" type="button" name="borrar_registros" value="Borrar Campos(*)" onclick="BorrarRegistro();" />
-                                                </div>
-                                                <p style="color:black">* Selecciona el check de los campos que desea borrar</p>
-                                                <div style="position: relative;">
-                                                    <input class="btn btn-primary" name="guardar" value="Guardar Plan de Trabajo" onclick="agregarPlanTrabajo(<?php echo $_SESSION['id_estudiante']; ?>);" />
-                                                    <br><br>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </center>
                                     </div>
                                 </div>
                             </div>
@@ -257,38 +206,41 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             <br>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-12 col-md-12">
-                                        <form name="frmProduct" method="post" action="">
-                                            <div id="outer">
-                                                <div id="header">
-                                                    <div class="float-left">&nbsp; Nro.</div>
-                                                    <div class="float-left col-heading"> Descripcion</div>
-                                                    <div class="float-left col-heading2">Numero de Horas</div>
+                                    <div class="col">
+                                        <center>
+                                            <form name="frmProduct" method="post" action="">
+                                                <div id="outer" class="table-responsive">
+                                                    <div id="header">
+                                                        <div class="float-left">N°</div>
+                                                        <div class="float-left col-heading"> Descripción</div>
+                                                        <div class="float-left col-heading2">Número de Horas</div>
+                                                    </div>
+                                                    <div id="productos">
+                                                        <?php foreach ($lista_actividades as $actividad) { ?>
+                                                            <div class="lista-producto float-clear" style="clear:both;">
+                                                                <ul class="list-group">
+                                                                    <li id="plan" class="list-group-item">
+                                                                        <div class="float-left"><input type="checkbox" name="item_index[]" /></div>
+                                                                        <div class="float-left"><textarea class="form-control plan_trabajo" name="pro_nombre[]" cols="40" rows="2"><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></textarea></div>
+                                                                        <div class="float-left"><input class="form-control plan_trabajo numero_horas" type="number" max="320" min="0" style="height: 60px;" name="pro_precio[]" value="<?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?>" /></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <br>
+                                                    <div class="btn-action float-clear">
+                                                        <p style="color:black">* Seleccione el check de los campos que desea borrar</p>
+                                                        <input class="btn btn-success" type="button" name="agregar_registros" value="Agregar Mas" onclick="AgregarMas();" />
+                                                        <input class="btn btn-danger" style="background-color: #D61117; color: white;" type="button" name="borrar_registros" value="Borrar Campos(*)" onclick="BorrarRegistro();" />
+                                                    </div>
+                                                    <div style="position: relative;">
+                                                        <input class="btn btn-primary" type="button" name="guardar" onclick="actualizarPlanTrabajo(<?php echo $_SESSION['id_estudiante'] ?>)" value="Actualizar Plan de Trabajo" />
+                                                        <br><br>
+                                                    </div>
                                                 </div>
-                                                <div id="productos">
-                                                    <?php foreach ($lista_actividades as $actividad) { ?>
-                                                        <div class="lista-producto float-clear" style="clear:both;">
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item">
-                                                                    <div class="float-left"><input type="checkbox" name="item_index[]" /></div>
-                                                                    <div class="float-left"><textarea class="form-control plan_trabajo" name="pro_nombre[]" cols="29"><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></textarea></div>
-                                                                    <div class="float-left"><input class="form-control plan_trabajo numero_horas" type="number" name="pro_precio[]" value="<?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?>" /></div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-                                                <div class="btn-action float-clear">
-                                                    <p style="color:black">* Selecciona el check de los campos que desea borrar</p>
-                                                    <input class="btn btn-success" type="button" name="agregar_registros" value="Agregar Mas" onclick="AgregarMas();" />
-                                                    <input class="btn btn-danger" type="button" name="borrar_registros" value="Borrar Campos(*)" onclick="BorrarRegistro();" />
-                                                </div>
-                                                <div style="position: relative;">
-                                                    <input class="btn btn-primary" type="button" name="guardar" onclick="actualizarPlanTrabajo(<?php echo $_SESSION['id_estudiante'] ?>)" value="Actualizar Plan de Trabajo" />
-                                                    <br><br>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </center>
                                     </div>
                                 </div>
                             </div>
@@ -350,7 +302,7 @@ if (!is_null($lista)) {
         <script>
             swal.fire({
                 icon: "info",
-                title: "Su plan de trabajo ya esta aprobado"
+                title: "Su plan de trabajo ya está aprobado"
             }).then(() => {
                 window.location = "index_student.php";
             })
