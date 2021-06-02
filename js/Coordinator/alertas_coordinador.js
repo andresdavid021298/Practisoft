@@ -80,7 +80,14 @@ function subirEstudiantes() {
 function agregarEstudianteIndividual() {
     var correo_estudiante = document.getElementById('correo_estudiante').value;
     var input_id_grupo = document.getElementById('input_id_grupo').value;
-    $.ajax({
+    console.log(correo_estudiante);
+    if (correo_estudiante == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Hay campos vacios"
+        })
+    } else {
+        $.ajax({
             url: "../../Controller/Estudiante/Estudiante_Controller.php",
             type: "POST",
             data: {
@@ -98,6 +105,8 @@ function agregarEstudianteIndividual() {
                 window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
             })
         })
+    }
+    
 }
 
 function eliminarEstudiante(id_estudiante) {
