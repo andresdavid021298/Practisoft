@@ -30,6 +30,30 @@ if ($_SESSION['id_empresa'] == NULL) {
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+<style>
+    label[for=" input_archivo_documentos"] {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #106BA0;
+        display: inline-block;
+        transition: all .5s;
+        cursor: pointer;
+        padding: 15px 40px !important;
+        text-transform: uppercase;
+        width: fit-content;
+        text-align: center;
+    }
+
+    input[type=”file”]#input_archivo_documentos {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+</style>
 
 <body id="page-top">
     <div>
@@ -160,11 +184,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </center>
                 <br>
                 <div class="container-fluid">
-
-
-
-
-
                     <div class="row">
                         <div class="col text-center">
                             <?php
@@ -193,15 +212,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <img src="https://cdn.pixabay.com/photo/2017/06/10/07/24/note-2389227_960_720.png" style="width: 200px; height: 200px;" /><br>
 
                             <div class="fileUpload btn">
-                                <label>Archivo</label>
+                                <label for="input_archivo_documentos">Archivo</label>
                                 <input id="input_archivo_documentos" type="file" name="input_archivo_documentos" />
                             </div>
 
                             <button onclick="subirDocumento();" id="btn_subir_doc" type="button" value="Enviar" name="btn_subir_doc" class="btn btn-primary">Cargar</button>
                             <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                             <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
-
-
                             <br><br>
                             <b>
                                 <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
