@@ -164,90 +164,92 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     </div>
                     <br><br>
                     <div class="container-fluid">
-                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th id="th">Nombre</th>
-                                    <th id="th">Representante Legal</th>
-                                    <th id="th">Dirección</th>
-                                    <th id="th">Celular</th>
-                                    <th id="th">Correo</th>
-                                    <th id="th">Sector</th>
-                                    <th id="th">Actividad Económica</th>
-                                    <th id="th">Documentación</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                require_once '../../Controller/Empresa/Empresa_Controller.php';
-                                $lista_empresas = listarTodasLasEmpresas();
-                                if (is_null($lista_empresas)) {
-                                ?><tr>
-                                        <td colspan="8" style="color: #D61117;">
-                                            <center><strong>NO HAY EMPRESAS REGISTRADAS EN EL SISTEMA</strong></center>
-                                        </td>
+                        <div class="table-responsive">
+                            <table id="tabla" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Representante Legal</th>
+                                        <th id="th">Dirección</th>
+                                        <th id="th">Celular</th>
+                                        <th id="th">Correo</th>
+                                        <th id="th">Sector</th>
+                                        <th id="th">Actividad Económica</th>
+                                        <th id="th">Documentación</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     <?php
-                                } else {
-                                    foreach ($lista_empresas as $empresa) {
-                                    ?>
-                                        <tr>
-                                            <td id="td">
-                                                <?php echo $empresa['nombre_empresa']; ?>
+                                    require_once '../../Controller/Empresa/Empresa_Controller.php';
+                                    $lista_empresas = listarTodasLasEmpresas();
+                                    if (is_null($lista_empresas)) {
+                                    ?><tr>
+                                            <td colspan="8" style="color: #D61117;">
+                                                <center><strong>NO HAY EMPRESAS REGISTRADAS EN EL SISTEMA</strong></center>
                                             </td>
-                                            <td id="td">
-                                                <?php echo $empresa['representante_legal']; ?>
-                                            </td>
-                                            <td id="td">
-                                                <?php echo $empresa['direccion_empresa']; ?>
-                                            </td>
-                                            <td id="td">
-                                                <?php echo $empresa['celular_empresa']; ?>
-                                            </td>
-                                            <td id="td">
-                                                <?php echo $empresa['correo_empresa']; ?>
-                                            </td>
-                                            <td id="td">
-                                                <?php echo $empresa['sector_empresa']; ?>
-                                            </td>
-                                            <td id="td">
-                                                <?php echo $empresa['actividad_empresa']; ?>
-                                            </td>
-
-                                            <?php
-                                            require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
-                                            $lista_documentos = listarDocumentosPorEmpresa($empresa['id_empresa']);
-                                            if (is_null($lista_documentos)) {
-                                            ?>
-                                                <td id="td">
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge">
-                                                </td>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <td id="td">
-                                                    <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
-                                                </td>
-                                            <?php
-                                            }
-                                            ?>
                                         </tr>
-                                <?php }
-                                } ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th id="th">Nombre</th>
-                                    <th id="th">Representante Legal</th>
-                                    <th id="th">Dirección</th>
-                                    <th id="th">Celular</th>
-                                    <th id="th">Correo</th>
-                                    <th id="th">Sector</th>
-                                    <th id="th">Actividad Económica</th>
-                                    <th id="th">Documentación</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                        <?php
+                                    } else {
+                                        foreach ($lista_empresas as $empresa) {
+                                        ?>
+                                            <tr>
+                                                <td id="td">
+                                                    <?php echo $empresa['nombre_empresa']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['representante_legal']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['direccion_empresa']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['celular_empresa']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['correo_empresa']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['sector_empresa']; ?>
+                                                </td>
+                                                <td id="td">
+                                                    <?php echo $empresa['actividad_empresa']; ?>
+                                                </td>
+
+                                                <?php
+                                                require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                                                $lista_documentos = listarDocumentosPorEmpresa($empresa['id_empresa']);
+                                                if (is_null($lista_documentos)) {
+                                                ?>
+                                                    <td id="td">
+                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge">
+                                                    </td>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <td id="td">
+                                                        <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
+                                                    </td>
+                                                <?php
+                                                }
+                                                ?>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Representante Legal</th>
+                                        <th id="th">Dirección</th>
+                                        <th id="th">Celular</th>
+                                        <th id="th">Correo</th>
+                                        <th id="th">Sector</th>
+                                        <th id="th">Actividad Económica</th>
+                                        <th id="th">Documentación</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                         <br><br><br>
                     </div>
                 </div>
@@ -284,18 +286,19 @@ if ($_SESSION['id_coordinador'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>

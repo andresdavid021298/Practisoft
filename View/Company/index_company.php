@@ -321,7 +321,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     Documentos
                                                 </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    <?php if (is_null($datos_convenio['nombre_archivo'])) {
+                                                    <?php if (is_null($datos_convenio)) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>

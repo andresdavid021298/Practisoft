@@ -9,16 +9,16 @@ function agregarCoordinador() {
         })
     } else {
         $.ajax({
-            url: "../../Controller/Coordinador/Coodinador_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "agregar_coordinador",
-                "nombre_coordinador": nombre_coordinador,
-                "correo_coordinador": correo_coordinador
-            },
-            dataType: "JSON"
-        })
-            .done(function (response) {
+                url: "../../Controller/Coordinador/Coodinador_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "agregar_coordinador",
+                    "nombre_coordinador": nombre_coordinador,
+                    "correo_coordinador": correo_coordinador
+                },
+                dataType: "JSON"
+            })
+            .done(function(response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -37,17 +37,17 @@ function actualizarCoordinador() {
     correo = document.getElementById('correo_coordinador_act').value;
 
     $.ajax({
-        url: "../../Controller/Coordinador/Coodinador_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "actualizar_coordinador",
-            "id_coordinador": id,
-            "nombre_coordinador": nombre,
-            "correo_coordinador": correo
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Coordinador/Coodinador_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_coordinador",
+                "id_coordinador": id,
+                "nombre_coordinador": nombre,
+                "correo_coordinador": correo
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -59,23 +59,33 @@ function actualizarCoordinador() {
 
 // Funcion que permite mostrar la alerta al momento de eliminar un coordinador
 function eliminarCoordinador(id_coordinador) {
-    $.ajax({
-        url: "../../Controller/Coordinador/Coodinador_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "eliminar_coordinador",
-            "id_coordinador": id_coordinador
-        },
-        dataType: "JSON"
+    swal.fire({
+        title: '¿Esta seguro de eliminar este coordinador?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: "../../Controller/Coordinador/Coodinador_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "eliminar_coordinador",
+                        "id_coordinador": id_coordinador
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "agregar_coordinador.php";
+                    })
+                })
+        }
     })
-        .done(function (response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = "agregar_coordinador.php";
-            })
-        })
 }
 
 // Funcion que permite mostrar una alerta al momento de crear un grupo
@@ -84,16 +94,16 @@ function crearGrupo() {
     id_coordinador = document.getElementById('id_coordinador_option').value;
 
     $.ajax({
-        url: "../../Controller/Grupo/Grupo_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "crear_grupo",
-            "nombre_grupo": nombre_grupo,
-            "id_coordinador": id_coordinador
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Grupo/Grupo_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "crear_grupo",
+                "nombre_grupo": nombre_grupo,
+                "id_coordinador": id_coordinador
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -105,23 +115,33 @@ function crearGrupo() {
 
 // Funcion que permite mostrar una alerta al momento de eliminar un grupo
 function eliminarGrupo(id_grupo) {
-    $.ajax({
-        url: "../../Controller/Grupo/Grupo_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "eliminar_grupo",
-            "id_grupo": id_grupo
-        },
-        dataType: "JSON"
+    swal.fire({
+        title: '¿Esta seguro de eliminar este grupo?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: "../../Controller/Grupo/Grupo_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "eliminar_grupo",
+                        "id_grupo": id_grupo
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = response.location;
+                    })
+                })
+        }
     })
-        .done(function (response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = response.location;
-            })
-        })
 }
 
 // Funcion que muestra una alerta cuando se actualiza el director
@@ -130,17 +150,17 @@ function editarDirector() {
     nombre_director = document.getElementById('nombre_director').value;
     correo_director = document.getElementById('correo_director').value;
     $.ajax({
-        url: "../../Controller/Director/Director_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "editar_director",
-            "id_director": id_director,
-            "nombre_director": nombre_director,
-            "correo_director": correo_director
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Director/Director_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "editar_director",
+                "id_director": id_director,
+                "nombre_director": nombre_director,
+                "correo_director": correo_director
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -161,21 +181,20 @@ function abrirSemestre() {
     var semestre = "";
     if (mes > 0 && mes < 7) {
         semestre = "I Semestre del " + anio;
-    }
-    else {
+    } else {
         semestre = "II Semestre del " + anio;
     }
 
     $.ajax({
-        url: "../../Controller/Semestre/Semestre_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "insertar_semestre",
-            "nombre_semestre": semestre
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/Semestre/Semestre_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "insertar_semestre",
+                "nombre_semestre": semestre
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -208,44 +227,34 @@ function finalizarSemestre() {
                     },
                     dataType: "JSON"
                 })
-                    .done(function (response) {
-                        swal.fire({
-                            icon: response.state,
-                            title: response.title
-                        }).then(() => {
-                            window.location = "semestre.php";
-                        })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "semestre.php";
                     })
+                })
             )
         }
     })
 }
 
 // Método para agregar un documento en documento_empresa
-function crearDocumento(){
+function crearDocumento() {
     var nombre_documento = document.getElementById('nombre_documento').value;
-    
-    // var final = "";
-    // var cont = 0;
-    // for (let index = 0; index < nombre_documento.length; index++) {
-        //console.log(nombre_documento.replace(' ', '_'));
-            
-            // final = final+nombre_documento.charAt(index);
-        // }
-        // console.log(nombre_documento.charAt());
-        
-    var formato_nombre = 'archivo_'+nombre_documento.replace(/ /g, '_');
-     
+    var formato_nombre = 'archivo_' + nombre_documento.replace(/ /g, '_');
+
     $.ajax({
-        url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "crear_documento_BD",
-            "nombre_documento": formato_nombre
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "crear_documento_BD",
+                "nombre_documento": formato_nombre
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -256,24 +265,22 @@ function crearDocumento(){
 }
 
 // Método para mostrar una alerta cuando se actualiza un documento de documento_empresa
-function actualizarDocumentoBD(){
+function actualizarDocumentoBD() {
     var nombre_documento_nuevo = document.getElementById('nombre_documento_act').value;
-    var nombre_documento_antiguo = document.getElementById('nombre_documento_antiguo').value;     
-    var formato_nombre_nuevo = 'archivo_'+nombre_documento_nuevo.replace(/ /g, '_');
-    // console.log(formato_nombre_nuevo);
-    // console.log(nombre_documento_antiguo);
-     
+    var nombre_documento_antiguo = document.getElementById('nombre_documento_antiguo').value;
+    var formato_nombre_nuevo = 'archivo_' + nombre_documento_nuevo.replace(/ /g, '_');
+
     $.ajax({
-        url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
-        type: "POST",
-        data: {
-            "accion": "actualizar_documento_BD",
-            "nombre_documento_nuevo": formato_nombre_nuevo,
-            "nombre_documento_antiguo": nombre_documento_antiguo
-        },
-        dataType: "JSON"
-    })
-        .done(function (response) {
+            url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_documento_BD",
+                "nombre_documento_nuevo": formato_nombre_nuevo,
+                "nombre_documento_antiguo": nombre_documento_antiguo
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -284,7 +291,7 @@ function actualizarDocumentoBD(){
 }
 
 // Método para mostrar una alerta cuando se elimina un documento de documento_empresa
-function eliminarDocumentoBD(nombre){
+function eliminarDocumentoBD(nombre) {
     Swal.fire({
         title: '¿Está seguro que desea borrar este documento?',
         text: "Esta acción es irreversible y conlleva la eliminación de este documento del sistema",
@@ -306,14 +313,14 @@ function eliminarDocumentoBD(nombre){
                     },
                     dataType: "JSON"
                 })
-                    .done(function (response) {
-                        swal.fire({
-                            icon: response.state,
-                            title: response.title
-                        }).then(() => {
-                            window.location = "gestionar_documentos_semestre.php";
-                        })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "gestionar_documentos_semestre.php";
                     })
+                })
             )
         }
     })

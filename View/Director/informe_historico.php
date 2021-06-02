@@ -1,11 +1,10 @@
-<!-- <?php
-        session_start();
-        $_SESSION['id_coordinador'] = 1;
-        if ($_SESSION['id_coordinador'] == NULL) {
+<?php
+session_start();
+if ($_SESSION['id_coordinador'] == NULL) {
 
-            header("Location: ../../index.php");
-        }
-        ?> -->
+    header("Location: ../../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +64,6 @@
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="agregar_coordinador.php"><i class="fas fa-user-cog"></i> Agregar Coordinador</a>
                         <a class="collapse-item" href="semestre.php"><i class="fas fa-folder-open"></i> Semestre </a>
-                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-chart-pie"></i> Informe Estadistico </a>
                     </div>
                 </div>
             </li>

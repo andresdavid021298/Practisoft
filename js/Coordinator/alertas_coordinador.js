@@ -80,7 +80,6 @@ function subirEstudiantes() {
 function agregarEstudianteIndividual() {
     var correo_estudiante = document.getElementById('correo_estudiante').value;
     var input_id_grupo = document.getElementById('input_id_grupo').value;
-    console.log(correo_estudiante);
     if (correo_estudiante == "") {
         swal.fire({
             icon: "warning",
@@ -88,46 +87,56 @@ function agregarEstudianteIndividual() {
         })
     } else {
         $.ajax({
-            url: "../../Controller/Estudiante/Estudiante_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "agregar_estudiante_individual",
-                "correo_estudiante": correo_estudiante,
-                "input_id_grupo": input_id_grupo
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+                url: "../../Controller/Estudiante/Estudiante_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "agregar_estudiante_individual",
+                    "correo_estudiante": correo_estudiante,
+                    "input_id_grupo": input_id_grupo
+                },
+                dataType: "JSON"
             })
-        })
+            .done(function(response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+                })
+            })
     }
-    
+
 }
 
 function eliminarEstudiante(id_estudiante) {
     var input_id_grupo = document.getElementById('input_id_grupo').value;
-    $.ajax({
-            url: "../../Controller/Estudiante/Estudiante_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "eliminar_estudiante",
-                "id_estudiante": id_estudiante
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
-            })
-        })
+    swal.fire({
+        title: '¿Esta seguro de eliminar este estudiante?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: "../../Controller/Estudiante/Estudiante_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "eliminar_estudiante",
+                        "id_estudiante": id_estudiante
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "ver_practicantes.php?id_grupo=" + input_id_grupo
+                    })
+                })
+        }
+    })
 }
 
 //Metodo para actualizar datos de coordinador

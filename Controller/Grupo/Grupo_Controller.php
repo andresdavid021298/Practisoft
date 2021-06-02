@@ -39,7 +39,7 @@ if(isset($_POST['accion'])){
         $obj_grupo_model = new GrupoModel();
         $rta = $obj_grupo_model->eliminarGrupo($id_grupo);
         if($rta == 0){
-            $response['title'] = "Ocurrio un error";
+            $response['title'] = "Error, el grupo ya posee estudiantes asignados";
             $response['state'] = "error";
             $response['location'] = "semestre.php";
         }

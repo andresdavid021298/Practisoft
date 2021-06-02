@@ -71,23 +71,33 @@ function actualizarActividad() {
 
 // Metodo que le muestra una alerta al estudiante al momento de eliminar una actividad
 function eliminarActividad(id_actividad, id_actividad_plan_trabajo) {
-    $.ajax({
-            url: "../../Controller/Actividad/Actividad_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "eliminar_actividad",
-                "id_actividad": id_actividad
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = "ver_actividades.php?id_actividad=" + id_actividad_plan_trabajo
-            })
-        })
+    swal.fire({
+        title: '¿Esta seguro de eliminar esta subactividad?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                    url: "../../Controller/Actividad/Actividad_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "eliminar_actividad",
+                        "id_actividad": id_actividad
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "ver_actividades.php?id_actividad=" + id_actividad_plan_trabajo
+                    })
+                })
+        }
+    })
 }
 
 // Metodo que permite mostrar una alerta al momento de actualizar su perfil 

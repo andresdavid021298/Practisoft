@@ -213,7 +213,14 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <center><?php echo $estudiante['celular_estudiante']; ?></center>
                                             </td>
                                             <td>
-                                                <center><?php echo $estudiante['nombre_tutor']; ?></center>
+                                                <?php
+                                                if (!is_null($estudiante['nombre_tutor'])) {
+                                                ?>
+                                                    <center><?php echo $estudiante['nombre_tutor']; ?></center>
+                                                <?php } else {
+                                                ?>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Tutor' ?>-gray?style=for-the-badge">
+                                                <?php }    ?>
                                             </td>
                                             <td>
                                                 <?php if ($estudiante['id_tutor'] == NULL) {

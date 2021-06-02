@@ -175,7 +175,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <table id="tabla" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-
                                         <td colspan="<?php echo count($listado_documentos) ?>">
                                             <center>
                                                 <b><?php echo $empresa[0]['nombre_empresa']; ?>
@@ -200,7 +199,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php
                                     require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
                                     $documentos_empresa = listarDocumentosPorEmpresa($_GET['id_empresa']);
@@ -227,7 +225,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                     </td>
                                                 <?php
                                                 } else {
-
                                                 ?>
                                                     <td>
                                                         <center>
@@ -248,7 +245,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 </td>
                                             <?php
                                             } else {
-
                                             ?>
                                                 <td>
                                                     <center>
@@ -306,18 +302,19 @@ if ($_SESSION['id_coordinador'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>
