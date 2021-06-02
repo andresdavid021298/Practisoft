@@ -118,15 +118,23 @@ if (isset($_POST['accion'])) {
         $response = array();
         $correo_estudiante = $_POST['correo_estudiante'];
         $id_grupo = $_POST['input_id_grupo'];
-        $obj_estudiante_model = new EstudianteModel();
-        $rta = $obj_estudiante_model->insertarEstudiante($correo_estudiante, $id_grupo);
-        if ($rta == 0) {
+        $extension = strrchr($correo_estudiante, "@");
+
+        if ($extension != "@ufps.edu.co") {
             $response['state'] = "error";
-            $response['title'] = "Ocurrio un error";
+            $response['title'] = "El correo debe ser institucional";
         } else {
-            $response['state'] = "success";
-            $response['title'] = "Estudiante agregado correctamente";
+            $obj_estudiante_model = new EstudianteModel();
+            $rta = $obj_estudiante_model->insertarEstudiante($correo_estudiante, $id_grupo);
+            if ($rta == 0) {
+                $response['state'] = "error";
+                $response['title'] = "Ocurrio un error";
+            } else {
+                $response['state'] = "success";
+                $response['title'] = "Estudiante agregado correctamente";
+            }
         }
+
         echo json_encode($response);
     }
 } else if (isset($_FILES['input_archivo']['name'])) {
