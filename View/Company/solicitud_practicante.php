@@ -354,11 +354,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <td id="td">
                                                 <?php if ($datos['estado_solicitud'] == 'En Espera') {
                                                 ?>
-                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud</button></center>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Cancelar Solicitud <i class="fas fa-times"></i></button></center>
                                                 <?php
                                                 } else if ($datos['estado_solicitud'] == 'Rechazada') {
                                                 ?>
-                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud</button></center>
+                                                    <center><button class="btn btn-danger" onclick="cancelarSolicitud(<?php echo $datos['id_solicitud']; ?>)"> Eliminar Solicitud <i class="fas fa-trash-alt"></i></button></center>
                                                 <?php
                                                 } else {
                                                 ?>

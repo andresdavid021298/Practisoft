@@ -227,7 +227,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                 } else {
                                                 ?>
                                                     <td id="td">
-                                                        <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
+                                                        <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion <i class="fas fa-eye"></i></a>
                                                     </td>
                                                 <?php
                                                 }

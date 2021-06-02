@@ -197,7 +197,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <center><?php echo $horas_estudiante; ?></center>
                                             </td>
                                             <td>
-                                                <center><a class="btn btn-primary" href="ver_actividades_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Detalles</a></center>
+                                                <center><a class="btn btn-primary" href="ver_actividades_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Detalles <i class="fas fa-info-circle"></i></a></center>
                                             </td>
                                         </tr>
                                 <?php }

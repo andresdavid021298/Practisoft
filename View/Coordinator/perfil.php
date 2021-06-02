@@ -168,12 +168,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 </div>
                             </div>
                             <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Correo">Correo</label></center>
+                            <center>
+                            <div class="form-group" style="justify-content: center;">
+                                <label for="input_correo" class="col-sm-2 col-form-label">Correo</label>
+                                <div class="col-sm-4">
                                     <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_coordinador['correo_coordinador']; ?>" disabled>
                                 </div>
                             </div>
+                            </center>
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group mx-sm-3 mb-2">

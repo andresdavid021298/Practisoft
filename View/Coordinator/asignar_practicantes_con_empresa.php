@@ -224,7 +224,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                         <input type="hidden" id="nombre_estudiante" value="<?php echo $estudiante['nombre_estudiante'] ?>">
 
                                                         <center><button class="btn btn-primary" onclick="vincularEstudianteConEmpresa(<?php echo $_GET['id_estudiante']; ?>,
-                                                        <?php echo $solicitud['id_empresa']; ?>, '<?php echo $solicitud['nombre_empresa']; ?>' ,'<?php echo $solicitud['funciones']; ?>',<?php echo $solicitud['id_solicitud']; ?>)">Vincular</button></center>
+                                                        <?php echo $solicitud['id_empresa']; ?>, '<?php echo $solicitud['nombre_empresa']; ?>' ,'<?php echo $solicitud['funciones']; ?>',<?php echo $solicitud['id_solicitud']; ?>)">Vincular <i class="fas fa-link"></i></button></center>
                                                     </td>
                                                 </tr>
                                         <?php }

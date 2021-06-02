@@ -219,7 +219,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     <center><?php echo $horas_estudiante; ?></center>
                                                 </td>
                                                 <td>
-                                                    <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades</a></center>
+                                                    <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades <i class="fas fa-eye"></i></a></center>
                                                 </td>
                                             </tr>
                                     <?php }

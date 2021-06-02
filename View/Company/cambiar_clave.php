@@ -154,12 +154,14 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <!-- End of Topbar -->
                 <center>
                     <h2 id="h2">Cambiar Clave</h2>
+                    <br>
+                    <img src="https://cdn.pixabay.com/photo/2014/04/02/10/15/padlock-303266_960_720.png" alt="Imagen Cambio de Contraseña" width="100px" height="100px">
                 </center>
-                <br><br><br>
+                <br><br>
                 <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">
                     <div class="container">
                         <div class="row" style="justify-content: center;">
-                            <div class="form-group mx-sm-3 mb-2" onkeyup="validarClavesEnPerfil();">
+                            <div class="form-group mx-sm-3 mb-2 col-4" onkeyup="validarClavesEnPerfil();">
                                 <center><label for="Contraseña">Nueva Contraseña</label></center>
                                 <label for="inputPassword2" class="sr-only">Password</label>
                                 <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">
@@ -169,7 +171,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         </div>
                         <br><br>
                         <div class="row" style="justify-content: center;">
-                            <div class="form-group mx-sm-3 mb-2" onkeyup="validarClavesEnPerfil();">
+                            <div class="form-group mx-sm-3 mb-2 col-4" onkeyup="validarClavesEnPerfil();">
                                 <center><label for="Contraseña">Repetir Nueva Contraseña</label></center>
                                 <label for="inputPassword2" class="sr-only">Password</label>
                                 <div data-toggle="tooltip" data-placement="right" title="La clave debe contener minimo 8 caracteres y al menos 1 numero">

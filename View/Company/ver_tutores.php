@@ -252,9 +252,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                             <td id="td"><?php echo $datos['celular_tutor'] ?></td>
                                             <td id="td">
 
-                                                <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" data-nombre="<?php echo $datos['nombre_tutor']; ?>" data-correo="<?php echo $datos['correo_tutor']; ?>" data-celular="<?php echo $datos['celular_tutor']; ?>" data-tutor="<?php echo $datos['id_tutor']; ?>">Actualizar</button></center><br>
+                                                <center style="margin-top: 15px;"> <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarTutor" data-nombre="<?php echo $datos['nombre_tutor']; ?>" data-correo="<?php echo $datos['correo_tutor']; ?>" data-celular="<?php echo $datos['celular_tutor']; ?>" data-tutor="<?php echo $datos['id_tutor']; ?>">Actualizar <i class="fas fa-sync-alt"></i></button></center><br>
 
-                                                <center><button class="btn btn-danger" onclick="eliminarTutor(<?php echo $datos['id_tutor']; ?>)"> Eliminar</button></center>
+                                                <center><button class="btn btn-danger" onclick="eliminarTutor(<?php echo $datos['id_tutor']; ?>)"> Eliminar <i class="fas fa-trash-alt"></i> </button></center>
 
                                             </td>
                                         </tr>

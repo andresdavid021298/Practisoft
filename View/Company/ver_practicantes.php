@@ -219,17 +219,17 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     <center><?php echo $estudiante['nombre_tutor']; ?></center>
                                                 <?php } else {
                                                 ?>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Tutor' ?>-gray?style=for-the-badge">
+                                                    <center><img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Tutor' ?>-gray?style=for-the-badge"></center>
                                                 <?php }    ?>
                                             </td>
                                             <td>
                                                 <?php if ($estudiante['id_tutor'] == NULL) {
                                                 ?>
-                                                    <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor</button></center>
+                                                    <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor <i class="fas fa-user-shield"></i></button></center>
 
                                                 <?php } else {
                                                 ?>
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Tutor Asignado' ?>-green?style=for-the-badge">
+                                                    <center><img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Tutor Asignado' ?>-green?style=for-the-badge"></center>
                                                 <?php } ?>
                                             </td>
                                         </tr>

@@ -213,7 +213,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                                     <td id="td"><?php echo $encuesta_estudiante['area_capacitacion']; ?></td>
                                                     <td id="td"><?php echo $encuesta_estudiante['area_servidores']; ?></td>
                                                     <td id="td"><?php echo $encuesta_estudiante['otro']; ?></td>
-                                                    <td id="td"><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo ?>">Asignar</a></td>
+                                                    <td id="td"><a class="btn btn-primary" href="asignar_practicantes_con_empresa.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>&id_grupo=<?php echo $grupo ?>">Asignar <i class="fas fa-check-square"></i></a></td>
                                             </tr>
                                 <?php }
                                             }

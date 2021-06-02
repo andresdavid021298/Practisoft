@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['id_coordinador'] == NULL) {
+if ($_SESSION['id_director'] == NULL) {
     header("Location: ../../index.php");
 }
 require_once '../../Controller/Empresa/Empresa_Controller.php';

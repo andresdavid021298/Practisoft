@@ -203,9 +203,9 @@ if ($_SESSION['id_director'] == NULL) {
                                             </td>
                                             <td id="td">
                                                 <center>
-                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarCoordinador" data-id="<?php echo $coordinador['id_coordinador']; ?>" data-nombre="<?php echo $coordinador['nombre_coordinador']; ?>" data-correo="<?php echo $coordinador['correo_coordinador']; ?>">Actualizar</button>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarCoordinador" data-id="<?php echo $coordinador['id_coordinador']; ?>" data-nombre="<?php echo $coordinador['nombre_coordinador']; ?>" data-correo="<?php echo $coordinador['correo_coordinador']; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
                                                 </center><br>
-                                                <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar</button></center>
+                                                <center><button class="btn btn-danger" onclick="eliminarCoordinador(<?php echo $coordinador['id_coordinador']; ?>);">Eliminar <i class="fas fa-trash-alt"></i></button></center>
                                             </td>
                                         </tr>
                                 <?php }

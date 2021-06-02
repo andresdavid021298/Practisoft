@@ -194,7 +194,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                             <tr>
                                                 <td id="td"><?php echo $actividad['descripcion_actividad_plan_trabajo']; ?></td>
                                                 <td id="td"><?php echo $actividad['numero_horas_actividad_plan_trabajo']; ?></td>
-                                                <td id="td"><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades</a></td>
+                                                <td id="td"><a class="btn btn-primary" href="ver_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver Subactividades <i class="fas fa-eye"></i></a></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

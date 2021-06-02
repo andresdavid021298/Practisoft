@@ -248,8 +248,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                     <td>
                                                         <?php
                                                         if ($actividad['estado_actividad'] == "En Espera") { ?>
-                                                            <center><button class="btn btn-success" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $_GET['id_actividad'] ?>)">Validar</button></center>
-                                                            <center style="margin-top: 15px;"><button class="btn btn-warning" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar</button></center>
+                                                            <center><button class="btn btn-primary" onclick="validarActividad(<?php echo $actividad['id_actividad'] ?>,<?php echo $_GET['id_actividad'] ?>)">Validar <i class="fas fa-check-square"></i></button></center>
+                                                            <center style="margin-top: 15px;"><button class="btn btn-danger" data-toggle="modal" data-target="#modalRechazarActividad" data-whatever="<?php echo $actividad['descripcion_actividad']; ?>" data-example="<?php echo $actividad['id_actividad']; ?>">Rechazar <i class="fas fa-trash-alt"></i></button></center>
                                                         <?php } else { ?>
                                                             <center>
                                                                 <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'No Disponible' ?>-gray?style=for-the-badge">

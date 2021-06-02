@@ -242,7 +242,7 @@ if ($_SESSION['id_director'] == NULL) {
                                                 <td><?php echo $datos['nombre_coordinador'] ?></td>
 
                                                 <td>
-                                                    <center><button class="btn btn-danger" onclick="eliminarGrupo(<?php echo $datos['id_grupo']; ?>)"> Eliminar</button></center>
+                                                    <center><button class="btn btn-danger" onclick="eliminarGrupo(<?php echo $datos['id_grupo']; ?>)"> Eliminar <i class="fas fa-trash-alt"></i></button></center>
                                                 </td>
                                             </tr>
                                         <?php

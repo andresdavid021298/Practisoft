@@ -231,10 +231,10 @@ if ($_SESSION['id_director'] == NULL) {
                                                     <center>
                                                         <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" 
                                                         data-nombre="<?php echo $resultado; ?>"
-                                                        data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar</button>
-                                                    </center><br>
-                                    
-                                                    <center><button class="btn btn-danger" onclick="eliminarDocumentoBD('<?php echo $cadena; ?>');">Eliminar</button></center>
+                                                        data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
+                                                    
+                                                        <button class="btn btn-danger" onclick="eliminarDocumentoBD('<?php echo $cadena; ?>');">Eliminar <i class="fas fa-trash-alt"></i></button>
+                                                    </center>
                                                 </td>
                                             <?php
                                             } else {

@@ -189,7 +189,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                                             <td id="td"><?php echo $lista['nombre_grupo'] ?></td>
                                             <td id="td">
-                                                <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Ver y Asignar</a>
+                                                <a class="btn btn-primary" href="asignar_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Ver y Asignar <i class="fas fa-eye"></i></a>
                                             </td>
                                         </tr>
                                 <?php

@@ -249,13 +249,13 @@ if ($_SESSION['id_director'] == NULL) {
                                             if (is_null($lista_documentos)) {
                                             ?>
                                                 <td id="td">
-                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge">
+                                                    <center><img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documentos' ?>-gray?style=for-the-badge"></center>
                                                 </td>
                                             <?php
                                             } else {
                                             ?>
                                                 <td id="td">
-                                                    <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
+                                                    <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $empresa['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion <i class="fas fa-eye"></i></a>
                                                 </td>
                                             <?php } ?>
                                         </tr>

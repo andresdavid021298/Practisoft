@@ -214,16 +214,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <td id="td"><?php echo $solicitud['numero_practicantes'] ?></td>
                                             <td id="td"><?php echo $solicitud['funciones'] ?></td>
                                             <td id="td">
-                                                <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $solicitud['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
+                                                <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $solicitud['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion <i class="fas fa-eye"></i></a>
                                             </td>
                                             <td id="td">
 
                                                 <?php if ($solicitud['estado_solicitud'] == 'En Espera') {
 
                                                 ?>
-                                                    <center style="margin-top: 15px;"> <button class="btn btn-primary" onclick="validarSolicitud(<?php echo $solicitud['id_solicitud'] ?>)">Validar</button></center><br>
+                                                    <center style="margin-top: 15px;"> <button class="btn btn-primary" onclick="validarSolicitud(<?php echo $solicitud['id_solicitud'] ?>)">Validar <i class="fas fa-check-square"></i></button></center><br>
 
-                                                    <center><button class="btn btn-danger" data-toggle="modal" data-target="#modalRechazarSolicitud" data-solicitud="<?php echo $solicitud['id_solicitud'] ?>" data-empresa="<?php echo $solicitud['nombre_empresa'] ?>"> Invalidar</button></center>
+                                                    <center><button class="btn btn-danger" data-toggle="modal" data-target="#modalRechazarSolicitud" data-solicitud="<?php echo $solicitud['id_solicitud'] ?>" data-empresa="<?php echo $solicitud['nombre_empresa'] ?>"> Invalidar <i class="fas fa-times"></i></button></center>
                                                 <?php
                                                 } else if ($solicitud['estado_solicitud'] == 'Aprobada') {
                                                 ?>

@@ -194,7 +194,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <center><?php echo $estudiante['correo_estudiante']; ?></center>
                                             </td>
                                             <td>
-                                                <center><a class="btn btn-primary" href="ver_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver</a></center>
+                                                <center><a class="btn btn-primary" href="ver_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver <i class="fas fa-eye"></i></a></center>
                                             </td>
                                         </tr>
                                 <?php }

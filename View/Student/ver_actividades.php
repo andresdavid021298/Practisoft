@@ -289,13 +289,13 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                                             <?php
                                                             if ($listado['estado_actividad'] == 'En Espera') {
                                                             ?>
-                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar <i class="fas fa-sync-alt"></i></button></center>
                                                                 <br>
-                                                                <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar</button></center>
+                                                                <center><button class="btn btn-danger" onclick="eliminarActividad(<?php echo $listado['id_actividad'] ?>,<?php echo $_GET['id_actividad']; ?>)">Eliminar <i class="fas fa-trash-alt"></i></button></center>
                                                             <?php
                                                             } else if ($listado['estado_actividad'] == 'Reprobada') {
                                                             ?>
-                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar</button></center>
+                                                                <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarActividad" data-fecha="<?php echo $listado['fecha_actividad'] ?>" data-horas="<?php echo $listado['horas_actividad'] ?>" data-descripcion="<?php echo $listado['descripcion_actividad'] ?>" data-actividad="<?php echo $listado['id_actividad'] ?>">Actualizar <i class="fas fa-sync-alt"></i></button></center>
                                                             <?php
                                                             } else {
                                                             ?>

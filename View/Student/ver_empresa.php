@@ -161,17 +161,19 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                 ?>
                     <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
-
+                        <center>
+                            <img src="../../img/img_company.jpg" style="width: 150px; height: 150px;" /><br>
+                        </center>
                         <div class="container">
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group mx-sm-3 mb-2 col-4">
                                     <label for="Empresa">Nombre:</label>
                                     <input value="<?php echo $datos_empresa['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
                             </div>
 
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group mx-sm-3 mb-2 col-4">
                                     <label for="Tutor">Tutor:</label>
                                     <?php
                                     if ($datos_empresa['nombre_tutor'] == NULL) {
@@ -188,19 +190,19 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             </div>
 
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group mx-sm-3 mb-2 col-4">
                                     <label for="Direccion">Direccion:</label>
                                     <input value="<?php echo $datos_empresa['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
                             </div>
 
                             <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group mx-sm-3 mb-2 col-4">
                                     <label for="Empresa">Celular:</label>
                                     <input value="<?php echo $datos_empresa['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
                             </div>
-
+                            <br><br><br>
 
 
 
