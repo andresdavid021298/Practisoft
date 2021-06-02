@@ -176,8 +176,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta"><i class="fas fa-eye"></i></button>
                             </div>
+                            <br>
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered" style="width:100%;">
+                                <table id="tabla" class="table table-striped table-bordered" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>
@@ -324,8 +325,20 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
     });
 </script>
-
 </html>

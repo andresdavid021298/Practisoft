@@ -177,19 +177,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                     <!-- Inicio Tabla Solicitudes -->
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
                                     <th id="th">Empresa</th>
-                                    <!-- <th id="th">Fecha Solicitud</th> -->
+                                    <th id="th">Fecha Solicitud</th>
                                     <th id="th">N° de Practicantes</th>
                                     <th id="th">Areas</th>
-                                    <th id="th">Protocolos</th>
-                                    <th id="th">Convenio</th>
-                                    <th id="th">CC Representante</th>
-                                    <th id="th">Certificado Existencia</th>
-                                    <th id="th">RUT</th>
+                                    <th id="th">Documentos</th>
                                     <th id="th">Opciones</th>
                                 </tr>
                             </thead>
@@ -214,77 +210,12 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <tr>
 
                                             <td id="td"><?php echo $solicitud['nombre_empresa'] ?></td>
-                                            <!-- <td id="td"><?php echo $solicitud['fecha_solicitud'] ?></td> -->
+                                            <td id="td"><?php echo $solicitud['fecha_solicitud'] ?></td>
                                             <td id="td"><?php echo $solicitud['numero_practicantes'] ?></td>
                                             <td id="td"><?php echo $solicitud['funciones'] ?></td>
                                             <td id="td">
-                                                <?php
-                                                $protocolos = mostrarDatosProtocolos($solicitud['id_empresa']);
-                                                if ($protocolos == true) {
-                                                    if ($protocolos['archivo_protocolos_bio'] != NULL) {
-                                                ?>
-                                                        <center><a target="_blank" href="../../Documentos/ProtocolosBioseguridad/<?php echo $protocolos['archivo_protocolos_bio']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
+                                                <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $solicitud['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion</a>
                                             </td>
-                                            <td id="td">
-                                                <?php
-                                                $empresa = mostrarConvenio($solicitud['id_empresa']);
-                                                if ($empresa == true) {
-                                                    if ($empresa['nombre_archivo'] != NULL) {
-                                                ?>
-                                                        <center><a target="_blank" href="../../Documentos/Convenios/<?php echo $empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
-
-                                            </td>
-                                            <td id="td">
-
-                                                <?php
-                                                $representante = mostrarDatosRepresentante($solicitud['id_empresa']);
-                                                if ($representante == true) {
-                                                    if ($representante['archivo_cc_representante'] != NULL) {
-                                                ?>
-                                                        <center><a target="_blank" href="../../Documentos/CedulaRepresentante/<?php echo $representante['archivo_cc_representante']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
-                                            <td id="td">
-
-                                                <?php
-                                                $certificado = mostrarDatosCertificado($solicitud['id_empresa']);
-                                                if ($certificado == true) {
-                                                    if ($certificado['archivo_certificado_existencia'] != NULL) {
-                                                ?>
-                                                        <center><a target="_blank" href="../../Documentos/CertificadoExistencia/<?php echo $certificado['archivo_certificado_existencia']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
-
-                                            <td id="td">
-                                                <?php
-                                                $rut = mostrarDatosRUT($solicitud['id_empresa']);
-                                                if ($rut == true) {
-                                                    if ($rut['archivo_rut'] != NULL) {
-                                                ?>
-                                                        <center><a target="_blank" href="../../Documentos/RUT/<?php echo $rut['archivo_rut']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a></center>
-
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
-
                                             <td id="td">
 
                                                 <?php if ($solicitud['estado_solicitud'] == 'En Espera') {
@@ -314,14 +245,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <tfoot>
                                 <tr>
                                     <th id="th">Empresa</th>
-                                    <!-- <th id="th">Fecha Solicitud</th> -->
+                                    <th id="th">Fecha Solicitud</th>
                                     <th id="th">N° de Practicantes</th>
                                     <th id="th">Funciones</th>
-                                    <th id="th">Protocolos</th>
-                                    <th id="th">Convenio</th>
-                                    <th id="th">CC Representante</th>
-                                    <th id="th">Certificado Existencia</th>
-                                    <th id="th">RUT</th>
+                                    <th id="th">Documentos</th>
                                     <th id="th">Opciones</th>
                                 </tr>
                             </tfoot>
@@ -418,17 +345,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/eventos.js"></script>
 <script src="../../js/Coordinator/alertas_coordinador.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 <script>
     $('#modalRechazarSolicitud').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
@@ -439,5 +359,22 @@ if ($_SESSION['id_coordinador'] == NULL) {
         modal.find('.nombre_empresa_coo').val(nombre_empresa)
     })
 </script>
-
+<script>
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
+    });
+</script>
 </html>

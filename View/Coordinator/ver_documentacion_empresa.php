@@ -148,9 +148,6 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-                <div style="padding-left: 10px;">
-                    <a class="btn btn-primary" href="ver_empresas.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
-                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
@@ -305,5 +302,22 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<script>
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
+    });
+</script>
 </html>

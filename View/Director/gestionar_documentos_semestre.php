@@ -196,7 +196,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                     <!-- Inicio Tabla Tutores -->
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
@@ -377,5 +377,22 @@ if ($_SESSION['id_director'] == NULL) {
         modal.find('.nombre_doc_antiguo').val(nombre_antiguo)
     })
 </script>
-
+<script>
+    $(document).ready(function() {
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
+    });
+</script>
 </html>

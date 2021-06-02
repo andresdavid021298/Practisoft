@@ -185,7 +185,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     </form>
                     <div>
                         <div style="text-align: center; display: block;">
-                            <a class="btn btn-primary" href="crear_informe_estudiantes.php?id_grupo=<?php echo $_GET['id_grupo']; ?>">Exportar PDF</a>
+                            <a style="background-color: #D61117; color: white;" class="btn" href="crear_informe_estudiantes.php?id_grupo=<?php echo $_GET['id_grupo']; ?>">Exportar PDF <i class="fas fa-file-pdf"></i></a>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agregar Estudiante</button>
                         </div>
                     </div>
@@ -230,7 +230,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     <!-- Inicio Tabla Solicitudes -->
 
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
@@ -324,8 +324,20 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#tabla').DataTable({
+            "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Sin Registros",
+            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+                "next" : "Siguiente",
+                "previous" : "Anterior"
+            }
+        }
+        });
     });
 </script>
-
 </html>
