@@ -1,11 +1,10 @@
-<!-- <?php
-        session_start();
-        $_SESSION['id_coordinador'] = 1;
-        if ($_SESSION['id_coordinador'] == NULL) {
+<?php
+session_start();
+if ($_SESSION['id_director'] == NULL) {
 
-            header("Location: ../../index.php");
-        }
-        ?> -->
+    header("Location: ../../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -46,10 +46,10 @@ function rechazarSolicitud() {
 
 //Método que permite mostrar alerta cuando se sube el listado de estudiantes al sistema
 function subirEstudiantes() {
-    var inputArchivo = document.getElementById('input_archivo').value;
+    var inputArchivo = document.getElementById('input_archivo_documentos').value;
     var input_id_grupo = document.getElementById('input_id_grupo').value;
     var fd = new FormData();
-    var files = $('#input_archivo')[0].files;
+    var files = $('#input_archivo_documentos')[0].files;
     if (inputArchivo == "") {
         swal.fire({
             icon: "warning",

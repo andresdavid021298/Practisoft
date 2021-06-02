@@ -30,30 +30,6 @@ if ($_SESSION['id_empresa'] == NULL) {
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<style>
-    label[for=" input_archivo_documentos"] {
-        font-size: 14px;
-        font-weight: 600;
-        color: #fff;
-        background-color: #106BA0;
-        display: inline-block;
-        transition: all .5s;
-        cursor: pointer;
-        padding: 15px 40px !important;
-        text-transform: uppercase;
-        width: fit-content;
-        text-align: center;
-    }
-
-    input[type=”file”]#input_archivo_documentos {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-</style>
 
 <body id="page-top">
     <div>
@@ -121,10 +97,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
                         <a class="collapse-item" href="documento_convenio.php"><i class="fas fa-file-alt"></i> Convenio</a>
-                        <a class="collapse-item" href="documento_protocolos.php"><i class="fas fa-biohazard"></i> Protocolos Bioseguridad</a>
-                        <a class="collapse-item" href="documento_certificado.php"><i class="fas fa-file-contract"></i> Certificado de Existencia</a>
-                        <a class="collapse-item" href="documento_representante.php"><i class="fas fa-id-card"></i> C.C Representante</a>
-                        <a class="collapse-item" href="documento_rut.php"><i class="fas fa-file-invoice"></i> RUT</a>
+                        <a class="collapse-item" href="gestionar_documentacion.php"><i class="fas fa-file-pdf"></i> Gestionar Documentos</a>
                     </div>
                 </div>
             </li>
@@ -211,10 +184,13 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                             <img src="https://cdn.pixabay.com/photo/2017/06/10/07/24/note-2389227_960_720.png" style="width: 200px; height: 200px;" /><br>
 
-                            <div class="fileUpload btn">
-                                <label for="input_archivo_documentos">Archivo</label>
-                                <input id="input_archivo_documentos" type="file" name="input_archivo_documentos" />
-                            </div>
+                            <label class="custom-file-upload">
+                                <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
+                                <i class="fas fa-upload"></i>
+                                Subir Archivo
+                            </label>
+                            <br>
+                            <label id="mensaje_label">El Archivo seleccionado es:</label>
 
                             <button onclick="subirDocumento();" id="btn_subir_doc" type="button" value="Enviar" name="btn_subir_doc" class="btn btn-primary">Cargar</button>
                             <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
@@ -345,6 +321,15 @@ if ($_SESSION['id_empresa'] == NULL) {
             }
         });
     });
+</script>
+
+<script>
+    function obtenerNombre() {
+        documento = document.getElementById('input_archivo_documentos').files[0];
+        nombre_documento = documento['name'];
+        label = document.getElementById("mensaje_label");
+        label.textContent = nombre_documento;
+    }
 </script>
 
 </html>

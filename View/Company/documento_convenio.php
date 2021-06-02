@@ -193,10 +193,17 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     }
                                 }
                                 ?>
-                                <div class="fileUpload btn">
+                                <label class="custom-file-upload">
+                                    <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
+                                    <i class="fas fa-upload"></i>
+                                    Subir Archivo
+                                </label>
+                                <br>
+                                <label id="mensaje_label">El Archivo seleccionado es:</label>
+                                <!-- <div class="fileUpload btn">
                                     <label>Archivo</label>
                                     <input id="input_archivo" type="file" name="input_archivo" />
-                                </div>
+                                </div> -->
                                 <button onclick="subirConvenio();" id="btn_subir_convenio" type="button" value="Enviar" name="btn_subir_convenio" class="btn btn-primary">Cargar</button>
                                 <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                                 <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
@@ -238,10 +245,16 @@ if ($_SESSION['id_empresa'] == NULL) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../../js/sb-admin-2.min.js"></script>
 <script src="../../js/Company/alertas_empresa.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+<script>
+    function obtenerNombre() {
+        documento = document.getElementById('input_archivo_documentos').files[0];
+        nombre_documento = documento['name'];
+        label = document.getElementById("mensaje_label");
+        label.textContent = nombre_documento;
+    }
+</script>
 
 </html>

@@ -146,7 +146,6 @@ if (isset($_POST['accion'])) {
     $archivo = $formato_nombre . $extension;
     $location = $_SERVER['DOCUMENT_ROOT'] . '/PractiSoft/Documentos/' . $archivo;
     $tipo_archivo = $_FILES['input_archivo']['type'];
-
     if ($tipo_archivo != "text/plain") {
         $response['title'] = "Solo se permiten archivos de texto plano (TXT)";
         $response['state'] = "warning";
@@ -156,8 +155,6 @@ if (isset($_POST['accion'])) {
         unlink($location);
         $obj_estudiante_model = new EstudianteModel();
         $result = NULL;
-
-
         foreach ($content as $correo) {
             $correo_estudiante = str_replace(',', '', $correo);
             $result = stristr($correo_estudiante, '@ufps.edu.co');

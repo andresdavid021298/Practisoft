@@ -171,13 +171,15 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     <strong>
                                         <p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p>
                                     </strong>
-                                    <div class="fileUpload btn">
-                                        <label for="inputArchivo">Seleccione su archivo</label>
-                                        <input type="file" class="form-control-file" name="input_archivo" id="input_archivo">
-                                        <input type="hidden" id="input_id_grupo" name="id_grupo" value="<?php echo $_GET['id_grupo']; ?>">
-                                        <br>
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="subirEstudiantes()">Subir</button>
-                                    </div>
+                                    <label class="custom-file-upload">
+                                        <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
+                                        <i class="fas fa-upload"></i>
+                                        Subir Archivo
+                                    </label>
+                                    <br>
+                                    <label id="mensaje_label">El Archivo seleccionado es:</label>
+                                    <br>
+                                    <button type="button" class="btn btn-primary" onclick="subirEstudiantes()">Subir</button>
                                 </div>
                             </div>
                         </div>
@@ -265,9 +267,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <td id="td"><?php echo $estudiante['celular_estudiante'] ?></td>
                                             <td id="td"><?php echo $estudiante['nombre_empresa'] ?></td>
                                             <td id="td">
-                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades</a></center><br>
+                                                <center><a class="btn btn-primary" href="ver_actividades_plan.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Ver Actividades <i class="fas fa-eye"></i></a></center><br>
 
-                                                <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Eliminar Estudiante</button></center>
+                                                <center><button class="btn btn-danger" onclick="eliminarEstudiante(<?php echo $estudiante['id_estudiante'] ?>)"> Eliminar Estudiante <i class="fas fa-trash-alt"></i></button></center>
                                             </td>
                                         </tr>
                                 <?php
@@ -326,18 +328,28 @@ if ($_SESSION['id_coordinador'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
+<script>
+    function obtenerNombre() {
+        documento = document.getElementById('input_archivo_documentos').files[0];
+        nombre_documento = documento['name'];
+        label = document.getElementById("mensaje_label");
+        label.textContent = nombre_documento;
+    }
+</script>
+
 </html>

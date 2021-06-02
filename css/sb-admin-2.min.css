@@ -11651,98 +11651,99 @@ footer {
     color: #222;
 }
 
-#nombreUsuario{
+#nombreUsuario {
     color: white;
     font-size: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-right: 5px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 940px){
-    #nombreUsuario{
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #nombreUsuario {
         width: 225px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
 
-@media only screen and (min-width: 400px) and (max-width: 767px){
-    #nombreUsuario{
+@media only screen and (min-width: 400px) and (max-width: 767px) {
+    #nombreUsuario {
         width: 225px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
 
-#nombreUsuarioCompany{
+#nombreUsuarioCompany {
     color: white;
     font-size: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-right: 5px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 940px){
-    #nombreUsuarioCompany{
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #nombreUsuarioCompany {
         width: 55px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
 
-@media only screen and (min-width: 400px) and (max-width: 767px){
-    #nombreUsuarioCompany{
+@media only screen and (min-width: 400px) and (max-width: 767px) {
+    #nombreUsuarioCompany {
         width: 55px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
 
-#nombreUsuarioDirector{
+#nombreUsuarioDirector {
     color: white;
     font-size: 20px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-right: 5px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 940px){
-    #nombreUsuarioDirector{
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #nombreUsuarioDirector {
         width: 142px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
 
-@media only screen and (min-width: 400px) and (max-width: 767px){
-    #nombreUsuarioDirector{
+@media only screen and (min-width: 400px) and (max-width: 767px) {
+    #nombreUsuarioDirector {
         width: 142px;
     }
-    #faBars{
+    #faBars {
         color: white;
     }
-    #titulosSideBar{
+    #titulosSideBar {
         font-size: 13px;
     }
 }
+
 
 /* Efecto de hover al momento de pasar por las cards */
 
@@ -11776,20 +11777,33 @@ footer {
     margin-right: 10px;
 }
 
-#td, #th{
+#td,
+#th {
     text-align: center;
     vertical-align: middle;
 }
 
-#h2{
+#h2 {
     color: black;
     font-weight: bold;
 }
 
 
+/* Estilo para el input file */
 
+#input_archivo_documentos {
+    display: none;
+}
 
-
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-color: #9d9c9c;
+    color: white;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
 
 .float-clear {
     clear: both;
@@ -11845,47 +11859,41 @@ footer {
     color: black;
 }
 
-#plan{
+#plan {
     display: flex;
     align-items: center;
     width: 620px;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 940px){
+@media only screen and (min-width: 768px) and (max-width: 940px) {
     .float-clear {
         clear: both;
     }
-    
     .float-left {
         float: left;
         margin-left: 10px;
         padding-right: 10px;
     }
-    
     .product-item input[type="number"] {
         padding: 5px;
         border: #ccc 1px solid;
         border-radius: 4px;
         margin: 0px 10px;
     }
-    
     .product-item input[type="checkbox"] {
         margin: 10px;
     }
-    
     .col-heading {
         width: 220px;
         font-size: 16px;
         font-weight: bold;
         padding-right: 100px;
     }
-    
     .col-heading2 {
         width: 180px;
         font-size: 16px;
         font-weight: bold;
     }
-    
     #header {
         padding: 12px 15px 15px;
         background: #D61117;
@@ -11894,49 +11902,40 @@ footer {
         color: #FFF;
         float: left;
     }
-    
     .btn-action {
         padding: 10px 0;
     }
-    
     #productos {
         width: 620px;
     }
-    
     #sumatoria {
         color: black;
     }
-    
-    #plan{
+    #plan {
         display: flex;
         align-items: center;
         width: 510px;
     }
-
 }
 
-@media only screen and (min-width: 400px) and (max-width: 767px){
+@media only screen and (min-width: 400px) and (max-width: 767px) {
     .float-clear {
         clear: both;
     }
-    
     .float-left {
         float: left;
         /* margin-left: 10px;
         padding-right: 10px; */
     }
-    
     .product-item input[type="number"] {
         padding: 5px;
         border: #ccc 1px solid;
         border-radius: 4px;
         margin: 0px 10px;
     }
-    
     .product-item input[type="checkbox"] {
         margin: 10px;
     }
-    
     .col-heading {
         width: 120px;
         font-size: 16px;
@@ -11945,13 +11944,11 @@ footer {
         float: left;
         text-align: left;
     }
-    
     .col-heading2 {
         width: 180px;
         font-size: 16px;
         font-weight: bold;
     }
-    
     #header {
         padding: 12px 15px 15px;
         background: #D61117;
@@ -11960,25 +11957,21 @@ footer {
         color: #FFF;
         float: left;
     }
-    
     .btn-action {
         padding: 10px 0;
     }
-    
     #productos {
         width: 620px;
     }
-    
     #sumatoria {
         color: black;
     }
-    
-    #plan{
+    #plan {
         display: flex;
         align-items: center;
         width: 450px;
     }
-    .plan_trabajo{
+    .plan_trabajo {
         width: 130px;
     }
 }

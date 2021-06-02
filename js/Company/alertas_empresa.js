@@ -536,7 +536,7 @@ function rechazarActividad(id_actividad_plan_trabajo) {
 function subirConvenio() {
     var fechaInicio = document.getElementById('fecha_inicio').value;
     var fechaExpiracion = document.getElementById('fecha_expiracion').value;
-    var inputArchivo = document.getElementById('input_archivo').value;
+    var inputArchivo = document.getElementById('input_archivo_documentos').value;
     if ((fechaInicio == "") || (fechaExpiracion == "") || (inputArchivo == "")) {
         swal.fire({
             icon: "warning",
@@ -769,7 +769,7 @@ function restablecerClave() {
     }
 }
 
-function subirDocumento(){
+function subirDocumento() {
     //Nombre de la columna separado por _
     var columna = document.getElementById('id_documento_option').value;
     //Nombre del documento
@@ -785,7 +785,7 @@ function subirDocumento(){
             icon: "warning",
             title: "Seleccione un archivo para cargar"
         })
-    } else{
+    } else {
         fd.append('columna', columna);
         fd.append('nombre_documento', documento);
         fd.append('id_empresa', idEmpresa);
@@ -807,5 +807,5 @@ function subirDocumento(){
             })
         })
     }
-    
+
 }
