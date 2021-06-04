@@ -152,6 +152,7 @@ if (isset($_POST['accion'])) {
     } else {
         move_uploaded_file($_FILES['input_archivo']['tmp_name'], $location);
         $content = file($location);
+        $cantidad_estudiantes_subidos = 0;
         unlink($location);
         $obj_estudiante_model = new EstudianteModel();
         $result = NULL;
@@ -160,12 +161,18 @@ if (isset($_POST['accion'])) {
             $result = stristr($correo_estudiante, '@ufps.edu.co');
             if ($result != false) {
                 $correo_sin_espacios = trim($correo_estudiante);
-                $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
+                $rta = $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
+                if ($rta == 1) {
+                    $cantidad_estudiantes_subidos++;
+                }
             }
         }
-        if ($result != NULL) {
-            $response['title'] = "Estudiantes Agregados Correctamente";
+        if ($cantidad_estudiantes_subidos > 0) {
+            $response['title'] = $cantidad_estudiantes_subidos . " estudiante(s) subido(s) correctamente";
             $response['state'] = "success";
+        } else {
+            $response['title'] = "No se subió ningun estudiante, porfavor revise el documento";
+            $response['state'] = "error";
         }
     }
     echo json_encode($response);

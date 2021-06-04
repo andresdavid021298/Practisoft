@@ -174,7 +174,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     <label class="custom-file-upload">
                                         <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
                                         <i class="fas fa-upload"></i>
-                                        Subir Archivo
+                                        Escoger Archivo
                                     </label>
                                     <br>
                                     <label id="mensaje_label">El Archivo seleccionado es:</label>

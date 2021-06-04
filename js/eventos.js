@@ -155,13 +155,37 @@ function sumatoriaNumeroHorasActividadesPlanTrabajo() {
     var cantidad_horas = 0;
     for (let index = 0; index < longitud; index++) {
         if (inputs_actividades[index].value != "") {
-            //     console.log(cantidad_horas);
-            // } else {
             cantidad_horas = cantidad_horas + parseInt(inputs_actividades[index].value);
-            // console.log(cantidad_horas);
-            // console.log(inputs_actividades[index].value);
-            // document.suma.resultado.value = cantidad_horas;
         }
     }
     p_sumatoria_horas.textContent = "Sumatoria de horas = " + cantidad_horas + " / 320";
+}
+
+// Funcion que permite escoger el rol 
+function escogerRol() {
+    var info_user = document.getElementById("select_rol").value
+    rol = info_user.split(" - ")[0];
+    id = info_user.split(" - ")[1];
+    nombre = info_user.split(" - ")[2];
+    imagen = info_user.split(" - ")[3];
+    $.ajax({
+            url: "../Controller/Login/Login_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "escoger_rol",
+                "rol": rol,
+                "nombre": nombre,
+                "id": id,
+                "imagen": imagen
+            },
+            dataType: "JSON"
+        })
+        .done(function(response) {
+            swal.fire({
+                icon: response.state,
+                title: response.title
+            }).then(() => {
+                window.location = response.view
+            })
+        })
 }

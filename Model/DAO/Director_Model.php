@@ -53,7 +53,7 @@ class DirectorModel
     // Metodo que permite buscar un director por el correo
     public function buscarDirectorPorCorreo($correo_director)
     {
-        $query = "SELECT id_director, nombre_director, correo_director FROM director WHERE correo_director=:correo";
+        $query = "SELECT id_director, nombre_director FROM director WHERE correo_director=:correo";
         $datos_director = NULL;
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":correo", $correo_director);
