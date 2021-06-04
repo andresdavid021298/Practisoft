@@ -28,7 +28,7 @@ if (isset($_FILES['input_archivo_documentos']['name'])) {
                 $response['title'] = "Error al subir el documento " . $nombre_documento;
                 $response['state'] = "error";
             } else {
-                $response['title'] = "Documento" . $nombre_documento . "cargado correctamente";
+                $response['title'] = "Documento " . $nombre_documento . " cargado correctamente";
                 $response['state'] = "success";
             }
         } else {

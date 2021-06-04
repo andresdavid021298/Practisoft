@@ -175,10 +175,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <center>
                             <h2 id="h2">Ver SubActividades</h2>
                             <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
-                            <!-- <h5>Numero de Horas Aprobadas: <?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $actividad_plan_trabajo['numero_horas_actividad_plan_trabajo']; ?></h5> -->
                         </center>
                         <div class="container-fluid">
-                            <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                            <h5 style="color: black;"><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                            <br>
                             <div class="table-responsive">
                                 <table id="tabla" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
@@ -190,8 +190,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <center><strong><em><?php echo $actividad_plan_trabajo['descripcion_actividad_plan_trabajo']; ?></em></strong></center>
                                             </td>
                                         </tr>
-                                    </thead>
-                                    <thead>
                                         <tr>
                                             <th id="th">Fecha</th>
                                             <th id="th">Descripcion</th>

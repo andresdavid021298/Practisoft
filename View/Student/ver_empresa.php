@@ -191,7 +191,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group mx-sm-3 mb-2 col-4">
-                                    <label for="Direccion">Direccion:</label>
+                                    <label for="Direccion">Dirección:</label>
                                     <input value="<?php echo $datos_empresa['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
                                 </div>
                             </div>

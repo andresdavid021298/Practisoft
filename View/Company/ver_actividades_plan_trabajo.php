@@ -60,7 +60,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -172,13 +172,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                 ?>
                     <center>
                         <h2 id="h2">Ver Actividades</h2>
-                        <h3><?php echo $info_estudiante['nombre_estudiante']; ?></h3>
                         <?php
                         require_once '../../Controller/Actividad/Actividad_Controller.php';
                         $numero_horas = verHorasPorEstudiante($_GET['id_estudiante']);
                         ?>
-                        <h4>Número de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
+                        <h4 style="color: black;">Número de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
                     </center>
+                    <div class="container-fluid">
+                        <h5 style="color: black;"><strong>Estudiante: </strong><?php echo $info_estudiante['nombre_estudiante']; ?></h5>
+                    </div>
                     <br>
                     <div class="container-fluid">
                         <div class="table-responsive">

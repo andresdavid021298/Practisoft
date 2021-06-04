@@ -170,6 +170,7 @@ if ($_SESSION['id_director'] == NULL) {
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered">

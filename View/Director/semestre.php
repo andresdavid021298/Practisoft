@@ -217,9 +217,9 @@ if ($_SESSION['id_director'] == NULL) {
 
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Coordinador</th>
-                                        <th>Opciones</th>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Coordinador</th>
+                                        <th id="th">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -238,10 +238,10 @@ if ($_SESSION['id_director'] == NULL) {
                                         foreach ($datos_grupo as $datos) {
                                         ?>
                                             <tr>
-                                                <td><?php echo $datos['nombre_grupo'] ?></td>
-                                                <td><?php echo $datos['nombre_coordinador'] ?></td>
+                                                <td id="td"><?php echo $datos['nombre_grupo'] ?></td>
+                                                <td id="td"><?php echo $datos['nombre_coordinador'] ?></td>
 
-                                                <td>
+                                                <td id="td">
                                                     <center><button class="btn btn-danger" onclick="eliminarGrupo(<?php echo $datos['id_grupo']; ?>)"> Eliminar <i class="fas fa-trash-alt"></i></button></center>
                                                 </td>
                                             </tr>
@@ -255,9 +255,9 @@ if ($_SESSION['id_director'] == NULL) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Correo</th>
-                                        <th>Opciones</th>
+                                        <th id="th">Nombre</th>
+                                        <th id="th">Correo</th>
+                                        <th id="th">Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -385,17 +385,17 @@ if ($_SESSION['id_director'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>

@@ -57,7 +57,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">

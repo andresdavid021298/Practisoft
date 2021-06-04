@@ -168,6 +168,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <strong>
                         <h2 id="h2">Informe Histórico</h2>
                     </strong>
+                    <br><br>
                     <p>Seleccione una fecha de inicio y fecha de fin para generar los informes.</p>
                 </div>
                 <br><br>

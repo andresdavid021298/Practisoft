@@ -57,7 +57,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -181,17 +181,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     ?>
                                 </select>
                             </center>
-
+                            <br>
                             <img src="https://cdn.pixabay.com/photo/2017/06/10/07/24/note-2389227_960_720.png" style="width: 200px; height: 200px;" /><br>
-
+                            <br>
                             <label class="custom-file-upload">
                                 <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
                                 <i class="fas fa-upload"></i>
-                                Subir Archivo
+                                Escoger Archivo
                             </label>
-                            <br>
                             <label id="mensaje_label">El Archivo seleccionado es:</label>
-
                             <button onclick="subirDocumento();" id="btn_subir_doc" type="button" value="Enviar" name="btn_subir_doc" class="btn btn-primary">Cargar</button>
                             <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                             <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
@@ -200,16 +198,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
                             </b>
                         </div>
-
-
                     </div>
+                    <br>
                     <?php
                     if (count($nombres_columnas) - 2 > 0) {
                     ?>
-
                         <div class="table-responsive">
                             <table id="tabla" class="table table-striped table-bordered">
-
                                 <thead>
                                     <tr>
                                         <?php
@@ -218,7 +213,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                                         ?>
 
-                                            <th><?php echo strtoupper(str_replace("archivo", "", str_replace("_", " ", $nombres_columnas[$aux]["COLUMN_NAME"]))); ?></th>
+                                            <th id="th"><?php echo strtoupper(str_replace("archivo", "", str_replace("_", " ", $nombres_columnas[$aux]["COLUMN_NAME"]))); ?></th>
                                         <?php
                                             $aux++;
                                         } ?>
@@ -250,7 +245,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
                                                     </td>
                                                 <?php } else { ?>
-                                                    <td>
+                                                    <td id="td">
                                                         <center>
                                                             <a target="_blank" href="../../Documentos/<?php echo $documentos_empresa[$documento_con_piso]; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
                                                         </center><br>

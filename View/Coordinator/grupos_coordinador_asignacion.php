@@ -160,7 +160,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         </div>
                     </div>
                     <!-- Inicio Tabla Solicitudes -->
-
+                    <br>
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered" style="width:100%">
 
@@ -244,18 +244,19 @@ if ($_SESSION['id_coordinador'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>

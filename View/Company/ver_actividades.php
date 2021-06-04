@@ -57,7 +57,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -156,19 +156,20 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <center>
                     <h2 id="h2">Seleccione un estudiante</h2>
                 </center>
+                <br>
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <center>Estudiante</center>
+                                    <th id="th">
+                                        Estudiante
                                     </th>
-                                    <th>
-                                        <center>Horas</center>
+                                    <th id="th">
+                                        Horas
                                     </th>
-                                    <th>
-                                        <center>Opciones</center>
+                                    <th id="th">
+                                        Opciones
                                     </th>
                                 </tr>
                             </thead>
@@ -186,17 +187,17 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     foreach ($lista_de_estudiantes as $estudiante) {
                                     ?>
                                         <tr>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $estudiante['nombre_estudiante']; ?></center>
                                             </td>
                                             <?php
                                             require_once '../../Controller/Actividad/Actividad_Controller.php';
                                             $horas_estudiante = verHorasPorEstudiante($estudiante['id_estudiante']);
                                             ?>
-                                            <td>
+                                            <td id="td">
                                                 <center><?php echo $horas_estudiante; ?></center>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <center><a class="btn btn-primary" href="ver_actividades_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>">Detalles <i class="fas fa-info-circle"></i></a></center>
                                             </td>
                                         </tr>

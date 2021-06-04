@@ -170,14 +170,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group col-4">
-                                    <center><label for="input_codigo">Codigo</label>
+                                    <center><label for="input_codigo">Código</label>
                                         <input width="100%" type="text" class="form-control" id="input_codigo" value="<?php echo $datos_estudiante['codigo_estudiante']; ?>" placeholder="Digite su codigo">
                                 </div>
                             </div>
                             <br><br>
                             <div class="row" style="justify-content: center;">
                                 <div class="form-group col-4">
-                                    <center><label for="input_celular">Numero de Telefono Movil</label></center>
+                                    <center><label for="input_celular">Número de Teléfono Móvil</label></center>
                                     <input width="100%" type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
                                 </div>
                             </div>

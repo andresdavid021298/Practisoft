@@ -61,7 +61,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -270,11 +270,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <input type="hidden" class="form-control id_est" name="id_estudiante" id="id_estudiante_tut">
 
                                         <label for="message-text" class="col-form-label">Seleccione un Tutor:</label>
-                                        <select class="form-control" aria-label="Default select example">
+                                        <select id="id_tutor_est" class="form-control" aria-label="Default select example">
                                             <?php
                                             foreach ($lista_de_tutores as $listado) {
                                             ?>
-                                                <option id="id_tutor_est" value="<?php echo $listado['id_tutor'] ?>"><?php echo $listado['nombre_tutor'] ?></option>
+                                                <option value="<?php echo $listado['id_tutor'] ?>"><?php echo $listado['nombre_tutor'] ?></option>
                                             <?php
                                             }
                                             ?>

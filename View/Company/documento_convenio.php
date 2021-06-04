@@ -57,7 +57,7 @@ if ($_SESSION['id_empresa'] == NULL) {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
                     <i class="fas fa-users-cog"></i>
-                    <span id="titulosSideBar">Gestion de Practicantes</span>
+                    <span id="titulosSideBar">Gestión de Practicantes</span>
                 </a>
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -196,14 +196,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <label class="custom-file-upload">
                                     <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />
                                     <i class="fas fa-upload"></i>
-                                    Subir Archivo
+                                    Escoger Archivo
                                 </label>
-                                <br>
-                                <label id="mensaje_label">El Archivo seleccionado es:</label>
-                                <!-- <div class="fileUpload btn">
-                                    <label>Archivo</label>
-                                    <input id="input_archivo" type="file" name="input_archivo" />
-                                </div> -->
+                                <label id="mensaje_label">El Archivo seleccionado es:</label>                                
                                 <button onclick="subirConvenio();" id="btn_subir_convenio" type="button" value="Enviar" name="btn_subir_convenio" class="btn btn-primary">Cargar</button>
                                 <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                                 <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">

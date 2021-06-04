@@ -250,6 +250,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 </tr>
                             </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
 
                 </div>

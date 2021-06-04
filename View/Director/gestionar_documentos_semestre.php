@@ -185,54 +185,46 @@ if ($_SESSION['id_director'] == NULL) {
                             </div>
                         </div>
                     </div>
-
-
                     <?php
-                        $cadena = "";
+                    $cadena = "";
                     ?>
-
-
-
                     <!-- Inicio Tabla Tutores -->
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered" style="width:100%">
 
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php
                                 require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
                                 $lista_documentos = verDocumentosBD();
                                 if (!is_null($lista_documentos)) {
                                     $cont = 0;
-                                    
+
                                     while ($cont < count($lista_documentos)) {
                                 ?>
                                         <tr>
 
                                             <?php
-                                                if ($cont >= 2) {
+                                            if ($cont >= 2) {
                                             ?>
-                                                <td>
+                                                <td id="td">
                                                     <?php
-                                                    
-                                                        $cadena =  $lista_documentos[$cont]["COLUMN_NAME"];
-                                                        $resultado = str_replace("_", " ", $cadena);
-                                                        echo $resultado;
-                                                        $cont += 1;
+
+                                                    $cadena =  $lista_documentos[$cont]["COLUMN_NAME"];
+                                                    $resultado = str_replace("_", " ", $cadena);
+                                                    echo $resultado;
+                                                    $cont += 1;
                                                     ?>
                                                 </td>
-                                                <td>
+                                                <td id="td">
                                                     <center>
-                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" 
-                                                        data-nombre="<?php echo $resultado; ?>"
-                                                        data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
-                                                    
+                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" data-nombre="<?php echo $resultado; ?>" data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
+
                                                         <button class="btn btn-danger" onclick="eliminarDocumentoBD('<?php echo $cadena; ?>');">Eliminar <i class="fas fa-trash-alt"></i></button>
                                                     </center>
                                                 </td>
@@ -251,11 +243,12 @@ if ($_SESSION['id_director'] == NULL) {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
+                                    <th id="th">Nombre</th>
+                                    <th id="th">Opciones</th>
                                 </tr>
                             </tfoot>
                         </table>
+                        <br><br><br>
                     </div>
                 </div>
 
@@ -314,7 +307,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                                     <input type="hidden" class="form-control nombre_doc_antiguo" name="nombre_documento" id="nombre_documento_antiguo">
 
-                                    
+
                                     <div class="text-center">
                                         <button type="button" onclick="actualizarDocumentoBD();" class="btn btn-primary">Actualizar</button>
                                     </div>
@@ -380,18 +373,19 @@ if ($_SESSION['id_director'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>

@@ -164,7 +164,7 @@ if ($_SESSION['id_director'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <center>
-                    <h2 id="h2">Actualizar Director</h2>
+                    <h2 id="h2">Mi Perfil</h2>
                 </center>
                 <br><br><br>
                 <form method="POST" action="">
@@ -176,7 +176,7 @@ if ($_SESSION['id_director'] == NULL) {
                     <div class="container">
                         <div class="row" style="justify-content: center;">
                             <div class="col-3">
-                                <center><label for="director">Nombre Director</label></center>
+                                <center><label for="director">Nombre</label></center>
                                 <label for="nombreDirector" class="sr-only">Nombre Director</label>
                                 <input type="text" class="form-control" value="<?php echo $datos_director['nombre_director']; ?>" id="nombre_director" placeholder="Nombre del Director">
                             </div>
@@ -184,7 +184,7 @@ if ($_SESSION['id_director'] == NULL) {
                         <br><br>
                         <div class="row" style="justify-content: center;">
                             <div class="col-3">
-                                <center><label for="Contraseña">Correo Director</label></center>
+                                <center><label for="Contraseña">Correo</label></center>
                                 <label for="inputPassword2" class="sr-only">Correo Director</label>
                                 <input type="email" class="form-control" value="<?php echo $datos_director['correo_director']; ?>" id="correo_director" placeholder="Correo del Director">
                             </div>

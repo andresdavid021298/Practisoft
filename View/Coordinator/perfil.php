@@ -194,10 +194,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <input type="hidden" id="id_coordinador" value="<?php echo $_SESSION['id_coordinador'] ?>">
 
                             <br><br>
-                            <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
+                            <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_coordinador']; ?>">
                             <div class="col text-center">
                                 <button onclick="actualizarPerfil();" id="btn_editar_perfil" type="button" name="btn_editar_perfil" class="btn btn-primary">Guardar</button>
                             </div>
+                            <br><br><br>
                         </div>
                     </form>
                 </div>

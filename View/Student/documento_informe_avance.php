@@ -170,11 +170,15 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                         }
                                     }
                                     ?>
-                                    <div class="fileUpload btn">
-                                        <label>Archivo</label>
-                                        <input id="input_archivo_informe" type="file" name="input_archivo_informe" />
-                                    </div>
-                                    <button onclick="subirInformeAvance();" id="btn_subir_informe" type="button" value="Enviar" name="btn_subir_informe" class="btn btn-primary">Cargar</button>
+                                    <label class="custom-file-upload">
+                                        <input type="file" id="input_archivo_informe" name="input_archivo_informe" onchange="obtenerNombre()" />
+                                        <i class="fas fa-upload"></i>
+                                        Escoger Archivo
+                                    </label>
+
+                                    <label id="mensaje_label">El Archivo seleccionado es:</label>
+
+                                    <button id="btn_subir_informe" type="button" value="Enviar" name="btn_subir_informe" class="btn btn-primary" onclick="subirInformeAvance()">Subir</button>
                                     <input id="nombre_estudiante" type="hidden" name="nombre_estudiante" value="<?php echo $_SESSION['nombre_estudiante']; ?>">
                                     <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
                                 </form>
@@ -220,5 +224,13 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    function obtenerNombre() {
+        documento = document.getElementById('input_archivo_informe').files[0];
+        nombre_documento = documento['name'];
+        label = document.getElementById("mensaje_label");
+        label.textContent = nombre_documento;
+    }
+</script>
 
 </html>

@@ -11791,7 +11791,7 @@ footer {
 
 /* Estilo para el input file */
 
-#input_archivo_documentos {
+#input_archivo_documentos, #input_archivo_carta, #input_archivo_informe {
     display: none;
 }
 
