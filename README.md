@@ -38,7 +38,7 @@
 
   - [![HTML5](https://img.shields.io/badge/HTML5-CSS-green)](https://developer.mozilla.org/es/docs/Web/Guide/HTML/HTML5)
   - [![JavaScript](https://img.shields.io/badge/JavaScript-green)](https://developer.mozilla.org/es/docs/Web/JavaScript)
-  - [![PHP](https://img.shields.io/badge/PHP-blue)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+  - [![PHP](https://img.shields.io/badge/PHP-blue)](https://www.php.net/manual/es/intro-whatis.php)
   - Lenguaje de base de datos: MYSQL.
   - Biblioteca de diseño: Bootstrap.
   -	Sistema de control de versiones: Github.
