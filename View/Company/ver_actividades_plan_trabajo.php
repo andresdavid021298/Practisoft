@@ -175,6 +175,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <?php
                         require_once '../../Controller/Actividad/Actividad_Controller.php';
                         $numero_horas = verHorasPorEstudiante($_GET['id_estudiante']);
+
                         ?>
                         <h4 style="color: black;">Número de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
                     </center>
@@ -190,6 +191,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <th id="th">Descripción</th>
                                         <th id="th">Horas Definidas</th>
                                         <th id="th">Horas Cumplidas</th>
+                                        <th id="th">Subactividades</th>
                                         <th id="th">Opciones</th>
                                     </tr>
                                 </thead>
@@ -205,6 +207,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <?php
                                     } else {
                                         foreach ($actividades_plan_trabajo as $actividad) {
+                                            $cantidad_actividades_en_espera = cantidadSubactividadesEnEspera($actividad['id_actividad_plan_trabajo']);
                                         ?>
                                             <tr>
                                                 <td>
@@ -220,7 +223,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                 <td>
                                                     <center><?php echo $horas_estudiante; ?></center>
                                                 </td>
-                                                <td>
+                                                <td id="td">
+                                                    <?php
+                                                    if ($cantidad_actividades_en_espera > 0) { ?>
+                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-Hay subactividades por revisar-yellow?style=for-the-badge">
+                                                    <?php
+                                                    } else { ?>
+                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-No hay subactividades por revisar-green?style=for-the-badge">
+                                                    <?php } ?>
+                                                </td>
+                                                <td id="td">
                                                     <center><a class="btn btn-primary" href="detalles_actividades.php?id_actividad=<?php echo $actividad['id_actividad_plan_trabajo']; ?>">Ver SubActividades <i class="fas fa-eye"></i></a></center>
                                                 </td>
                                             </tr>
@@ -232,6 +244,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <th id="th">Descripción</th>
                                         <th id="th">Horas Definidas</th>
                                         <th id="th">Horas Cumplidas</th>
+                                        <th id="th">Subactividades</th>
                                         <th id="th">Opciones</th>
                                     </tr>
                                 </tfoot>

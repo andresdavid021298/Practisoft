@@ -227,4 +227,24 @@ class ActividadModel
             return $cantidad_subactividades;
         }
     }
+
+    //Método que permite contar la cantidad de subatividades por actividad que se encuentren en espera
+    public function cantidadDeSubactividadesPorActividadEnEspera($id_actividad_plan_trabajo)
+    {
+        $cantidad_subactividades = 0;
+        $query = "SELECT COUNT(*) AS cantidad FROM actividad WHERE id_actividad_plan_trabajo=:id_actividad_plan_trabajo AND estado_actividad = 'En Espera'";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":id_actividad_plan_trabajo", $id_actividad_plan_trabajo);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
+            if (!is_null($result)) {
+                $cantidad_subactividades = $result['cantidad'];
+            }
+            return $cantidad_subactividades;
+        }
+    }
 }

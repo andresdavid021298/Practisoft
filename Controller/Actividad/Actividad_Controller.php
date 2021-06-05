@@ -44,6 +44,12 @@ function cantidadDeSubactividadesPorActividad($id_actividad_plan_trabajo)
     return $obj_actividad_model->cantidadDeSubactividadesPorActividad($id_actividad_plan_trabajo);
 }
 
+// Metodo que conecta con el modelo para contar las subactividades que se encuentran en espera
+function cantidadSubactividadesEnEspera($id_actividad_plan_trabajo){
+    $obj_actividad_model = new ActividadModel();
+    return $obj_actividad_model->cantidadDeSubactividadesPorActividadEnEspera($id_actividad_plan_trabajo);
+}
+
 if (isset($_POST['accion'])) {
     if ($_POST['accion'] == "validar_actividad") {
         $response = array();
