@@ -154,7 +154,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <!-- End of Topbar -->
                 <div class="container-fluid">
                     <center>
-                        <h2>Bienvenido <strong><?php echo $_SESSION['nombre_empresa']; ?></strong></h2>
+                        <h2 id="h2">Bienvenida Empresa <strong><?php echo $_SESSION['nombre_empresa']; ?></strong></h2>
                     </center>
                     <br>
                     <br>

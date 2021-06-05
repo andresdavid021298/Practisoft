@@ -19,7 +19,7 @@ $obj_empresa_model = generarInformeDeEmpresas();
 <body>
 	<table border="1" align="center" cellspacing="0" cellpadding="5">
 		<tr align="center" bgcolor="#D61117">
-			<td colspan="9" style="color: white;"><b>EMPRESAS <br>
+			<td colspan="10" style="color: white;"><b>EMPRESAS <br>
 					PRACTICA EMPRESARIAL</b></td>
 		</tr>
 		<tr>
@@ -50,12 +50,15 @@ $obj_empresa_model = generarInformeDeEmpresas();
 			<th>
 				Actividad
 			</th>
+			<th>
+				Fecha de Registro
+			</th>
 		</tr>
 		<?php
 		if ($obj_empresa_model == NULL) {
 		?>
 			<tr>
-				<td colspan="9" style="text-align: center; color: #D61117;"><b>No hay empresas asociadas</b></td>
+				<td colspan="10" style="text-align: center; color: #D61117;"><b>No hay empresas asociadas</b></td>
 			</tr>
 			<?php
 		} else {
@@ -88,6 +91,9 @@ $obj_empresa_model = generarInformeDeEmpresas();
 					</td>
 					<td>
 						<?php echo $row['actividad_empresa']; ?>
+					</td>
+					<td>
+						<?php echo date("d-m-Y", strtotime($row['fecha_registro'])); ?>
 					</td>
 			<?php
 			}

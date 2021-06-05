@@ -139,7 +139,7 @@ if (isset($_POST['accion'])) {
             $response['state'] = "error";
             $response['location'] = "ver_estudiantes_plan_trabajo.php";
         } else {
-            $response['title'] = "El plan de trabajo se ha rechazado correctamente";
+            $response['title'] = "Observaciones agregadas correctamente";
             $response['state'] = "success";
             $response['location'] = "ver_estudiantes_plan_trabajo.php";
         }

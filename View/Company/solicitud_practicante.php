@@ -172,9 +172,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </div>
                         </div>
                     </div>
-
+                    <br>
                     <!--Modal-->
-
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -327,7 +326,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     foreach ($datos_solicitud as $datos) {
                                     ?>
                                         <tr>
-                                            <td id="td"><?php echo $datos['fecha_solicitud'] ?></td>
+                                            <td id="td"><?php echo date("d-m-Y", strtotime($datos['fecha_solicitud'])) ?></td>
                                             <td id="td"><?php echo $datos['numero_practicantes'] ?></td>
                                             <td id="td"><?php echo $datos['funciones'] ?></td>
                                             <td id="td"><?php echo $datos['observaciones_solicitud'] ?></td>

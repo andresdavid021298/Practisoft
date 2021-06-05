@@ -156,7 +156,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <center>
                     <h2 id="h2">Ver Plan de Trabajo</h2>
                 </center>
-
+                <br>
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered" style="width:100%">
@@ -168,13 +168,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <th>
                                         <center>Cantidad de Horas</center>
                                     </th>
-                                    <!-- <th>
-                                    <center>Opciones</center>
-                                </th> -->
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php
                                 require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
                                 $lista_de_actividades = listarActividadesPlanTrabajoPorEstudiante($_GET['id_estudiante']);
@@ -208,11 +204,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                         <?php if (!is_null($lista_de_actividades) && $estado_aprobado == 0 && $estado_rechazado == 0) {
                                         ?>
                                             <button type="button" onclick="validarPlanTrabajo(<?php echo $_GET['id_estudiante'] ?>)" class="btn btn-primary" data-toggle="modal" data-target="#">Validar Plan</button>
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rechazarPlan" data-actividad="<?php echo $_GET['id_estudiante'] ?>">Rechazar Plan</button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rechazarPlan" data-actividad="<?php echo $_GET['id_estudiante'] ?>">Corregir Plan</button>
+                                            <br><br>
                                         <?php
                                         } else if (!is_null($lista_de_actividades) && $estado_rechazado == 0) {
                                         ?>
-
                                             <div class="p-2" style="background-color: #3FA535;">
                                                 <center><strong class="text-white">Plan de Trabajo Aprobado</strong></center>
                                             </div>
@@ -232,7 +228,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </div>
                         </table>
                     </div>
-
                 </div>
 
                 <!-- Inicio Modal Rechazar Plan de Trabajo del Estudiante -->
@@ -240,7 +235,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background-color:#D61117;">
-                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Rechazar Plan</h3>
+                                <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Corregir Plan</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

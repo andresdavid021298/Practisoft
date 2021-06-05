@@ -164,6 +164,11 @@ if ($_SESSION['id_director'] == NULL) {
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
+                    <center>
+                        <h2 id="h2">Bienvenido Director <strong><?php echo $_SESSION['nombre_director']; ?></strong></h2>
+                    </center>
+                    <br>
+                    <br>
                     <div class="row">
                         <?php
                         require_once "../../Controller/Semestre/Semestre_Controller.php";

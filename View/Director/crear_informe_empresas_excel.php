@@ -39,6 +39,7 @@ $sheet = $spreadsheet->getActiveSheet();
             <th><?php $sheet->setCellValue('G1', 'Celular')->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true); ?></th>
             <th><?php $sheet->setCellValue('H1', 'Sector')->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true); ?></th>
             <th><?php $sheet->setCellValue('I1', 'Actividad')->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true); ?></th>
+            <th><?php $sheet->setCellValue('J1', 'Fecha de Registro')->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true); ?></th>
           </tr>
           <?php
           $cont = 2;
@@ -51,6 +52,7 @@ $sheet = $spreadsheet->getActiveSheet();
           $G = 'G';
           $H = 'H';
           $I = 'I';
+          $J = 'J';
           foreach ($obj_empresa_model as $row) {
             $celdaA1 = $A . $cont;
             $celdaB1 = $B . $cont;
@@ -61,6 +63,7 @@ $sheet = $spreadsheet->getActiveSheet();
             $celdaG1 = $G . $cont;
             $celdaH1 = $H . $cont;
             $celdaI1 = $I . $cont;
+            $celdaJ1 = $J . $cont;
           ?>
             <tr style="text-align: center;">
               <td>
@@ -107,6 +110,11 @@ $sheet = $spreadsheet->getActiveSheet();
               <td>
                 <?php echo $row['actividad_empresa'];
                 $sheet->setCellValue($celdaI1, $row['actividad_empresa'])->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true);
+                ?>
+              </td>
+              <td>
+                <?php echo date("d-m-Y", strtotime($row['fecha_registro']));
+                $sheet->setCellValue($celdaJ1, date("d-m-Y", strtotime($row['fecha_registro'])))->getColumnDimension($sheet->getHighestColumn())->setAutoSize(true);
                 ?>
               </td>
             </tr>

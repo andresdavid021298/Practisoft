@@ -213,7 +213,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <tr>
 
                                             <td id="td"><?php echo $solicitud['nombre_empresa'] ?></td>
-                                            <td id="td"><?php echo $solicitud['fecha_solicitud'] ?></td>
+                                            <td id="td"><?php echo date("d-m-Y", strtotime($solicitud['fecha_solicitud'])); ?></td>
                                             <td id="td"><?php echo $solicitud['numero_practicantes'] ?></td>
                                             <td id="td"><?php echo $solicitud['funciones'] ?></td>
                                             <td id="td">

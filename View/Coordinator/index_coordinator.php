@@ -163,6 +163,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
+                    <center>
+                        <h2 id="h2">Bienvenido Coordinador <strong><?php echo $_SESSION['nombre_coordinador']; ?></strong></h2>
+                    </center>
+                    <br>
+                    <br>
                     <div class="row">
                         <?php
                         require_once "../../Controller/Grupo/Grupo_Controller.php";

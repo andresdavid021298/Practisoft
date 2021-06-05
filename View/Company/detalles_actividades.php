@@ -168,7 +168,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     $estudiante = buscarEstudiante($actividad_plan_trabajo['id_estudiante']);
                     if ($estudiante['id_empresa'] != $_SESSION['id_empresa']) {
                     ?>
-                        <h1 style="color: #D61117; text-align: center;">Que no perro</h1>
+                        <h1 style="color: #D61117; text-align: center;">Estudiante no asignado</h1>
                     <?php
                     } else {
                     ?>

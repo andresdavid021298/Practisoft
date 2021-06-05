@@ -28,7 +28,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
 
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
-    
+
 </head>
 
 <body id="page-top">
@@ -140,8 +140,12 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
                 <div class="container-fluid">
+                    <center>
+                        <h2 id="h2">Bienvenido Estudiante <strong><?php echo $_SESSION['nombre_estudiante']; ?></strong></h2>
+                    </center>
+                    <br>
+                    <br>
                     <div class="row">
-
                         <!-- Cards segun si presenta o no encuesta de inscripcion -->
                         <?php
                         require_once "../../Controller/Estudiante/Estudiante_Controller.php";
