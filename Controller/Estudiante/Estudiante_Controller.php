@@ -2,7 +2,14 @@
 require_once "../../Model/DAO/Estudiante_Model.php";
 require_once "../../Model/DAO/Solicitud_Model.php";
 require_once "../../Model/DAO/Historico_Model.php";
-include_once "../../vendor/autoload.php";
+
+//Importación de la librería de PHPMailer
+require_once "../../PHPMailer-master/src/Exception.php";
+require_once "../../PHPMailer-master/src/PHPMailer.php";
+require_once "../../PHPMailer-master/src/SMTP.php";
+require_once '../../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
 
 // Metodo que conecta con la vista para mostrar informacion de practicantes asignados a una empresa
 function listarEstudiantesPorEmpresa($id_empresa)
@@ -130,8 +137,34 @@ if (isset($_POST['accion'])) {
                 $response['state'] = "error";
                 $response['title'] = "Ocurrio un error";
             } else {
-                $response['state'] = "success";
-                $response['title'] = "Estudiante agregado correctamente";
+                try {
+                    $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
+            <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
+            <h3 style='text-align: center;'><strong>Mensaje de Registro en el Sistema</strong></h3>
+            <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al sistema,
+            completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
+                    $oMail = new PHPMailer();
+                    $oMail->isSMTP();
+                    $oMail->Host = "smtp.gmail.com";
+                    $oMail->Port = 587;
+                    $oMail->SMTPSecure = "tls";
+                    $oMail->SMTPAuth = true;
+                    $oMail->Username = "practisoftufps@gmail.com";
+                    $oMail->Password = "practisoftufps2021@";
+                    $oMail->setFrom("practisoftufps@gmail.com");
+                    $oMail->addAddress($correo_estudiante);
+                    $oMail->Subject = "Registro Exitoso de Estudiante - PractiSoft UFPS";
+                    $oMail->msgHTML($head);
+                    $response['state'] = "success";
+                    $response['title'] = "Estudiante agregado correctamente";
+                    if (!$oMail->send()) {
+                        $response['title'] = $oMail->ErrorInfo;
+                        $response['state'] = "error";
+                    }
+                } catch (Exception $e) {
+                    $response['title'] = $e->getMessage();
+                    $response['state'] = "error";
+                }
             }
         }
 
@@ -164,6 +197,36 @@ if (isset($_POST['accion'])) {
                 $rta = $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
                 if ($rta == 1) {
                     $cantidad_estudiantes_subidos++;
+                    
+                    try {
+                        $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
+                <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
+                <h3 style='text-align: center;'><strong>Mensaje de Registro en el Sistema</strong></h3>
+                <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al sistema,
+                completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
+                        $oMail = new PHPMailer();
+                        $oMail->isSMTP();
+                        $oMail->Host = "smtp.gmail.com";
+                        $oMail->Port = 587;
+                        $oMail->SMTPSecure = "tls";
+                        $oMail->SMTPAuth = true;
+                        $oMail->Username = "practisoftufps@gmail.com";
+                        $oMail->Password = "practisoftufps2021@";
+                        $oMail->setFrom("practisoftufps@gmail.com");
+                        $oMail->addAddress($correo_sin_espacios);
+                        $oMail->Subject = "Registro Estudiante - PractiSoft UFPS";
+                        $oMail->msgHTML($head);
+                        $response['state'] = "success";
+                        $response['title'] = "Estudiante agregado correctamente";
+                        if (!$oMail->send()) {
+                            $response['title'] = $oMail->ErrorInfo;
+                            $response['state'] = "error";
+                        }
+                    } catch (Exception $e) {
+                        $response['title'] = $e->getMessage();
+                        $response['state'] = "error";
+                    }
+
                 }
             }
         }

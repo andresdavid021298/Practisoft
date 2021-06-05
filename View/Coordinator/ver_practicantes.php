@@ -176,10 +176,16 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <i class="fas fa-upload"></i>
                                         Escoger Archivo
                                     </label>
-                                    <br>
                                     <label id="mensaje_label">El Archivo seleccionado es:</label>
-                                    <br>
                                     <button type="button" class="btn btn-primary" onclick="subirEstudiantes()">Subir</button>
+                                    <center>
+                                        <div id="cargando_fichero" style="display:none;">
+                                            <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                                            <p>
+                                                insertando estudiantes
+                                            </p>
+                                        </div>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +217,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <p><strong>Agregue sólo el correo del estudiante que desea insertar. Los demás datos serán completados por el estudiante.</strong></p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Correo:</label>
+                                            <label for="recipient-name" class="col-form-label">Correo del Estudiante:</label>
                                             <input type="mail" class="form-control" name="correo_estudiante" id="correo_estudiante">
                                             <input type="hidden" id="input_id_grupo" name="id_grupo" value="<?php echo $_GET['id_grupo']; ?>">
                                         </div>
@@ -223,6 +229,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             </div>
                                         </div>
                                     </form>
+                                    <center>
+                                        <div id="cargando" style="display:none;">
+                                            <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                                            <p>
+                                                Insertando Estudiante
+                                            </p>
+                                        </div>
+                                    </center>
                                 </div>
                             </div>
                         </div>

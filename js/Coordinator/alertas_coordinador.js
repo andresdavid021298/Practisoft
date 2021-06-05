@@ -58,6 +58,7 @@ function subirEstudiantes() {
     } else {
         fd.append('input_id_grupo', input_id_grupo);
         fd.append('input_archivo', files[0]);
+        $("#cargando_fichero").show();
         $.ajax({
             url: '../../Controller/Estudiante/Estudiante_Controller.php',
             type: 'post',
@@ -66,6 +67,7 @@ function subirEstudiantes() {
             contentType: false,
             processData: false,
         }).done(function(response) {
+            $("#cargando_fichero").hide();
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -86,6 +88,7 @@ function agregarEstudianteIndividual() {
             title: "Hay campos vacios"
         })
     } else {
+        $("#cargando").show();
         $.ajax({
                 url: "../../Controller/Estudiante/Estudiante_Controller.php",
                 type: "POST",
@@ -97,6 +100,7 @@ function agregarEstudianteIndividual() {
                 dataType: "JSON"
             })
             .done(function(response) {
+                $("#cargando").hide();
                 swal.fire({
                     icon: response.state,
                     title: response.title
