@@ -158,7 +158,7 @@ class DocumentosEmpresaModel
         $query = "SELECT d.*,c.nombre_archivo 
                   FROM documentos_empresa AS d 
                   RIGHT JOIN empresa AS e ON d.id_empresa =  e.id_empresa 
-                  LEFT JOIN convenio AS c ON e.id_empresa= c.id_empresa 
+                  LEFT JOIN convenio AS c ON e.id_empresa= c.id_empresa
                   WHERE e.id_empresa = :id_empresa";
         $stmt = $this->conexion->prepare($query);
         $stmt->bindParam(":id_empresa", $id_empresa);
@@ -173,4 +173,120 @@ class DocumentosEmpresaModel
             return $lista_documentos;
         }
     } 
+
+    //Metodo para insertar en el historico de documentos empresa
+    public function insertarDocumentoHistorico($nombre_documento)
+    {
+        $query = "INSERT INTO historico_documentos_empresa(nombre_documento, estado) VALUES(:nombre_documento, 'Activo')";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":nombre_documento", $nombre_documento);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    //Metodo para listar documentos que están en el historico
+    public function listarDocumentosHistorico(){
+        $lista_documentos = NULL;
+        $query = "SELECT * FROM historico_documentos_empresa";
+        $stmt = $this->conexion->prepare($query);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $lista_documentos[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_documentos;
+        }
+    }
+
+    //Metodo para listar documentos que están en el historico
+    public function listarDocumentosHistoricoActivos(){
+        $lista_documentos = NULL;
+        $query = "SELECT * FROM historico_documentos_empresa WHERE estado = 'Activo'";
+        $stmt = $this->conexion->prepare($query);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $lista_documentos[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_documentos;
+        }
+    }
+
+    //Método para actualizar en historico de documentos de empresa
+    public function actualizarDocumentoHistorico($nombre_documento_anterior, $nombre_nuevo){
+        $query = "UPDATE historico_documentos_empresa SET nombre_documento=:nombre_nuevo WHERE nombre_documento = :nombre_anterior";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":nombre_anterior", $nombre_documento_anterior);
+        $stmt->bindParam(":nombre_nuevo", $nombre_nuevo);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    public function actualizarEstadoInactivo($nombre_documento){
+        $query = "UPDATE historico_documentos_empresa SET estado='Inactivo' WHERE nombre_documento = :nombre_documento";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":nombre_documento", $nombre_documento);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    public function actualizarEstadoActivo($nombre_documento){
+        $query = "UPDATE historico_documentos_empresa SET estado='Activo' WHERE nombre_documento = :nombre_documento";
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bindParam(":nombre_documento", $nombre_documento);
+
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            $stmt->closeCursor();
+            return 1;
+        }
+    }
+
+    public function verEstadoDocumentos(){
+        $lista_estados =  NULL;
+        $query = "SELECT estado FROM historico_documentos_empresa";
+        $stmt = $this->conexion->prepare($query);
+        if (!$stmt->execute()) {
+            $stmt->closeCursor();
+            return 0;
+        } else {
+            while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $lista_estados[] = $result;
+            }
+            $stmt->closeCursor();
+            return $lista_estados;
+        }
+    }
 }
+
+// $documentos = new DocumentosEmpresaModel();
+// $result = $documentos->listarDocumentosHistorico();
+// echo var_dump($result);

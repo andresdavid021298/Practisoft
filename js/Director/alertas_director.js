@@ -268,7 +268,8 @@ function crearDocumento() {
 function actualizarDocumentoBD() {
     var nombre_documento_nuevo = document.getElementById('nombre_documento_act').value;
     var nombre_documento_antiguo = document.getElementById('nombre_documento_antiguo').value;
-    var formato_nombre_nuevo = 'archivo_' + nombre_documento_nuevo.replace(/ /g, '_');
+    var eliminar_palabra_archivo = nombre_documento_nuevo.replace('archivo ', "");
+    var formato_nombre_nuevo = 'archivo_' + eliminar_palabra_archivo.replace(/ /g, '_');
 
     $.ajax({
             url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
@@ -309,6 +310,78 @@ function eliminarDocumentoBD(nombre) {
                     type: "POST",
                     data: {
                         "accion": "eliminar_documento_BD",
+                        "nombre_documento": nombre
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "gestionar_documentos_semestre.php";
+                    })
+                })
+            )
+        }
+    })
+}
+
+// Método que muestra alerta cuando se deshabilita un documento
+function deshabilitarDocumentoBD(nombre) {
+    Swal.fire({
+        title: '¿Está seguro que desea deshabilitar este documento?',
+        text: "Esta acción deshabilitará este documento del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, deseo deshabilitar el documento!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                $.ajax({
+                    url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "deshabilitar_documento_BD",
+                        "nombre_documento": nombre
+                    },
+                    dataType: "JSON"
+                })
+                .done(function(response) {
+                    swal.fire({
+                        icon: response.state,
+                        title: response.title
+                    }).then(() => {
+                        window.location = "gestionar_documentos_semestre.php";
+                    })
+                })
+            )
+        }
+    })
+}
+
+// Método que muestra alerta cuando se deshabilita un documento
+function habilitarDocumentoBD(nombre) {
+    Swal.fire({
+        title: '¿Está seguro que desea habilitar este documento?',
+        text: "Esta acción habilitará este documento en el sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, deseo habilitar el documento!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                $.ajax({
+                    url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+                    type: "POST",
+                    data: {
+                        "accion": "habilitar_documento_BD",
                         "nombre_documento": nombre
                     },
                     dataType: "JSON"

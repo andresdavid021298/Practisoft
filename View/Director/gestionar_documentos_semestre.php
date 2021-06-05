@@ -201,45 +201,35 @@ if ($_SESSION['id_director'] == NULL) {
                             <tbody>
                                 <?php
                                 require_once '../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php';
-                                $lista_documentos = verDocumentosBD();
-                                if (!is_null($lista_documentos)) {
-                                    $cont = 0;
-
-                                    while ($cont < count($lista_documentos)) {
+                                $lista_documentos = listarDocumentosHistorico();
+                                if (is_null($lista_documentos)) {
                                 ?>
+                                    <td id="td">
+                                        <p>No existen documentos en el sistema</p>
+                                    </td>
+                                    <?php } else {
+                                    foreach ($lista_documentos  as $lista) {
+                                        $nombre_doc_con_piso = $lista['nombre_documento'];
+                                        $nombre_doc_sin_piso = str_replace("_", " ", $nombre_doc_con_piso);
+                                    ?>
+
                                         <tr>
+                                            <td id="td"><?php echo $nombre_doc_sin_piso ?></td>
 
-                                            <?php
-                                            if ($cont >= 2) {
-                                            ?>
-                                                <td id="td">
-                                                    <?php
-
-                                                    $cadena =  $lista_documentos[$cont]["COLUMN_NAME"];
-                                                    $resultado = str_replace("_", " ", $cadena);
-                                                    echo $resultado;
-                                                    $cont += 1;
-                                                    ?>
-                                                </td>
-                                                <td id="td">
-                                                    <center>
-                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" data-nombre="<?php echo $resultado; ?>" data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
-
-                                                        <button class="btn btn-danger" onclick="eliminarDocumentoBD('<?php echo $cadena; ?>');">Eliminar <i class="fas fa-trash-alt"></i></button>
-                                                    </center>
-                                                </td>
-                                            <?php
-                                            } else {
-                                                $cont += 1;
-                                            }
-
-                                            ?>
-
+                                            <td id="td">
+                                                <center>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" data-nombre="<?php echo $resultado; ?>" data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
+                                                    <?php if($lista['estado'] == 'Activo'){ ?>
+                                                        <button class="btn btn-danger" onclick="deshabilitarDocumentoBD('<?php echo $nombre_doc_con_piso; ?>');">Deshabilitar <i class="fas fa-eye-slash"></i></button>
+                                                    <?php } else { ?>
+                                                        <button class="btn btn-primary" onclick="habilitarDocumentoBD('<?php echo $nombre_doc_con_piso; ?>');">Habilitar <i class="fas fa-eye"></i></button>
+                                                    <?php } ?>
+                                                </center>
+                                            </td>
                                         </tr>
-                                <?php
-                                    }
-                                }
-                                ?>
+
+                                <?php }
+                                } ?>
                             </tbody>
                             <tfoot>
                                 <tr>

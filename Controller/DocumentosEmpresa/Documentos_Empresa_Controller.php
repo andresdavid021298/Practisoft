@@ -61,7 +61,8 @@ if (isset($_POST['accion'])) {
         $nombre_documento = $_POST['nombre_documento'];
         $obj_documentos_empresa_model = new DocumentosEmpresaModel();
         $rta = $obj_documentos_empresa_model->agregarDocumentoBD($nombre_documento);
-        if ($rta == 0) {
+        $result = $obj_documentos_empresa_model->insertarDocumentoHistorico($nombre_documento);
+        if ($rta == 0 || $result == 0) {
             $response['title'] = "Error al crear documento";
             $response['state'] = "error";
         } else {
@@ -74,7 +75,8 @@ if (isset($_POST['accion'])) {
         $nombre_documento_antiguo = $_POST['nombre_documento_antiguo'];
         $obj_documentos_empresa_model = new DocumentosEmpresaModel();
         $rta = $obj_documentos_empresa_model->actualizarDocumentoBD($nombre_documento_antiguo, $nombre_documento_nuevo);
-        if ($rta == 0) {
+        $result = $obj_documentos_empresa_model->actualizarDocumentoHistorico($nombre_documento_antiguo, $nombre_documento_nuevo);
+        if ($rta == 0 || $result == 0) {
             $response['title'] = "Error al actualizar el documento";
             $response['state'] = "error";
         } else {
@@ -94,6 +96,32 @@ if (isset($_POST['accion'])) {
             $response['state'] = "success";
         }
         echo json_encode($response);
+    } else if($_POST['accion'] == "deshabilitar_documento_BD"){
+        $nombre_documento = $_POST['nombre_documento'];
+        $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+        $rta = $obj_documentos_empresa_model->actualizarEstadoInactivo($nombre_documento);
+        $result = $obj_documentos_empresa_model->eliminarDocumentoBD($nombre_documento);
+        if ($rta == 0) {
+            $response['title'] = "Error al deshabilitar el documento";
+            $response['state'] = "error";
+        } else {
+            $response['title'] = "Documento deshabilitado correctamente";
+            $response['state'] = "success";
+        }
+        echo json_encode($response);
+    } else if($_POST['accion'] == "habilitar_documento_BD"){
+        $nombre_documento = $_POST['nombre_documento'];
+        $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+        $rta = $obj_documentos_empresa_model->actualizarEstadoActivo($nombre_documento);
+        $result = $obj_documentos_empresa_model->agregarDocumentoBD($nombre_documento);
+        if ($rta == 0) {
+            $response['title'] = "Error al habilitar el documento";
+            $response['state'] = "error";
+        } else {
+            $response['title'] = "Documento habilitado correctamente";
+            $response['state'] = "success";
+        }
+        echo json_encode($response);
     }
 }
 
@@ -102,6 +130,24 @@ function verDocumentosBD()
 {
     $obj_documentos_empresa_model = new DocumentosEmpresaModel();
     return $obj_documentos_empresa_model->verDocumentosBD();
+}
+
+// Método para listar los documentos del historico
+function listarDocumentosHistorico(){
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->listarDocumentosHistorico();
+}
+
+// Método para listar los documentos del historico
+function listarDocumentosHistoricoActivos(){
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->listarDocumentosHistoricoActivos();
+}
+
+//Metodo para conocer los estados de los documentos en la tabla historico documentos
+function estadoDocumentos(){
+    $obj_documentos_empresa_model = new DocumentosEmpresaModel();
+    return $obj_documentos_empresa_model->verEstadoDocumentos();
 }
 
 // Metodo que conecta con la vista para verificar si existe registro de algun documento para una empresa

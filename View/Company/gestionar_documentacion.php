@@ -162,6 +162,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <?php
                             require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
                             $nombres_columnas = verDocumentosBD();
+                            $listado_documentos = listarDocumentosHistoricoActivos();
                             ?>
                             <center>
                                 <strong>
@@ -169,16 +170,14 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </strong>
                                 <select class="form-control col-3" aria-label="Default select example" id="id_documento_option">
                                     <?php
-                                    $cont = 2;
-                                    while ($cont < count($nombres_columnas)) {
-                                        $result = str_replace("_", " ", $nombres_columnas[$cont]["COLUMN_NAME"]);
-                                    ?>
 
-                                        <option value="<?php echo $nombres_columnas[$cont]["COLUMN_NAME"] ?>"><?php echo $result ?></option>
-                                    <?php
-                                        $cont++;
-                                    }
+                                    foreach ($listado_documentos as $lista) {
+                                        $documento_con_piso = $lista['nombre_documento'];
+                                        $documento_con_espacio = str_replace("_", " ", $documento_con_piso);
                                     ?>
+                                        <option value="<?php echo $documento_con_piso ?>"><?php echo $documento_con_espacio ?></option>
+                                    <?php } ?>
+
                                 </select>
                             </center>
                             <br>
@@ -200,71 +199,68 @@ if ($_SESSION['id_empresa'] == NULL) {
                         </div>
                     </div>
                     <br>
-                    <?php
-                    if (count($nombres_columnas) - 2 > 0) {
-                    ?>
-                        <div class="table-responsive">
-                            <table id="tabla" class="table table-striped table-bordered">
-                                <thead>
+                
+                    <div class="table-responsive">
+                        <table id="tabla" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+
+                                    <?php
+
+                                    foreach ($listado_documentos as $lista) {
+                                        $documento_con_piso = $lista['nombre_documento'];
+                                        $documento_con_espacio = str_replace("_", " ", $documento_con_piso);
+                                    ?>
+                                        <th id="th"><?php echo $documento_con_espacio; ?></th>
+                                    <?php } ?>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php
+                                require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                                $documentos_empresa = listarDocumentosPorEmpresa($_SESSION['id_empresa']);
+
+                                if (is_null($documentos_empresa)) {
+                                ?>
+
+                                    <td style="color: #D61117; text-align: center;" colspan="<?php count($listado_documentos) + 1; ?>"><strong>Sin Documentación</strong></td>
+
+                                <?php
+                                } else {
+                                ?>
                                     <tr>
                                         <?php
-                                        $aux = 2;
-                                        while ($aux < count($nombres_columnas)) {
-
+                                        foreach ($listado_documentos as $lista) {
+                                            $documento_con_piso = $lista['nombre_documento'];
+                                            if (is_null($documentos_empresa[$documento_con_piso])) {
                                         ?>
-
-                                            <th id="th"><?php echo strtoupper(str_replace("archivo", "", str_replace("_", " ", $nombres_columnas[$aux]["COLUMN_NAME"]))); ?></th>
+                                                <td id="td">
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
+                                                </td>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <td id="td">
+                                                    <center>
+                                                        <a target="_blank" href="../../Documentos/<?php echo $documentos_empresa[$documento_con_piso]; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    </center><br>
+                                                    <?php echo $documentos_empresa[$documento_con_piso]; ?>
+                                                </td>
                                         <?php
-                                            $aux++;
-                                        } ?>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php
-                                    require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
-                                    $documentos_empresa = listarDocumentosPorEmpresa($_SESSION['id_empresa']);
-
-                                    if (is_null($documentos_empresa)) {
-                                    ?>
-
-                                        <td style="color: #D61117; text-align: center;" colspan="<?php count($listado_documentos) + 1; ?>"><strong>Sin Documentación</strong></td>
-
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <tr>
-                                            <?php
-                                            $contador = 2;
-                                            while ($contador < count($nombres_columnas)) {
-
-                                                $documento_con_piso = $nombres_columnas[$contador]["COLUMN_NAME"];
-                                                if (is_null($documentos_empresa[$documento_con_piso])) {
-                                            ?>
-                                                    <td id="td">
-                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
-                                                    </td>
-                                                <?php } else { ?>
-                                                    <td id="td">
-                                                        <center>
-                                                            <a target="_blank" href="../../Documentos/<?php echo $documentos_empresa[$documento_con_piso]; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
-                                                        </center><br>
-                                                        <?php echo $documentos_empresa[$documento_con_piso]; ?>
-                                                    </td>
-                                            <?php
-                                                }
-                                                $contador++;
                                             }
-                                            ?>
-                                        </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                            <br><br><br>
-                        </div>
-                    <?php } ?>
+                                        }
+                                        ?>
+                                        
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <br><br><br>
+                    </div>
                 </div>
 
 

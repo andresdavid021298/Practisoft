@@ -177,7 +177,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <?php
                 require_once "../../Controller/Empresa/Empresa_Controller.php";
                 require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
-                $listado_documentos = verDocumentosBD();
+                $listado_documentos = listarDocumentosHistorico();
                 $empresa = mostrarDatos($_GET['id_empresa']);
                 if (!$empresa[0]) {
                 ?>
@@ -203,15 +203,13 @@ if ($_SESSION['id_director'] == NULL) {
                                     </tr>
                                     <tr>
                                         <?php
-                                        $cont = 2;
-                                        while ($cont < count($listado_documentos)) {
-                                            $documento_con_piso = $listado_documentos[$cont]["COLUMN_NAME"];
+
+                                        foreach ($listado_documentos as $lista) {
+                                            $documento_con_piso = $lista['nombre_documento'];
                                             $documento_con_espacio = str_replace("_", " ", $documento_con_piso);
                                         ?>
-
                                             <th id="th"><?php echo $documento_con_espacio ?></th>
                                         <?php
-                                            $cont++;
                                         }
                                         ?>
                                         <th id="th">Convenio</th>
@@ -233,10 +231,11 @@ if ($_SESSION['id_director'] == NULL) {
                                     ?>
                                         <tr>
                                             <?php
-                                            $cont = 2;
-                                            while ($cont < count($listado_documentos)) {
-                                                $documento_con_piso = $listado_documentos[$cont]["COLUMN_NAME"];
+
+                                            foreach ($listado_documentos as $lista) {
+                                                $documento_con_piso = $lista['nombre_documento'];
                                             ?>
+
                                                 <?php
                                                 if (is_null($documentos_empresa[$documento_con_piso])) {
                                                 ?>
@@ -255,7 +254,7 @@ if ($_SESSION['id_director'] == NULL) {
                                                     </td>
                                             <?php
                                                 }
-                                                $cont++;
+                                                
                                             }
                                             ?>
                                             <?php
