@@ -204,6 +204,16 @@ if ($_SESSION['id_estudiante'] == NULL) {
                         <?php } else {
                         ?>
                             <br>
+                            <?php
+                            if ($lista_actividades[0]['estado'] == "Rechazada") {
+                            ?>
+                                <div class="p-2 bg-danger">
+                                    <center><strong class="text-white">Plan de Trabajo Rechazado</strong></center>
+                                </div>
+                                <br>
+                            <?php
+                            }
+                            ?>
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -279,13 +289,6 @@ if ($_SESSION['id_estudiante'] == NULL) {
 <script src="../../js/Student//alertas_estudiante.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
 
 <!-- Valida si un estudiante ya hizo un plan de trabajo -->
 <?php
@@ -317,10 +320,8 @@ if (!is_null($lista)) {
                 icon: 'warning',
                 title: 'Plan de Trabajo Rechazado',
                 text: 'Observaciones: " . $observacion . "',
-                footer: 'Se eliminaran las actividades previas'
-           }).then(() => {
-            eliminarActividadesPlanTrabajo(" . $_SESSION['id_estudiante'] . ")
-        })
+                footer: 'Por favor actualize el plan de trabajo y vuelva a enviarlo'
+           })
         </script>
         ";
     }
