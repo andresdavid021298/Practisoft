@@ -160,6 +160,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <br>
                     <div class="row">
 
+                        <!-- Inicio de card Numero de Practicantes Asignados-->
                         <?php
                         require_once '../../Controller/Estudiante/Estudiante_Controller.php';
                         $cantidad_estudiantes = cantidadDeEstudiantesPorEmpresa($_SESSION['id_empresa']);
@@ -182,7 +183,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </div>
                             </a>
                         </div>
+                        <!-- Fin Card Numero de Practicantes Asignados -->
 
+                        <!-- Inicio de card Numero de Solicitudes Aprobadas -->
                         <?php
                         require_once '../../Controller/Solicitud/Solicitud_Controller.php';
                         $cantidad_solicitudes_aprobadas = cantidadSolicitudesAprobadas($_SESSION['id_empresa']);
@@ -207,7 +210,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </a>
                             </div>
                         <?php } ?>
+                        <!-- Fin Card Numerod de Solicitudes Aprobadas -->
 
+
+                        <!-- Inicio Card Numero de Solicitudes en Espera -->
                         <?php
                         require_once '../../Controller/Solicitud/Solicitud_Controller.php';
                         $cantidad_solicitudes_en_espera = cantidadSolicitudesEnEspera($_SESSION['id_empresa']);
@@ -230,10 +236,14 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </div>
                             </a>
                         </div>
+                        <!-- Fin Card Numero de Solicitudes En Espera -->
+
+                        <!-- Inicio card Documentos -->
                         <?php
                         require_once "../../Controller/Convenio/Convenio_Controller.php";
                         require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
                         $datos_convenio = mostrarConvenio($_SESSION['id_empresa']);
+                        $lista_documentos_activos = listarDocumentosHistoricoActivos();
                         $nombre_columnas = verDocumentosBD();
                         $documentos_empresa = verificarDocumentacion($_SESSION['id_empresa']);
                         if (is_null($datos_convenio) && is_null($documentos_empresa)) {
@@ -252,17 +262,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                     </div>
                                                     <?php
-                                                    $aux = 2;
-                                                    while ($aux < count($nombre_columnas)) {
+                                                    foreach ($lista_documentos_activos as $documento_activo) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
                                                             <a href="gestionar_documentacion.php" class="form-check-label">
-                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $documento_activo['nombre_documento'])); ?>
                                                             </a>
                                                         </div>
                                                     <?php
-                                                        $aux++;
                                                     } ?>
                                                 </div>
                                             </div>
@@ -289,17 +297,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         <a href="documento_convenio.php" class="form-check-label">Convenio</a>
                                                     </div>
                                                     <?php
-                                                    $aux = 2;
-                                                    while ($aux < count($nombre_columnas)) {
+                                                    foreach ($lista_documentos_activos as $documento_activo) {
                                                     ?>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
                                                             <a href="gestionar_documentacion.php" class="form-check-label">
-                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                                <?php echo str_replace("archivo", "", str_replace("_", " ", $documento_activo['nombre_documento'])); ?>
                                                             </a>
                                                         </div>
                                                     <?php
-                                                        $aux++;
                                                     } ?>
                                                 </div>
                                             </div>
@@ -310,7 +316,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     </div>
                                 </div>
                             </div> <?php
-                                } else if (count($nombre_columnas) - 2 > 0) {
+                                } else {
                                     ?>
                             <div class="col-xl-3 col-md-6 mb-4 zoom">
                                 <div class="card border-left-warning shadow h-100 py-2">
@@ -335,15 +341,13 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                         </div>
                                                         <?php
                                                     }
-                                                    $aux = 2;
-                                                    while ($aux < count($nombre_columnas)) {
-                                                        if (is_null($documentos_empresa[$nombre_columnas[$aux]['COLUMN_NAME']])) {
+                                                    foreach ($lista_documentos_activos as $documento_activo) {
+                                                        if (is_null($documentos_empresa[$documento_activo['nombre_documento']])) {
                                                         ?>
-
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled>
                                                                 <a href="gestionar_documentacion.php" class="form-check-label">
-                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $documento_activo['nombre_documento'])); ?>
                                                                 </a>
                                                             </div>
                                                         <?php
@@ -352,12 +356,11 @@ if ($_SESSION['id_empresa'] == NULL) {
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" value="" id="checkConvenio" disabled checked>
                                                                 <a href="gestionar_documentacion.php" class="form-check-label">
-                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $nombre_columnas[$aux]["COLUMN_NAME"])) ?>
+                                                                    <?php echo str_replace("archivo", "", str_replace("_", " ", $documento_activo['nombre_documento'])); ?>
                                                                 </a>
                                                             </div>
                                                     <?php
                                                         }
-                                                        $aux++;
                                                     } ?>
                                                 </div>
                                             </div>
@@ -369,6 +372,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 </div>
                             </div>
                         <?php } ?>
+                        <!-- Fin Card Documentacion -->
+
+
                     </div>
                     <!-- <iframe allowfullscreen="allowfullscreen" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/15d265eab8.html" style="border: 1px solid lightgray; width: 100%; height: 500px;"></iframe> -->
                 </div>

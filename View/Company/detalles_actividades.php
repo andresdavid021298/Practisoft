@@ -152,10 +152,6 @@ if ($_SESSION['id_empresa'] == NULL) {
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Boton de ATRAS -->
-                <div style="padding-left: 10px;">
-                    <a class="btn btn-primary" href="ver_actividades_plan_trabajo.php"><i class="fas fa-arrow-circle-left"></i> Volver</a>
-                </div>
                 <?php
                 require_once "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php";
                 $actividad_plan_trabajo = buscarActividaPlanTrabajo($_GET['id_actividad']);
@@ -172,6 +168,10 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <?php
                     } else {
                     ?>
+                        <!-- Boton de ATRAS -->
+                        <div style="padding-left: 10px;">
+                            <a class="btn btn-primary" href="ver_actividades_plan_trabajo.php?id_estudiante=<?php echo $estudiante['id_estudiante']; ?>"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+                        </div>
                         <center>
                             <h2 id="h2">Ver SubActividades</h2>
                             <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>

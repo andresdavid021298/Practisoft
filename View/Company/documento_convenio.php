@@ -166,14 +166,16 @@ if ($_SESSION['id_empresa'] == NULL) {
                             ?>
                             <form id="formConvenio" method="POST" enctype="multipart/form-data">
                                 <div style="align-items: center; justify-content: center;" class="row">
-                                    <div class="col-3">
+                                    <div class="form-group">
                                         <b>
                                             <center><label for="fecha_inicio">Fecha Inicio</label></center>
                                         </b>
                                         <label for="fecha_inicio" class="sr-only">Fecha Inicio</label>
                                         <input value="<?php echo $empresa['fecha_inicio']; ?>" type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
                                     </div>
-                                    <div class="col-3">
+                                    &nbsp;
+                                    &nbsp;
+                                    <div class="form-group">
                                         <b>
                                             <center><label for="fecha_fin">Fecha Fin</label></center>
                                         </b>
@@ -198,7 +200,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <i class="fas fa-upload"></i>
                                     Escoger Archivo
                                 </label>
-                                <label id="mensaje_label">El Archivo seleccionado es:</label>                                
+                                <label id="mensaje_label">El Archivo seleccionado es:</label>
                                 <button onclick="subirConvenio();" id="btn_subir_convenio" type="button" value="Enviar" name="btn_subir_convenio" class="btn btn-primary">Cargar</button>
                                 <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                                 <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">

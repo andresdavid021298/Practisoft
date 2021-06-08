@@ -167,95 +167,78 @@ if ($_SESSION['id_empresa'] == NULL) {
                 $datos_empresa = mostrarDatos($id_empresa);
                 foreach ($datos_empresa as $datos) {
                 ?>
-                    <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_empresa">Empresa</label>
+                                <input type="text" class="form-control" readonly value="<?php echo $datos['nombre_empresa']; ?>">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="input_nit">NIT</label>
+                                <input type="text" class="form-control" readonly value="<?php echo $datos['nit_empresa']; ?>">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_sector">Sector</label>
+                                <input type="text" class="form-control" readonly value="<?php echo $datos['sector_empresa']; ?>">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="input_actividad">Actividad Economica</label>
+                                <input type="text" class="form-control" readonly value="<?php echo $datos['actividad_empresa']; ?>">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_representante">Representante Legal</label>
+                                <input type="text" class="form-control" value="<?php echo $datos['representante_legal']; ?>" id="inputRepresentante" placeholder="Representante Legal">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="input_correo">Correo</label>
+                                <input type="email" id="inputCorreo" class="form-control" value="<?php echo $datos['correo_empresa']; ?>" placeholder="Correo Electronico">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_representante">Dirección</label>
+                                <input type="text" class="form-control" value="<?php echo $datos['direccion_empresa']; ?>" id="inputDireccion" placeholder="Direccion">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputState">Municipio</label>
+                                <select id="select_municipio" class="form-control">
+                                    <option value="<?php echo $datos['municipio_empresa']; ?>"><?php echo $datos['municipio_empresa']; ?></option>
+                                    <option value="Cucuta">Cúcuta</option>
+                                    <option value="Villa del Rosario">Villa del Rosario</option>
+                                    <option value="Los Patios">Los Patios</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_representante">Número de Celular de la Empresa</label>
+                                <input type="number" class="form-control" value="<?php echo $datos['celular_empresa']; ?>" id="inputContacto" placeholder="Número de Celular">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="input_correo">Número Telefónico de la Empresa</label>
+                                <input type="number" id="inputTelefono" class="form-control" value="<?php echo $datos['telefono_empresa']; ?>" placeholder="Número Telefonico">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="input_representante">Pagina Web</label>
+                                <input type="text" class="form-control" value="<?php echo $datos['web_empresa']; ?>" id="inputPaginaWeb" placeholder="Pagina Web">
+                            </div>
+                        </div>
+                        <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">
                         <div class="container">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Empresa</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nombre_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">NIT</span>
-                                        </div>
-                                        <input value="<?php echo $datos['nit_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Sector</span>
-                                        </div>
-                                        <input id="inputSector" name="input_sector" value="<?php echo $datos['sector_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Actividad</span>
-                                        </div>
-                                        <input name="input_actividad" value="<?php echo $datos['actividad_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" readonly>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Correo</span>
-                                        </div>
-                                        <input id="inputCorreo" name="input_correo" value="<?php echo $datos['correo_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Representante Legal</span>
-                                        </div>
-                                        <input id="inputRepresentante" name="input_representante_legal" value="<?php echo $datos['representante_legal']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Dirección</span>
-                                        </div>
-                                        <input id="inputDireccion" name="input_direccion" value="<?php echo $datos['direccion_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Ubicación</span>
-                                        </div>
-                                        <select id="select_municipio" class="form-control">
-                                            <option value="<?php echo $datos['municipio_empresa']; ?>"><?php echo $datos['municipio_empresa']; ?></option>
-                                            <option value="Cucuta">Cúcuta</option>
-                                            <option value="Villa del Rosario">Villa del Rosario</option>
-                                            <option value="Los Patios">Los Patios</option>
-                                        </select>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Número de Celular de la Empresa</span>
-                                        </div>
-                                        <input id="inputContacto" name="input_celular" value="<?php echo $datos['celular_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Número Telefónico de la Empresa</span>
-                                        </div>
-                                        <input id="inputTelefono" name="input_telefono" value="<?php echo $datos['telefono_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">Página Web</span>
-                                        </div>
-                                        <input id="inputPaginaWeb" name="input_pagina_web" value="<?php echo $datos['web_empresa']; ?>" type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                                <input type="hidden" id="id_empresa" name="id_empresa" value="<?php echo $id_empresa; ?>">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <button type="button" onclick="actualizarDatos()" name="btn_editar_perfil" class="btn btn-primary">Editar</button>
-                                        </div>
-                                    </div>
+                                <div class="col text-center">
+                                    <button type="button" onclick="actualizarDatos()" name="btn_editar_perfil" class="btn btn-primary">Editar</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <br>
+                    </div>
                 <?php
                 }
                 ?>
