@@ -376,7 +376,9 @@ if ($_SESSION['id_empresa'] == NULL) {
 
 
                     </div>
-                    <!-- <iframe allowfullscreen="allowfullscreen" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/15d265eab8.html" style="border: 1px solid lightgray; width: 100%; height: 500px;"></iframe> -->
+                    <!-- Video tutorial -->
+                    <iframe width="100%" height="550px" src="https://www.youtube.com/embed/hxnmlId5v2s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <br><br>
                 </div>
             </div>
             <!-- End of Page Wrapper -->
