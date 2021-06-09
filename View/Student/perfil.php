@@ -152,35 +152,37 @@ if ($_SESSION['id_estudiante'] == NULL) {
                     ?>
                     <form method="POST" action="../../Controller/Empresa/Empresa_Controller.php">
                         <div class="container">
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group col-4">
-                                    <center><label for="input_nombre">Nombre</label></center>
-                                    <input width="100%" type="text" class="form-control" id="input_nombre" disabled value="<?php echo $_SESSION['nombre_estudiante']; ?>">
-                                </div>
-                            </div>
-                            <br><br>
                             <center>
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                    <div class="col-sm-4">
+                                        <input width="100%" type="text" class="form-control" id="input_nombre" disabled value="<?php echo $_SESSION['nombre_estudiante']; ?>">
+                                    </div>
+                                </div>
+                                <br><br>
+
                                 <div class="form-group" style="justify-content: center;">
                                     <label for="input_correo" class="col-sm-2 col-form-label">Correo</label>
                                     <div class="col-sm-4">
                                         <input width="100%" type="email" class="form-control" id="input_correo" value="<?php echo $datos_estudiante['correo_estudiante']; ?>" disabled>
                                     </div>
                                 </div>
-                            </center>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group col-4">
-                                    <center><label for="input_codigo">Código</label>
+
+                                <br><br>
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_codigo" class="col-sm-2 col-form-label">Código</label>
+                                    <div class="col-sm-4">
                                         <input width="100%" type="text" class="form-control" id="input_codigo" value="<?php echo $datos_estudiante['codigo_estudiante']; ?>" placeholder="Digite su codigo">
+                                    </div>
                                 </div>
-                            </div>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group col-4">
-                                    <center><label for="input_celular">Número de Teléfono Móvil</label></center>
-                                    <input width="100%" type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
+                                <br><br>
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_celular" class="col-sm-2 col-form-label">Teléfono Móvil</label>
+                                    <div class="form-group col-4">
+                                        <input width="100%" type="text" class="form-control" id="input_celular" value="<?php echo $datos_estudiante['celular_estudiante']; ?>" placeholder="Digite su celular">
+                                    </div>
                                 </div>
-                            </div>
+                            </center>
                             <br><br>
                             <input type="hidden" id="input_id_estudiante" name="input_id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
                             <div class="col text-center">

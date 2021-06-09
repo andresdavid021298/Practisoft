@@ -97,6 +97,20 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </div>
             </li>
 
+            <!-- Nav Item - Informes -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
+                </a>
+                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -161,36 +175,40 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     ?>
                     <form method="POST" action="../../Controller/Coordinador/Coodinador_Controller.php">
                         <div class="container">
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Nombre">Nombre</label></center>
-                                    <input type="text" class="form-control" id="input_nombre" value="<?php echo $datos_coordinador['nombre_coordinador']; ?>" disabled>
-                                </div>
-                            </div>
-                            <br><br>
                             <center>
-                            <div class="form-group" style="justify-content: center;">
-                                <label for="input_correo" class="col-sm-2 col-form-label">Correo</label>
-                                <div class="col-sm-4">
-                                    <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_coordinador['correo_coordinador']; ?>" disabled>
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="input_nombre" value="<?php echo $datos_coordinador['nombre_coordinador']; ?>" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            </center>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Codigo">Codigo</label>
-                                        <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_coordinador['codigo_coordinador']; ?>" placeholder="Digite su codigo">
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="row" style="justify-content: center;">
-                                <div class="form-group mx-sm-3 mb-2">
-                                    <center><label for="Celular">Celular</label></center>
-                                    <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_coordinador['celular_coordinador']; ?>" placeholder="Digite su celular">
-                                </div>
-                            </div>
+                                <br><br>
 
+
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_correo" class="col-sm-2 col-form-label">Correo</label>
+                                    <div class="col-sm-4">
+                                        <input type="email" class="form-control" id="input_correo" value="<?php echo $datos_coordinador['correo_coordinador']; ?>" disabled>
+                                    </div>
+                                </div>
+
+                                <br><br>
+
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_codigo" class="col-sm-2 col-form-label">Código</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_coordinador['codigo_coordinador']; ?>" placeholder="Digite su codigo">
+                                    </div>
+                                </div>
+                                <br><br>
+
+                                <div class="form-group" style="justify-content: center;">
+                                    <label for="input_celular" class="col-sm-2 col-form-label">Teléfono Movil</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_coordinador['celular_coordinador']; ?>" placeholder="Digite su celular">
+                                    </div>
+                                </div>
+                            </center>
                             <input type="hidden" id="id_coordinador" value="<?php echo $_SESSION['id_coordinador'] ?>">
 
                             <br><br>

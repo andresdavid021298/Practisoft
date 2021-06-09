@@ -174,26 +174,26 @@ if ($_SESSION['id_director'] == NULL) {
 
                     ?>
                     <div class="container">
-                        <div class="row" style="justify-content: center;">
-                            <div class="col-3">
-                                <center><label for="director">Nombre</label></center>
-                                <label for="nombreDirector" class="sr-only">Nombre Director</label>
-                                <input type="text" class="form-control" value="<?php echo $datos_director['nombre_director']; ?>" id="nombre_director" placeholder="Nombre del Director">
+                        <center>
+                            <div class="form-group" style="justify-content: center;">
+                                <label for="input_nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" value="<?php echo $datos_director['nombre_director']; ?>" id="nombre_director" placeholder="Nombre del Director">
+                                </div>
                             </div>
-                        </div>
-                        <br><br>
-                        <div class="row" style="justify-content: center;">
-                            <div class="col-3">
-                                <center><label for="Contraseña">Correo</label></center>
-                                <label for="inputPassword2" class="sr-only">Correo Director</label>
-                                <input type="email" class="form-control" value="<?php echo $datos_director['correo_director']; ?>" id="correo_director" placeholder="Correo del Director">
+                            <br><br>
+                            <div class="form-group" style="justify-content: center;">
+                                <label for="input_correo" class="col-sm-2 col-form-label">Correo</label>
+                                <div class="col-sm-4">
+                                    <input type="email" class="form-control" value="<?php echo $datos_director['correo_director']; ?>" id="correo_director" placeholder="Correo del Director">
+                                </div>
                             </div>
-                        </div>
-                        <br><br>
-                        <input type="hidden" id="input_id_director" name="input_id_director" value="<?php echo $_SESSION['id_director']; ?>">
-                        <div class="col text-center">
-                            <button onclick="editarDirector();" id="btn_editar_director" type="button" name="btn_editar_director" class="btn btn-primary">Actualizar</button>
-                        </div>
+                            <br><br>
+                            <input type="hidden" id="input_id_director" name="input_id_director" value="<?php echo $_SESSION['id_director']; ?>">
+                            <div class="col text-center">
+                                <button onclick="editarDirector();" id="btn_editar_director" type="button" name="btn_editar_director" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </center>
                     </div>
 
                 </form>
