@@ -201,7 +201,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     $actividades_plan_trabajo = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
                                     if (is_null($actividades_plan_trabajo)) {
                                     ?>
-                                        <td colspan="4" style="color: #D61117;">
+                                        <td colspan="5" style="color: #D61117;">
                                             <center><strong>NO SE HA VALIDADO EL PLAN DE TRABAJO DE ESTE ESTUDIANTE</strong></center>
                                         </td>
                                         <?php

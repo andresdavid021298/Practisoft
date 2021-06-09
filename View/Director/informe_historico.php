@@ -167,11 +167,11 @@ if ($_SESSION['id_director'] == NULL) {
                 <?php
                 include_once 'crear_informe_historico.php';
                 ?>
-                <br>
+                <br><br>
                 <div style="text-align: center;">
                     <button class="btn" style="background-color: #D61117; color: white;" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF <i class="fas fa-file-pdf"></i></button>
                 </div>
-                <br>
+                <br><br>
             </div>
             <!-- End of Page Wrapper -->
 

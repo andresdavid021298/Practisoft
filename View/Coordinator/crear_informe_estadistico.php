@@ -88,8 +88,6 @@ $obj_solicitud = cantidadSolicitudesPorEmpresa();
 
     var options = {
       title: "Diagrama de Barras - Cantidad de Solicitudes por Empresa",
-      width: 800,
-      height: 400,
       is3D: true,
       vAxis: {
         format: '0'
@@ -102,25 +100,18 @@ $obj_solicitud = cantidadSolicitudesPorEmpresa();
 <div class="container">
   <div class="row">
     <div class="col text-center">
+      <h1 id="h2">Informe Estadístico</h1>
       <br><br>
-      <h1>Informe Estadístico</h1>
-      <br><br><br><br>
       <center>
-        <h2>Empresas por Actividad</h2>
-        <br>
-        <div id="piechartEmpresaActividad" style="width: 900px; height: 500px;"></div>
+        <div id="piechartEmpresaActividad"></div>
       </center>
-      <br><br><br>
+      <br><br>
       <center>
-        <h2>Empresas por Sector</h2>
-        <br>
-        <div id="piechartEmpresaSector" style="width: 800px; height: 500px;"></div>
+        <div id="piechartEmpresaSector"></div>
       </center>
-      <br><br><br>
+      <br><br>
       <center>
-        <h2>Solicitudes por Empresa</h2>
-        <br>
-        <div id="columnchart_values" style="width: 900px; height: 500px;"></div>
+        <div id="columnchart_values"></div>
       </center>
     </div>
   </div>

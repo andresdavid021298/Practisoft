@@ -11975,3 +11975,79 @@ footer {
         width: 130px;
     }
 }
+
+#piechartEmpresaActividad{
+    width: 900px;
+    height: 500px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #piechartEmpresaActividad{
+        width: 500px;
+        height: 300px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 767px) {
+    #piechartEmpresaActividad{
+        width: 250px;
+        height: 200px;
+    }
+}
+
+#piechartEmpresaSector{
+    width: 900px;
+    height: 500px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #piechartEmpresaSector{
+        width: 500px;
+        height: 300px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 767px) {
+    #piechartEmpresaSector{
+        width: 250px;
+        height: 200px;
+    }
+}
+
+#columnchart_values{
+    width: 900px;
+    height: 500px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #columnchart_values{
+        width: 500px;
+        height: 300px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 767px) {
+    #columnchart_values{
+        width: 250px;
+        height: 200px;
+    }
+}
+
+#donutchart{
+    width: 900px;
+    height: 500px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 940px) {
+    #donutchart{
+        width: 500px;
+        height: 300px;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 767px) {
+    #donutchart{
+        width: 250px;
+        height: 200px;
+    }
+}

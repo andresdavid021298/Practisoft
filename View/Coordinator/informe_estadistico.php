@@ -1,11 +1,9 @@
-<!-- <?php
-        session_start();
-        $_SESSION['id_coordinador'] = 1;
-        if ($_SESSION['id_coordinador'] == NULL) {
-
-            header("Location: ../../index.php");
-        }
-        ?> -->
+<?php
+session_start();
+if ($_SESSION['id_coordinador'] == NULL) {
+    header("Location: ../../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,6 +96,20 @@
                 </div>
             </li>
 
+            <!-- Nav Item - Informes -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
+                </a>
+                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -152,10 +164,11 @@
                 <?php
                 include_once 'crear_informe_estadistico.php';
                 ?>
+                <br><br>
                 <div style="text-align: center;">
-                    <button  style="background-color: #D61117; color: white;" class="btn" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF <i class="fas fa-file-pdf"></i></button>
+                    <button style="background-color: #D61117; color: white;" class="btn" id="imprimirInforme" onclick="imprimirInformeEstadistico();">Exportar PDF <i class="fas fa-file-pdf"></i></button>
                 </div>
-                <br>
+                <br><br>
             </div>
             <!-- End of Page Wrapper -->
 

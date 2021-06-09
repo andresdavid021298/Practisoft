@@ -1,7 +1,6 @@
 <?php
 session_start();
 if ($_SESSION['id_coordinador'] == NULL) {
-
     header("Location: ../../index.php");
 }
 ?>
@@ -97,6 +96,20 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 </div>
             </li>
 
+            <!-- Nav Item - Informes -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInformes" aria-expanded="true" aria-controls="collapseInformes">
+                    <i class="fas fa-signal"></i>
+                    <span id="titulosSideBar">Informe Estadístico</span>
+                </a>
+                <div id="collapseInformes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones:</h6>
+                        <a class="collapse-item" href="informe_estadistico.php"><i class="fas fa-book"></i> Informe del Semestre</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -151,7 +164,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 id="h2" class="mb-0 text-gray-800">Documentación</h2>
+                            <h2 id="h2">Documentación</h2>
                         </div>
                     </div>
                 </div>
@@ -176,7 +189,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <thead>
                                     <tr>
 
-                                        <td colspan="<?php echo count($listado_documentos) ?>">
+                                        <td colspan="<?php echo count($listado_documentos) + 1; ?>">
                                             <center>
                                                 <b><?php echo $empresa[0]['nombre_empresa']; ?>
                                                 </b>
