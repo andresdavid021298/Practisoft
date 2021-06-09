@@ -169,7 +169,7 @@ if ($_SESSION['id_director'] == NULL) {
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
-                            <h2 id="h2" class="mb-0 text-gray-800">Documentación</h2>
+                            <h2 id="h2">Documentación</h2>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ if ($_SESSION['id_director'] == NULL) {
                                 <thead>
                                     <tr>
 
-                                        <td colspan="<?php echo count($listado_documentos) ?>">
+                                        <td colspan="<?php echo count($listado_documentos) + 1?>">
                                             <center>
                                                 <b><?php echo $empresa[0]['nombre_empresa']; ?>
                                                 </b>
@@ -283,6 +283,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                                 </tbody>
                             </table>
+                            <br><br><br>
                         </div>
                     </div>
                 <?php }
