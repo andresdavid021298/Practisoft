@@ -182,7 +182,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                             <div class="row">
                                 <div class="col text-center">
                                     <strong>
-                                        <p style="color: black;"><em>Aquí puede cargar el archivo txt con los correos institucionales de los practicantes</em></p>
+                                    <p style="color: black;"><em>Aquí puede cargar el archivo txt generado por <a href="https://docentes.ufps.edu.co/" target="_blank">Divisist</a> con los correos institucionales de los practicantes</em></p>
                                     </strong>
                                     <label class="custom-file-upload">
                                         <input type="file" id="input_archivo_documentos" name="input_archivo_documentos" onchange="obtenerNombre()" />

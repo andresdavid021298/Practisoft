@@ -167,7 +167,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <div class="row">
                             <div class="col text-center">
                                 <h2 id="h2">Actividades</h2>
-                                <br>
+                                
                             </div>
                         </div>
                     </div>
@@ -178,11 +178,14 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         <?php
                         require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
                         require_once '../../Controller/Estudiante/Estudiante_Controller.php';
+                        require_once '../../Controller/Actividad/Actividad_Controller.php';
                         $estudiante = buscarEstudiante($_GET['id_estudiante']);
                         $actividad_plan = listarActividadesPlanTrabajoPorEstudianteAprobadas($_GET['id_estudiante']);
+                        $horas_aprobadas_estudiante = verHorasPorEstudiante($_GET['id_estudiante']);
                         ?>
 
-                        <h4>Estudiante: <?php echo $estudiante['nombre_estudiante']; ?></h4>
+                        <center><h4 style="color: black;">Número de Horas Totales Aprobadas: <?php echo $horas_aprobadas_estudiante; ?> / 320</h4></center><br>
+                        <h5 style="color: black;"> <strong>Estudiante:</strong> <?php echo $estudiante['nombre_estudiante']; ?></h5><br>
 
                         <?php
                         if (is_null($actividad_plan)) {
@@ -202,7 +205,11 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                     <div class="card-header" id="headingOne">
                                         <h5 class="mb-0">
                                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $cont ?>" aria-expanded="false" aria-controls="collapseOne">
-                                                <?php echo $actividades['descripcion_actividad_plan_trabajo'] ?>
+                                                <?php
+                                                echo $actividades['descripcion_actividad_plan_trabajo'];
+                                                $cantidad_horas_plan_trabajo = $actividades['numero_horas_actividad_plan_trabajo'];
+                                                ?>
+
                                             </button>
                                         </h5>
                                     </div>
@@ -213,13 +220,20 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             $subactividades = listarActividadesPorActividadPlanTrabajo($actividades['id_actividad_plan_trabajo']);
                                             if (is_null($subactividades)) {
                                             ?>
+                                                <center><strong><h5 style="color: black;"><?php echo "Cantidad de horas aprobadas: 0/" . $cantidad_horas_plan_trabajo ?></h5></strong></center>
                                                 <label>No Presenta Subactividades</label>
                                             <?php
                                             } else {
                                             ?>
 
-                                                <table id="tabla" class="table table-striped table-bordered" style="width:100%">
+                                                <?php
+                                                $horas_aprobadas = sumarHorasPorActividadPlanTrabajo($actividades['id_actividad_plan_trabajo']);
+                                                ?>
 
+
+                                                <center><strong><h5 style="color: black;"><?php echo "Cantidad de horas aprobadas: " . $horas_aprobadas . "/" . $cantidad_horas_plan_trabajo ?></h5></strong></center>
+
+                                                <table id="tabla" class="table table-striped table-bordered" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th id="th">Descripción</th>
@@ -326,18 +340,19 @@ if ($_SESSION['id_coordinador'] == NULL) {
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>

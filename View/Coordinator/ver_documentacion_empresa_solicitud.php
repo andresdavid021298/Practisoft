@@ -61,9 +61,9 @@ if ($_SESSION['id_coordinador'] == NULL) {
                 <div id="collapseGestionPracticantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones:</h6>
-                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revision de Solicitudes</a>
+                        <a class="collapse-item" href="revision_solicitudes.php"><i class="fas fa-plus"></i> Revisión de Solicitudes</a>
                         <a class="collapse-item" href="grupos_coordinador.php"><i class="fas fa-users"></i> Mis Grupos</a>
-                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiante</a>
+                        <a class="collapse-item" href="grupos_coordinador_asignacion.php"><i class="fas fa-user"></i> Asignar Estudiantes</a>
                     </div>
                 </div>
             </li>
@@ -161,70 +161,130 @@ if ($_SESSION['id_coordinador'] == NULL) {
 
                 </nav>
                 <!-- End of Topbar -->
-                <div class="container-fluid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-center">
-                                <h2 id="h2">Grupos de Practicas Empresariales</h2>
-                                <br>
-                            </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h2 id="h2">Documentación</h2>
                         </div>
                     </div>
+                </div>
+                <br>
+                <?php
+                require_once "../../Controller/Empresa/Empresa_Controller.php";
+                require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                $listado_documentos = listarDocumentosHistoricoActivos();
+                $empresa = mostrarDatos($_GET['id_empresa']);
+                if (!$empresa[0]) {
+                ?>
+                    <br>
+                    <center>
+                        <h3 style="color: #D61117;">No existe esta empresa</h3>
+                    </center>
+                <?php } else {
 
+                ?>
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table id="tabla" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
 
+                                        <td colspan="<?php echo count($listado_documentos) + 1; ?>">
+                                            <center>
+                                                <b><?php echo $empresa[0]['nombre_empresa']; ?>
+                                                </b>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <?php
 
-                    <!-- Inicio Tabla Solicitudes -->
+                                        foreach ($listado_documentos as $lista) {
+                                            $documento_con_piso = $lista['nombre_documento'];
+                                            $documento_con_espacio = str_replace("_", " ", $documento_con_piso);
+                                        ?>
+                                            <th id="th"><?php echo $documento_con_espacio ?></th>
+                                        <?php
+                                        }
+                                        ?>
+                                        <th id="th">Convenio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                    <div class="table-responsive">
-                        <table id="tabla" class="table table-striped table-bordered" style="width:100%">
-
-                            <thead>
-                                <tr>
-                                    <th id="th">Nombre</th>
-                                    <th id="th">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                require_once '../../Controller/Grupo/Grupo_Controller.php';
-                                $lista_grupos = listarGruposPorCoordinador($_SESSION['id_coordinador']);
-
-                                if (is_null($lista_grupos)) {
-                                ?>
-                                    <td colspan="6" style="color: #D61117;">
-                                        <center><strong>NO EXISTEN GRUPOS EN EL SISTEMA</strong></center>
-                                    </td>
                                     <?php
-                                } else {
+                                    require_once "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php";
+                                    $documentos_empresa = listarDocumentosPorEmpresa($_GET['id_empresa']);
 
-                                    foreach ($lista_grupos as $lista) {
+                                    if (is_null($documentos_empresa)) {
                                     ?>
                                         <tr>
-
-                                            <td id="td"><?php echo $lista['nombre_grupo'] ?></td>
-                                            <td id="td">
-                                                <a class="btn btn-primary" href="ver_practicantes.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Gestionar <i class="fas fa-tasks"></i></a><br><br>
-                                                <a class="btn btn-warning" href="ver_documentacion_estudiante.php?id_grupo=<?php echo $lista['id_grupo']; ?>">Documentación <i class="fas fa-eye"></i></a>
-                                            </td>
+                                            <td style="color: #D61117; text-align: center;" colspan="<?php count($listado_documentos) + 1; ?>"><strong>Sin Documentación</strong></td>
                                         </tr>
-                                <?php
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <tr>
+                                            <?php
+
+                                            foreach ($listado_documentos as $lista) {
+                                                $documento_con_piso = $lista['nombre_documento'];
+                                            ?>
+
+                                                <?php
+                                                if (is_null($documentos_empresa[$documento_con_piso])) {
+                                                ?>
+                                                    <td id="td">
+                                                        <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
+                                                    </td>
+                                                <?php
+                                                } else {
+
+                                                ?>
+                                                    <td>
+                                                        <center>
+                                                            <a target="_blank" href="../../Documentos/<?php echo $documentos_empresa[$documento_con_piso]; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                        </center><br>
+                                                        <center><?php echo $documentos_empresa[$documento_con_piso]; ?></center>
+                                                    </td>
+                                            <?php
+                                                }
+                                                
+                                            }
+                                            ?>
+                                            <?php
+                                            if (is_null($documentos_empresa['nombre_archivo'])) {
+                                            ?>
+                                                <td id="td">
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Documento' ?>-gray?style=for-the-badge">
+                                                </td>
+                                            <?php
+                                            } else {
+
+                                            ?>
+                                                <td>
+                                                    <center>
+                                                        <a target="_blank" href="../../Documentos/Convenios/<?php echo $documentos_empresa['nombre_archivo']; ?>"><img src="../../Img/pdf.svg.png" style="width: 45px; height: 50px;" /></a>
+                                                    </center><br>
+                                                    <center><?php echo $documentos_empresa['nombre_archivo']; ?></center>
+                                                </td>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tr>
+                                    <?php
                                     }
-                                }
-                                ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th id="th">Nombre</th>
-                                    <th id="th">Opciones</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <br><br><br>
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                </div>
-
+                <?php }
+                ?>
             </div>
+
+
             <!-- End of Page Wrapper -->
 
             <!-- Scroll to Top Button-->
@@ -254,24 +314,23 @@ if ($_SESSION['id_coordinador'] == NULL) {
 <script src="../../js/Coordinator/alertas_coordinador.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#tabla').DataTable({
             "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "Sin Registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-                "next" : "Siguiente",
-                "previous" : "Anterior"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Sin Registros",
+                "info": "Mostrando la pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
             }
-        }
         });
     });
 </script>
+
 </html>

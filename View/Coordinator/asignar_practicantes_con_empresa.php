@@ -187,7 +187,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                     ?>
                         <div class="container-fluid">
                             <div class="row">
-                                <h5><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>
+                                <h5 style="color: black;"><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5> &nbsp &nbsp
                                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta"><i class="fas fa-eye"></i></button>
                             </div>
                             <br>

@@ -24,7 +24,7 @@ if(isset($_POST['accion'])){
         $obj_grupo_model = new GrupoModel();
         $rta = $obj_grupo_model->insertarGrupo($nombre_grupo, $id_coordinador);
         if($rta == 0){
-            $response['title'] = "Ocurrio un error";
+            $response['title'] = "Nombre de grupo duplicado";
             $response['state'] = "error";
             $response['location'] = "semestre.php";
         }

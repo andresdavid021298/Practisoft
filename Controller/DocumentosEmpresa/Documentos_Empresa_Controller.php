@@ -100,7 +100,6 @@ if (isset($_POST['accion'])) {
         $nombre_documento = $_POST['nombre_documento'];
         $obj_documentos_empresa_model = new DocumentosEmpresaModel();
         $rta = $obj_documentos_empresa_model->actualizarEstadoInactivo($nombre_documento);
-        $result = $obj_documentos_empresa_model->eliminarDocumentoBD($nombre_documento);
         if ($rta == 0) {
             $response['title'] = "Error al deshabilitar el documento";
             $response['state'] = "error";
@@ -113,7 +112,6 @@ if (isset($_POST['accion'])) {
         $nombre_documento = $_POST['nombre_documento'];
         $obj_documentos_empresa_model = new DocumentosEmpresaModel();
         $rta = $obj_documentos_empresa_model->actualizarEstadoActivo($nombre_documento);
-        $result = $obj_documentos_empresa_model->agregarDocumentoBD($nombre_documento);
         if ($rta == 0) {
             $response['title'] = "Error al habilitar el documento";
             $response['state'] = "error";
