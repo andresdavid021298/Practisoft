@@ -230,7 +230,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                             <td id="td"><?php echo $solicitud['numero_practicantes'] ?></td>
                                             <td id="td"><?php echo $solicitud['funciones'] ?></td>
                                             <td id="td">
-                                                <a href="ver_documentacion_empresa.php?id_empresa=<?php echo $solicitud['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion <i class="fas fa-eye"></i></a>
+                                                <a href="ver_documentacion_empresa_solicitud.php?id_empresa=<?php echo $solicitud['id_empresa'] ?>" class="btn btn-primary">Ver Documentacion <i class="fas fa-eye"></i></a>
                                             </td>
                                         </tr>
                                 <?php
