@@ -200,7 +200,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Celular:</label>
-                                            <input type="text" class="form-control" name="celularTutor" id="celular_tutor">
+                                            <input type="number" class="form-control" name="celularTutor" id="celular_tutor">
                                         </div>
 
 
@@ -302,7 +302,7 @@ if ($_SESSION['id_empresa'] == NULL) {
 
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Celular:</label>
-                                        <input type="text" class="form-control celular_tut" name="celularTutor" id="celular_tutor_act">
+                                        <input type="number" class="form-control celular_tut" name="celularTutor" id="celular_tutor_act">
                                     </div>
 
                                     <input type="hidden" class="form-control id_tut" name="id_tutor" id="id_tutor_act">

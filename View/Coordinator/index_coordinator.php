@@ -304,6 +304,10 @@ if ($_SESSION['id_coordinador'] == NULL) {
                         }
                         ?>
                     </div>
+        
+                    <!-- Video tutorial -->
+                    <iframe width="100%" height="550px" src="https://www.youtube.com/embed/5U_o9Jz9KHE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <br><br>
                 </div>
             </div>
             <!-- End of Page Wrapper -->

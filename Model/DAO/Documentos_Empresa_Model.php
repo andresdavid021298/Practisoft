@@ -286,7 +286,3 @@ class DocumentosEmpresaModel
         }
     }
 }
-
-// $documentos = new DocumentosEmpresaModel();
-// $result = $documentos->listarDocumentosHistorico();
-// echo var_dump($result);

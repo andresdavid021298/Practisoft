@@ -56,6 +56,9 @@ if (isset($_POST['accion'])) {
         if ($rta == 0) {
             $response['state'] = "error";
             $response['title'] = "Ocurrio un error";
+        } else if ($rta == 2) {
+            $response['state'] = "error";
+            $response['title'] = "Coordinador ya registrado con el siguiente codigo (" . $codigo_estudiante . ")";
         } else {
             $response['state'] = "success";
             $response['title'] = "Perfil Actualizado Correctamente";
