@@ -161,6 +161,8 @@ if ($_SESSION['id_empresa'] == NULL) {
                     <?php
                 } else {
                     require_once "../../Controller/Estudiante/Estudiante_Controller.php";
+                    require_once '../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php';
+                    $info_actividad = buscarActividaPlanTrabajo($_GET['id_actividad']);
                     $estudiante = buscarEstudiante($actividad_plan_trabajo['id_estudiante']);
                     if ($estudiante['id_empresa'] != $_SESSION['id_empresa']) {
                     ?>
@@ -175,6 +177,9 @@ if ($_SESSION['id_empresa'] == NULL) {
                         <center>
                             <h2 id="h2">Ver SubActividades</h2>
                             <?php require_once '../../Controller/Actividad/Actividad_Controller.php'; ?>
+                        </center>
+                        <center>
+                            <h4 style="color: black;"><strong>Total de Horas Aprobadas: </strong><?php echo sumarHorasPorActividadPlanTrabajo($_GET['id_actividad']); ?> / <?php echo $info_actividad['numero_horas_actividad_plan_trabajo'] ?></h4>
                         </center>
                         <div class="container-fluid">
                             <h5 style="color: black;"><strong>Estudiante: </strong><?php echo $estudiante['nombre_estudiante'] ?></h5>

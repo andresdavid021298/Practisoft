@@ -52,11 +52,6 @@ if ($_SESSION['id_empresa'] == NULL) {
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <!-- <div class="sidebar-heading">
-                Interface
-            </div> -->
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGestionPracticantes" aria-expanded="true" aria-controls="collapseGestionPracticantes">
@@ -160,28 +155,29 @@ if ($_SESSION['id_empresa'] == NULL) {
                 <center>
                     <h2 id="h2">Ver Practicantes</h2>
                 </center>
+                <br>
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table id="tabla" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <center>Nombre</center>
+                                    <th id="th">
+                                        Nombre
                                     </th>
-                                    <th>
-                                        <center>Correo Institucional</center>
+                                    <th id="th">
+                                        Correo Institucional
                                     </th>
-                                    <th>
-                                        <center>Código</center>
+                                    <th id="th">
+                                        Código
                                     </th>
-                                    <th>
-                                        <center>Celular</center>
+                                    <th id="th">
+                                        Celular
                                     </th>
-                                    <th>
-                                        <center>Tutor</center>
+                                    <th id="th">
+                                        Tutor
                                     </th>
-                                    <th>
-                                        <center>Asignar Tutor</center>
+                                    <th id="th">
+                                        Opciones
                                     </th>
                                 </tr>
                             </thead>
@@ -200,36 +196,36 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     foreach ($lista_de_estudiantes as $estudiante) {
                                     ?>
                                         <tr>
-                                            <td>
-                                                <center><?php echo $estudiante['nombre_estudiante']; ?></center>
+                                            <td id="td">
+                                                <?php echo $estudiante['nombre_estudiante']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $estudiante['correo_estudiante']; ?></center>
+                                            <td id="td">
+                                                <?php echo $estudiante['correo_estudiante']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $estudiante['codigo_estudiante']; ?></center>
+                                            <td id="td">
+                                                <?php echo $estudiante['codigo_estudiante']; ?>
+                                            </td id="td">
+                                            <td id="td">
+                                                <?php echo $estudiante['celular_estudiante']; ?>
                                             </td>
-                                            <td>
-                                                <center><?php echo $estudiante['celular_estudiante']; ?></center>
-                                            </td>
-                                            <td>
+                                            <td id="td">
                                                 <?php
                                                 if (!is_null($estudiante['nombre_tutor'])) {
                                                 ?>
-                                                    <center><?php echo $estudiante['nombre_tutor']; ?></center>
+                                                    <?php echo $estudiante['nombre_tutor']; ?>
                                                 <?php } else {
                                                 ?>
-                                                    <center><img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Tutor' ?>-gray?style=for-the-badge"></center>
+                                                    <img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Sin Tutor' ?>-gray?style=for-the-badge">
                                                 <?php }    ?>
                                             </td>
-                                            <td>
+                                            <td id="td">
                                                 <?php if ($estudiante['id_tutor'] == NULL) {
                                                 ?>
-                                                    <center><button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor <i class="fas fa-user-shield"></i></button></center>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Asignar Tutor <i class="fas fa-user-shield"></i></button>
 
                                                 <?php } else {
                                                 ?>
-                                                    <center><img alt="GitHub followers badge" src="https://img.shields.io/badge/-<?php echo 'Tutor Asignado' ?>-green?style=for-the-badge"></center>
+                                                    <button class="btn btn-warning" data-toggle="modal" data-target="#modalAsignarTutor" data-estudiante="<?php echo $estudiante['id_estudiante'] ?>" data-nombre="<?php echo $estudiante['nombre_estudiante'] ?>">Cambiar Tutor <i class="fas fa-user-shield"></i></button>
                                                 <?php } ?>
                                             </td>
                                         </tr>

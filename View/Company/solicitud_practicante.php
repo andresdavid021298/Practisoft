@@ -189,7 +189,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                     <form action="../../Controller/Solicitud/Solicitud_Controller.php" method="POST">
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Número de Practicantes:</label>
-                                            <input type="text" class="form-control" name="numPracticantes" id="practicantes">
+                                            <input type="number" min="1" max="8" class="form-control" name="numPracticantes" id="practicantes">
                                         </div>
 
                                         <div class="form-group">

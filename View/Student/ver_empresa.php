@@ -162,7 +162,7 @@ if ($_SESSION['id_estudiante'] == NULL) {
                 ?>
                     <form action="../../Controller/Empresa/Empresa_Controller.php" method="POST">
                         <center>
-                            <img src="../../img/img_company.jpg" style="width: 150px; height: 150px;" /><br>
+                            <img src="../../Img/img_company.jpg" style="width: 150px; height: 150px;" /><br>
                         </center>
                         <div class="container">
                             <div class="row" style="justify-content: center;">

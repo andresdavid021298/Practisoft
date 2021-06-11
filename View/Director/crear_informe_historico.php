@@ -155,7 +155,7 @@ $obj_historico_redes = cantidadAreasRedesPorEmpresaYFecha($fecha_inicio, $fecha_
   <div class="row">
     <div class="col text-center">
       <br><br>
-      <h1 id="h2">Informe Estadístico</h1>
+      <h1 id="h2">Informe Histórico</h1>
       <br><br><br>
       <center>
         <div id="piechartEmpresaActividad"></div>

@@ -11,18 +11,18 @@ function agregarActividad() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Actividad/Actividad_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "agregar_actividad",
-                    "id": id_actividad_plan_trabajo,
-                    "fecha": fecha,
-                    "horas": horas,
-                    "descripcion": descripcion
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Actividad/Actividad_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregar_actividad",
+                "id": id_actividad_plan_trabajo,
+                "fecha": fecha,
+                "horas": horas,
+                "descripcion": descripcion
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -47,18 +47,18 @@ function actualizarActividad() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Actividad/Actividad_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_actividad",
-                    "id": idActividad,
-                    "fecha": fecha,
-                    "horas": horas,
-                    "descripcion": descripcion
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Actividad/Actividad_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_actividad",
+                "id": idActividad,
+                "fecha": fecha,
+                "horas": horas,
+                "descripcion": descripcion
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -80,15 +80,15 @@ function eliminarActividad(id_actividad, id_actividad_plan_trabajo) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                    url: "../../Controller/Actividad/Actividad_Controller.php",
-                    type: "POST",
-                    data: {
-                        "accion": "eliminar_actividad",
-                        "id_actividad": id_actividad
-                    },
-                    dataType: "JSON"
-                })
-                .done(function(response) {
+                url: "../../Controller/Actividad/Actividad_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "eliminar_actividad",
+                    "id_actividad": id_actividad
+                },
+                dataType: "JSON"
+            })
+                .done(function (response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title
@@ -113,18 +113,18 @@ function actualizarPerfil() {
         })
     } else {
         $.ajax({
-                url: "../../Controller/Estudiante/Estudiante_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "actualizar_perfil",
-                    "id_estudiante": id_estudiante,
-                    "nombre": nombre,
-                    "codigo": codigo,
-                    "celular": celular
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Estudiante/Estudiante_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "actualizar_perfil",
+                "id_estudiante": id_estudiante,
+                "nombre": nombre,
+                "codigo": codigo,
+                "celular": celular
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -145,21 +145,21 @@ function guardarEncuestaInscripcion() {
     area_capacitacion = document.getElementById("select_area_capacitacion").value;
     otro = document.getElementById("input_otro").value;
     $.ajax({
-            url: "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "guardar_inscripcion",
-                "id_estudiante": id_estudiante,
-                "area_capacitacion": area_capacitacion,
-                "area_mantenimiento": area_mantenimiento,
-                "area_desarrollo": area_desarrollo,
-                "area_servidores": area_servidores,
-                "area_redes": area_redes,
-                "otro": otro
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Encuesta_Areas/Encuesta_Areas_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "guardar_inscripcion",
+            "id_estudiante": id_estudiante,
+            "area_capacitacion": area_capacitacion,
+            "area_mantenimiento": area_mantenimiento,
+            "area_desarrollo": area_desarrollo,
+            "area_servidores": area_servidores,
+            "area_redes": area_redes,
+            "otro": otro
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -175,10 +175,15 @@ function agregarPlanTrabajo(id_estudiante) {
     arreglo_campos = document.getElementsByClassName("plan_trabajo");
     var cantidad_horas = 0;
     var arreglo_actividades = [];
+    var aux = 0;
     for (let index = 0; index < arreglo_campos.length; index++) {
         arreglo_actividades.push(arreglo_campos[index].value);
         if (index % 2 != 0) {
             cantidad_horas = cantidad_horas + parseInt(arreglo_campos[index].value);
+            if (arreglo_campos[index].value < 1 || arreglo_campos[index].value > 320) {
+                aux = 1;
+                break;
+            }
         }
     }
     existe_actividad_vacia = arreglo_actividades.includes("");
@@ -187,7 +192,13 @@ function agregarPlanTrabajo(id_estudiante) {
             icon: "warning",
             title: "Hay campos vacios"
         })
-    } else {
+    } else if (aux == 1) {
+        swal.fire({
+            icon: "warning",
+            title: "Número de horas inválido"
+        })
+    }
+    else {
         if (cantidad_horas > 320 || cantidad_horas < 320) {
             swal.fire({
                 icon: "warning",
@@ -195,16 +206,16 @@ function agregarPlanTrabajo(id_estudiante) {
             })
         } else {
             $.ajax({
-                    url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
-                    type: "POST",
-                    data: {
-                        "accion": "insertar_actividad_plan_trabajo",
-                        "id_estudiante": id_estudiante,
-                        "actividades": arreglo_actividades
-                    },
-                    dataType: "JSON"
-                })
-                .done(function(response) {
+                url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "insertar_actividad_plan_trabajo",
+                    "id_estudiante": id_estudiante,
+                    "actividades": arreglo_actividades
+                },
+                dataType: "JSON"
+            })
+                .done(function (response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title
@@ -222,10 +233,15 @@ function actualizarPlanTrabajo(id_estudiante) {
     arreglo_campos = document.getElementsByClassName("plan_trabajo");
     var cantidad_horas = 0;
     var arreglo_actividades = [];
+    var aux = 0;
     for (let index = 0; index < arreglo_campos.length; index++) {
         arreglo_actividades.push(arreglo_campos[index].value);
         if (index % 2 != 0) {
             cantidad_horas = cantidad_horas + parseInt(arreglo_campos[index].value);
+            if (arreglo_campos[index].value < 1 || arreglo_campos[index].value > 320) {
+                aux = 1;
+                break;
+            }
         }
     }
     existe_actividad_vacia = arreglo_actividades.includes("");
@@ -234,7 +250,13 @@ function actualizarPlanTrabajo(id_estudiante) {
             icon: "warning",
             title: "Hay campos vacios"
         })
-    } else {
+    } else if (aux == 1) {
+        swal.fire({
+            icon: "warning",
+            title: "Número de horas inválido"
+        })
+    }
+    else {
         if (cantidad_horas > 320 || cantidad_horas < 320) {
             swal.fire({
                 icon: "warning",
@@ -242,16 +264,16 @@ function actualizarPlanTrabajo(id_estudiante) {
             })
         } else {
             $.ajax({
-                    url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
-                    type: "POST",
-                    data: {
-                        "accion": "actualizar_plan_trabajo",
-                        "id_estudiante": id_estudiante,
-                        "actividades": arreglo_actividades
-                    },
-                    dataType: "JSON"
-                })
-                .done(function(response) {
+                url: "../../Controller/Actividades_Plan_Trabajo/Actividades_Plan_Trabajo_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "actualizar_plan_trabajo",
+                    "id_estudiante": id_estudiante,
+                    "actividades": arreglo_actividades
+                },
+                dataType: "JSON"
+            })
+                .done(function (response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title
@@ -273,7 +295,7 @@ function eliminarActividadesPlanTrabajo(id_estudiante) {
             "id_estudiante": id_estudiante
         },
         dataType: "JSON"
-    }).done(function(response) {
+    }).done(function (response) {
         swal.fire({
             icon: response.state,
             title: response.title
@@ -300,6 +322,7 @@ function subirCartaCompromisoria() {
         fd.append('id_estudiante', idEstudiante);
         fd.append('nombre_estudiante', nombreEstudiante);
         fd.append('input_archivo_carta', files[0]);
+        $("#cargando").show();
         $.ajax({
             url: '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php',
             type: 'post',
@@ -307,7 +330,8 @@ function subirCartaCompromisoria() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
+            $("#cargando").hide();
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -334,6 +358,7 @@ function subirInformeAvance() {
         fd.append('id_estudiante', idEstudiante);
         fd.append('nombre_estudiante', nombreEstudiante);
         fd.append('input_archivo_informe', files[0]);
+        $("#cargando").show();
         $.ajax({
             url: '../../Controller/DocumentosEstudiante/Documentos_Estudiante_Controller.php',
             type: 'post',
@@ -341,7 +366,8 @@ function subirInformeAvance() {
             data: fd,
             contentType: false,
             processData: false,
-        }).done(function(response) {
+        }).done(function (response) {
+            $("#cargando").hide();
             swal.fire({
                 icon: response.state,
                 title: response.title

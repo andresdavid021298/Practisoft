@@ -183,6 +183,14 @@ if ($_SESSION['id_estudiante'] == NULL) {
                                     <input id="id_estudiante" type="hidden" name="id_estudiante" value="<?php echo $_SESSION['id_estudiante']; ?>">
                                 </form>
                                 <div id="mensaje"></div>
+                                <center>
+                                    <div id="cargando" style="display:none;">
+                                        <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                                        <p>
+                                            Cargando documento...
+                                        </p>
+                                    </div>
+                                </center>
                                 <br><br>
                                 <b>
                                     <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>

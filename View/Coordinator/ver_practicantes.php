@@ -195,7 +195,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <div id="cargando_fichero" style="display:none;">
                                             <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
                                             <p>
-                                                insertando estudiantes
+                                                Insertando Estudiantes...
                                             </p>
                                         </div>
                                     </center>
@@ -246,7 +246,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         <div id="cargando" style="display:none;">
                                             <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
                                             <p>
-                                                Insertando Estudiante
+                                                Insertando Estudiantes...
                                             </p>
                                         </div>
                                     </center>
@@ -279,7 +279,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 if (is_null($estudiantes)) {
                                 ?>
                                     <td colspan="6" style="color: #D61117;">
-                                        <center><strong>NO EXISTEN ESTUDIANTES EN ESTE GRUPOS</strong></center>
+                                        <center><strong>NO EXISTEN ESTUDIANTES EN ESTE GRUPO</strong></center>
                                     </td>
                                     <?php
                                 } else {

@@ -177,7 +177,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         $numero_horas = verHorasPorEstudiante($_GET['id_estudiante']);
 
                         ?>
-                        <h4 style="color: black;">Número de Horas Totales Aprobadas: <?php echo $numero_horas; ?> / 320</h4>
+                        <h4 style="color: black;"><strong>Número de Horas Totales Aprobadas: </strong><?php echo $numero_horas; ?> / 320</h4>
                     </center>
                     <div class="container-fluid">
                         <h5 style="color: black;"><strong>Estudiante: </strong><?php echo $info_estudiante['nombre_estudiante']; ?></h5>

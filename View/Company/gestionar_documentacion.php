@@ -193,6 +193,15 @@ if ($_SESSION['id_empresa'] == NULL) {
                             <input id="nombre_empresa" type="hidden" name="nombre_empresa" value="<?php echo $_SESSION['nombre_empresa']; ?>">
                             <input id="id_empresa" type="hidden" name="id_empresa" value="<?php echo $_SESSION['id_empresa']; ?>">
                             <br><br>
+                            <center>
+                                <div id="cargando" style="display:none;">
+                                    <img width="200" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                                    <p>
+                                        Cargando Documento...
+                                    </p>
+                                </div>
+                            </center>
+                            <br>
                             <b>
                                 <p style="color: black;">La aplicación web Practisoft garantiza la protección de los datos personales <br> suministrados los cuales serán única y exclusivamente con propósito académico.</p>
                             </b>

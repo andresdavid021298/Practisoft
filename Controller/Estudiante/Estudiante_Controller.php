@@ -141,8 +141,8 @@ if (isset($_POST['accion'])) {
                     $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
             <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
             <h3 style='text-align: center;'><strong>Mensaje de Registro en el Sistema</strong></h3>
-            <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al sistema,
-            completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
+            <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al <a href='https://practisoftufps.online/'>sistema</a>,
+            iniciar sesión con su correo institucional, completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
                     $oMail = new PHPMailer();
                     $oMail->isSMTP();
                     $oMail->Host = "smtp.gmail.com";
@@ -197,13 +197,13 @@ if (isset($_POST['accion'])) {
                 $rta = $obj_estudiante_model->insertarEstudiante($correo_sin_espacios, $id_grupo);
                 if ($rta == 1) {
                     $cantidad_estudiantes_subidos++;
-                    
+
                     try {
                         $head = "<html><h3 style='text-align: center;'><span style='color: #D61117;'><img src='https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_vertical_ingsistemas_ht180.png' style='border-style: solid'; width='388' height='132' /></span></h3>
                 <h1 style='text-align: center;'><span style='color: #D61117;'>PractiSoft - Sistema de Prácticas Empresariales</span></h1>
                 <h3 style='text-align: center;'><strong>Mensaje de Registro en el Sistema</strong></h3>
-                <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al sistema,
-                completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
+                <p>El sistema PractiSoft de la UFPS le da la bienvenida. A partir de este momento, usted puede ingresar al <a href='https://practisoftufps.online/'>sistema</a>,
+                iniciar sesión con su correo institucional, completar sus datos personales e iniciar con su proceso de prácticas empresariales de acuerdo con las indicaciones del docente.</p>";
                         $oMail = new PHPMailer();
                         $oMail->isSMTP();
                         $oMail->Host = "smtp.gmail.com";
@@ -226,7 +226,6 @@ if (isset($_POST['accion'])) {
                         $response['title'] = $e->getMessage();
                         $response['state'] = "error";
                     }
-
                 }
             }
         }
