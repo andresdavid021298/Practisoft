@@ -218,7 +218,7 @@ if ($_SESSION['id_director'] == NULL) {
 
                                             <td id="td">
                                                 <center>
-                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" data-nombre="<?php echo $resultado; ?>" data-nombre_antiguo="<?php echo $cadena; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#actualizarDocumento" data-nombre="<?php echo $nombre_doc_sin_piso; ?>" data-nombre_antiguo="<?php echo $nombre_doc_con_piso; ?>">Actualizar <i class="fas fa-sync-alt"></i></button>
                                                     <?php if($lista['estado'] == 'Activo'){ ?>
                                                         <button class="btn btn-danger" onclick="deshabilitarDocumentoBD('<?php echo $nombre_doc_con_piso; ?>');">Deshabilitar <i class="fas fa-eye-slash"></i></button>
                                                     <?php } else { ?>
