@@ -197,7 +197,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <div class="form-group" style="justify-content: center;">
                                     <label for="input_codigo" class="col-sm-2 col-form-label">Código</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="input_codigo" value="<?php echo $datos_coordinador['codigo_coordinador']; ?>" placeholder="Digite su codigo">
+                                        <input type="number" class="form-control" id="input_codigo" value="<?php echo $datos_coordinador['codigo_coordinador']; ?>" placeholder="Digite su codigo">
                                     </div>
                                 </div>
                                 <br><br>
@@ -205,7 +205,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                 <div class="form-group" style="justify-content: center;">
                                     <label for="input_celular" class="col-sm-2 col-form-label">Teléfono Movil</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="input_celular" value="<?php echo $datos_coordinador['celular_coordinador']; ?>" placeholder="Digite su celular">
+                                        <input type="number" class="form-control" id="input_celular" value="<?php echo $datos_coordinador['celular_coordinador']; ?>" placeholder="Digite su celular">
                                     </div>
                                 </div>
                             </center>
