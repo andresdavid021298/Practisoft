@@ -133,7 +133,7 @@ if (isset($_POST['accion'])) {
             $response['state'] = "error";
             $response['location'] = "cambiar_clave.php";
         } else {
-            $response['title'] = "Clave cambiada correctamente. Por favor vuelve a iniciar sesión";
+            $response['title'] = "Clave cambiada correctamente. Por favor vuelva a iniciar sesión";
             $response['state'] = "success";
             $response['location'] = "../../index.php";
         }

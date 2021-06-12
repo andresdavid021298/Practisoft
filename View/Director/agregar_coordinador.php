@@ -213,6 +213,7 @@ if ($_SESSION['id_director'] == NULL) {
                                 } ?>
                             </tbody>
                         </table>
+                        <br><br><br>
                     </div>
                 </div>
 
@@ -318,13 +319,10 @@ if ($_SESSION['id_director'] == NULL) {
 <script>
     $('#actualizarCoordinador').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        //var recipient = button.data('whatever')
         var id = button.data('id');
         var nombre = button.data('nombre') // Extract info from data-* attributes
         var correo = button.data('correo')
         var modal = $(this)
-        //modal.find('.modal-title').text('Actividad: ' + fecha)
-        //modal.find('.modal-body input').val(num_horas)
         modal.find('.id_coo').val(id)
         modal.find('.nombre_coo').val(nombre)
         modal.find('.correo_coo').val(correo)

@@ -261,6 +261,7 @@ if ($_SESSION['id_director'] == NULL) {
                                     </tr>
                                 </tfoot>
                             </table>
+                            <br><br><br>
                         </div>
                     <?php
                     }

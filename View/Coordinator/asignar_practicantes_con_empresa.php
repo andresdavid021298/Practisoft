@@ -245,6 +245,7 @@ if ($_SESSION['id_coordinador'] == NULL) {
                                         } ?>
                                     </tbody>
                                 </table>
+                                <br><br><br>
                             </div>
                         </div>
                 <?php }

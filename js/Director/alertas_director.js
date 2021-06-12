@@ -7,18 +7,23 @@ function agregarCoordinador() {
             icon: "warning",
             title: "Hay campos vacios"
         })
+    } else if (validarEmail(correo_coordinador) == 0) {
+        swal.fire({
+            icon: "warning",
+            title: "Dirección de correo inválida"
+        })
     } else {
         $.ajax({
-                url: "../../Controller/Coordinador/Coodinador_Controller.php",
-                type: "POST",
-                data: {
-                    "accion": "agregar_coordinador",
-                    "nombre_coordinador": nombre_coordinador,
-                    "correo_coordinador": correo_coordinador
-                },
-                dataType: "JSON"
-            })
-            .done(function(response) {
+            url: "../../Controller/Coordinador/Coodinador_Controller.php",
+            type: "POST",
+            data: {
+                "accion": "agregar_coordinador",
+                "nombre_coordinador": nombre_coordinador,
+                "correo_coordinador": correo_coordinador
+            },
+            dataType: "JSON"
+        })
+            .done(function (response) {
                 swal.fire({
                     icon: response.state,
                     title: response.title
@@ -35,8 +40,18 @@ function actualizarCoordinador() {
     id = document.getElementById('id_coordinador_act').value;
     nombre = document.getElementById('nombre_coordinador_act').value;
     correo = document.getElementById('correo_coordinador_act').value;
-
-    $.ajax({
+    if (nombre == "" || correo == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Hay campos vacios"
+        })
+    } else if (validarEmail(correo) == 0) {
+        swal.fire({
+            icon: "warning",
+            title: "Dirección de correo inválida"
+        })
+    } else {
+        $.ajax({
             url: "../../Controller/Coordinador/Coodinador_Controller.php",
             type: "POST",
             data: {
@@ -47,14 +62,15 @@ function actualizarCoordinador() {
             },
             dataType: "JSON"
         })
-        .done(function(response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = "agregar_coordinador.php";
+            .done(function (response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = "agregar_coordinador.php";
+                })
             })
-        })
+    }
 }
 
 // Funcion que permite mostrar la alerta al momento de eliminar un coordinador
@@ -68,15 +84,15 @@ function eliminarCoordinador(id_coordinador) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                    url: "../../Controller/Coordinador/Coodinador_Controller.php",
-                    type: "POST",
-                    data: {
-                        "accion": "eliminar_coordinador",
-                        "id_coordinador": id_coordinador
-                    },
-                    dataType: "JSON"
-                })
-                .done(function(response) {
+                url: "../../Controller/Coordinador/Coodinador_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "eliminar_coordinador",
+                    "id_coordinador": id_coordinador
+                },
+                dataType: "JSON"
+            })
+                .done(function (response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title
@@ -92,18 +108,17 @@ function eliminarCoordinador(id_coordinador) {
 function crearGrupo() {
     nombre_grupo = document.getElementById('nombre_grupo').value;
     id_coordinador = document.getElementById('id_coordinador_option').value;
-
     $.ajax({
-            url: "../../Controller/Grupo/Grupo_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "crear_grupo",
-                "nombre_grupo": nombre_grupo,
-                "id_coordinador": id_coordinador
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Grupo/Grupo_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "crear_grupo",
+            "nombre_grupo": nombre_grupo,
+            "id_coordinador": id_coordinador
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -124,15 +139,15 @@ function eliminarGrupo(id_grupo) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                    url: "../../Controller/Grupo/Grupo_Controller.php",
-                    type: "POST",
-                    data: {
-                        "accion": "eliminar_grupo",
-                        "id_grupo": id_grupo
-                    },
-                    dataType: "JSON"
-                })
-                .done(function(response) {
+                url: "../../Controller/Grupo/Grupo_Controller.php",
+                type: "POST",
+                data: {
+                    "accion": "eliminar_grupo",
+                    "id_grupo": id_grupo
+                },
+                dataType: "JSON"
+            })
+                .done(function (response) {
                     swal.fire({
                         icon: response.state,
                         title: response.title
@@ -149,7 +164,18 @@ function editarDirector() {
     id_director = document.getElementById('input_id_director').value;
     nombre_director = document.getElementById('nombre_director').value;
     correo_director = document.getElementById('correo_director').value;
-    $.ajax({
+    if (nombre_director == "" || correo_director == "") {
+        swal.fire({
+            icon: "warning",
+            title: "Hay campos vacios"
+        })
+    } else if (validarEmail(correo_director) == 0) {
+        swal.fire({
+            icon: "warning",
+            title: "Dirección de correo inválida"
+        })
+    } else {
+        $.ajax({
             url: "../../Controller/Director/Director_Controller.php",
             type: "POST",
             data: {
@@ -160,15 +186,15 @@ function editarDirector() {
             },
             dataType: "JSON"
         })
-        .done(function(response) {
-            swal.fire({
-                icon: response.state,
-                title: response.title
-            }).then(() => {
-                window.location = response.location;
+            .done(function (response) {
+                swal.fire({
+                    icon: response.state,
+                    title: response.title
+                }).then(() => {
+                    window.location = response.location;
+                })
             })
-        })
-
+    }
 }
 
 // Funcion que muestra una alerta cuando se abre el semestre
@@ -186,15 +212,15 @@ function abrirSemestre() {
     }
 
     $.ajax({
-            url: "../../Controller/Semestre/Semestre_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "insertar_semestre",
-                "nombre_semestre": semestre
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/Semestre/Semestre_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "insertar_semestre",
+            "nombre_semestre": semestre
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -227,14 +253,14 @@ function finalizarSemestre() {
                     },
                     dataType: "JSON"
                 })
-                .done(function(response) {
-                    swal.fire({
-                        icon: response.state,
-                        title: response.title
-                    }).then(() => {
-                        window.location = "semestre.php";
+                    .done(function (response) {
+                        swal.fire({
+                            icon: response.state,
+                            title: response.title
+                        }).then(() => {
+                            window.location = "semestre.php";
+                        })
                     })
-                })
             )
         }
     })
@@ -246,15 +272,15 @@ function crearDocumento() {
     var formato_nombre = 'archivo_' + nombre_documento.replace(/ /g, '_');
 
     $.ajax({
-            url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "crear_documento_BD",
-                "nombre_documento": formato_nombre
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "crear_documento_BD",
+            "nombre_documento": formato_nombre
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -272,16 +298,16 @@ function actualizarDocumentoBD() {
     var formato_nombre_nuevo = 'archivo_' + eliminar_palabra_archivo.replace(/ /g, '_');
 
     $.ajax({
-            url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
-            type: "POST",
-            data: {
-                "accion": "actualizar_documento_BD",
-                "nombre_documento_nuevo": formato_nombre_nuevo,
-                "nombre_documento_antiguo": nombre_documento_antiguo
-            },
-            dataType: "JSON"
-        })
-        .done(function(response) {
+        url: "../../Controller/DocumentosEmpresa/Documentos_Empresa_Controller.php",
+        type: "POST",
+        data: {
+            "accion": "actualizar_documento_BD",
+            "nombre_documento_nuevo": formato_nombre_nuevo,
+            "nombre_documento_antiguo": nombre_documento_antiguo
+        },
+        dataType: "JSON"
+    })
+        .done(function (response) {
             swal.fire({
                 icon: response.state,
                 title: response.title
@@ -314,14 +340,14 @@ function eliminarDocumentoBD(nombre) {
                     },
                     dataType: "JSON"
                 })
-                .done(function(response) {
-                    swal.fire({
-                        icon: response.state,
-                        title: response.title
-                    }).then(() => {
-                        window.location = "gestionar_documentos_semestre.php";
+                    .done(function (response) {
+                        swal.fire({
+                            icon: response.state,
+                            title: response.title
+                        }).then(() => {
+                            window.location = "gestionar_documentos_semestre.php";
+                        })
                     })
-                })
             )
         }
     })
@@ -350,14 +376,14 @@ function deshabilitarDocumentoBD(nombre) {
                     },
                     dataType: "JSON"
                 })
-                .done(function(response) {
-                    swal.fire({
-                        icon: response.state,
-                        title: response.title
-                    }).then(() => {
-                        window.location = "gestionar_documentos_semestre.php";
+                    .done(function (response) {
+                        swal.fire({
+                            icon: response.state,
+                            title: response.title
+                        }).then(() => {
+                            window.location = "gestionar_documentos_semestre.php";
+                        })
                     })
-                })
             )
         }
     })
@@ -386,14 +412,14 @@ function habilitarDocumentoBD(nombre) {
                     },
                     dataType: "JSON"
                 })
-                .done(function(response) {
-                    swal.fire({
-                        icon: response.state,
-                        title: response.title
-                    }).then(() => {
-                        window.location = "gestionar_documentos_semestre.php";
+                    .done(function (response) {
+                        swal.fire({
+                            icon: response.state,
+                            title: response.title
+                        }).then(() => {
+                            window.location = "gestionar_documentos_semestre.php";
+                        })
                     })
-                })
             )
         }
     })
@@ -423,4 +449,14 @@ function imprimirInformeEstadistico() {
     $('.navbar-nav').show();
     $('#imprimirInforme').show();
     $('.foot').css("visibility", "visible");
+}
+
+function validarEmail(correo) {
+    var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    var esValido = expReg.test(correo);
+    if (esValido == true) {
+        return 1;
+    } else {
+        return 0;
+    }
 }

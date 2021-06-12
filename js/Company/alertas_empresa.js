@@ -221,6 +221,11 @@ function agregarTutor() {
             icon: "warning",
             title: "Hay campos vacios"
         })
+    } else if (validarEmail(correo) == 0) {
+        swal.fire({
+            icon: "warning",
+            title: "Dirección de correo inválida"
+        })
     } else {
         $.ajax({
             url: "../../Controller/Tutor/Tutor_Controller.php",
@@ -257,7 +262,13 @@ function actualizarTutor() {
             icon: "warning",
             title: "Hay campos vacios"
         })
-    } else {
+    } else if (validarEmail(correo) == 0) {
+        swal.fire({
+            icon: "warning",
+            title: "Dirección de correo inválida"
+        })
+    }
+    else {
         $.ajax({
             url: "../../Controller/Tutor/Tutor_Controller.php",
             type: "POST",
@@ -400,6 +411,7 @@ function agregarSolicitud() {
     var areasSeleccionadas = areas.join();
     var numPracticantes = document.getElementById('practicantes').value;
     var idEmpresa = document.getElementById('id_empresa').value;
+
     if (numPracticantes == "" || areasSeleccionadas == "") {
         swal.fire({
             icon: "warning",
@@ -818,4 +830,14 @@ function subirDocumento() {
         })
     }
 
+}
+
+function validarEmail(correo) {
+    var expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    var esValido = expReg.test(correo);
+    if (esValido == true) {
+        return 1;
+    } else {
+        return 0;
+    }
 }

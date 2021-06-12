@@ -184,7 +184,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <input type="text" class="form-control" readonly value="<?php echo $datos['sector_empresa']; ?>">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="input_actividad">Actividad Economica</label>
+                                <label for="input_actividad">Actividad Económica</label>
                                 <input type="text" class="form-control" readonly value="<?php echo $datos['actividad_empresa']; ?>">
                             </div>
                         </div>
@@ -194,7 +194,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 <input type="text" class="form-control" value="<?php echo $datos['representante_legal']; ?>" id="inputRepresentante" placeholder="Representante Legal">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="input_correo">Correo</label>
+                                <label for="input_correo">Correo Electrónico</label>
                                 <input type="email" id="inputCorreo" class="form-control" value="<?php echo $datos['correo_empresa']; ?>" placeholder="Correo Electronico">
                             </div>
                         </div>
@@ -225,7 +225,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="input_representante">Pagina Web</label>
+                                <label for="input_representante">Página Web</label>
                                 <input type="text" class="form-control" value="<?php echo $datos['web_empresa']; ?>" id="inputPaginaWeb" placeholder="Pagina Web">
                             </div>
                         </div>

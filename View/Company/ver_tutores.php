@@ -174,7 +174,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                             </div>
                         </div>
                     </div>
-
+                    <br>
                     <!-- Inicio Modal Agregar Tutor -->
                     <div class="modal fade" id="agregarTutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -239,7 +239,7 @@ if ($_SESSION['id_empresa'] == NULL) {
                                 if (is_null($datos_tutor)) {
                                 ?>
                                     <td colspan="4" style="color: #D61117;">
-                                        <center><strong>NO POSEE TUTORES DE PRACTICANTES EN EL SISTEMA</strong></center>
+                                        <center><strong>NO POSEE TUTORES EN EL SISTEMA</strong></center>
                                     </td>
                                     <?php
                                 } else {

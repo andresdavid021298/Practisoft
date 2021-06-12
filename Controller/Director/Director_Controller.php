@@ -16,7 +16,7 @@ function eliminarFicheros()
         if (is_file($file))
             unlink($file); //elimino el fichero
     }
-    foreach ($files2 as $file2){
+    foreach ($files2 as $file2) {
         if (is_file($file2))
             unlink($file2); //elimino el fichero
     }
@@ -28,15 +28,24 @@ if (isset($_POST['accion'])) {
         $nombre_director = $_POST['nombre_director'];
         $correo_director = $_POST['correo_director'];
         $obj_director_model = new DirectorModel();
-        $rta = $obj_director_model->actualizarDirector($id_director, $correo_director, $nombre_director);
-        if ($rta == 0) {
-            $response['title'] = "Error al actualizar coordinador";
+        // Validar la extensión ufps.edu.co
+        $extension = strrchr($correo_director, "@");
+
+        if ($extension != "@ufps.edu.co") {
             $response['state'] = "error";
+            $response['title'] = "El correo debe ser institucional";
             $response['location'] = "perfil.php";
         } else {
-            $response['title'] = "Director actualizado correctamente";
-            $response['state'] = "success";
-            $response['location'] = "perfil.php";
+            $rta = $obj_director_model->actualizarDirector($id_director, $correo_director, $nombre_director);
+            if ($rta == 0) {
+                $response['title'] = "Error al actualizar coordinador";
+                $response['state'] = "error";
+                $response['location'] = "perfil.php";
+            } else {
+                $response['title'] = "Director actualizado correctamente";
+                $response['state'] = "success";
+                $response['location'] = "perfil.php";
+            }
         }
         echo json_encode($response);
     } else if ($_POST['accion'] == 'finalizar_semestre') {
