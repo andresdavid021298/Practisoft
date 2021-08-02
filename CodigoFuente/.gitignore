@@ -1,0 +1,6 @@
+# Ignora la carpeta vendor
+vendor
+# Ignara la carpeta PHPMailer
+PHPMailer-master
+# Ignora la carpeta Documentos
+Documentos

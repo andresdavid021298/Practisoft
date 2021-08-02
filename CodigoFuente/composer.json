@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/apiclient": "^2.0",
+        "dompdf/dompdf": "dev-master",
+        "phpoffice/phpspreadsheet": "^1.18"
+    }
+}

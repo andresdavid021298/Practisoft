@@ -4,7 +4,7 @@ class Conexion
 {
     private static $user = "root";
     private static $password = "";
-    private static $host = "localhost";
+    private static $host = "localhost:3307";
     private static $database_name = "practisoft";
 
     //Permite hacer una conexion PDO con la base de datos
