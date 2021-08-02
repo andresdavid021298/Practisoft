@@ -26,7 +26,7 @@
 
 | Archivo      | Descripción  |
 |--------------|--------------|
-| [Config](https://github.com/andresdavid021298/Practisoft/blob/main/Config/db._config.php) | Archivo para la conexión con la base de datos. |
+| [Config](https://github.com/andresdavid021298/Practisoft/blob/main/Config) | Archivo para la conexión con la base de datos y su correspondiente script. |
 | [Controller](https://github.com/andresdavid021298/Practisoft/tree/main/Controller) | Carpeta que contiene los controladores de la aplicación. |
 | [Model](https://github.com/andresdavid021298/Practisoft/tree/main/Model/DAO) | Carpeta que contiene los modelos con los DAO de la aplicación. |
 | [View](https://github.com/andresdavid021298/Practisoft/tree/main/View) | Carpeta que contiene las interfaces gráficas de la aplicación. |
