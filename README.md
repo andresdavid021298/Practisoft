@@ -73,6 +73,10 @@ Para la instalación del sistema, es necesario contar con los siguientes compone
 ***
 ### Demo
 La aplicación se encuentra alojada temporalmente en el siguiente enlace: [PractiSoft](https://practisoftufps.online/).
+- Usuario Director: judithdelpilarrt@ufps.edu.co - Contraseña: contraseña del correo institucional
+- Usuario Coordinador: judithdelpilarrt@ufps.edu.co - Contraseña: contraseña del correo institucional
+- Usuario Empresa: madarme22@gmail.com - Contraseña: Clave1234
+- Usuario Estudiante: madarme@ufps.edu.co - Contraseña: contraseña del correo institucional
 
 ***
 ### Autor(es)
