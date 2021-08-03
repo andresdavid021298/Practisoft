@@ -36,7 +36,7 @@
 ***
 #### Tecnologías
 
-  - [![HTML5](https://img.shields.io/badge/-html-brightgreen)](https://developer.mozilla.org/es/docs/Web/HTML)
+  - [![HTML5](https://img.shields.io/badge/-HTML-brightgreen)](https://developer.mozilla.org/es/docs/Web/HTML)
   - [![JavaScript](https://img.shields.io/badge/JavaScript-green)](https://developer.mozilla.org/es/docs/Web/JavaScript)
   - [![PHP](https://img.shields.io/badge/PHP-blue)](https://www.php.net/manual/es/intro-whatis.php)
   - Lenguaje de base de datos: MYSQL.
@@ -64,7 +64,7 @@ Para la instalación del sistema, es necesario contar con los siguientes compone
 - Ingresar al repositorio. [Github](https://github.com/andresdavid021298/Practisoft).
 - Descargar el proyecto. [descargar](https://github.com/andresdavid021298/Practisoft/archive/refs/heads/main.zip).
 - Descargar un paquete de software libre de distribución de Apache (XAMPP, WAMP, LAMP...).
-- Incorporar la base de datos. [ver](https://github.com/andresdavid021298/Practisoft/tree/main/Config).
+- Incorporar la base de datos. [ver](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/Config).
 - Instalar Composer, el sistema de gestión de paquetes. [Composer](https://getcomposer.org/download/).
 - Agregar el siguiente comando para disponer de la librería de [DOMPDF](https://github.com/dompdf/dompdf): `composer require dompdf/dompdf`
 - Agregar el siguiente comando para disponer de la librería de [PHPSPREADSHEET](https://phpspreadsheet.readthedocs.io/en/latest/): `composer require phpoffice/phpspreadsheet`
