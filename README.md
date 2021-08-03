@@ -27,11 +27,11 @@
 | Archivo      | Descripción  |
 |--------------|--------------|
 | [Config](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/Config) | Archivo para la conexión con la base de datos y su correspondiente script. |
-| [Controller](https://github.com/andresdavid021298/Practisoft/tree/main/Controller) | Carpeta que contiene los controladores de la aplicación. |
-| [Model](https://github.com/andresdavid021298/Practisoft/tree/main/Model/DAO) | Carpeta que contiene los modelos con los DAO de la aplicación. |
-| [View](https://github.com/andresdavid021298/Practisoft/tree/main/View) | Carpeta que contiene las interfaces gráficas de la aplicación. |
-| [css](https://github.com/andresdavid021298/Practisoft/tree/main/css) | Archivos que tienen las hojas de estilo que se aplican a las interfaces gráficas. |
-| [js](https://github.com/andresdavid021298/Practisoft/tree/main/js) | Carpeta que contiene los archivos para el manejo de los eventos de la aplicación. |
+| [Controller](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/Controller) | Carpeta que contiene los controladores de la aplicación. |
+| [Model](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/Model/DAO) | Carpeta que contiene los modelos con los DAO de la aplicación. |
+| [View](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/View) | Carpeta que contiene las interfaces gráficas de la aplicación. |
+| [css](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/css) | Archivos que tienen las hojas de estilo que se aplican a las interfaces gráficas. |
+| [js](https://github.com/andresdavid021298/Practisoft/tree/main/CodigoFuente/js) | Carpeta que contiene los archivos para el manejo de los eventos de la aplicación. |
 
 ***
 #### Tecnologías
