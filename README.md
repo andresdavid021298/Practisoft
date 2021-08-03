@@ -36,7 +36,7 @@
 ***
 #### Tecnologías
 
-  - [![HTML5]](https://developer.mozilla.org/es/docs/Web/HTML)
+  - [![HTML5](https://img.shields.io/badge/-html-brightgreen)](https://developer.mozilla.org/es/docs/Web/HTML)
   - [![JavaScript](https://img.shields.io/badge/JavaScript-green)](https://developer.mozilla.org/es/docs/Web/JavaScript)
   - [![PHP](https://img.shields.io/badge/PHP-blue)](https://www.php.net/manual/es/intro-whatis.php)
   - Lenguaje de base de datos: MYSQL.
