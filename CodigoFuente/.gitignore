@@ -1,0 +1,42 @@
+#Ignora la carpeta vendor
+vendor
+
+#Ignora la carpeta PHPMailer-master
+PHPMailer-master
+
+#Ignora archivos de composer
+composer.json
+composer.lock
+
+#Ignora la base de datos
+db._config.php
+
+#Ignora documentos cargados
+Carta_Compromisoria_Jorge Mojica.pdf
+Informe_Avance_Jorge Mojica.pdf
+CCRepresentante_BMW.pdf
+Certificado_BMW.pdf
+Convenio_BMW.pdf
+Protocolos_BMW.pdf
+RUT_BMW.pdf
+Convenio_INCEL.pdf
+RUT_INCEL.pdf
+Protocolos_INCEL.pdf
+Estudiantes_Practicas.txt
+CCRepresentante_INCEL.pdf
+Certificado_INCEL.pdf
+informe_empresas.xlsx
+Cámara_de_Comercio_INCEL.pdf
+cc_representante_INCEL.pdf
+certificado_existencia_INCEL.pdf
+protocolos_bio_INCEL.pdf
+Carta_Compromisoria_Jorge Andrés Mojica Villamizar.pdf
+informe_Avance_Jorge Andrés Mojica Villamizar.pdf
+Cámara_de_Comercio_ABC.pdf
+Convenio_ABC.pdf
+Cámara_de_Comercio_ASICS.pdf
+Prueba2_ASICS.pdf
+Convenio_ASICS.pdf
+
+#Ignora la carpeta de ExportPDF
+ExportPDF
